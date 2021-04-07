@@ -1,0 +1,25 @@
+Email confirmation. WellAi
+<!--part-->
+Please confirm your email to use the full functionality of the WellAI. Welcome to the 21st century healthacare! Please follow this link https://wellai.health/assistant/confirmemail?hash=<%- hash %>
+<!--part-->
+<mjml>
+    <mj-body>
+        <mj-section>
+        <mj-column>
+
+            <mj-image width="100px" src="https://wellai.health/ai/img/wailogo.3f23ce58.png"></mj-image>
+
+            <mj-divider border-color="#0059ff"></mj-divider>
+
+            <mj-text font-family="Segue, Arial">
+                Please confirm your email to use the full functionality of the WellAI. Welcome to the 21st century healthacare!
+            </mj-text>
+
+            <mj-button font-family="Segue, Helvetica" background-color="#0059ff" color="white" href="https://wellai.health/assistant/confirmemail?hash=<%- hash %>">
+                Confirm email
+            </mj-button>
+
+        </mj-column>
+        </mj-section>
+    </mj-body>
+</mjml>

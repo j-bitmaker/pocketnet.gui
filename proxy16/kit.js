@@ -136,6 +136,23 @@ var defaultSettings = {
 		}
 	},
 
+	
+	emails : {
+		dbpath : 'data/emails',
+		from : '',
+		transporters: {       
+			host: '',
+			port: 25,
+			from: '',
+			secure: false, // true for 465, false for other ports
+			auth: {
+				user: [''], // generated ethereal user
+				pass: '', // generated ethereal password
+			},
+		}
+
+	},
+
     node: {
 		dbpath : 'data/node',
         enabled: false,
@@ -173,6 +190,10 @@ var state = {
 			wallet : {
 				addresses : settings.wallet.addresses
 			},
+			emails : {
+				from : settings.emails.from,
+				transporters : settings.emails.transporters
+			},
 			node : {
 				enabled : settings.node.enabled,
 				binPath : settings.node.binPath,
@@ -197,6 +218,13 @@ var state = {
 
 			if (exporting.wallet.addresses.registration.privatekey)
 				exporting.wallet.addresses.registration.privatekey = "*"
+
+			if (exporting.transporters.auth.pass)
+				exporting.transporters.auth.pass = "*"
+			
+			if (exporting.transporters.auth.user)
+				exporting.transporters.auth.user = "*"
+
 		}
 
 		return exporting
@@ -590,7 +618,21 @@ var kit = {
 				}
 
 			},
-	
+		
+			emails : {
+
+				settransporter : function({transporters}){
+
+					settings.emails.transporters = transporters
+
+					return state.saverp().then(proxy => {
+						return proxy.emails.setTransporter(transporters)
+					})
+
+				}
+
+			},
+
 			node : {
 
 				check : function(){
@@ -856,6 +898,18 @@ var kit = {
 					return proxy.bots.remove(address)
 				})
 			}
+		},
+		
+		emails : {
+			init : function(){
+				return kit.proxy().then(proxy => {
+					console.log('proxy!!', proxy);
+					return Promise.resolve({
+						emails : proxy.emails.init()
+					})
+				})
+			},
+
 		}
 	},
 

@@ -1,0 +1,95 @@
+<%- from.name || 'Wellai user' %> sent you a gift code to use Wellai AI-powered digital health assistant!
+<!--part-->
+<%- from.name || 'Wellai user' %> made you a present! Use gift code!
+<!--part-->
+<mjml>
+    <mj-body>
+        <mj-section>
+        <mj-column>
+
+            <mj-image width="100px" src="https://wellai.health/ai/img/wailogo.3f23ce58.png"></mj-image>
+
+            <mj-divider border-color="#0059ff"></mj-divider>
+
+            <mj-text font-family="Segue, Arial" font-size="36px" font-weight="100">
+                Wellai AI-powered digital health assistant
+            </mj-text>
+
+            <mj-text font-family="Segue, Arial">
+                Dear <%- to.name %>,
+            </mj-text>
+
+            <mj-text font-family="Segue, Arial">
+                <%- from.name || 'Wellai user' %> sent you a gift code to use Wellai AI-powered digital health assistant. Wellai can talk to you about your health issues, ask follow up questions, make suggestions. Wellai is a more scientific alternative to using search engines and symptom checkers.
+            </mj-text>
+              
+           </mj-column>
+        </mj-section>
+          <mj-section background-color="#b3b3b3">
+        <mj-column>    
+            <mj-text padding-top="20px" font-family="Segue, Arial">
+                <b>Gift Code:</b>
+            </mj-text>
+
+
+            <mj-text color="#f1f1f1" padding-top="0px" font-family="Segue, Arial" font-size="24px" font-weight="100">
+                <%-code%>
+            </mj-text>
+              
+             </mj-column>
+        </mj-section>
+           
+
+            
+        <mj-section background-color="#e4e4e4">
+        <mj-column>  
+              
+            <mj-text align="center" font-family="Segue, Arial" font-size="26px" font-weight="100">
+                You can login to your Wellai gift account after downloading Application
+            </mj-text>
+
+        </mj-column>
+        </mj-section>
+
+
+        <mj-section background-color="#e4e4e4" padding-bottom="35px" padding-top="5px">
+        <mj-column >
+            <mj-image href="https://apps.apple.com/us/app/id1530556224" src="https://wellai.health/img/appstore.png" alt="Download on the App Store" width="120px"></mj-image>
+            
+        </mj-column>
+        <mj-column >
+            <mj-image href="https://play.google.com/store/apps/details?id=health.wellai.assistant" src="https://wellai.health/img/googleplaybadge.png" alt="Get it on Google Play" border="none" width="131px"></mj-image>
+        </mj-column>
+        </mj-section>
+
+        <mj-section>
+            <mj-column>
+                <mj-text font-family="Segue, Arial">
+
+                </mj-text>
+            </mj-column>
+        </mj-section>
+
+         <mj-section>
+            <mj-column>
+                <mj-text font-family="Segue, Arial">
+               Thank you,
+
+
+            </mj-text>
+            <mj-text font-family="Segue, Arial">
+              Wellai Team
+            </mj-text>
+            </mj-column>
+        </mj-section>
+
+         
+
+    </mj-body>
+</mjml>
+
+
+
+
+
+

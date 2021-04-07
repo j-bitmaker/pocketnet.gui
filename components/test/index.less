@@ -16,7 +16,7 @@
 		}
 	}
 
-	.errorname{
+	.errorname, .erroremail, .confirmemail{
 		color : @color-main;
 		padding: 2 * @rhythm;
 		text-align: center;
@@ -307,13 +307,30 @@
 				}
 			}
 
-			&[parameter="email"]{
+			
+			&[parameter="code"]{
 				display: none;
 			}
 
 			&[parameter="ref"]{
 				display: none;
 			}
+
+			&[parameter="send"]{
+				
+				button{
+					float: right
+				}
+			}
+
+			.changeemail {
+				display: none
+			}
+
+			.confirmemail{
+				display: none
+			}
+
 		}
 		.subcaption{
 			margin-bottom : 2 * @rhythm;
@@ -777,7 +794,7 @@ html.stblack{
 			}
 		}
 	
-		.errorname{
+		.errorname, .erroremail{
 			color : @color-main;
 		}
 	
@@ -869,6 +886,10 @@ html.stblack{
 	
 					&.error{
 						border : 1px solid @color-bad;
+					}
+
+					&.success{
+						border : 1px solid @color-good;
 					}
 				}
 	

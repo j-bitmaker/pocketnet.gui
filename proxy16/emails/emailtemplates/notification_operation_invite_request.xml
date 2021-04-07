@@ -1,0 +1,38 @@
+WellAi invitation
+<!--part-->
+<% if(nu) {%>
+    Welcome to the 21st century healthacare! 
+<% } else { %> 
+    Hello! 
+<% } %> 
+
+You've been invited to connect with <%- username %> Please follow this link https://wellai.health/assistant/operation?id=<%- operation %>&token=<%- token %>
+<!--part-->
+<mjml>
+    <mj-body>
+        <mj-section>
+        <mj-column>
+
+            <mj-image width="100px" src="https://wellai.health/ai/img/wailogo.3f23ce58.png"></mj-image>
+
+            <mj-divider border-color="#0059ff"></mj-divider>
+
+            <mj-text font-family="Segue, Arial">
+
+                <% if(nu) {%>
+                    Welcome to the 21st century healthacare! 
+                <% } else { %> 
+                    Hello! 
+                <% } %>  
+                
+                You've been invited to connect with <%- username %>
+            </mj-text>
+
+            <mj-button font-family="Segue, Helvetica" background-color="#0059ff" color="white" href="https://wellai.health/assistant/operation?id=<%- operation %>&token=<%- token %>">
+                Proceed
+            </mj-button>
+
+        </mj-column>
+        </mj-section>
+    </mj-body>
+</mjml>

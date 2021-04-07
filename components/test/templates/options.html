@@ -1,6 +1,9 @@
 <% _.each(userOptions, function(parameter){ %>
 
 	<div class="parameterMaketWrapper <%-parameter.pid%>" parameter="<%-parameter.id%>">
+		
+		<% if(parameter.id != 'send') {%>
+
 		<div class="parameter table <%-parameter.type%>">
 
 			<div class="pName">
@@ -41,12 +44,41 @@
 
 		</div>
 
+		<% } else { %> 
 
-		<% if(parameter.id == 'name') { %>
+			<div class="parameter table button <%-parameter.type%>">
+				<button>
+					<%=parameter.name%> 
+				</button>
+			</div>
+		<% } %>
+
+		<% if(parameter.id == 'name' ) { %>
 			<div class="errorname">
 				<span></span>
 			</div>
 		<% } %>
+
+		
+		<% if(parameter.id == 'email' ) { %>
+			<div class="changeemail">
+				<span>
+					<%=e('e133514')%> 
+				</span>
+			</div>
+			<div class="erroremail">
+				<span></span>
+			</div>
+			<div class="confirmemail">
+				<span class="parameter table button send">
+					<button>
+						<%=e('e133513')%> 
+					</button>
+				</span>
+			</div>
+		<% } %>
+
+		
 		
 	</div>
 

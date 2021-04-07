@@ -367,7 +367,6 @@ var filluser = (function(){
 
 							if (result && (current == 'money' || current =='captcha')){
 
-
 								actions.next()
 
 							}

@@ -74,8 +74,6 @@ var Wallet = function(p){
 
     var db = new Datastore(f.path(p.dbpath));
 
-    console.log('db!!!!', f.path(p.dbpath));
-
     var initProcess = function(){
 
         var mk = function(){

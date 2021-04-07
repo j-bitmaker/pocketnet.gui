@@ -1,0 +1,21 @@
+Test Notification. WellAi
+<!--part-->
+Test Notification
+<!--part-->
+<mjml>
+    <mj-body>
+        <mj-section>
+        <mj-column>
+
+            <mj-image width="100px" src="https://wellai.health/ai/img/wailogo.3f23ce58.png"></mj-image>
+
+            <mj-divider border-color="#0059ff"></mj-divider>
+
+            <mj-text font-family="Segue, Arial">
+                Test Notification
+            </mj-text>
+
+        </mj-column>
+        </mj-section>
+    </mj-body>
+</mjml>

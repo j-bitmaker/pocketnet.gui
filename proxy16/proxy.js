@@ -24,6 +24,7 @@ var Proxies = require('./proxies.js');
 var Exchanges = require('./exchanges.js');
 var Peertube = require('./peertube.js');
 var Bots = require('./bots.js');
+var Emails = require('./emails/emails.js');
 //////////////
 
 
@@ -43,13 +44,14 @@ var Proxy = function (settings, manage) {
     var exchanges = new Exchanges() 
     var peertube = new Peertube() 
     var bots = new Bots(settings.bots)
+    var emails = new Emails(settings.emails)
 
     self.userDataPath = null    
 
     f.mix({ 
         wss, server, pocketnet, nodeControl, 
         remote, firebase, nodeManager, wallet,
-        proxies, exchanges, peertube, bots,
+        emails, proxies, exchanges, peertube, bots,
 
         proxy : self
     })
@@ -307,6 +309,54 @@ var Proxy = function (settings, manage) {
         }
     }
 
+    self.emails = {
+
+        init: function () {
+            return emails.init()
+        },
+    
+        inited : function(){
+            return emails.inited()
+        },
+
+        
+    
+        destroy: function () {
+            return emails.destroy()
+        },
+
+    
+        re : function(){
+            return this.destroy().then(r => {
+                this.init()
+            })
+        },
+    
+        info : function(){
+            return emails.info()
+        },
+    
+        check : function({email}){
+            return emails.kit.check(email);
+        },
+
+        verify : function({email}){
+            return emails.kit.verify(email)
+            
+        },
+
+        checkcode : function({email, code}){
+            return emails.kit.checkcode(email, code);
+        },
+
+        update : function({email, code}){
+            return emails.kit.update(email, code);
+        },
+
+
+
+    }
+
     self.wss = {
         
         init: function () {
@@ -529,6 +579,7 @@ var Proxy = function (settings, manage) {
                 server: self.server.info(compact),
                 wss : self.wss.info(compact),
                 wallet : self.wallet.info(compact),
+                emails : self.emails.info(compact),
                 remote : remote.info(compact),
                 admins : settings.admins,
 
@@ -545,12 +596,16 @@ var Proxy = function (settings, manage) {
             var catchError = function(key){
                 return (e) => {
 
+                    console.log('catch?',key, e);
+
                     return Promise.resolve()
                 }
             }
 
             var promises = _.map(list, (i) => {
-                return self[i].init().catch(catchError(i)).then(() => {
+
+                return self[i].init().catch(catchError(i)).then((then) => {
+
                     return Promise.resolve()
                 })
             })
@@ -563,6 +618,7 @@ var Proxy = function (settings, manage) {
 
             if(!self.nodeManager.inited()) wrks.push('nodeManager')
             if(!self.wallet.inited()) wrks.push('wallet')
+            if (!self.emails.inited()) wrks.push('emails')
 
             if(!wrks.length){
                 return Promise.resolve({})
@@ -581,7 +637,7 @@ var Proxy = function (settings, manage) {
 
             status = 1
 
-            return this.initlist(['server', 'wss', 'nodeManager', 'wallet', 'firebase', 'nodeControl', 'exchanges', 'peertube', 'bots']).then(r => {
+            return this.initlist(['server', 'wss', 'nodeManager', 'wallet', 'emails', 'firebase', 'nodeControl', 'exchanges', 'peertube', 'bots']).then(r => {
 
                 status = 2
 
@@ -606,7 +662,11 @@ var Proxy = function (settings, manage) {
                 })
             })
 
-            return Promise.all(promises).catch(e => { return Promise.resolve(); }).then(r => {
+            return Promise.all(promises).catch(e => { 
+
+                return Promise.resolve(); 
+            
+            }).then(r => {
                 return Promise.resolve(cantstopped)
             })
         },
@@ -620,11 +680,12 @@ var Proxy = function (settings, manage) {
 
             var catchError = function(key){
                 return (e) => {
+
                     return Promise.resolve()
                 }
             }
 
-            var promises = _.map(['server', 'wss', 'nodeManager', 'wallet', 'firebase', 'nodeControl', 'exchanges', 'peertube', 'bots'], (i) => {
+            var promises = _.map(['server', 'wss', 'nodeManager', 'wallet', 'emails', 'firebase', 'nodeControl', 'exchanges', 'peertube', 'bots'], (i) => {
                 return self[i].destroy().catch(catchError(i)).then(() => {
                     return Promise.resolve()
                 })
@@ -1335,6 +1396,116 @@ var Proxy = function (settings, manage) {
             }
         },
 
+
+        emails : {
+
+            check : {
+                path : '/emails/check',
+                authorization : false,
+                action : function(p){
+
+                    console.log('emails/check', p);
+
+                    return self.emails.check(p).then(function(r){
+
+                        return Promise.resolve({
+                            data : r
+                        })
+
+                    }).catch(e => {
+
+                        return Promise.reject(e)
+                    })
+
+                }
+            },
+
+            verify : {
+                path : '/emails/verify',
+                authorization : false,
+                action : function(p){
+
+                    console.log('emails/verify', p);
+
+                    return self.emails.verify(p).then(function(r){
+
+                        console.log('RRR!!', r, p);
+
+                        if (p.clbk){
+
+                            p.clbk(r);
+                        }
+
+                        return Promise.resolve({
+                            data : r
+                        })
+
+                    }).catch(e => {
+
+                        return Promise.reject(e)
+                    })
+
+                }
+            },
+
+            checkcode : {
+                path : '/emails/checkcode',
+                authorization : false,
+                action : function(p){
+
+                    console.log('emails/checkcode', p);
+
+                    return self.emails.checkcode(p).then(function(r){
+
+                        console.log('RRR!!', r, p);
+
+                        if (p.clbk){
+
+                            p.clbk(r);
+                        }
+
+                        return Promise.resolve({
+                            data : r
+                        })
+
+                    }).catch(e => {
+
+                        return Promise.reject(e)
+                    })
+
+                }
+            },
+
+            update : {
+                path : '/emails/update',
+                authorization : false,
+                action : function(p){
+
+                    console.log('emails/update', p);
+
+                    return self.emails.update(p).then(function(r){
+
+                        if (p.clbk){
+
+                            p.clbk(r);
+                        }
+
+                        return Promise.resolve({
+                            data : r
+                        })
+
+                    }).catch(e => {
+
+                        return Promise.reject(e)
+                    })
+
+                }
+            }
+
+
+
+        },
+
         manage : {
             all : {
                 path : '/manage',
@@ -1364,6 +1535,7 @@ var Proxy = function (settings, manage) {
     }
 
     self.wallet.events()
+
 
     return self
 

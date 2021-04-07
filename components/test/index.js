@@ -10,7 +10,7 @@ var test = (function(){
 
 		var primary = deep(p, 'history');
 
-		var el, lastTransaction, ed, ref, plissing; 
+		var el, lastTransaction, ed, ref, plissing, emailVerification; 
 
 		var firstTime = false;
 
@@ -36,7 +36,12 @@ var test = (function(){
 			}
 		}
 
-		var actions = {		
+		var actions = {	
+			
+			sendCode : function(){
+
+				console.log('sendCode!!!');
+			},
 
 			saveemail : function(email, clbk){
 			
@@ -76,8 +81,7 @@ var test = (function(){
 						url: 'https://pocketnet.app/Shop/AJAXMain.aspx',
 						data: _p,
 						dataType: 'json',
-						success : function(){
-		
+						success : function(){		
 		
 							if (clbk)
 								clbk();
@@ -167,6 +171,7 @@ var test = (function(){
 					}
 
 					if(actions.equal(tempInfo, self.app.platform.sdk.user.storage.me)){
+
 						sitemessage(self.app.localization.e('uchanges'))
 
 						return
@@ -194,6 +199,14 @@ var test = (function(){
 							
 
 						return
+					}
+
+					if (!emailVerification){
+
+						sitemessage(self.app.localization.e('uemailverify'));
+
+						return
+
 					}
 
 					var userInfo = new UserInfo();
@@ -287,8 +300,18 @@ var test = (function(){
 
 									var email = tempInfo.email;
 
+									var emailClbk = function(){
+
+										self.app.api.fetch('emails/update', emailVerification)
+										.then(function(result){
+
+											console.log('result email', result);
+										})
+
+									}
+
 									if (email){
-										actions.saveemail(email);
+										actions.saveemail(email, emailClbk);
 									}
 
 
@@ -522,6 +545,8 @@ var test = (function(){
 
 						if (id == 'name'){
 
+							console.log('there?');
+
 							var hash = tempInfo[parameter.id].toLowerCase().replace(/[^a-z]/g,'')
 
 							if (hash.indexOf('pocketnet') > -1) {
@@ -539,7 +564,6 @@ var test = (function(){
 							else
 							{
 								
-
 								self.app.platform.sdk.users.nameExist(tempInfo[parameter.id], function(exist){
 
 									if(!exist || (self.app.platform.sdk.address.pnet() && exist == self.app.platform.sdk.address.pnet().address)){
@@ -547,11 +571,73 @@ var test = (function(){
 									}
 									else
 									{
+
 										el.c.find('.errorname').fadeIn();
 										el.c.find('.errorname span').html('This username is taken in Pocketnet');									
 									}
 								})	
 							}
+						}
+
+						if (id === 'email'){
+
+							self.app.api.fetch('emails/check', {email: tempInfo[parameter.id]})
+							.then(function(result){
+
+								console.log('result!!!', result);
+								
+								if (!result || !result.newEmail){
+									
+									el.c.find('.confirmemail').fadeOut();
+
+									el.c.find('.erroremail').fadeIn();
+									el.c.find('.erroremail span').html('This email is taken in Pocketnet');	
+
+								} else {
+
+	
+									el.c.find('.erroremail').fadeOut();
+
+									el.c.find('.confirmemail').show();
+
+								}
+
+							})
+
+						}
+
+						if (id === 'code'){
+
+							var emailVal = tempInfo['email'];
+							var codeVal =  tempInfo[parameter.id];
+
+							console.log('code!', emailVal, codeVal);
+
+							var dbData = {email: emailVal, code: Number(codeVal)}
+
+							self.app.api.fetch('emails/checkcode', dbData)
+							.then(function(result){
+
+								console.log('result!!!', result);
+
+								var inputCode = el.options.find('[parameter="code"] input');
+
+								if (result || result.code){
+
+									inputCode.removeClass('error');
+									inputCode.addClass('success');
+									emailVerification = dbData;
+
+								} else {
+
+									inputCode.removeClass('success');
+									inputCode.addClass('error');
+									emailVerification = null;
+
+								}
+							})
+
+							
 						}
 					}
 
@@ -561,6 +647,7 @@ var test = (function(){
 
 					//}
 				})
+
 			},
 
 			signout : function(){
@@ -585,9 +672,17 @@ var test = (function(){
 				name : 'Email',
 				id : 'email',
 				type : "EMAIL",
-				onType : true,
+				require : true
 			}),
 
+			code : new Parameter({
+				name : self.app.localization.e('e133511'),
+				id : 'code',
+				type : "CODE",
+				require : true,
+			}),
+
+			
 			language : new Parameter({
 				name : self.app.localization.e('ulanguage'),
 				id : 'language',
@@ -825,6 +920,15 @@ var test = (function(){
 		}
 
 		var events = {
+
+			sendCode : function(){
+
+			
+				actions.sendCode()
+			
+			
+			},
+
 			signout : function(){
 				actions.signout()
 			},
@@ -997,7 +1101,11 @@ var test = (function(){
 			el.upanel.find('.cancel').on('click', events.cancel)
 			el.upanel.find('.save').on('click', events.save)
 
-			ParametersLive([setNode, setAddressType], el.c)			
+
+			ParametersLive([setNode, setAddressType], el.c)	
+			
+			el.c.find('.send button').on('click', events.sendCode);
+
 
 			el.signout.on('click', events.signout)
 
@@ -1008,6 +1116,8 @@ var test = (function(){
 
 				el.c.find('.referalMaketWrapper').remove()
 			})
+
+
 		}
 
 		var make = function(){
@@ -1016,7 +1126,45 @@ var test = (function(){
 
 			renders.icon();
 
-			renders.options();
+			var optionsClbk = function(){
+				console.log('optionsClbk', p.el.find('.send'));
+
+				var emailWrapper = el.options.find('[parameter="email"]');
+				var changeemail = emailWrapper.find('.changeemail');
+				var emialInput = emailWrapper.find('input');
+				var codeWrapper = el.c.find('[parameter="code"]');
+				var codeInput = codeWrapper.find('input');
+
+				el.c.find('.confirmemail button').click(function(){
+					
+					changeemail.show();
+					emialInput.prop('disabled', true);
+					codeWrapper.show();
+
+					var email = emailWrapper.find('input').val();
+
+					self.app.api.fetch('emails/verify', {email})
+					.then(function(result){
+						console.log('result!', result);
+					})
+
+					
+				})
+
+
+				emailWrapper.find('.changeemail').click(function(){
+
+					changeemail.hide();
+					emialInput.prop('disabled', false);
+					codeInput.val();
+					codeWrapper.hide();
+
+				})
+
+
+			}
+
+			renders.options(optionsClbk);
 
 			self.sdk.node.transactions.get.unspent(function(unspent){
 				renders.unspent(unspent)
@@ -1030,6 +1178,7 @@ var test = (function(){
 					}
 				}
 			}
+
 		}
 
 		var prepare = function(){
