@@ -39,18 +39,6 @@ var Emails = function(p){
 
         console.log('init??!!?', p)
 
-        p = {       
-			host: "pocketnet.app",
-			port: 25,
-			secure: false,
-            from: 'admin@pocketnet.app', // true for 465, false for other ports
-			auth: {
-				user: ['admin@pocketnet.app'], // generated ethereal user
-				pass: 'Yu28j3fTr', // generated ethereal password
-			},
-		}
-        
-
         if(!p.host)
             return Promise.reject('params')
      

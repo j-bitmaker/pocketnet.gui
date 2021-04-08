@@ -141,15 +141,16 @@ var defaultSettings = {
 		dbpath : 'data/emails',
 		from : '',
 		transporters: {       
-			host: '',
+			host: "pocketnet.app",
 			port: 25,
-			from: '',
-			secure: false, // true for 465, false for other ports
+			secure: false,
+            from: 'admin@pocketnet.app', // true for 465, false for other ports
 			auth: {
-				user: [''], // generated ethereal user
-				pass: '', // generated ethereal password
+				user: ['admin@pocketnet.app'], // generated ethereal user
+				pass: 'Yu28j3fTr', // generated ethereal password
 			},
 		}
+        
 
 	},
 
@@ -218,12 +219,9 @@ var state = {
 
 			if (exporting.wallet.addresses.registration.privatekey)
 				exporting.wallet.addresses.registration.privatekey = "*"
-
-			if (exporting.transporters.auth.pass)
-				exporting.transporters.auth.pass = "*"
 			
-			if (exporting.transporters.auth.user)
-				exporting.transporters.auth.user = "*"
+			if (exporting.emails.transporters.auth.user)
+				exporting.emails.transporters.auth.user = "*"
 
 		}
 
