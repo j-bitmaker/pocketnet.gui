@@ -75,7 +75,7 @@
  	};
 
 
- 	var secInTime = function(sec){
+ 	secInTime = function(sec){
 
  		var h = sec/3600 ^ 0 ;
 		var m = (sec-h*3600)/60 ^ 0 ;
@@ -930,7 +930,6 @@
 
 		p.html = '<div class="caption">' + p.caption + '</div>';
 		p.html += '<div class="values">';
-		console.log('p.values', p.values)
 		_.each(p.values, function(value, index){
 
 			if(value.time){
@@ -1127,7 +1126,6 @@
 					var txt = wnd.find('textarea[index="'+index+'"]');
 
 					txt.on('keyup', function(){
-						console.log('this.scrollTop', this.scrollTop)
 
 						if (this.scrollTop > 0){
 						  	this.style.height = (this.scrollHeight + 10) + "px";
@@ -1217,7 +1215,6 @@
 			var _values = {},
 				arr = true;
 
-				console.log('uploaded', uploaded)
 
 			_.each(p.values, function(value, index){
 
@@ -1378,7 +1375,6 @@
 
 				item.find('i').on('click', function(){
 
-					console.log('input', item.find('.input'));
 
 					item.find('.input').val('');
 				})
@@ -1554,7 +1550,6 @@
 		}
 
 		self.close = function(){
-			console.log("CLOSE TOOLTIP", self)
 			if (self.instance)
 				self.instance.close();
 		}
@@ -1606,8 +1601,6 @@
 				_el.css('background-size', p.size || 'cover');
 				_el.css('background-position', p.position || 'center center');
 				_el.css('background-repeat', p.repeat || 'no-repeat');
-
-				
 				_el.attr('image', '')
 			}
 
@@ -1615,7 +1608,7 @@
 			{
 				_el.imagesLoaded({ background: true }, function(image) {
 
-				  	el.fadeIn(100);
+					el.fadeIn(100);
 
 				  	if(typeof p.clbk === 'function')
 				  		p.clbk(image);
@@ -1643,7 +1636,6 @@
 	  };
 
 	  xhr.onerror = function(){
-	  	console.log("ERROR")
 	  }
 
 	  xhr.open('GET', url);
@@ -1703,7 +1695,6 @@
 			canvas.width  = newWidth;
 			canvas.height = newHeight;
 
-			console.log('newWidth', newHeight, newWidth)
 
 				ctx.drawImage(imageObj, 0, 0, newWidth, newHeight);
 
@@ -1762,7 +1753,6 @@
 			canvas.width  = newWidth;
 			canvas.height = newHeight;
 
-			console.log('newWidth', newWidth, newHeight)
 
 				ctx.drawImage(imageObj, 0, 0, newWidth, newHeight);
 
@@ -1776,6 +1766,78 @@
 
 		
 	}
+
+	resizeNew = function (srcData, width, height, format) {
+		return new Promise((resolve, reject) => {
+			var imageObj = new Image(),
+			  canvas = document.createElement('canvas'),
+			  ctx = canvas.getContext('2d'),
+			  xStart = 0,
+			  yStart = 0,
+			  aspectRadio,
+			  newWidth,
+			  newHeight;
+	  
+			imageObj.crossOrigin = 'Anonymous';
+			imageObj.src = srcData;
+	  
+			format || (format = 'jpeg');
+	  
+			imageObj.onload = function () {
+			  aspectRadio = imageObj.height / imageObj.width;
+			  newHeight = imageObj.height;
+			  newWidth = imageObj.width;
+	  
+			  if (newHeight <= height && newWidth <= width) {
+			  } else {
+				if (newWidth > width) {
+				  newWidth = width;
+				  newHeight = width * aspectRadio;
+				}
+	  
+				if (newHeight > height) {
+				  newHeight = height;
+				  newWidth = newHeight / aspectRadio;
+				}
+			  }
+	  
+			  canvas.width = newWidth;
+			  canvas.height = newHeight;
+	  
+			  ctx.drawImage(imageObj, 0, 0, newWidth, newHeight);
+	  
+			  var url = canvas.toDataURL('image/' + format, 0.75);
+	  
+			  $(canvas).remove();
+	  
+			  return resolve(url);
+			};
+		  });
+	}
+
+
+	dataURLtoFile = function(dataurl, filename) {
+ 
+        var arr = dataurl.split(','),
+            mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]), 
+            n = bstr.length, 
+            u8arr = new Uint8Array(n);
+            
+        while(n--){
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+        
+        return new File([u8arr], filename, {type:mime});
+    }
+
+	toDataURL = file => new Promise((resolve, reject) => {
+		const reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onload = () => resolve(reader.result);
+		reader.onerror = error => reject(error);
+	});
+
 
     grayscaleImage = function (srcData, clbk){
 
@@ -3523,8 +3585,6 @@
 
 							var value = $(this).val().toLowerCase(); 
 
-												
-
 							if(!take().hasClass('opened')){
 								open();		
 							}
@@ -3616,11 +3676,29 @@
 
 						}
 
-
-
 						parameter.set(value);
 
-						__el.val(parameter.labelByValue(value))
+						var label = parameter.labelByValue(value)
+
+						if (parameter.labelToInput){
+							__el.val(parameter.labelToInput(label))
+
+							_el.parent().html(parameter.input())
+
+							ParametersLive([parameter], el, p)
+
+							return
+
+							console.log('value', value, parameter.labelToInput(label))
+						}
+						else
+						{
+							__el.val(label)
+						}
+
+						console.log('value', value, label)
+
+						
 
 						if (parameter.type == 'valuesmultibig'){							
 
@@ -4022,6 +4100,8 @@
 						_el.addClass('error')
 					}
 
+					console.log("VALUE", value)
+
 					parameter.set(value)
 				}
  
@@ -4070,7 +4150,8 @@
 			self.possibleValuesLabels = p.possibleValuesLabels || [];
 			self.value = p.value || null;
 			self.defaultValuesTemplate = p.defaultValuesTemplate || null;
-
+			self.defaultValueTemplate = p.defaultValueTemplate || null;
+			self.labelToInput = p.labelToInput || null; 
 			self.currency = p.currency || null;
 			self.disabled = p.disabled;
 
@@ -4453,6 +4534,14 @@
 				return self.possibleValuesLabels[index]
 			}
 
+			/*index = _.indexOf(self.possibleValues, function(_v){
+				if(_v && _v.address) return _v.address == v
+			});
+
+			if (index > -1){
+				return self.possibleValuesLabels[index]
+			}*/
+
 			return v;
 		}
 
@@ -4544,6 +4633,10 @@
 
 				if (self.type == 'values' || self.type == 'valuescustom'){
 					displayValue = self.labelByValue(self.value)
+
+					if(self.labelToInput){
+						displayValue = self.labelToInput(displayValue)
+					}
 				}
 
 				var caret = '';
@@ -4608,7 +4701,17 @@
 							var label = self.labelByValue(value);
 
 							input += '<div class="vc_value" value="' + value + '">';
-							input += label;
+
+							if (self.defaultValueTemplate)
+							{
+								input += self.defaultValueTemplate(label, value, self)
+
+							}
+							else{
+								input += label;
+							}
+							
+							
 							input += '</div>';
 
 					  	});
@@ -5586,6 +5689,8 @@
 	flb = function (str) {
 
 		if(!str) return ""
+		if(!str[0]) return str
+		if(!str.substr) return str
 
 		return str[0].toUpperCase() + str.substr(1);
 	}
@@ -6050,14 +6155,12 @@
 									
 								}, function (err) {
 
-									console.log('scanmedia fail 2', err)
 									
 								})
 
 							}
 							else
 							{
-								console.log('scanmedia fail 1')
 							}
 
 
@@ -6883,20 +6986,6 @@
 						}
 						else{
 
-							/*console.log("YEEES", _direction, mainDirection.i, self.opposite(_direction, mainDirection.i))
-
-							if(self.opposite(_direction, mainDirection.i) && mainDirection.mintrueshold){
-
-								var d = nullbydirection(_d, mainDirection.i)
-
-								var dp = (d.x || d.y || 0);
-
-								if(Math.abs(dp) <= mainDirection.mintrueshold){
-									self.backup(mainDirection.i)	
-								}
-
-							}*/
-
 							mainDirection = null;
 						}
 
@@ -7557,7 +7646,6 @@
 				request(_d,
 			    function (_error, response, body) {
 
-					// console.log(url, _error)
 
 			    	if(_error)
 			    	{
@@ -8174,7 +8262,6 @@
 	        try {
 	            return document.execCommand("copy");  // Security exception may be thrown by some browsers.
 	        } catch (ex) {
-	            console.warn("Copy to clipboard failed.", ex);
 	            return false;
 	        } finally {
 	            document.body.removeChild(textarea);
@@ -8451,6 +8538,8 @@
 			}
 		}
 
+		
+
 		var events = {
 			clear : function(el){
 
@@ -8571,6 +8660,11 @@
 			}
 		}
 
+		self.clear = events.clear
+		self.blur = function(){
+			el.find('input').blur()
+		}
+
 		var initEvents = function(){
 
 			var searchInput = searchEl.find('.sminput')
@@ -8610,6 +8704,8 @@
 
 			searchInput.on('focus', function(){
 
+				self.active = true
+
 				if($(this).val()){
 					events.fastsearch(searchInput)
 				}
@@ -8619,6 +8715,11 @@
 					if(p.last){
 						events.showlast(searchInput)
 					}
+
+			})
+
+			searchInput.on('blur', function(){
+				self.active = false
 
 			})
 
@@ -9102,13 +9203,11 @@
 
         				readFile(reader, error, file, files, function(fileObject){
 
-							console.log('fileObject.base64.length', fileObject.base64.length)
 
 							imageresize(file, fileObject.base64, function(base64){
 
 								fileObject.base64 = base64;
 
-								console.log('fileObject.base64.length', fileObject.base64.length)
 
 								autorotation(file, fileObject.base64, function(base64){
 
@@ -9403,7 +9502,6 @@
 		var takeData = function(uri){
 			if(typeof localStorage != 'undefined' && localStorage[prefix+uri]){
 				data[uri] = JSON.parse(localStorage[prefix+uri]);
-				console.log('takedata', uri, data[uri]);
 			} 
 			else {
 				data[uri] = {};
@@ -9892,7 +9990,6 @@
 	}
 
 	parseVideo = function(url) {
-		// console.log('WWW', url.indexOf('channel'))
 		var _url = url;
 
 	    var test = _url.match(/(peertube:\/\/)?(http:\/\/|https:\/\/|)?(player.|www.)?(pocketnetpeertube[0-9]*\.nohost\.me|peer\.tube|vimeo\.com|youtu(be\.com|\.be|be\.googleapis\.com)|bitchute\.com)\/((videos?\/|embed\/|watch\/?)*(\?v=|v\/)?)*([A-Za-z0-9._%-]*)(\&\S+)?/);
@@ -9902,11 +9999,12 @@
 		
 	    // if(test && url.indexOf('channel') == -1 && url.indexOf("user") == -1){}
 
-	    	if(test && test[2]){
+	    	if(test && test[2] || (_url && _url.indexOf('peertube://') > -1)){
 
 				if (test.indexOf('youtube.com') > -1 || test.indexOf('youtu.be') > -1) {
 					type = 'youtube'
 			        id = test[9]
+					url = 'https://youtu.be/' + id
 			    }
 				if (test.indexOf('vimeo.com') > -1) {
 					type = 'vimeo'
@@ -9920,8 +10018,9 @@
 					var params = _url.split('?')[1] || '';
 
 					type = 'peertube'
-			        id = `${test[9]}?${params}`
+			        id = `${test[9]}` //?${params}
 					host_name = test[4]
+
 			    }
 			}
 			
@@ -10336,7 +10435,6 @@
 		}
 
 
-		console.log("inputText", inputText)
 
 	    var replacedText = (inputText || '').replace(/(^|[^A-Za-z0-9А-Яа-яёЁ\-\_])(https?:\/\/)?((?:[A-Za-z\$0-9А-Яа-яёЁ](?:[A-Za-z\$0-9\-\_А-Яа-яёЁ]*[A-Za-z\$0-9А-Яа-яёЁ])?\.){1,5}[A-Za-z\$рфуконлайнстРФУКОНЛАЙНСТ\-\d]{2,22}(?::\d{2,5})?)((?:\/(?:(?:\&amp;|\&#33;|,[_%]|[A-Za-z0-9А-Яа-яёЁ\-\_#%\@&\?+\/\$.~=;:]+|\[[A-Za-z0-9А-Яа-яёЁ\-\_#\@%&\?+\/\$.,~=;:]*\]|\([A-Za-z0-9А-Яа-яёЁ\-\_#\@%&\?+\/\$.,~=;:]*\))*(?:,[_%]|[A-Za-z0-9А-Яа-яёЁ\-\_#\@%&\?+\/\$.~=;:]*[A-Za-z0-9А-Яа-яёЁ\_#\@%&\?+\/\$~=]|\[[A-Za-z0-9А-Яа-яёЁ\-\_#\@%&\?+\/\$.,~=;:]*\]|\([A-Za-z0-9А-Яа-яёЁ\-\_#\@%&\?+\/\$.,~=;:]*\)))?)?)/ig,
 	            function () { // copied to notifier.js:3401
@@ -10532,6 +10630,99 @@ clearStringXss = function(nm){
 	})
 }
 
+getBase64 = function (file) {
+	return new Promise((resolve, reject) => {
+	  const reader = new FileReader();
+	  reader.readAsDataURL(file);
+	  reader.onload = () => resolve(reader.result);
+	  reader.onerror = (error) => reject(error);
+	});
+};
+
+findResponseError = (response) => {
+	const ERRORS_PATHS = [
+		'error.response.data.errors',
+		'error.response.data.error',
+	];
+
+	const error = ERRORS_PATHS.map(path => deep(response, path)).filter(error => error)[0] || {};
+
+	return (typeof error === 'object') ? (Object.values(error)[0] || {}).msg : error;
+}
+serialize = function (obj) {
+	var str = [];
+	for (var p in obj)
+	  if (obj.hasOwnProperty(p)) {
+		str.push(encodeURIComponent(p) + '=' + encodeURIComponent(obj[p]));
+	  }
+	return str.join('&');
+  };
+  
+
+stringEqTrig = function(s1, s2){
+
+	if(!s1) s1 = ''
+	if(!s2) s2 = ''
+
+	var bw = function(s){
+		return s.split(/[ \t\v\r\n\f,.]+/)
+	}
+
+	var hash = function(s){
+
+		var ps = bw(s).join(' ')
+
+		return ps.toLowerCase().replace(/[^a-zа-я0-9&]*/g, '');
+	}
+
+	
+
+	var makeTr = function(w){
+		var trs = {};
+
+		var takeC = function(index){
+			var c;
+
+			if(index < 0 || index >= w.length) c = "_";
+
+			else c = w[index];
 
 
+
+			return c;
+		}
+
+		for(var i = -1; i <= w.length; i++){
+
+			var tr = "";
+
+			for(var j = i - 1; j <= i + 1; j++){
+				tr = tr + takeC(j);
+			}
+
+
+			trs[tr] = 1;
+		}
+
+		return trs;
+	}
+
+
+	var t1 = makeTr(hash(s1)),
+        t2 = makeTr(hash(s2));
+        
+
+	var c = 0,
+		m = Math.max(_.toArray(t1).length, _.toArray(t2).length)
+
+	_.each(t1, function(t, index){
+
+		if(t2[index]) c++;
+
+	})
+
+	return c / m;
+
+
+}
 /* */

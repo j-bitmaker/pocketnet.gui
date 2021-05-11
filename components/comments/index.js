@@ -35,9 +35,9 @@ var comments = (function(){
 		var wordsRegExp = /[,.!?;:() \n\r]/g
 
 		var clbks = {
-			upvote : function(err, comment, value, address){
+			upvote : function(err, comment, value, address, temp){
 
-
+				console.log("CLBK")
 				if(!comment) return
 
 				if (comment.txid != txid) return
@@ -48,24 +48,39 @@ var comments = (function(){
 
 				if (address == self.app.platform.sdk.address.pnet().address){
 
-					_el.addClass('rated')
+					console.log('value', value, err)
 
-					if(value > 0){
-						d_el.find('.scoreUp').addClass('ratedScore')
+					if(!value){
+
+						if(err != 40){
+							_el.removeClass('rated')
+							d_el.find('.scoreUp').removeClass('ratedScore')
+							d_el.find('.scoreDown').removeClass('ratedScore')
+						}
+						
 					}
+					else{
+						_el.addClass('rated')
 
-					if(value < 0)
-					{
-						d_el.find('.scoreDown').addClass('ratedScore')
+						if(value > 0){
+							d_el.find('.scoreUp').addClass('ratedScore')
+						}
+
+						if(value < 0)
+						{
+							d_el.find('.scoreDown').addClass('ratedScore')
+						}
 					}
 
 				}
 
-				if (comment.scoreUp)
-					d_el.find('.scoreUp .commentScore').html(compressedNumber(comment.scoreUp, 1))
+				var cs = {
+					scoreUp : (comment.scoreUp || 0) + ((temp && value > 0) ? 1 : 0),
+					scoreDown : (comment.scoreDown || 0) + ((temp && value < 0) ? 1 : 0)
+				}
 
-				if (comment.scoreDown)
-					d_el.find('.scoreDown .commentScore').html(compressedNumber(comment.scoreDown, 1))
+				d_el.find('.scoreUp .commentScore').html(comment.scoreUp ? compressedNumber(cs.scoreUp, 1) : '')
+				d_el.find('.scoreDown .commentScore').html(cs.scoreDown ? compressedNumber(cs.scoreDown, 1) : '')
 			},
 
 			post : function(err, alias, _txid, pid, aid, editid, id, manual){
@@ -395,6 +410,8 @@ var comments = (function(){
 				})
 			},
 			removeForm : function(id){
+
+				console.log("ID", id)
 
 				delete areas[id]
 
@@ -1248,8 +1265,18 @@ var comments = (function(){
 
 							_p.el.find('.emojionearea-editor').focus()
 
-							_p.el.addClass('active')	
-							
+							_p.el.addClass('active')
+
+							// If we are on mobile, scroll to the comment section
+							/*if (isMobile()) {
+								var offsetTop = _p.el.offset().top - 65
+								offsetTop = (offsetTop < 0) ? 0 : offsetTop
+								window.scrollTo({
+									left: 0,
+									top: offsetTop,
+									behavior: 'smooth'
+								})
+							}*/
 
 							ed.init = false;
 						}
@@ -1282,7 +1309,18 @@ var comments = (function(){
 			_p.el.find('.emojionearea-editor').on('focus', function(){
 				actions.process(p.id || '0')	
 
-				_p.el.addClass('active')
+				 _p.el.addClass('active')
+				
+				// If we are on mobile, scroll to the comment section
+				/*if (isMobile()) {
+					var offsetTop = _p.el.offset().top - 65
+					offsetTop = (offsetTop < 0) ? 0 : offsetTop
+					window.scrollTo({
+						left: 0,
+						top: offsetTop,
+						behavior: 'smooth'
+					})
+				}*/
 			
 			})
 

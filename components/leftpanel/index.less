@@ -1,0 +1,188 @@
+@import "../../css/__cssvar";
+
+#leftpanel{
+
+	>div{
+
+		.wrp{
+			padding-bottom : 10px;
+		}
+	
+	}
+
+	.sections{
+		background: fade(#F0F0F0, 30);
+	
+		>div{
+			padding : @rhythm  0;
+			width: 50%;
+			vertical-align: middle;
+			cursor: pointer;
+			.transition(0.3s);
+			text-align: center;
+
+			span{
+				font-size: 0.8em;
+			}
+
+			&:hover,
+			&.active{
+				background: @color-add;
+				color : #fff;
+			}
+		}
+	}
+
+	.currentsearch{
+		color : @color-gray-mlight;
+    
+		.tcaption{
+		   
+			padding : 2 * @rhythm;
+			padding-top : 2 * @rhythm;
+			padding-left: 0;
+		   
+			margin-bottom: @rhythm;
+	
+			span{
+				font-size : 0.8em;
+				font-weight: 700;
+			}
+		}
+
+		.searchcnt{
+			span{
+				font-size : 0.8em;
+				color : @color-orange;
+			}
+		}
+
+		.goback{
+			padding : 2 * @rhythm 0;
+		}
+	}
+
+	.subtop{
+		color : @color-gray-mlight;
+    
+		.tcaption{
+		   
+			padding : 2 * @rhythm;
+			padding-top : 2 * @rhythm;
+			padding-left: 0;
+			margin-bottom: @rhythm;
+	
+			span{
+				font-size : 0.8em;
+				font-weight: 700;
+			}
+		}
+
+		.searchcnt{
+			span{
+				font-size : 0.8em;
+				color : @color-orange;
+			}
+		}
+
+		.topnavigation{
+			padding : 2 * @rhythm 0;
+
+			button{
+				width: 110px;
+			}
+		}
+
+		.toplabel{
+			padding-top : 2 * @rhythm;
+
+			.topactualback{
+				a{
+					font-size: 0.8em;
+					text-decoration: underline;
+				}
+			}
+		}
+
+		.vc_inputWrapper{
+			width: 130px;
+		}
+
+		.vc_iconWrapper{
+			width: auto;
+
+			.vc_iconSpinWrapper{
+				width: 22px;
+			}
+		}
+	}
+
+	.vc_valuecustom{
+		font-size: 1.5em;
+		font-weight: 100;
+		cursor: pointer;
+		background: transparent;
+		width: auto;
+		height: auto;
+
+		.vc_inputWrapper{
+			border : 0;
+		}
+
+		.vc_iconWrapper{
+			font-size: 0.6em;
+		}
+
+		.vc_selectInput,
+		.vc_iconWrapper{
+			border: 0;
+		}
+
+		
+
+		.vc_selectInput{
+			background : #011621;
+			max-height: 500px;
+
+			.vc_value{
+				padding-left: 0;
+				.transition(0.3s);
+				font-size: 0.8em;
+
+				&:hover{
+					color : @color-main;
+					background: transparent;
+				}
+			}
+		}
+
+		input[disabled]{
+			cursor: pointer;
+			color : @color-main;
+		}
+
+		input{
+			padding-left: 0;
+		}
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	#leftpanel{
+		padding-left: 2 * @rhythm;
+
+		>div{
+			font-size: 1.3em;
+		}
+
+		.subtop{
+			.topnavigation{
+				button{
+					width: 135px;
+				}
+			}
+			
+		}
+	}
+
+}

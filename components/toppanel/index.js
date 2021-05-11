@@ -8,34 +8,50 @@ var toppanel = (function(){
 
 		var primary = deep(p, 'history');
 
-		var el, links = {
-
-			index : "index",
-
-			sub : "index?r=sub",
-
-			recommended : 	"index?r=recommended"
-
-		};
+		var el;
 
 		var actions = {
 			selector : function(){
 
+				var links = {
+
+					index : "index",
+		
+					sub : "index?r=sub",
+		
+					recommended : 	"index?r=recommended"
+		
+		
+				}
+
+				if (self.app.platform.videoenabled){
+					links.video = "index?video=1"
+				}
+
 				var vs = _.toArray(links)
 
 				var r = parameters(self.app.nav.current.completeHref, true).r || 'index'
+				var video = parameters(self.app.nav.current.completeHref, true).video || false
+				var value = links[r]
+
+				var labels = [self.app.localization.e('e13136'), self.app.localization.e('e13137'), self.app.localization.e('e13138')]
+
+				if (self.app.platform.videoenabled){
+					value = links[video ? 'video' : r]
+					labels.push(self.app.localization.e('video'))
+				}
 
 				var contents = new Parameter({
 					type : "VALUES",
 					name : "Contents",
 					id : 'contents',
 					possibleValues : vs, 
-					possibleValuesLabels : [self.app.localization.e('e13136'), self.app.localization.e('e13137'), self.app.localization.e('e13138')],
-					defaultValue : links[r]
+					possibleValuesLabels : labels,
+					defaultValue : value
 				
 				})
 
-				contents.value = links[r]
+				contents.value = value
 
 				contents._onChange = function(v){
 

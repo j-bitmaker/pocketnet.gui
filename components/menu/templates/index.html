@@ -25,9 +25,6 @@
 		<div class="sections">
 			<div class="section right">
 
-				
-
-
 					<div class="items navWrapper unselectable">
 
 						<div class="item navWrapperItem" events="navinit">
@@ -42,11 +39,24 @@
 											</div>
 										</div>
 
+
+										<% if(!app.platform.videoenabled) {%>
+
 										<div class="pcenterCell">
 											<div class="pcenterLabel " r="sub">
 												<a href="index?r=sub"  handler="true"><%=e('e13137')%></a>
 											</div>
 										</div>
+
+										<% } %>
+										
+										<% if(app.platform.videoenabled) {%>
+											<div class="pcenterCell">
+												<div class="pcenterLabel " r="video">
+													<a href="index?video=1"  handler="true"><%=e('video')%></a>
+												</div>
+											</div>
+										<% } %>
 
 										<div class="pcenterCell">
 											<div class="pcenterLabel toppost " r="recommended">
@@ -61,33 +71,7 @@
 						</div>
 
 					</div>
-					<% if(!app.curation()) {%>
-						<div class="items searchWrapper">
-
-							<div class="item table right" events="searchinit">
-								<div class="postssearchwrapper">
-									<div class="postssearch autowidth">
-									</div>
-								</div>
-
-							</div>
-
-						</div>
-						
 					
-						<div class="items searchIcons">
-
-							<div class="item table right onlyicon" events="search">
-								<div class="icon">
-									<i class="fas fa-search"></i>
-								</div>
-
-							</div>
-
-						</div>
-					
-
-					<% } %>
 
 					<% if(state) { %>
 
@@ -204,7 +188,15 @@
 
 											<% } %>
 
-											
+											<% if(deep(app, 'platform.real.'+user.address.value.toString('hex'))) {%>
+												<div class="realperson">
+			
+													<span class="fa-stack fa-2x">
+														<i class="fas fa-certificate fa-stack-2x"></i>
+														<i class="fas fa-check fa-stack-1x"></i>
+													  </span>
+												</div>
+											<% } %>
 										
 										</div>
 									</a>
@@ -247,6 +239,9 @@
 					<% } %>
 				
 			</div>
+
+		
+
 			<div class="section leftpart">
 
 				<div class="items sitenames">
@@ -257,7 +252,15 @@
 						</div>
 						<div class="label">
 							<div events="sitename">POCKETNET</div>
-							<div class="lang localization"><%-(lkey.name || '').toLowerCase()%> <i class="fas fa-caret-down"></i></div>
+							<div class="lang localization">
+								<% if(isMobile()) {%>
+									<%-(lkey.key || '').toLowerCase()%> 
+								<% } else { %>
+									<%-(lkey.name || '').toLowerCase()%> 
+								<% } %>
+								
+								<i class="fas fa-caret-down"></i>
+							</div>
 						</div>						
 
 					</div>
@@ -302,6 +305,23 @@
 
 				<% } %>-->
 
+			</div>
+
+			<div class="section centerpart">
+				<% if(!app.curation()) {%>
+					<div class="items searchWrapper">
+
+						<div class="item table right" events="searchinit">
+							<div class="postssearchwrapper">
+								<div class="postssearch">
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+
+				<% } %>
 			</div>
 			
 		</div>
