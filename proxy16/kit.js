@@ -12,6 +12,7 @@ const { base64encode, base64decode } = require('nodejs-base64');
 ////
 var f = require('./functions');
 const { deep } = require("./functions");
+const { defaults } = require("underscore");
 ////
 var db = null;
 var proxy = null;
@@ -220,8 +221,8 @@ var state = {
 			if (exporting.wallet.addresses.registration.privatekey)
 				exporting.wallet.addresses.registration.privatekey = "*"
 			
-			if (exporting.emails.transporters.auth.user)
-				exporting.emails.transporters.auth.user = "*"
+			// if (exporting.emails.transporters.auth.user)
+			// 	exporting.emails.transporters.auth.user = "*"
 
 		}
 
@@ -236,6 +237,7 @@ var state = {
 	},
 
 	expand : function(_settings, defaultSettings){
+
 		var cds = cloneDeep(defaultSettings)
 
         deepExtend(cds, _settings)
@@ -621,9 +623,13 @@ var kit = {
 
 				settransporter : function({transporters}){
 
+					console.log('setTrans');
+
 					settings.emails.transporters = transporters
 
 					return state.saverp().then(proxy => {
+
+						console.log('proxy', proxy)
 						return proxy.emails.setTransporter(transporters)
 					})
 
@@ -901,7 +907,6 @@ var kit = {
 		emails : {
 			init : function(){
 				return kit.proxy().then(proxy => {
-					console.log('proxy!!', proxy);
 					return Promise.resolve({
 						emails : proxy.emails.init()
 					})
@@ -954,6 +959,8 @@ var kit = {
 
 	init : function(environmentDefaultSettings, hck){
 
+		console.log('evironmentD', environmentDefaultSettings, hck);
+
 		var settings = defaultSettings;
 
 		if(!environmentDefaultSettings) 
@@ -962,6 +969,7 @@ var kit = {
 		if(!hck) hck = {}
 
 		settings = state.expand(environmentDefaultSettings, settings)
+
 
 		db = new Datastore(f.path(settingsPath));
 
@@ -995,8 +1003,8 @@ var kit = {
 				if(!err){
 					db.find({ nedbkey : nedbkey }).exec(function (err, docs) {
 			
-						var savedSettings = !err? docs[0] || {} : {}
-			
+						var savedSettings = !err? docs[0] || {} : {};
+									
 						state.apply(state.expand(savedSettings, settings))
 
 						state.save()

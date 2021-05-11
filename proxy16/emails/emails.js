@@ -20,8 +20,6 @@ var Emails = function(p){
 
     self.destroy = function(){
 
-
-
         if (unspentsInterval){
             clearInterval(unspentsInterval)
             unspentsInterval = null
@@ -36,15 +34,14 @@ var Emails = function(p){
     }
 
     self.init = function(){
+        var emails = p.transporters;    
 
-        console.log('init??!!?', p)
-
-        if(!p.host)
+        if(!emails || !emails.host)
             return Promise.reject('params')
      
         inited = true;
 
-        transporter = nodemailer.createTransport(p);
+        transporter = nodemailer.createTransport(emails);
 
         return new Promise((resolve, reject) => {
 
@@ -99,14 +96,12 @@ var Emails = function(p){
                         return reject(err);
                     }
 
-                    console.log('docs', docs);
-
                     if (docs && docs.length){
 
                         var lastHour = docs.find(function(i){
-
-                            return f.now - i.date > 3600000;
+                            return Date.parse(f.now()) - Date.parse(i.date) < 3600000;
                         })
+                        
 
                         return resolve({code: Boolean(lastHour)})
                     } 
@@ -121,16 +116,16 @@ var Emails = function(p){
 
         check : function(email){
 
+            console.log('check there', email);
+
             return new Promise((resolve, reject) => {
 
-                return db.find({email, used: true}, function (err, docs) {
+                return db.find({email, check: true}, function (err, docs) {
                     
                     if (err){
 
                         return reject(err);
                     }
-
-                    console.log('docs', docs);
 
                     if (docs && docs.length){
 
@@ -149,14 +144,12 @@ var Emails = function(p){
 
             return new Promise((resolve, reject) => {
 
-                return db.find({email: email, used: true}, function (err, docs) {
+                return db.find({email: email, check: true}, function (err, docs) {
                     
                     if (err){
 
                         return reject(err);
                     }
-
-                    console.log('docs', docs);
 
                     if (!docs && docs.length){
 
@@ -164,12 +157,9 @@ var Emails = function(p){
 
                     } 
 
-                    return db.update({email: email, code: code}, {$set: { used: true }}, function(err, docs){
+                    return db.update({email: email, code: code}, {$set: { check: true }}, function(err, docs){
 
-                        console.log('err docs', err, docs);
-                        return db.remove({email: email, used: false}, {multi: true}, function(err, numRemoved){
-
-                            console.log('err numRemoved', err, numRemoved);
+                        return db.remove({email: email, check: false}, {multi: true}, function(err, numRemoved){
 
                             return resolve({updated: true})
 
@@ -204,8 +194,6 @@ var Emails = function(p){
 
             if (!EmailValidator.validate(email)) return Promise.reject();
 
-            console.log('email', email);
-
             var code = self.kit.makecode()
 
             var exdata = {
@@ -217,7 +205,6 @@ var Emails = function(p){
             var template = 'sendgiftcode';
             return self.email.send(template, exdata, email).then(function(result){
 
-                console.log('result?', result);
                 self.dbapi.insert(email, code);
 
                 return Promise.resolve(result);

@@ -312,7 +312,9 @@ var Proxy = function (settings, manage) {
     self.emails = {
 
         init: function () {
-            return emails.init()
+
+            return emails.init();
+
         },
     
         inited : function(){
@@ -596,7 +598,7 @@ var Proxy = function (settings, manage) {
             var catchError = function(key){
                 return (e) => {
 
-                    console.log('catch?',key, e);
+                    console.log('catch?', key, e);
 
                     return Promise.resolve()
                 }

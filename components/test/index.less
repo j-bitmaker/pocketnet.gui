@@ -251,6 +251,10 @@
 				&.error{
 					border : 1px solid @color-bad;
 				}
+
+				&.success{
+					border : 1px solid @color-good;
+				}
 			}
 
 			textarea{
@@ -262,6 +266,15 @@
 				textarea,
 				input{
 					border : 1px solid @color-bad;
+				}
+				
+			}
+
+			.success{
+				select,
+				textarea,
+				input{
+					border : 1px solid @color-good;
 				}
 				
 			}
@@ -324,7 +337,22 @@
 			}
 
 			.changeemail {
-				display: none
+				display: none;
+
+				.changeWrapper {
+					display: flex;
+
+					.empty{
+						width: 190px;
+					}
+
+					.change{
+						font-size: .9em;
+						color: @color-main;
+						cursor: pointer;
+					}
+				}
+
 			}
 
 			.confirmemail{
@@ -889,8 +917,9 @@ html.stblack{
 					}
 
 					&.success{
-						border : 1px solid @color-good;
+						border : 1px solid @color-good
 					}
+
 				}
 	
 	
@@ -902,6 +931,17 @@ html.stblack{
 					}
 					
 				}
+
+				.success{
+					select,
+					textarea,
+					input{
+						border : 1px solid @color-good;
+					}
+				}
+
+				
+
 	
 	
 				.vc_valuecustom,

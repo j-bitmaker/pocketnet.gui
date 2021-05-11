@@ -201,6 +201,11 @@
 #test .userPanel .parameter input.error {
   border: 1px solid #F41A4D;
 }
+#test .userPanel .parameter select.success,
+#test .userPanel .parameter textarea.success,
+#test .userPanel .parameter input.success {
+  border: 1px solid #076C34;
+}
 #test .userPanel .parameter textarea {
   min-height: 105px;
 }
@@ -208,6 +213,11 @@
 #test .userPanel .parameter .error textarea,
 #test .userPanel .parameter .error input {
   border: 1px solid #F41A4D;
+}
+#test .userPanel .parameter .success select,
+#test .userPanel .parameter .success textarea,
+#test .userPanel .parameter .success input {
+  border: 1px solid #076C34;
 }
 #test .userPanel .parameter select {
   height: 38px;
@@ -244,6 +254,17 @@
 }
 #test .userPanel .parameterMaketWrapper .changeemail {
   display: none;
+}
+#test .userPanel .parameterMaketWrapper .changeemail .changeWrapper {
+  display: flex;
+}
+#test .userPanel .parameterMaketWrapper .changeemail .changeWrapper .empty {
+  width: 190px;
+}
+#test .userPanel .parameterMaketWrapper .changeemail .changeWrapper .change {
+  font-size: 0.9em;
+  color: #4AC6F9;
+  cursor: pointer;
 }
 #test .userPanel .parameterMaketWrapper .confirmemail {
   display: none;
@@ -626,6 +647,11 @@ html.stblack #test .userPanel .parameter .error select,
 html.stblack #test .userPanel .parameter .error textarea,
 html.stblack #test .userPanel .parameter .error input {
   border: 1px solid #F41A4D;
+}
+html.stblack #test .userPanel .parameter .success select,
+html.stblack #test .userPanel .parameter .success textarea,
+html.stblack #test .userPanel .parameter .success input {
+  border: 1px solid #076C34;
 }
 html.stblack #test .userPanel .parameter .vc_valuecustom .vc_textInput,
 html.stblack #test .userPanel .parameter .vc_valuecustom_multibig .vc_textInput {

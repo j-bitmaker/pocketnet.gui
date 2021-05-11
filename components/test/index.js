@@ -622,7 +622,7 @@ var test = (function(){
 
 								var inputCode = el.options.find('[parameter="code"] input');
 
-								if (result || result.code){
+								if (result && result.code){
 
 									inputCode.removeClass('error');
 									inputCode.addClass('success');
