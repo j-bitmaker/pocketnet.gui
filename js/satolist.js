@@ -4262,6 +4262,8 @@ Platform = function (app, listofnodes) {
 
                 return self.sdk.keys.need().then(me => {
 
+                    console.log("MEW")
+
                     if(self.loadingWithErrors){
                         return Promise.reject('loadingWithErrors')
                     }
@@ -4281,6 +4283,8 @@ Platform = function (app, listofnodes) {
                         }))
 
                     var err = userInfo.validation()
+
+                    console.log("errerrerrerr", err)
 
                     if (err){
 
@@ -20248,9 +20252,11 @@ Platform = function (app, listofnodes) {
 
         link : function(core){
 
-
+            console.log('core', core)
             core.update({
-                block : self.currentBlock
+                block : {
+                    height : self.currentBlock
+                }
             })
 
 
@@ -20258,7 +20264,9 @@ Platform = function (app, listofnodes) {
             self.app.platform.ws.messages["new block"].clbks.matrixchat = function(){
 
                 core.update({
-                    block : self.currentBlock
+                    block : {
+                        height : self.currentBlock
+                    }
                 })
 
             }
