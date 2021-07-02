@@ -922,6 +922,7 @@ Nav = function(app)
 				return
 			}
 
+			console.log('core.loadSource', p);
 			core.loadSource(p.map, function(module){
 
 				if(!module)
@@ -1290,6 +1291,7 @@ Nav = function(app)
 		},
 
 		load : function(p){
+
 			var clbk = p.clbk;
 
 			p.clbk = function(error, r){

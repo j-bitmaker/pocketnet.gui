@@ -316,6 +316,7 @@ var Comment = function(txid){
 		},
 		v : []
 	}
+	
 
 	self.url = {
 		set : function(_v){

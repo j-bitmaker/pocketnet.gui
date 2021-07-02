@@ -317,6 +317,38 @@ Comment = function(txid){
 		v : []
 	}
 
+	self.receiver = {
+		set : function(_v){
+
+			if(!_v){
+				this.v = ''
+			}
+			else
+
+				this.v = _v
+
+			if (self.on.change)
+				self.on.change('receiver', this.v)
+		},
+		v : ''
+	};
+
+	self.donate = {
+		set : function(_v){
+
+			if(!_v){
+				this.v = ''
+			}
+			else
+
+				this.v = _v
+
+			if (self.on.change)
+				self.on.change('donate', this.v)
+		},
+		v : ''
+	};
+
 	self.url = {
 		set : function(_v){
 
@@ -337,6 +369,8 @@ Comment = function(txid){
 		self.message.set()
 		self.images.set()
 		self.url.set()
+		self.donate.set()
+		self.receiver.set()
 	}
 
 	self.on = {}
@@ -464,6 +498,8 @@ Comment = function(txid){
 				
 				message : encodeURIComponent(self.message.v),
 				url : encodeURIComponent(self.url.v),
+				donate : encodeURIComponent(self.donate.v),
+				receiver : encodeURIComponent(self.receiver.v),
 				images : _.map(self.images.v, function(i){
 					return encodeURIComponent(i)
 				}),
@@ -513,6 +549,8 @@ Comment = function(txid){
 		v.msgparsed = JSON.parse(v.msg)
 
 		self.url.set(decodeURIComponent(v.msgparsed.url))
+		self.donate.set(decodeURIComponent(v.msgparsed.donate))
+		self.receiver.set(decodeURIComponent(v.msgparsed.receiver))
 		self.message.set(decodeURIComponent(v.msgparsed.message))
 		self.images.set(_.map(v.msgparsed.images, function(i){
 			return decodeURIComponent(i)

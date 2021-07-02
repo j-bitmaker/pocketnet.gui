@@ -529,6 +529,7 @@ ____loclib.e13108 = "There isn't connection with Electron proxy interface"
 
 ____loclib.e13109 = "Please enter the words in the picture to receive Pocketcoin and continue registration"
 ____loclib.e13110 = "Enter words"
+____loclib.e131101 = "Enter donation amount"
 ____loclib.poll = "Create poll"
 ____loclib.next = "Next"
 ____loclib.refresh = "Refresh"

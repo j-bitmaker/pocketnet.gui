@@ -22,6 +22,39 @@
 		white-space: nowrap;
 	}
 
+			
+	.donateEmbWr{
+
+		.donatecntWrapper{
+			padding-top: @rhythm * 2;
+			padding-bottom: @rhythm * 2;
+
+			.removedonate{
+				border-radius: 50%;
+				height: 30px;
+				width: 30px;
+				line-height: 30px;
+				text-align: center;
+				cursor: pointer;
+				.transition(0.3s);
+				color : @color-bad;
+	
+				&:hover{
+					background : @color-gray-slight;
+				}
+			}
+	
+			.donatecnt{
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				max-width: 240px;
+			}
+	
+		}
+	}
+
+
 	&.preview{
 		.post{
 			.txt{
@@ -1046,6 +1079,21 @@
 		.embedimages{
 			position: absolute;
 			right : 12px;
+			top : 2px;
+			padding : 6px;
+			cursor: pointer;
+			color : @color-gray-light;
+			.transition(0.3s);
+
+			&:hover{
+				color : @color-black2;
+			}
+		}
+
+		
+		.embeddonate{
+			position: absolute;
+			right : 70px;
 			top : 2px;
 			padding : 6px;
 			cursor: pointer;

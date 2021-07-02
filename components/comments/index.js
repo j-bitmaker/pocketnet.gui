@@ -359,6 +359,71 @@ var comments = (function(){
 
 
 			},
+
+			removeDonate : function(id, p){
+
+				var comment = currents[id]
+
+				comment.donate.set();
+
+				renders.donate(id, p);
+
+			},
+
+			embeddonate : function(id, p){
+
+				id || (id = '0')
+
+				actions.process(id)
+
+				if (areas[id])
+					areas[id].___inited = true
+
+				var storage = currents[id].export(true)
+
+				self.nav.api.load({
+					open : true,
+					id : 'embeding',
+					inWnd : true,
+
+					essenseData : {
+						type : 'donate',
+						storage : storage,
+						on : {
+						
+							added : function(value){
+
+
+								var result = Boolean(value);
+
+								if(!_.isArray(value)) value = [value]
+
+
+								currents[id].donate.set(value)
+
+								
+
+
+								if(!result && errors[type]){
+
+									sitemessage(errors[type])
+
+								}		
+								
+								
+								renders.donate(id, p)
+
+							}
+						}
+					},
+
+					clbk : function(s, p){
+						external = p
+					}
+				})
+
+			}, 
+
 			embedimages : function(id, p){
 				id || (id = '0')
 
@@ -380,6 +445,8 @@ var comments = (function(){
 						on : {
 						
 							added : function(value){
+
+								console.log('added');
 
 								var result = true;
 
@@ -1357,9 +1424,35 @@ var comments = (function(){
 
 		var renders = {
 
+			donate : function(id, p, clbk){
+
+				var comment = currents[id]
+
+				self.shell({
+					name :  'donate',
+					turi : 'embeding',
+					inner : html,
+					el : p.el.find('.newcommentdonate'),
+					data : {
+						donate : comment.donate.v,
+					},
+
+				}, function(_p){
+
+					_p.el.find('.removedonate').on('click', function(){
+
+						actions.removeDonate(id, p)
+					})
+
+					
+				})
+			},
+
 			images : function(id, p, clbk){
 
 				var comment = currents[id]
+
+				console.log('html!!', html)
 
 				self.shell({
 					name :  'images',
@@ -1629,6 +1722,24 @@ var comments = (function(){
 
 						postEvents(p, _p, __clbk)
 					}
+
+					_p.el.find('.embeddonate').off('click').on('click', function(){
+
+						var id = actions.getid(_p.el.find('.postbody'))
+
+						if(state){
+							actions.embeddonate(id, p)
+							if(!p.answer && !p.editid){
+
+								ini()
+
+							}	
+						}
+						else{
+							actions.stateAction(function(){
+							})
+						}
+					})
 
 					_p.el.find('.embedimages').off('click').on('click', function(){
 
