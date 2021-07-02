@@ -35,11 +35,13 @@
 #comments .donateEmbWr .donatecntWrapper .removedonate:hover {
   background: #e4ddde;
 }
-#comments .donateEmbWr .donatecntWrapper .donatecnt {
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  max-width: 240px;
+#comments .donateEmbWr .donatecntWrapper .donatecnt .value,
+#comments .donateEmbWr .donatecntWrapper .donatecnt .removeWrapper {
+  display: inline-block;
+}
+#comments .donateEmbWr .donatecntWrapper .donatecnt .removeWrapper {
+  position: relative;
+  top: -10px;
 }
 #comments.preview .post .txt textarea {
   display: block;

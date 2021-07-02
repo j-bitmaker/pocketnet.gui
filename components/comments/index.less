@@ -45,10 +45,14 @@
 			}
 	
 			.donatecnt{
-				white-space: nowrap;
-				text-overflow: ellipsis;
-				overflow: hidden;
-				max-width: 240px;
+				.value, .removeWrapper{
+					display: inline-block;
+				}
+
+				.removeWrapper{
+					position: relative; 
+					top: -10px
+				}
 			}
 	
 		}

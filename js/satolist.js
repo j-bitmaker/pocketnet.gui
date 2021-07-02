@@ -12448,6 +12448,8 @@ Platform = function (app, listofnodes) {
 
                     common: function (inputs, obj, fees, clbk, p, fromTG) {
 
+                        console.log('commmon', inputs, obj, fees, clbk, p);
+
                         const savedObj = JSON.parse(JSON.stringify(obj));
 
                         if (!fromTG && self.app.user.features.telegram) {

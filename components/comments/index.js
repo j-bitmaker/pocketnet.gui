@@ -365,6 +365,7 @@ var comments = (function(){
 				var comment = currents[id]
 
 				comment.donate.set();
+				comment.receiver.set();
 
 				renders.donate(id, p);
 
@@ -398,19 +399,15 @@ var comments = (function(){
 
 								if(!_.isArray(value)) value = [value]
 
-
 								currents[id].donate.set(value)
-
-								
-
+								currents[id].receiver.set(self.essenseData.address)
 
 								if(!result && errors[type]){
 
 									sitemessage(errors[type])
 
 								}		
-								
-								
+																
 								renders.donate(id, p)
 
 							}
@@ -1427,6 +1424,8 @@ var comments = (function(){
 			donate : function(id, p, clbk){
 
 				var comment = currents[id]
+
+				console.log('redners.donate', comment.receiver.v);
 
 				self.shell({
 					name :  'donate',
