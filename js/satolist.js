@@ -12297,6 +12297,8 @@ Platform = function (app, listofnodes) {
 
                         self.sdk.node.transactions.get.unspent(function (unspent) {
 
+                            console.log('unspent', unspent, obj, clbk, p);
+
                             unspent = _.filter(unspent, self.sdk.node.transactions.canSpend)
 
                             if (!unspent.length && !p.relay) {
@@ -12318,7 +12320,12 @@ Platform = function (app, listofnodes) {
 
                             var inputs = [];
 
+                            var totalInputs = 0;
+
                             if (unspent.length) {
+
+                                totalInputs += unspent[unspent.length - 1].amount;
+
                                 inputs = [{
 
                                     txId: unspent[unspent.length - 1].txid,
@@ -12327,9 +12334,10 @@ Platform = function (app, listofnodes) {
                                     scriptPubKey: unspent[unspent.length - 1].scriptPubKey,
 
                                 }]
+                                
                             }
 
-                            if (unspent.length > 60) {
+                            if (unspent.length > 60 || !obj.donate.v.length) {
                                 inputs.push({
                                     txId: unspent[unspent.length - 2].txid,
                                     vout: unspent[unspent.length - 2].vout,
@@ -12339,33 +12347,70 @@ Platform = function (app, listofnodes) {
 
                             }
 
+                            var totalDonate = 0;
 
-                            self.sdk.node.transactions.create[obj.type](inputs, obj, function (a, er, data) {
+                            obj.donate.v.forEach(function(d){
 
-                                if (!a) {
-                                    if ((er == -26 || er == -25 || er == 16) && !p.update) {
+                                totalDonate += Number(d.amount);
 
-                                        p.update = true;
+                            })
 
-                                        self.sdk.node.transactions.create.commonFromUnspent(obj, clbk, p, telegram)
+                            var lastUnspent = unspent.slice(0, unspent.length - 1);
+                            
+                            for (var u of lastUnspent){
 
-                                        return
+                                if (totalDonate >= totalInputs){
+                                    
+                                    totalInputs += u.amount;
+
+                                    inputs.push({
+                                        txId: u.txid,
+                                        vout: u.vout,
+                                        amount: u.amount,
+                                        scriptPubKey: u.scriptPubKey,
+                                    })
+
+                                } else {
+
+                                    break;
+                                }
+
+                            }
+
+                            if (!obj.donate.v.length || totalDonate < totalInputs){
+
+                                self.sdk.node.transactions.create[obj.type](inputs, obj, function (a, er, data) {
+
+                                    if (!a) {
+                                        if ((er == -26 || er == -25 || er == 16) && !p.update) {
+    
+                                            p.update = true;
+    
+                                            self.sdk.node.transactions.create.commonFromUnspent(obj, clbk, p, telegram)
+    
+                                            return
+                                        }
                                     }
-                                }
+    
+    
+                                    var regs = app.platform.sdk.registrations.storage[addr];
+    
+                                    if (regs && (regs == 4)) {
+                                        self.sdk.registrations.add(addr, 5)
+                                    }
+    
+                                    if (clbk) {
+                                        clbk(a, er, data)
+                                    }
+    
+    
+                                }, p, telegram)
+    
+                            } else {
 
-
-                                var regs = app.platform.sdk.registrations.storage[addr];
-
-                                if (regs && (regs == 4)) {
-                                    self.sdk.registrations.add(addr, 5)
-                                }
-
-                                if (clbk) {
-                                    clbk(a, er, data)
-                                }
-
-
-                            }, p, telegram)
+                                sitemessage(self.app.localization.e('e13117'))
+                            }
+                       
 
                         }, deep(p, 'address.address'), p.update, telegram)
                     },
@@ -12450,7 +12495,15 @@ Platform = function (app, listofnodes) {
 
                     common: function (inputs, obj, fees, clbk, p, fromTG) {
 
-                        console.log('commmon', inputs, obj, fees, clbk, p);
+                        console.log('common', inputs, obj, fees, clbk, p);
+
+                        var totalDonate = 0;
+
+                        obj.donate.v.forEach(function(d){
+
+                            totalDonate += Number(d.amount);
+
+                        })
 
                         const savedObj = JSON.parse(JSON.stringify(obj));
 
@@ -12527,7 +12580,12 @@ Platform = function (app, listofnodes) {
                                 amount = amount + Number(i.amount);
                             })
 
+                            console.log('amount', amount, smulti);
+
                             amount = amount * smulti;
+
+                            console.log('amount', amount, smulti);
+
 
                             var data = Buffer.from(bitcoin.crypto.hash256(obj.serialize()), 'utf8');
                             var optype = obj.typeop ? obj.typeop(self) : obj.type
@@ -12555,8 +12613,6 @@ Platform = function (app, listofnodes) {
                             })
 
                             self.sdk.node.transactions.get.unspent(function (unspents) {
-
-
 
                                 if (p.relay) {
 
@@ -12595,13 +12651,29 @@ Platform = function (app, listofnodes) {
 
                                 }
 
+                                console.log('addsato', amount);
 
-                                txb.addOutput(address.address, Number((amount - (fees || 0)).toFixed(0)));
+                                obj.donate.v.forEach(function(d){
+
+                                    txb.addOutput(d.address, Number(d.amount) * smulti);
+                                    outputs.push({
+                                        address: d.address, 
+                                        amount: Number(d.amount) * smulti
+                                    });
+
+                                })
+
+
+                                txb.addOutput(address.address, Number((amount - totalDonate - (fees || 0)).toFixed(0)));
+
+                                console.log('address!', address, amount, fees, txb, amount - totalDonate - (fees || 0));
 
                                 outputs.push({
                                     address: address.address,
-                                    amount: Number((amount - (fees || 0)).toFixed(0))
+                                    amount: Number((amount - totalDonate - (fees || 0)).toFixed(0))
                                 })
+
+                                console.log('output', outputs, txb);
 
                                 _.each(inputs, function (input, index) {
                                     txb.sign(index, keyPair);

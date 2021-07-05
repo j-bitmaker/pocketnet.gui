@@ -186,78 +186,6 @@ var comments = (function(){
 
 		var actions = {
 
-			prepareTransactionCommon : function(amount, reciever, feesMode, feerate, message, clbk){
-
-				var prepareClbk = function(addresses, outputs, feesMode){
-
-					self.app.platform.sdk.wallet.txbase(addresses, _.clone(outputs), 0, feesMode, function(err, inputs, _outputs){
-
-						if(err){
-							sitemessage(err)
-
-							return
-						}
-
-						var tx = self.app.platform.sdk.node.transactions.create.wallet(inputs, _outputs)
-
-
-						var totalFees = Math.min(tx.virtualSize() * feerate, 0.0999);
-
-						
-						if (clbk)
-							clbk(addresses, outputs, totalFees, feesMode)
-					})
-
-				}
-
-				var addresses = [];
-				var outputs = [];
-
-
-				if(reciever == 'pnetwallet' || reciever == self.app.localization.e('tacaddress')){
-					outputs.push({
-						address : self.app.platform.sdk.address.pnet().address,
-						amount : amount
-					})
-
-					prepareClbk(addresses, outputs, feesMode)
-
-					return
-				}
-
-				if(reciever == 'wallet' || reciever == self.app.localization.e('twallet')){
-
-					self.app.platform.sdk.addresses.getFirstRandomAddress(function(_a){
-
-						outputs.push({
-							address : _a,
-							amount : amount
-						})
-
-						self.app.platform.sdk.addresses.save();
-
-						prepareClbk(addresses, outputs, feesMode)
-
-					})
-
-					return
-				}
-
-				outputs.push({
-					address : reciever,
-					amount : amount
-				})
-
-				self.sdk.wallet.embed(outputs, message)
-
-				prepareClbk(addresses, outputs, feesMode)
-			},
-
-			prepareTransaction : function(feerate, receiver, amount, feesMode, clbk){
-
-				actions.prepareTransactionCommon(amount, receiver, feesMode, feerate, '', clbk)
-				
-			},
 
 			myscores : function(){
 				_.each(rendered, function(c, id){
@@ -439,6 +367,8 @@ var comments = (function(){
 
 				comment.donate.remove()
 
+				console.log('comment.donate', comment.donate);
+
 				renders.donate(id, p);
 
 			},
@@ -473,7 +403,7 @@ var comments = (function(){
 
 								currents[id].donate.set({
 									address: self.essenseData.address,
-									amount: value
+									amount: Number(value)
 								})
 
 								if(!result && errors[type]){
@@ -1500,38 +1430,26 @@ var comments = (function(){
 				var comment = currents[id];
 				var donate = comment.donate.v[0];
 
-				if (donate){
+				self.shell({
+					name :  'donate',
+					turi : 'embeding',
+					inner : html,
+					el : p.el.find('.newcommentdonate'),
+					data : {
+						donate : donate && donate.amount
+					},
 
-					self.app.platform.sdk.node.fee.estimate(function(fees){
+				}, function(_p){
 
-						var f = (fees.feerate || 0.000001)
-	
-						actions.prepareTransaction(f, donate.amount, donate.address, 'feesmode', function(addresses, outputs, totalFees, feesMode){
-	
-							console.log('preparetransaction', addresses, outputs, totalFees, feesMode);
-	
-						})
-	
-						self.shell({
-							name :  'donate',
-							turi : 'embeding',
-							inner : html,
-							el : p.el.find('.newcommentdonate'),
-							data : {
-								donate : donate.amount
-							},
-		
-						}, function(_p){
-		
-							_p.el.find('.removedonate').on('click', function(){
-		
-								actions.removeDonate(id, p)
-							})
-		
-							
-						})
+					_p.el.find('.removedonate').on('click', function(){
+
+						actions.removeDonate(id, p)
 					})
-				}
+
+					
+				})
+			
+				
 
 
 
