@@ -1790,6 +1790,7 @@ var wallet = (function(){
 
 						_p.el.find('.sendtransaction').on('click', function(){
 
+
 							if($(this).hasClass('loading')) return
 
 							sendpreloader(true)
@@ -1956,6 +1957,9 @@ var wallet = (function(){
 							}
 
 							_p.el.find('.sendtransaction').on('click', function(){
+
+								console.log('sendtransaction', addresses, outputs, totalFees, feesMode);
+
 
 								if($(this).hasClass('loading')) return
 

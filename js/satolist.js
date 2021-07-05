@@ -10637,6 +10637,8 @@ Platform = function (app, listofnodes) {
 
                 common: function (p, clbk, cache) {
 
+                    console.log('common');
+
                     self.app.user.isState(function (state) {
 
                         if (!p) p = {};

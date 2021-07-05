@@ -320,6 +320,10 @@
 #comments .list .metatable > div.author {
   color: #3c4146;
 }
+#comments .list .metatable > div .donate {
+  color: #076C34;
+  margin-left: 0.5em;
+}
 #comments .list .metatable > div .date {
   color: #b2abac;
 }
