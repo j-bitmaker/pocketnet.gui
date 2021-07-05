@@ -317,36 +317,51 @@ Comment = function(txid){
 		v : []
 	}
 
-	self.receiver = {
-		set : function(_v){
 
-			if(!_v){
-				this.v = ''
-			}
-			else
-
-				this.v = _v
-
-			if (self.on.change)
-				self.on.change('receiver', this.v)
-		},
-		v : ''
-	};
 
 	self.donate = {
-		set : function(_v){
+		set : function(donate){
 
-			if(!_v){
-				this.v = ''
+			if(!donate){
+				this.v = []
 			}
-			else
 
-				this.v = _v
+			else
+			{
+				if(_.isArray(donate)){
+
+					this.v = donate;
+				}
+
+				else{
+
+					if(!donate) return
+
+					this.v.push(donate)
+				}
+			}
+
 
 			if (self.on.change)
 				self.on.change('donate', this.v)
+
+			return true;
 		},
-		v : ''
+		remove : function(donate){
+			if(!donate){
+				this.v = []
+			}
+			else
+			{
+				removeEqual(this.v, donate)
+			}
+		},
+		get : function(){
+			return _.map(this.v, function(donate){
+				return donate
+			})
+		},
+		v : []
 	};
 
 	self.url = {
@@ -370,7 +385,6 @@ Comment = function(txid){
 		self.images.set()
 		self.url.set()
 		self.donate.set()
-		self.receiver.set()
 	}
 
 	self.on = {}
@@ -498,8 +512,9 @@ Comment = function(txid){
 				
 				message : encodeURIComponent(self.message.v),
 				url : encodeURIComponent(self.url.v),
-				donate : encodeURIComponent(self.donate.v),
-				receiver : encodeURIComponent(self.receiver.v),
+				// donate : _.map(self.donate.v, function(i){
+				// 	return encodeURIComponent(i)
+				// }),
 				images : _.map(self.images.v, function(i){
 					return encodeURIComponent(i)
 				}),
@@ -527,11 +542,12 @@ Comment = function(txid){
 				url : encodeURIComponent(self.url.v),
 				images : _.map(self.images.v, function(i){
 					return encodeURIComponent(i)
-				}),
+				})
+				// donate : _.map(self.donate.v, function(i){
+				// 	return encodeURIComponent(i)
+				// }),
 			})
 		}
-
-		console.log('self.images.v', self.images.v)
 
 		if(self.id){
 			r.id = self.id
@@ -549,8 +565,9 @@ Comment = function(txid){
 		v.msgparsed = JSON.parse(v.msg)
 
 		self.url.set(decodeURIComponent(v.msgparsed.url))
-		self.donate.set(decodeURIComponent(v.msgparsed.donate))
-		self.receiver.set(decodeURIComponent(v.msgparsed.receiver))
+		// self.donate.set(_.map(v.msgparsed.donate, function(i){
+		// 	return decodeURIComponent(i)
+		// }))
 		self.message.set(decodeURIComponent(v.msgparsed.message))
 		self.images.set(_.map(v.msgparsed.images, function(i){
 			return decodeURIComponent(i)

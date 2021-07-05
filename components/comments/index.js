@@ -437,8 +437,7 @@ var comments = (function(){
 
 				var comment = currents[id]
 
-				comment.donate.set();
-				comment.receiver.set();
+				comment.donate.remove()
 
 				renders.donate(id, p);
 
@@ -472,8 +471,10 @@ var comments = (function(){
 
 								if(!_.isArray(value)) value = [value]
 
-								currents[id].donate.set(value)
-								currents[id].receiver.set(self.essenseData.address)
+								currents[id].donate.set({
+									address: self.essenseData.address,
+									amount: value
+								})
 
 								if(!result && errors[type]){
 
@@ -1497,40 +1498,42 @@ var comments = (function(){
 			donate : function(id, p, clbk){
 
 				var comment = currents[id];
-				var receiver = comment.receiver.v;
-				var donate = comment.donate.v;
+				var donate = comment.donate.v[0];
 
-				console.log('redners.donate', comment.receiver.v);
+				if (donate){
 
-				self.app.platform.sdk.node.fee.estimate(function(fees){
+					self.app.platform.sdk.node.fee.estimate(function(fees){
 
-					var f = (fees.feerate || 0.000001)
-
-					actions.prepareTransaction(f, receiver, donate, 'feesmode', function(addresses, outputs, totalFees, feesMode){
-
-						console.log('preparetransaction', addresses, outputs, totalFees, feesMode);
-
-					})
-
-					self.shell({
-						name :  'donate',
-						turi : 'embeding',
-						inner : html,
-						el : p.el.find('.newcommentdonate'),
-						data : {
-							donate : comment.donate.v,
-						},
+						var f = (fees.feerate || 0.000001)
 	
-					}, function(_p){
+						actions.prepareTransaction(f, donate.amount, donate.address, 'feesmode', function(addresses, outputs, totalFees, feesMode){
 	
-						_p.el.find('.removedonate').on('click', function(){
+							console.log('preparetransaction', addresses, outputs, totalFees, feesMode);
 	
-							actions.removeDonate(id, p)
 						})
 	
-						
+						self.shell({
+							name :  'donate',
+							turi : 'embeding',
+							inner : html,
+							el : p.el.find('.newcommentdonate'),
+							data : {
+								donate : donate.amount
+							},
+		
+						}, function(_p){
+		
+							_p.el.find('.removedonate').on('click', function(){
+		
+								actions.removeDonate(id, p)
+							})
+		
+							
+						})
 					})
-				})
+				}
+
+
 
 
 			},

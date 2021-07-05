@@ -12630,8 +12630,10 @@ Platform = function (app, listofnodes) {
                                     })
 
                                     self.app.platform.sdk.node.transactions.blockUnspents(bids)
+                                    console.log('export', obj.export())
 
                                     self.app.api.rpc('sendrawtransactionwithmessage', [hex, obj.export(), optstype]).then(d => {
+
 
                                         var alias = obj.export(true);
                                             alias.txid = d;
