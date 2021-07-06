@@ -122,6 +122,7 @@ var comments = (function(){
 						areas[id].setText('');
 
 					el.c.find('.post .newcommentimages').html('')
+					el.c.find('.post .newcommentdonate').html('')
 				}
 
 				else
@@ -396,7 +397,6 @@ var comments = (function(){
 						
 							added : function(value){
 
-
 								var result = Boolean(value);
 
 								if(!_.isArray(value)) value = [value]
@@ -511,6 +511,7 @@ var comments = (function(){
 							actions.send(current, function(error, alias){
 
 								current.loading = false;
+								
 
 								if(!error){
 									successCheck()
@@ -529,6 +530,9 @@ var comments = (function(){
 				
 			},
 			send : function(comment, clbk, pid, aid, editid, id){	
+
+
+				console.log('send', comment, clbk, pid, aid, editid, id);
 
 				self.app.platform.sdk.comments.send(txid, comment, pid, aid, function(err, alias){
 					if (el.c)
@@ -1401,7 +1405,6 @@ var comments = (function(){
 			})
 
 				
-
 			_p.el.find('.postaction').on('click', function(){
 
 				if(c.hasClass('sending')) return
@@ -1421,11 +1424,13 @@ var comments = (function(){
 			_p.el.find('.closeAnswer').on('click', function(){
 				actions.removeForm(p.id || '0')
 			})
+
+
 		}
 
 		var renders = {
 
-			donate : function(id, p, clbk){
+			donate : function(id, p){
 
 				var comment = currents[id];
 				var donate = comment.donate.v[0];
@@ -1449,9 +1454,6 @@ var comments = (function(){
 					
 				})
 			
-				
-
-
 
 
 			},
@@ -1459,8 +1461,6 @@ var comments = (function(){
 			images : function(id, p, clbk){
 
 				var comment = currents[id]
-
-				console.log('html!!', html)
 
 				self.shell({
 					name :  'images',

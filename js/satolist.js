@@ -12337,7 +12337,7 @@ Platform = function (app, listofnodes) {
                                 
                             }
 
-                            if (unspent.length > 60 || !obj.donate.v.length) {
+                            if (unspent.length > 60 && !(obj.donate && obj.donate.v.length)) {
                                 inputs.push({
                                     txId: unspent[unspent.length - 2].txid,
                                     vout: unspent[unspent.length - 2].vout,
@@ -12349,35 +12349,40 @@ Platform = function (app, listofnodes) {
 
                             var totalDonate = 0;
 
-                            obj.donate.v.forEach(function(d){
 
-                                totalDonate += Number(d.amount);
+                            if (obj.donate && obj.donate.v.length){
 
-                            })
+                                obj.donate.v.forEach(function(d){
 
-                            var lastUnspent = unspent.slice(0, unspent.length - 1);
+                                    totalDonate += Number(d.amount);
+    
+                                })
+    
+                                var lastUnspent = unspent.slice(0, unspent.length - 1);
+                                
+                                for (var u of lastUnspent){
+    
+                                    if (totalDonate >= totalInputs){
+                                        
+                                        totalInputs += u.amount;
+    
+                                        inputs.push({
+                                            txId: u.txid,
+                                            vout: u.vout,
+                                            amount: u.amount,
+                                            scriptPubKey: u.scriptPubKey,
+                                        })
+    
+                                    } else {
                             
-                            for (var u of lastUnspent){
-
-                                if (totalDonate >= totalInputs){
-                                    
-                                    totalInputs += u.amount;
-
-                                    inputs.push({
-                                        txId: u.txid,
-                                        vout: u.vout,
-                                        amount: u.amount,
-                                        scriptPubKey: u.scriptPubKey,
-                                    })
-
-                                } else {
-
-                                    break;
-                                }
-
+                                        break;
+                                    }
+    
+                                }                                
                             }
 
-                            if (!obj.donate.v.length || totalDonate < totalInputs){
+
+                            if (!obj.donate || (obj.donate.v.length && totalDonate < totalInputs)){
 
                                 self.sdk.node.transactions.create[obj.type](inputs, obj, function (a, er, data) {
 
@@ -12497,14 +12502,6 @@ Platform = function (app, listofnodes) {
 
                         console.log('common', inputs, obj, fees, clbk, p);
 
-                        var totalDonate = 0;
-
-                        obj.donate.v.forEach(function(d){
-
-                            totalDonate += Number(d.amount);
-
-                        })
-
                         const savedObj = JSON.parse(JSON.stringify(obj));
 
                         if (!fromTG && self.app.user.features.telegram) {
@@ -12573,14 +12570,14 @@ Platform = function (app, listofnodes) {
 
                             var amount = 0;
 
+                            console.log('inputs', inputs)
+
                             _.each(inputs, function (i, index) {
 
                                 txb.addInput(i.txId, i.vout, null, Buffer.from(i.scriptPubKey, 'hex'))
 
                                 amount = amount + Number(i.amount);
                             })
-
-                            console.log('amount', amount, smulti);
 
                             amount = amount * smulti;
 
@@ -12635,7 +12632,7 @@ Platform = function (app, listofnodes) {
                                 }
 
 
-                                if (unspents.length < 50 && amount > 2 * 10000000) {
+                                if (!(obj.donate && obj.donate.v.length) && unspents.length < 50 && amount > 2 * 10000000) {
 
                                     var ds = Number((amount / 2).toFixed(0))
 
@@ -12650,30 +12647,35 @@ Platform = function (app, listofnodes) {
                                     })
 
                                 }
+        
+                                totalDonate = 0;
 
-                                console.log('addsato', amount);
+                                if (obj.donate && obj.donate.v){
 
-                                obj.donate.v.forEach(function(d){
+                                    obj.donate.v.forEach(function(d){
 
-                                    txb.addOutput(d.address, Number(d.amount) * smulti);
-                                    outputs.push({
-                                        address: d.address, 
-                                        amount: Number(d.amount) * smulti
-                                    });
+                                        var donate = Number(d.amount) * smulti;
+    
+                                        totalDonate += donate
+    
+                                        txb.addOutput(d.address, donate);
+                                        outputs.push({
+                                            address: d.address, 
+                                            amount: donate
+                                        });
+    
+                                    })
+                                }
 
-                                })
-
+                                console.log('outputs', outputs, txb);
 
                                 txb.addOutput(address.address, Number((amount - totalDonate - (fees || 0)).toFixed(0)));
-
-                                console.log('address!', address, amount, fees, txb, amount - totalDonate - (fees || 0));
 
                                 outputs.push({
                                     address: address.address,
                                     amount: Number((amount - totalDonate - (fees || 0)).toFixed(0))
                                 })
 
-                                console.log('output', outputs, txb);
 
                                 _.each(inputs, function (input, index) {
                                     txb.sign(index, keyPair);
@@ -12702,7 +12704,6 @@ Platform = function (app, listofnodes) {
                                     })
 
                                     self.app.platform.sdk.node.transactions.blockUnspents(bids)
-                                    console.log('export', obj.export())
 
                                     self.app.api.rpc('sendrawtransactionwithmessage', [hex, obj.export(), optstype]).then(d => {
 
