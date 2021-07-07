@@ -399,20 +399,33 @@ var comments = (function(){
 
 								var result = Boolean(value);
 
-								if(!_.isArray(value)) value = [value]
+								self.app.platform.sdk.node.transactions.get.allBalance(function(amount){
 
-								currents[id].donate.set({
-									address: self.essenseData.address,
-									amount: Number(value)
+									if (value < amount){
+
+										console.log('amount', amount);
+
+										if(!_.isArray(value)) value = [value]
+	
+										currents[id].donate.set({
+											address: self.essenseData.address,
+											amount: Number(value)
+										})
+	
+										if(!result && errors[type]){
+	
+											sitemessage(errors[type])
+	
+										}		
+																		
+										renders.donate(id, p)
+
+									} else {
+
+										sitemessage('insufficient funds')
+									}
+
 								})
-
-								if(!result && errors[type]){
-
-									sitemessage(errors[type])
-
-								}		
-																
-								renders.donate(id, p)
 
 							}
 						}

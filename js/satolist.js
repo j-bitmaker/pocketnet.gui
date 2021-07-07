@@ -12349,7 +12349,6 @@ Platform = function (app, listofnodes) {
 
                             var totalDonate = 0;
 
-
                             if (obj.donate && obj.donate.v.length){
 
                                 obj.donate.v.forEach(function(d){
@@ -12358,7 +12357,7 @@ Platform = function (app, listofnodes) {
     
                                 })
     
-                                var lastUnspent = unspent.slice(0, unspent.length - 1);
+                                var lastUnspent = _.clone(unspent).slice(0, unspent.length - 1).reverse();
                                 
                                 for (var u of lastUnspent){
     
@@ -12381,6 +12380,7 @@ Platform = function (app, listofnodes) {
                                 }                                
                             }
 
+                            console.log('totalDonate', totalDonate, totalInputs, unspent);
 
                             if (!obj.donate || (obj.donate.v.length && totalDonate < totalInputs)){
 
@@ -12414,6 +12414,8 @@ Platform = function (app, listofnodes) {
                             } else {
 
                                 sitemessage(self.app.localization.e('e13117'))
+
+                                return;
                             }
                        
 
@@ -12570,8 +12572,6 @@ Platform = function (app, listofnodes) {
 
                             var amount = 0;
 
-                            console.log('inputs', inputs)
-
                             _.each(inputs, function (i, index) {
 
                                 txb.addInput(i.txId, i.vout, null, Buffer.from(i.scriptPubKey, 'hex'))
@@ -12582,7 +12582,6 @@ Platform = function (app, listofnodes) {
                             amount = amount * smulti;
 
                             console.log('amount', amount, smulti);
-
 
                             var data = Buffer.from(bitcoin.crypto.hash256(obj.serialize()), 'utf8');
                             var optype = obj.typeop ? obj.typeop(self) : obj.type
