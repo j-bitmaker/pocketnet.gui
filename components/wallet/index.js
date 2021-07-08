@@ -829,6 +829,8 @@ var wallet = (function(){
 
 						var totalFees = Math.min(tx.virtualSize() * feerate, 0.0999);
 
+						console.log('totalFees', totalFees);
+
 						
 						if (clbk)
 							clbk(addresses, outputs, totalFees, feesMode)
