@@ -12345,38 +12345,11 @@ Platform = function (app, listofnodes) {
 
                             }
 
-                            var createTransaction = function(fees){
-
-                                self.sdk.node.transactions.create[obj.type](inputs, obj, fees, function (a, er, data) {
-
-                                    if (!a) {
-                                        if ((er == -26 || er == -25 || er == 16) && !p.update) {
-    
-                                            p.update = true;
-    
-                                            self.sdk.node.transactions.create.commonFromUnspent(obj, clbk, p, telegram)
-    
-                                            return
-                                        }
-                                    }
-    
-    
-                                    var regs = app.platform.sdk.registrations.storage[addr];
-    
-                                    if (regs && (regs == 4)) {
-                                        self.sdk.registrations.add(addr, 5)
-                                    }
-    
-                                    if (clbk) {
-                                        clbk(a, er, data)
-                                    }
-    
-    
-                                }, p, telegram)
-
-                            }
+                            var feerate = TXFEE;
 
                             if (obj.donate && obj.donate.v.length){
+
+                                feerate = 0.00001;
 
                                 var totalDonate = 0;
 
@@ -12390,7 +12363,7 @@ Platform = function (app, listofnodes) {
                                 
                                 for (var u of lastUnspent){
     
-                                    if (totalDonate >= totalInputs){
+                                    if (totalDonate + feerate >= totalInputs){
                                         
                                         totalInputs += u.amount;
     
@@ -12420,17 +12393,34 @@ Platform = function (app, listofnodes) {
     
                                 }  
 
-                                self.app.platform.sdk.node.fee.estimate(function(fees){
+                            } 
 
-                                    var feerate = fees.feerate || 0.00001;
-                                    createTransaction(feerate * smulti);
-                                })
+                            self.sdk.node.transactions.create[obj.type](inputs, obj, feerate, function (a, er, data) {
 
-                            } else {
+                                if (!a) {
+                                    if ((er == -26 || er == -25 || er == 16) && !p.update) {
 
-                                createTransaction(TXFEE)
+                                        p.update = true;
 
-                            }
+                                        self.sdk.node.transactions.create.commonFromUnspent(obj, clbk, p, telegram)
+
+                                        return
+                                    }
+                                }
+
+
+                                var regs = app.platform.sdk.registrations.storage[addr];
+
+                                if (regs && (regs == 4)) {
+                                    self.sdk.registrations.add(addr, 5)
+                                }
+
+                                if (clbk) {
+                                    clbk(a, er, data)
+                                }
+
+
+                            }, p, telegram)
 
                             console.log('totalDonate', totalDonate, totalInputs, unspent);
                        
