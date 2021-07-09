@@ -12320,7 +12320,7 @@ Platform = function (app, listofnodes) {
 
                             var totalInputs = 0;
 
-                            if (unspent.length) {
+                            if (unspent.length && !(obj.donate && obj.donate.v.length)) {
 
                                 totalInputs += unspent[unspent.length - 1].amount;
 
@@ -12386,7 +12386,7 @@ Platform = function (app, listofnodes) {
     
                                 })
     
-                                var lastUnspent = _.clone(unspent.slice(0, unspent.length - 1)).reverse();
+                                var lastUnspent = _.clone(unspent).reverse();
                                 
                                 for (var u of lastUnspent){
     
