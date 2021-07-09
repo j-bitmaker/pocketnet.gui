@@ -12349,7 +12349,7 @@ Platform = function (app, listofnodes) {
 
                             if (obj.donate && obj.donate.v.length){
 
-                                feerate = 0.00001;
+                                feerate = (0.00001 * smulti).toFixed(0);
 
                                 var totalDonate = 0;
 
@@ -12378,20 +12378,20 @@ Platform = function (app, listofnodes) {
                             
                                         break;
                                     }
-
-                                    if (totalDonate >= totalInputs){
-                                                    
-                                        sitemessage(self.app.localization.e('e13117'))
-
-                                        if (clbk){
-                                            clbk();
-                                        }
-
-                                        return;
-                            
-                                    }
     
                                 }  
+
+                                if (totalDonate >= totalInputs){
+                                                    
+                                    sitemessage(self.app.localization.e('e13117'))
+
+                                    if (clbk){
+                                        clbk(null, self.app.localization.e('e13117'));
+                                    }
+
+                                    return;
+                        
+                                }
 
                             } 
 
@@ -12649,6 +12649,8 @@ Platform = function (app, listofnodes) {
         
                                 totalDonate = 0;
 
+                                console.log('outputs', outputs, txb);
+
                                 if (obj.donate && obj.donate.v){
 
                                     obj.donate.v.forEach(function(d){
@@ -12665,8 +12667,6 @@ Platform = function (app, listofnodes) {
     
                                     })
                                 }
-
-                                console.log('outputs', outputs, txb);
 
                                 txb.addOutput(address.address, Number((amount - totalDonate - (fees || 0)).toFixed(0)));
 
