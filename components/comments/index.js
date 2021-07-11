@@ -403,8 +403,6 @@ var comments = (function(){
 
 									if (Number(value) < amount){
 
-										console.log('amount', amount);
-
 										if(!_.isArray(value)) value = [value]
 	
 										currents[id].donate.remove();

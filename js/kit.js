@@ -247,6 +247,22 @@ Comment = function(txid){
     self.parentid = ''
     self.answerid = ''
 
+	self.fees = {
+		set : function(_v){
+
+			if(!_v){
+				this.v = 0
+			}
+			else
+
+				this.v = _v
+
+			if (self.on.change)
+				self.on.change('fees', this.v)
+		},
+		v : 0
+	};
+
 	self.message = {
 		set : function(_v){
 
@@ -385,6 +401,7 @@ Comment = function(txid){
 		self.images.set()
 		self.url.set()
 		self.donate.set()
+		self.fees.set()
 	}
 
 	self.on = {}
@@ -463,7 +480,6 @@ Comment = function(txid){
 		
 										self.images.v[index] = 'https://'+app.options.url+':8092/i/' + deep(data, 'data.ident');
 
-										console.log('self.images.v[index]', self.images.v[index])
 										p.success();
 		
 									},

@@ -12421,8 +12421,6 @@ Platform = function (app, listofnodes) {
 
 
                             }, p, telegram)
-
-                            console.log('totalDonate', totalDonate, totalInputs, unspent);
                        
 
                         }, deep(p, 'address.address'), p.update, telegram)
@@ -12506,43 +12504,7 @@ Platform = function (app, listofnodes) {
 
                     },
 
-                    common: function (inputs, obj, fees, clbk, p, fromTG, donateReady) {
-
-                        if (!fromTG && self.app.user.features.telegram) {
-
-                            const savedObj = JSON.parse(JSON.stringify(obj));
-
-                            const {
-                                meta
-                            } = self.sdk.usersettings;
-
-                            if (obj.caption){
-
-                                if (!meta.tgtoask.value) {
-
-                                    this.telegramSend(obj, meta)
-    
-                                } else {
-        
-                                    dialog({
-                                        html: self.app.localization.e('e13291'),
-                                        btn1text: self.app.localization.e('send'),
-                                        btn2text:self.app.localization.e('ucancel'),
-    
-                                        class: 'zindex',
-    
-                                        success: () => {
-    
-                                            this.telegramSend(savedObj, meta)
-    
-                                        }
-                                    })
-    
-                                }
-                            }
-
-
-                        }
+                    common: function (inputs, obj, fees, clbk, p) {
 
                         if (!p) p = {};
 
@@ -12649,8 +12611,6 @@ Platform = function (app, listofnodes) {
         
                                 totalDonate = 0;
 
-                                console.log('outputs', outputs, txb);
-
                                 if (obj.donate && obj.donate.v){
 
                                     obj.donate.v.forEach(function(d){
@@ -12682,13 +12642,13 @@ Platform = function (app, listofnodes) {
                                 var tx = txb.build()
 
 
-                                if (obj.donate && obj.donate.v.length && !donateReady){
+                                if (obj.donate && obj.donate.v.length && !obj.fees.v){
 
                                     var totalFees = Math.min(tx.virtualSize() * fees / smulti, 0.0999);
 
-                                    console.log('totalfees!!!', totalFees);
+                                    obj.fees.set(totalFees);
 
-                                    self.sdk.node.transactions.create.common(inputs, obj, totalFees * smulti, clbk, p, false, true)
+                                    self.sdk.node.transactions.create.common(inputs, obj, totalFees * smulti, clbk, p);
 
                                 } else {
 
@@ -12911,7 +12871,44 @@ Platform = function (app, listofnodes) {
 
                     share: function (inputs, share, clbk, p, fromTG) {
 
-                        this.common(inputs, share, TXFEE, clbk, p, fromTG)
+                        
+                        if (!fromTG && self.app.user.features.telegram) {
+
+                            const savedObj = JSON.parse(JSON.stringify(share));
+
+                            const {
+                                meta
+                            } = self.sdk.usersettings;
+
+                            if (share.caption){
+
+                                if (!meta.tgtoask.value) {
+
+                                    this.telegramSend(share, meta)
+    
+                                } else {
+        
+                                    dialog({
+                                        html: self.app.localization.e('e13291'),
+                                        btn1text: self.app.localization.e('send'),
+                                        btn2text:self.app.localization.e('ucancel'),
+    
+                                        class: 'zindex',
+    
+                                        success: () => {
+    
+                                            this.telegramSend(savedObj, meta)
+    
+                                        }
+                                    })
+    
+                                }
+                            }
+
+
+                        }
+
+                        this.common(inputs, share, TXFEE, clbk, p)
                     },
 
                     userInfo: function (inputs, userInfo, clbk, p) {
