@@ -12349,7 +12349,7 @@ Platform = function (app, listofnodes) {
 
                             if (obj.donate && obj.donate.v.length){
 
-                                feerate = (0.00001 * smulti).toFixed(0);
+                                feerate = 0.00001;
 
                                 var totalDonate = 0;
 
@@ -12393,6 +12393,7 @@ Platform = function (app, listofnodes) {
                         
                                 }
 
+                                feerate = Number((feerate * smulti).toFixed(0));
                             } 
 
                             self.sdk.node.transactions.create[obj.type](inputs, obj, feerate, function (a, er, data) {
