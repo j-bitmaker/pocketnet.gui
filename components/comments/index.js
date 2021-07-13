@@ -1932,6 +1932,8 @@ var comments = (function(){
 
 			list : function(p, clbk, pid){
 
+				console.log('render list', p);
+
 				if(!p) p = {};
 
 				p.comments = _.filter(p.comments || [], function(c){

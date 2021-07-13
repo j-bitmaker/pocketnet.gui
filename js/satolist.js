@@ -819,6 +819,17 @@ Platform = function (app, listofnodes) {
             },
 
             
+        },
+
+        "incorrectdonate" : {
+
+            message: function () {
+
+                return 'Incorrect donate'
+
+            },
+
+            
         }
     }
 
@@ -12629,135 +12640,144 @@ Platform = function (app, listofnodes) {
                                     })
                                 }
 
-                                txb.addOutput(address.address, Number((amount - totalDonate - (fees || 0)).toFixed(0)));
+                                var totalReturn = Number((amount - totalDonate - (fees || 0)).toFixed(0));
 
-                                outputs.push({
-                                    address: address.address,
-                                    amount: Number((amount - totalDonate - (fees || 0)).toFixed(0))
-                                })
+                                if (totalReturn < 0 || totalDonate <= fees){
 
-                                _.each(inputs, function (input, index) {
-                                    txb.sign(index, keyPair);
-                                })
-
-                                var tx = txb.build()
-
-
-                                if (obj.donate && obj.donate.v.length && !obj.fees.v){
-
-                                    var totalFees = Math.min(tx.virtualSize() * fees / smulti, 0.0999);
-
-                                    obj.fees.set(totalFees);
-
-                                    self.sdk.node.transactions.create.common(inputs, obj, totalFees * smulti, clbk, p);
-
+                                    if (clbk){
+                                        clbk(null, 'incorrectdonate')
+                                    }
                                 } else {
 
-                                    var hex = tx.toHex();
+                                    txb.addOutput(address.address, totalReturn);
 
-                                    if (p.pseudo) {
-                                        var alias = obj.export(true);
-                                        alias.txid = makeid();
+                                    outputs.push({
+                                        address: address.address,
+                                        amount: totalReturn
+                                    })
     
-                                        if (clbk)
-                                            clbk(alias, null)
-                                    }
-                                    else {
+                                    _.each(inputs, function (input, index) {
+                                        txb.sign(index, keyPair);
+                                    })
     
-                                        var bids = _.map(inputs, function (i) {
-                                            return {
-                                                txid : i.txId,
-                                                vout : i.vout
-                                            }
-                                        })
-    
-                                        self.app.platform.sdk.node.transactions.blockUnspents(bids)
-    
-                                        self.app.api.rpc('sendrawtransactionwithmessage', [hex, obj.export(), optstype]).then(d => {
+                                    var tx = txb.build()
     
     
+                                    if (obj.donate && obj.donate.v.length && !obj.fees.v){
+    
+                                        var totalFees = Math.min(tx.virtualSize() * fees / smulti, 0.0999);
+    
+                                        obj.fees.set(totalFees);
+    
+                                        self.sdk.node.transactions.create.common(inputs, obj, totalFees * smulti, clbk, p);
+    
+                                    } else {
+    
+                                        var hex = tx.toHex();
+    
+                                        if (p.pseudo) {
                                             var alias = obj.export(true);
-                                                alias.txid = d;
-                                                alias.address = address.address;
-                                                alias.type = obj.type
-                                                alias.time = self.currentTime()
-                                                alias.timeUpd = alias.time
-                                                alias.optype = optype
-    
-                                                var count = deep(tempOptions, obj.type + ".count") || 'many'
-    
-    
-                                                if (!temp[obj.type] || count == 'one') {
-                                                    temp[obj.type] = {};
+                                            alias.txid = makeid();
+        
+                                            if (clbk)
+                                                clbk(alias, null)
+                                        }
+                                        else {
+        
+                                            var bids = _.map(inputs, function (i) {
+                                                return {
+                                                    txid : i.txId,
+                                                    vout : i.vout
                                                 }
-    
-                                                temp[obj.type][d] = alias;
-    
-                                                alias.inputs = inputs
-                                                alias.outputs = _.map(outputs, function(output){
-                                                    return {
-                                                        address : output.address,
-                                                        amount : output.amount / smulti,
-                                                        deleted : output.deleted
+                                            })
+        
+                                            self.app.platform.sdk.node.transactions.blockUnspents(bids)
+        
+                                            self.app.api.rpc('sendrawtransactionwithmessage', [hex, obj.export(), optstype]).then(d => {
+        
+        
+                                                var alias = obj.export(true);
+                                                    alias.txid = d;
+                                                    alias.address = address.address;
+                                                    alias.type = obj.type
+                                                    alias.time = self.currentTime()
+                                                    alias.timeUpd = alias.time
+                                                    alias.optype = optype
+        
+                                                    var count = deep(tempOptions, obj.type + ".count") || 'many'
+        
+        
+                                                    if (!temp[obj.type] || count == 'one') {
+                                                        temp[obj.type] = {};
                                                     }
-                                                })
-    
-                                                self.sdk.node.transactions.saveTemp()
-    
-                                                var ids = _.map(inputs, function (i) {
-    
-                                                    return {
-                                                        txid: i.txId,
-                                                        vout: i.vout
-                                                    }
-    
-                                                })
-    
-                                                self.app.platform.sdk.node.transactions.clearUnspents(ids)
-    
-                                                if (obj.ustate) {
-    
-                                                    var ustate = obj.ustate;
-    
-                                                    if (typeof obj.ustate == 'function') ustate = obj.ustate();
-    
-                                                    if (ustate) {
-                                                        var us = self.sdk.ustate.storage;
-    
-                                                        if (us[address.address]) {
-                                                            us[address.address][obj.ustate + "_spent"]++
-                                                            us[address.address][obj.ustate + "_unspent"]--
+        
+                                                    temp[obj.type][d] = alias;
+        
+                                                    alias.inputs = inputs
+                                                    alias.outputs = _.map(outputs, function(output){
+                                                        return {
+                                                            address : output.address,
+                                                            amount : output.amount / smulti,
+                                                            deleted : output.deleted
                                                         }
-    
-                                                        _.each(self.sdk.ustate.clbks, function (c) {
-                                                            c()
-                                                        })
+                                                    })
+        
+                                                    self.sdk.node.transactions.saveTemp()
+        
+                                                    var ids = _.map(inputs, function (i) {
+        
+                                                        return {
+                                                            txid: i.txId,
+                                                            vout: i.vout
+                                                        }
+        
+                                                    })
+        
+                                                    self.app.platform.sdk.node.transactions.clearUnspents(ids)
+        
+                                                    if (obj.ustate) {
+        
+                                                        var ustate = obj.ustate;
+        
+                                                        if (typeof obj.ustate == 'function') ustate = obj.ustate();
+        
+                                                        if (ustate) {
+                                                            var us = self.sdk.ustate.storage;
+        
+                                                            if (us[address.address]) {
+                                                                us[address.address][obj.ustate + "_spent"]++
+                                                                us[address.address][obj.ustate + "_unspent"]--
+                                                            }
+        
+                                                            _.each(self.sdk.ustate.clbks, function (c) {
+                                                                c()
+                                                            })
+                                                        }
+        
+        
+        
+        
                                                     }
-    
-    
-    
-    
+        
+        
+                                                    if (clbk)
+                                                        clbk(alias)
+                
+                                            }).catch(e => {
+                                                self.app.platform.sdk.node.transactions.unblockUnspents(bids)
+        
+        
+                                                if (clbk) {
+                                                    clbk(null, e.code, data)
                                                 }
+                                            })
+        
+                                            
+                                        }
     
-    
-                                                if (clbk)
-                                                    clbk(alias)
-            
-                                        }).catch(e => {
-                                            self.app.platform.sdk.node.transactions.unblockUnspents(bids)
-    
-    
-                                            if (clbk) {
-                                                clbk(null, e.code, data)
-                                            }
-                                        })
-    
-                                        
                                     }
 
                                 }
-
-
 
 
                             }, address.address)

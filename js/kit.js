@@ -2283,6 +2283,9 @@ pComment = function(){
 	self.time = 0;
 	self.timeUpd = 0;
 	self.children = 0;
+	self.donation = '';
+	self.amount = 0;
+
 
 	self.address = '';
 	self.parentid = '';
@@ -2330,6 +2333,9 @@ pComment = function(){
 		self.scoreDown = Number(v.scoreDown || '0');
 		self.scoreUp = Number(v.scoreUp || '0');
 
+		self.donation = v.donation;
+		self.amount = Number(v.amount || '0');
+
 		if (v.myScore) self.myScore = v.myScore
 
 		if (v.deleted) self.deleted = true
@@ -2361,7 +2367,9 @@ pComment = function(){
 			scoreDown : self.scoreDown,
 			scoreUp : self.scoreUp,
 			myScore : self.myScore,
-			deleted : self.deleted
+			deleted : self.deleted,
+			donation: self.donation,
+			amount: self.amount
 		}
 
 		return r

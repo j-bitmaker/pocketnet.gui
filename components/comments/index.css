@@ -323,6 +323,7 @@
 #comments .list .metatable > div .donate {
   color: #076C34;
   margin-left: 0.5em;
+  font-size: 0.9em;
 }
 #comments .list .metatable > div .date {
   color: #b2abac;
@@ -1276,6 +1277,10 @@ html.stblack #comments .answers .comment:nth-child(1) {
   }
   #comments .list .commentWrapper > div.iconWrapper .usericon {
     margin: 0;
+  }
+  #comments .list .commentWrapper > div.commentBody .donate {
+    display: block;
+    margin-left: 0;
   }
   #comments .list .commentcontenttable {
     display: block;
