@@ -1,0 +1,221 @@
+<% if(url){ 
+	
+	var meta = app.platform.parseUrl(url);
+
+
+	if(typeof share == 'undefined') share = {};
+
+	if((meta.type == 'youtube') || meta.type == 'vimeo' || meta.type == 'bitchute' || meta.type == 'peertube'){ 
+		if(!app.platform.sdk.usersettings.meta.embedvideo || 
+			app.platform.sdk.usersettings.meta.embedvideo.value) {
+
+			var info = app.platform.sdk.videos.storage[url] || app.platform.sdk.videos.storage[meta.id] || {}
+			var aspectRatio = (info.data || {}).aspectRatio || 0;
+	%>
+		<div class="videoWrapper <%- (aspectRatio < 1.25) && (aspectRatio >= 0.9) ? 'squareVideo' : ''%> <%- (aspectRatio < 0.9) && (aspectRatio != 0) ? 'verticalVideo' : ''%>" pid="<%- makeid() %>">
+
+			<% if(meta.type == 'youtube' && window.cordova) {%>
+
+				<div class="js-player-dummy">
+					<div class="jsPlayerLoading">
+						<div class="jsPlayerLoadingD table watchonyoutube">
+							<div>
+								<a href="<%- url %>" cordovalink="_system" target="_blank">Watch on Youtube</a>
+							</div>
+						</div>
+					</div>
+				</div>
+		
+			<% } else { %> 
+				
+				<div class="js-player" data-plyr-provider="<%-meta.type%>" data-plyr-embed-id="<%-meta.url%>" data-plyr-video-id="<%-meta.id%>" data-plyr-host-name="<%-meta.host_name || ''%>">
+					
+					<% if(typeof preview != 'undefined' && preview) {  %>
+
+						<div class="jsPlayerPreview">
+							<% if(info.data) {%>
+								<div class="wpl opensviurl" image="<%-info.data.image || ''%>">
+								</div>
+								<% if(info.data.duration) {%>
+									<div class="durationWrapper">
+										<span><%-secInTime(info.data.duration)%></span>
+									</div>
+								<% } %>
+
+								<% if(info.data.isLive) {%>
+									<div class="durationWrapper live">
+										<i class="fas fa-rss"></i> <span>Live</span>
+									</div>
+								<% } %>
+
+								<div class="statswrapper">
+									<% if(info.data.views) {%>
+										<div class="viewsWrapper">
+											<i class="far fa-eye"></i> <span><%-compressedNumber(info.data.views)%></span>
+										</div>
+									<% } %>
+
+		
+									<% if(share) {
+										
+										var value = Number(share.score)
+
+										if (Number(share.scnt) && _.isNumber(Number(share.scnt))) {
+											value = value / Number(share.scnt)
+										}
+										else {
+											value = 0
+										}
+										
+										%>
+										<div class="starsRatingWrapper">
+											<i class="far fa-star"></i> <span><%-Number(value).toFixed(1)%></span>
+										</div>
+										<div class="commentsCountWrapper">
+											<i class="far fa-comment"></i> <span><%-compressedNumber(share.comments || 0)%></span>
+										</div>
+									<% } %>
+								</div>
+
+							<% } %>
+						</div>
+
+
+					<% } else { %>
+
+						<div class="jsPlayerLoading">
+							<div class="jsPlayerLoadingD table">
+								<div>
+									<div class="preloader5"><span></span><span></span><span></span></div>
+								</div>
+							</div>
+						</div>
+						
+					<% } %>
+
+				
+				</div>
+
+				<!--<% if(typeof views != 'undefined' && views) {%>
+					<div class="videoviews"><span class="label">Views:</span> <span class="number"><%-views%></span></div>
+				<% } %>-->
+
+				<% if(typeof video == 'undefined' || !video) { %> 
+					<div class="videoTips">
+						<div class="videoTip">
+							<span><%=e('expandvideo')%></span>
+						</div>
+					</div>
+				<% } %>
+
+				<% if(typeof remove != 'undefined' && share && share.itisvideo()) {
+					
+					
+					%>
+
+					<div class="peertubepanel">
+
+						<% if(info.data) {%>
+
+							<% if (info.data.isLive) { %>
+								<div class="item streaminfo">
+									<i class="fas fa-broadcast-tower"></i> <span><%- e('streamInfo') %></span>
+								</div>
+							<% 	} %>
+
+							
+							<div class="item uploadpeertubewp">
+								<i class="fas fa-camera"></i> <span><%- e('editWallpaper') %></span>
+							</div>
+							
+						<% } %>
+
+						<div class="item removepeertube">
+							<i class="far fa-times-circle"></i> <span><%- e('removeVideo') %></span>
+						</div>
+
+					</div>
+
+				<% } %>
+	
+			<% } %>
+
+
+			
+		</div>
+
+		<% } %>
+
+	<% } else { %> 
+
+		<% if(og && !_.isEmpty(og)) {%>
+
+			<div class="urlhtmlcontent">
+				<div class="ogtable table">
+					<% if(og.image && !deep(share, 'images.length')) {
+
+						var imagesetting = deep(share, 'settings.image') || 'a'
+
+						if (imagesetting == 'a'){ %>
+
+							<div class="image">							
+								<img src="<%- og.image %>">		
+
+								<div class="removeImage">
+									<i class="fas fa-times-circle"></i>
+								</div>					
+							</div>
+
+						<% } %>
+					<% } %>
+
+					<div class="cnt">
+						<% if(og.title || og.titlePage) {%>
+							<a href="<%- url %>">
+								<div class="title"><%= clearStringXss(clearScripts(((og.title || og.titlePage)))) %></div>
+							</a>
+						<% } %>
+
+						<% if(og.description || og.descriptionPage) {%>
+							<a href="<%- url %>">
+								<div class="description"><%= trimHtml(clearScripts((findAndReplaceLink(clearStringXss(og.description || og.descriptionPage)))), 100) %></div>
+							</a>
+						<% } %>
+					</div>
+				</div>
+			</div>
+
+		<% } %>
+
+		
+	<% } %> 
+
+	<% if((typeof remove != 'undefined' || (!og || _.isEmpty(og))) && !share.itisvideo()) {%>
+
+	<div class="urlcnt">
+		<div class="urlcnttable table">
+			<div class="linkcnt">
+				<span class="linkedstyle <%- (meta.type === 'peertube' && typeof remove === 'undefined') ? 'hidden' : '' %>">
+					<a href="<%- url %>" cordovalink="_system">
+						<%- url %>
+					</a>
+				</span>
+			</div>
+
+			<% if(typeof remove != 'undefined' && (!share.aliasid || !share.itisvideo || !share.itisvideo())) {%>
+
+				<div class="removeWrapper">
+					<div class="removelink">
+						<i class="fas fa-times-circle"></i>
+					</div>
+				</div>
+
+			<% } %>
+
+			
+		</div>
+	</div>
+
+	<% } %>
+
+<% } %>

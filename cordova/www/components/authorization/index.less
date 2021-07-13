@@ -1,0 +1,874 @@
+@import "../../css/__cssvar";
+
+#authorization{	
+
+	#filluserfast{
+		.caption{
+			display: none;
+		}
+
+		.work{
+			width : 100%;
+			padding-left : 0;
+			padding-right : 0;
+			padding-top : 0;
+		}
+
+		.mWrapper {
+
+			margin-top : 0;
+
+			#test{
+				width : 100%;
+
+				.userPanel{
+					padding-top : 0;
+				}
+			}
+			
+		}
+	}
+	.work{
+		padding-top: 4 * @rhythm!important;
+		padding-bottom : 4 * @rhythm!important;
+	}
+	.maket{
+
+		&.leftPart{
+			background: #F7F7F9;
+		}
+	}
+	.caption{
+		font-size: 4.1em;
+		font-weight: 100;
+		margin-bottom : @rhythm!important;
+	}
+
+	button{
+		min-width: 350px;
+
+		&.toRegistration{
+			min-width: 190px;
+		}
+	}
+
+	.inputTable{
+
+		>div{
+			vertical-align: middle;
+
+			.upload .fileUploader, .upload .fileUploader .elContent{
+				position: relative;
+			}
+
+			&.fileUploaderWrapper{
+				width: 190px;
+
+				text-align: center;
+
+				.fileUploader{
+					
+				}
+
+				>div{
+					color : @color-main;
+					font-size: 0.8em;
+				}
+			}
+
+
+		}
+
+		&.stay{
+			width: auto;
+		}
+
+		.staylabel{
+			font-size: 0.8em;
+		}
+	}
+	
+	.sitelogin{
+		.form{
+			margin-top: 3 * @rhythm;
+			.item{
+				margin-bottom: 2 * @rhythm;
+			
+				width: 100%;
+
+				&.e{
+					margin-top: 4 * @rhythm;
+				}
+
+				.label{
+					width: 100%;
+					font-size: 0.9em;
+					color: @color-main;
+					font-weight: 700;
+				}
+
+				input{
+					margin : 0 auto;
+					padding: 2 * @rhythm;
+					width: 100%;
+					font-size: 1.5em;
+					font-weight: 100;
+					background: #fff;
+					color : @color-main;
+					border : 1px solid transparent;
+					.transition(0.4s);
+					
+
+					&:focus{
+						border : 1px solid @color-gray-light;
+						background: #fff;
+						color : @color-black2;
+					}
+				}
+
+				.validationFail{
+
+					color: @color-bad;
+					margin-left: @rhythm;
+					padding: 1.5 * @rhythm @rhythm;
+				}
+			}
+		}
+
+		
+	}
+
+	.lptable{
+		height: auto;
+		.transition(0.3s);
+
+		>div{
+			vertical-align: middle;
+		}
+	}
+
+	&.fastregistration{
+		.formv{
+			display: block;
+		}
+		
+		.formh{
+			display: none;
+		}
+		.sitelogin{
+			.item{
+				margin-top : 0;
+				.transition(0.3s);
+			}
+			
+		}
+
+		&.signinshow{
+			.formh{
+				display: block;
+			}
+			.formv{
+				display: none;
+			}
+
+			/*.leftPart .work,
+			.leftPart{
+				position: absolute;
+				left : 0;
+				right : 0;
+				top : 0;
+				bottom : 0;
+				width: 100%;
+			}
+
+			.sitelogin {
+				position: static;
+			}
+
+			.lptable{
+				height: 100%;
+			}*/
+
+			.sitelogin{
+				.item{
+
+					animation: 0.3s ease-out forwards mpt;
+				}
+				
+			}
+		}
+
+		.leftPart{
+			.work{
+				padding-top : 0!important;;
+				padding-bottom : 0!important;;
+			}
+
+			.sitelogin .form .item.e{
+				margin-top : 0;
+			}
+		}
+
+		.showformh{
+			background: transparent;
+			border : 0;
+			color : @color-main;
+		}
+	}
+
+}
+
+@keyframes mpt{
+    0% {
+      margin-top: 0;
+    }
+    
+ 
+    100% {
+		margin-top : 3 * @rhythm;
+    }
+}
+
+.betasign{
+	.btn1wr{
+		display: none!important;
+	}
+}
+
+.wnd.authwindow{
+	.wndinner{
+		width : 550px;
+		height: 80%;
+		max-height: 700px;
+		background: #fff;
+
+		.wndcontent{
+			padding : 0;
+		}
+	}
+
+	.wndback{
+		background: fade(@color-black, 90);
+	}
+
+	._close{
+		color : #fff;
+	}
+
+	#authorization{	
+
+		
+
+		position: absolute;
+		left : 0;
+		right : 0;
+		top : 0;
+		bottom : 0;
+
+		#filluserfast{
+			.welcome{
+				.subcaption{
+					font-size: 2em;
+					padding-top : 18 * @rhythm;
+				}
+			}	
+
+			.mWrapper{
+
+	
+				
+				
+
+			}
+
+			
+
+			
+		}
+
+		
+
+		.topCaption{
+			position: absolute;
+			left : 0;
+			right : 0;
+			top : 0;
+			height : 57px;
+			background: #F7F7F9;
+
+			.caption{
+				color : @color-black;
+				font-size: 1.5em;
+			}
+		}
+
+		.scrollmaketpart{
+			position: absolute;
+			left : 0;
+			right : 0;
+			bottom : 0;
+			top : 57px;
+			overflow-y: scroll;
+
+			.filluserform{
+				min-height: 600px;
+			}
+
+			.userpart {
+				padding-top : @rhythm;
+			}
+		}
+
+		&.welcomepnet{
+			.topCaption{
+				display: none;
+			}
+
+			.scrollmaketpart{
+				top : 0;
+				overflow: hidden;
+			}
+
+			.leftPart {
+				display: none;
+			}	
+
+			.cpt2{
+				display: none;
+			}
+
+			#filluserfast,
+			.filluserform,
+			.createAccount ,
+			.userpart>div,
+			.userpart,
+			.rightPart{
+				position: absolute;
+				left : 0;
+				right : 0;
+				top : 0;
+				bottom : 0;
+				min-height: 0;
+			}
+		}
+
+		.work{
+			padding-top: 2 * @rhythm!important;
+			padding-bottom : 2 * @rhythm!important;
+		}
+	
+		.caption{
+			font-size: 1.3em;
+			margin-bottom : 0!important;
+			text-align: center;
+			font-weight: 100;
+			color : @color-bright;
+		}
+
+		.label{
+			text-align: center;
+		}
+	
+		button{
+			width : 100%;
+	
+			&.toRegistration{
+				min-width: 190px;
+			}
+		}
+	
+		.inputTable{
+	
+			>div{
+				vertical-align: middle;
+	
+				.upload .fileUploader, .upload .fileUploader .elContent{
+					position: relative;
+				}
+	
+				&.fileUploaderWrapper{
+					width: 190px;
+	
+					text-align: center;
+	
+					.fileUploader{
+						
+					}
+	
+					>div{
+						color : @color-main;
+						font-size: 0.8em;
+					}
+				}
+	
+	
+			}
+	
+			&.stay{
+				width: auto;
+			}
+	
+			.staylabel{
+				font-size: 0.8em;
+			}
+		}
+		
+		.sitelogin{
+			.form{
+				margin-top: 2 * @rhythm;
+				.item{
+					margin-bottom: @rhythm;
+	
+					&.e{
+						margin-top: 2 * @rhythm;
+					}
+	
+					
+					input{
+						background: transparent;
+						color : @color-main;
+						border : 1px solid transparent;
+						border-right: 1px solid @color-gray-slight;
+						&:focus{
+							border :1px solid @color-gray-slight;
+							background: transparent;
+							color : @color-black2;
+						}
+					}
+	
+					.validationFail{
+	
+						color: @color-bad;
+						margin-left: @rhythm;
+						padding: 1.5 * @rhythm @rhythm;
+					}
+				}
+			}
+
+			.keytable {
+				>div{
+					background: #fff;
+				}
+			}
+	
+			
+		}
+
+		&.fastregistration{
+			.rightPart {
+				.work{
+					padding-top : 0!important;
+				}
+			}
+			
+			
+			.leftPart{
+				.work{
+					padding-top : 0!important;;
+					padding-bottom : 0!important;;
+				}
+	
+				.sitelogin .form .item.e{
+					margin-top : 0;
+				}
+			}
+
+			.panelWrapper{
+				margin-top : 0!important;
+			}
+
+			#test{
+				padding-top : 2 * @rhythm;
+				min-height: 350px;
+
+				.parameterMaketWrapper{
+					&[parameter="site"],
+					&[parameter="language"]{
+						display: none;
+					}
+				}
+
+				.parameter textarea {
+					min-height: 85px;
+				}
+
+				.userPanel {
+					
+					.dropZone{
+						.subcaption{
+							display: none;
+						}
+					}
+	
+					.pgroupIconWrapper{
+						height: 90px;
+						margin-bottom : 0;
+					}
+				}
+
+				.subcaption{
+					font-size: 1.5em;
+				}
+
+				.pgroup{
+					margin-bottom : @rhythm;
+				}
+
+				
+			}
+		}
+	
+		
+	
+	}
+}
+
+html.stblack{
+	#authorization{	
+		
+		.maket{
+	
+			&.leftPart{
+				background: @color-black4;
+			}
+		}
+		
+	
+		.inputTable{
+	
+			>div{
+	
+				&.fileUploaderWrapper{
+	
+					>div{
+						color : @color-main;
+					}
+				}
+	
+	
+			}
+	
+		}
+		
+		.sitelogin{
+			.form{
+				.item{
+					
+					.label{
+						color: @color-main;
+					}
+	
+					input{
+					
+						background: @color-black;
+						color : @color-main;
+						border : 1px solid transparent;
+						
+	
+						&:focus{
+							border : 1px solid @color-main;
+							background: @color-black;
+							color : @color-main;
+						}
+					}
+	
+					.validationFail{
+						color: @color-bad;
+					}
+				}
+			}
+	
+			
+		}
+	
+		
+	
+	}
+	
+	.wnd.authwindow{
+		.wndinner{
+			background: @color-black;
+	
+			.wndcontent{
+				padding : 0;
+			}
+		}
+	
+		.wndback{
+			background: fade(@color-black2, 90);
+		}
+	
+		._close{
+			color : @color-main;
+		}
+	
+		#authorization{	
+	
+	
+			.topCaption{
+				background: @color-main;
+	
+				.caption{
+					color :#fff;
+				}
+			}
+	
+
+		
+			#test{
+				background: @color-black3;		
+				.userPanel{
+	
+					.upanelloader{
+						background: fade(@color-black3, 90);
+					}
+				}
+			}
+		
+			.caption{
+				color : @color-bright;
+			}
+	
+		
+			.inputTable{
+		
+				>div{					
+		
+					&.fileUploaderWrapper{
+		
+						>div{
+							color : @color-main;
+						}
+					}
+		
+				}
+		
+			}
+			
+			.sitelogin{
+				.form{
+					.item{						
+						
+						input{
+							background: transparent;
+							color : @color-main;
+							border : 1px solid transparent;
+							border-right: 1px solid @color-black2;
+							&:focus{
+								border :1px solid @color-black2;
+								background: transparent;
+								color : @color-black2;
+							}
+						}
+		
+						.validationFail{
+		
+							color: @color-bad;
+						}
+					}
+				}
+	
+				.keytable {
+					>div{
+						background: @color-black2;
+					}
+				}
+		
+				
+			}
+		
+			
+		
+		}
+	}
+}
+
+/*t*/ @media only screen and (max-width: 768px){
+	#authorization{	
+		padding-bottom : 6 * @rhythm;
+		.work{
+			padding-top: 2 * @rhythm!important;
+			padding-bottom : 2 * @rhythm!important;
+			padding-left : @rhythm!important;
+			padding-right: @rhythm!important;
+		}
+		.maket{
+
+			&.leftPart{
+				background: #F7F7F9;
+			}
+		}
+		.caption{
+			font-size: 2.1em;
+		}
+
+		button{
+			width: 100%;
+			min-width: 0;
+
+			&.toRegistration{
+				min-width: 0;
+			}
+		}
+
+		
+		.inputTable{
+
+
+			>div{
+
+				&.fileUploaderWrapper{
+					width: 50%;
+				}
+			}
+
+			&.typeactive{
+				>div{
+					&.fileUploaderWrapper{
+						display: none;
+					}
+				}
+			}
+		}
+	}
+
+	.wnd.authwindow{
+		.wndinner{
+			width : 100%;
+			height: 100%;
+			max-height: none;
+		}
+	
+		
+		._close{
+			color : @color-black;
+		}
+	
+		#authorization{	
+	
+			.topCaption{
+				padding-left: 2 * @rhythm;
+				padding-right: 2 * @rhythm;
+			}
+	
+			.scrollmaketpart{
+				
+			}
+	
+			
+			.work{
+				padding-top: 2 * @rhythm!important;
+				padding-bottom : 2 * @rhythm!important;
+			}
+		
+			.caption{
+				font-size: 1.3em;
+				margin-bottom : 0!important;
+				text-align: center;
+				font-weight: 100;
+				color : @color-bright;
+			}
+	
+			.label{
+				text-align: center;
+			}
+		
+			button{
+				width : 100%;
+		
+				&.toRegistration{
+					min-width: 190px;
+				}
+			}
+		
+			.inputTable{
+		
+				>div{
+					vertical-align: middle;
+		
+					.upload .fileUploader, .upload .fileUploader .elContent{
+						position: relative;
+					}
+		
+					&.fileUploaderWrapper{
+						width: 190px;
+		
+						text-align: center;
+		
+						.fileUploader{
+							
+						}
+		
+						>div{
+							color : @color-main;
+							font-size: 0.8em;
+						}
+					}
+		
+		
+				}
+		
+				&.stay{
+					width: auto;
+				}
+		
+				.staylabel{
+					font-size: 0.8em;
+				}
+			}
+			
+			.sitelogin{
+				.form{
+					margin-top: 2 * @rhythm;
+					.item{
+						margin-bottom: @rhythm;
+		
+						&.e{
+							margin-top: 2 * @rhythm;
+						}
+		
+						
+						input{
+							background: transparent;
+							color : @color-main;
+							border : 1px solid transparent;
+							border-right: 1px solid @color-gray-slight;
+							&:focus{
+								border :1px solid @color-gray-slight;
+								background: transparent;
+								color : @color-black2;
+							}
+						}
+		
+						.validationFail{
+		
+							color: @color-bad;
+							margin-left: @rhythm;
+							padding: 1.5 * @rhythm @rhythm;
+						}
+					}
+				}
+	
+				.keytable {
+					>div{
+						background: #fff;
+					}
+				}
+		
+				
+			}
+		
+			
+		
+		}
+	}
+
+	html.stblack{
+		.wnd.authwindow{
+			
+			._close{
+				color : #fff;
+			}
+		}
+	}
+}

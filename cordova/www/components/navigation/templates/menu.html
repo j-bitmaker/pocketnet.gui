@@ -1,0 +1,196 @@
+
+
+<% if(typeof lentakey == 'undefined') lentakey = 'index' %>
+<% if(typeof indexkey == 'undefined') indexkey = 'index' %>
+
+
+<div class="items table">
+
+	<div class="item">
+
+		<div class="linkButtonWrapper">
+
+			<% if(back) {  
+				
+				var ur = addtouri(back.href, 'back', 'true')
+
+				
+				
+				%>
+				
+					<a href="<%- ur %>" fast="fast" handler="true">
+						<div class="iconWrapper">
+							<% if(ur.indexOf('index') > -1 && !self.app.curation()){ %>
+								<i class="fas fa-home"></i>
+							<% } else { %> 
+								<i class="fas fa-chevron-left"></i>
+							<% } %>
+							
+						</div>
+					</a>
+				
+			<% } else { %> 
+
+				<% if(href == 'chat') { %>
+
+				<% } else { %> 
+
+					<% if(href == indexkey || !href) { 
+						
+						if(state){ %>
+
+							<% if(self.app.curation()) {%>
+
+								<a href="userpage?id=wallet" fast="fast">
+									<div class="iconWrapper">
+										<i class="fas fa-wallet"></i>
+									</div>
+								</a>
+
+							<% } else { %> 
+
+								<% if(typeof shw != 'undefined' && shw) {%>
+
+									<a href="index" fast="fast">
+										<div class="iconWrapper">
+											<i class="fas fa-rss"></i>
+										</div>
+									</a>
+	
+									
+								<% } else { %>
+	
+									<a href="index?video=1" fast="fast">
+										<div class="iconWrapper">
+											<i class="fas fa-play-circle"></i>
+										</div>
+									</a>
+	
+									
+								<% } %>
+								
+							<% } %>
+
+							
+
+							
+
+							<!--
+					
+							 -->
+
+						<% } else { %> 
+
+							<% if(typeof shw != 'undefined' && shw) {%>
+								<a href="index" fast="fast">
+									<div class="iconWrapper">
+										<i class="fas fa-rss"></i>
+									</div>
+								</a>
+
+								
+							<% } else { %>
+
+								<a href="index?video=1" fast="fast">
+									<div class="iconWrapper">
+										<i class="fas fa-play-circle"></i>
+									</div>
+								</a>
+
+								
+							<% } %>
+							
+						<% } %>
+				
+					<% } else { 
+
+						
+						
+						%> 
+
+						<% if(self.app.curation()) {%>
+
+							<a href="userpage?id=wallet" fast="fast">
+								<div class="iconWrapper">
+									<i class="fas fa-wallet"></i>
+								</div>
+							</a>
+
+						<% } else { %> 
+
+							<a href="<%- lentakey %>" fast="fast">
+								<div class="iconWrapper">
+									<i class="fas fa-home"></i>
+								</div>
+							</a>
+							
+						<% } %>
+
+						
+						
+					<%}%>
+
+				<% } %>
+			
+			<% } %>
+		</div>
+
+		<div class="upbuttonWrapper">
+			<div class="iconWrapper toup">
+				<i class="fas fa-chevron-up"></i>
+			</div>
+		</div>
+
+		
+	</div>
+
+		
+	<div class="item">
+
+		<% 
+		
+		var sharec = ''
+		
+		if(href == 'share') { 
+			sharec = 'active' %>
+		<% } %>
+
+			<% if(state){ %>
+
+				<a href="share" fast="fast">
+					<div class="iconWrapper shr <%-sharec%>">
+						<i class="fas fa-plus-circle"></i>
+					</div>
+				</a>
+
+			<% } else { %> 
+
+				<a href="registration" fast="fast">
+					<div class="iconWrapper reg">
+						<i class="fas fa-user-plus"></i>
+					</div>
+				</a>
+
+				
+				
+			<% } %>
+
+		
+		
+	</div>
+
+
+	<div class="item">
+
+		
+
+		<a href="userpage" fast="fast" handler="true">
+			<div class="iconWrapper">
+					<i class="fas fa-bars"></i>
+			</div>
+		</a>
+
+	</div>
+
+
+</div>

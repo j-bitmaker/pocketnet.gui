@@ -1,0 +1,72 @@
+<div class="address btcltc">
+	<div class="caption">
+		<%- curobj.name %> <%=e('donation')%>
+	</div>
+
+	<div class="subcaption">
+		<div class="subcaptionTable table">
+			<div class="s"><span><%=e('address')%>:</span></div>
+
+			<div class="s right">
+				<span class="copyaddress"><i class="far fa-copy"></i> <%=e('copy')%></span>
+			</div>
+		</div>
+		 
+	</div>
+
+	<div class="addressline">
+		<% if(info.Status == 'AWAITINGFUNDS' || info.Status == 'AWAITINGDONATION') {%>
+			<b><span class="aw"><%- address %></span></b>
+		<% } else { %> 
+
+
+			<b><%- hideString(address) %></b>
+
+		<% } %>
+	</div>
+
+	<div class="status">
+		<% if(info.Status == 'AWAITINGFUNDS' || info.Status == 'AWAITINGDONATION') {%>
+
+			<%=e('e13074')%> <b> <%- info.MinutesLeft %> <%=e('minutes')%></b>
+
+		<% } %>
+
+		<% if(info.Status == 'EXPIREDAWAITINGFUNDS') {%>
+			<%=e('e13075')%> <div class="reactivate"><%=e('reactivate')%></div>
+		<% } %>
+	</div>
+	<% if(info.Status == 'AWAITINGFUNDS' || info.Status == 'AWAITINGDONATION') {%>
+
+		<div class="qrcode">
+			<div class="subcaption">
+				<span><%=e('e13076')%> <% curobj.name %></span>
+			</div>
+
+			<div class="qr">
+				<img src="https://chart.googleapis.com/chart?chs=225x225&chld=L|2&cht=qr&chl=<%- curobj.qrname %>:<%- address %>">
+			</div>
+		</div>
+
+	<% } %>
+
+	<div class="backnext table">
+		<div class="backwrapper">
+			<div class="back">
+				<span>
+					<%=e('back')%>
+				</span>
+			</div>
+		</div>
+
+		<div class="nextwrapper">
+			<div class="next">
+				<span>
+					<i class="far fa-check-circle"></i> <%=e('e13077')%>
+				</span>
+			</div>
+		</div>
+
+	</div>
+
+</div>

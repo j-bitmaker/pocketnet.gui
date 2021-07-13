@@ -1,0 +1,65 @@
+<div class="thankyou">
+
+	<div class="caption">
+		<%=e('thankyou')%>
+	</div>
+
+	<div class="text">
+		<%=e('e13089')%>
+	</div>
+
+	<div class="sendinfo table">
+
+		<div class="currency">
+			<%- curobj.name %>
+		</div>
+		<div class="amount">
+			<%= parameters.amount.input() %>
+		</div>
+		<div class="sendwrapper">
+			<button class="send"><%=e('e13090')%></button>
+		</div>
+		<div class="iconwrapper">
+			<div class="icon">
+				<% 
+
+
+
+					var src = deep(app, 'platform.sdk.usersl.storage.'+ app.platform.sdk.address.pnet().address +'.image')
+
+				%>
+
+					<div class="usericon" image="<%-src || ''%>">
+
+					
+						
+					</div>
+
+				
+
+				
+			</div>
+		</div>
+	</div>
+
+	<div class="text textor">
+		<span>
+			<%=e('e13091')%> <a href="mailto:support@pocketnet.app">support@pocketnet.app</a> <%=e('e13092')%> 
+		</span>
+	</div>
+
+	<div class="back">
+		<span>
+			<% if(second) {%>
+
+				<%=e('back')%>
+
+			<% } else { %> 
+
+				<%=e('finish')%>
+
+			<% } %>
+			
+		</span>
+	</div>
+</div>

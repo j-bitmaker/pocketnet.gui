@@ -1,0 +1,48 @@
+<div class="ta">
+    <% _.each(tags, function(tag, i){ %>
+
+        <div tag="<%- tag.tag %>" class="tg <% if(tagsmap[tag.tag]) {%> selected <% if(tagsmap[tag.tag].fixed) {%> fixed <% } %> <% } %> <% if(i > 9) {%> hdn <% } %>">
+
+            
+                <div class="tag">
+                    <div class="tagtable table">
+                        <div class="iconWrapper">
+                            <div class="icon">
+                                <i class="fas fa-hashtag"></i>
+                            </div>
+                        </div>
+
+                        <div class="tagvalue tagcheckgl">
+                            <span><%- tag.tag %><% if(tag.count) {%>, <%- compressedNumber(tag.count) %><%}%></span>
+                        </div>
+
+                        <div class="tagcheck tagcheckgl">
+                            <i class="far fa-circle unselected"></i>
+                            <i class="fas fa-plus-circle selected"></i>
+                        </div>
+
+                        <div class="tagsearch">
+                            <a href="?sst=<%- tag.tag %>">
+                                <i class="fas fa-search"></i>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+        </div>
+
+    <% }) %>
+
+    <% if(tags.length > 9) {%>
+
+        <div class="showalltags showhidealltags">
+            <span><%=e('e13021')%></span>
+        </div>
+
+        <div class="hidealltags showhidealltags">
+            <span><%=e('hide')%></span>
+        </div>
+
+    <% } %>
+
+</div>

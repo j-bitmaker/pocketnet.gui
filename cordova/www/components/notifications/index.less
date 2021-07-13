@@ -1,0 +1,534 @@
+@import "../../css/__cssvar";
+
+#notifications{
+	position: relative;
+
+	.closentooltipth,
+	.closentooltipsecond,
+	.closentooltip{
+		display: none;
+	}
+
+	._wrp{
+		.commenttext,
+		.data{
+			
+			overflow: hidden;
+		}
+		
+		/*.commenttext{
+			word-break: break-all;
+		}*/
+	}
+
+	.error,
+	.loader{
+		padding : 6 * @rhythm;
+		text-align: center;
+		
+	}
+
+	.error{
+		color : @color-gray-mlight;
+		font-size: 2em;
+		opacity: 0.5;
+	}
+
+	.circularprogress{
+		overflow: hidden;
+		height: 0px;
+		position: absolute;
+		left : 0;
+		right : 0;
+		top : 0;
+		
+
+		.circularprogressWrapper{
+			padding : 2 * @rhythm;
+			text-align: center;
+			canvas{
+				margin : 0 auto;
+			}
+		}		
+	}
+	
+	.ncaption{
+		font-weight: 700;
+		
+	}
+
+	.wrk{
+		padding : 0 8 * @rhythm;
+	}
+	.subcaption{
+		margin-bottom : 2 * @rhythm;
+		font-size: 2em;
+		font-weight: 100;
+		display: none;
+	}
+
+	.group{
+		.groupCaption{
+			padding : 4 * @rhythm 0;
+
+			.caption{
+				font-size: 1em;
+				font-weight: 700;
+			}
+		}
+
+		
+	}
+
+	.ncaptionWrapper{
+		>div{
+			padding : @rhythm;
+			vertical-align: middle;
+
+			&.showAll{
+
+				text-align: right;
+				color : @color-main;
+				display : none;
+				font-size: 0.8em;
+				.transition(0.3s);
+				cursor: pointer;
+
+				&:hover{
+					color : @color-gray;
+				}
+			}
+		}
+	}
+
+	.nwrapper{
+
+		.notification{
+			border-bottom: 1px solid @color-gray-slight;
+			padding: 2 * @rhythm;
+			cursor: pointer;
+			.transition(0.1s);
+			background: fade(@color-gray2, 5);
+
+			
+
+			&:nth-last-child(1){
+				border-bottom : 0;
+			}
+
+			&:hover{
+				color : @color-gray;
+			}
+
+
+			&.seen{
+				background: transparent;
+			}
+
+			.caption{
+				text-overflow: ellipsis;
+				overflow: hidden;
+			}
+
+
+
+			.date{
+				font-size: 0.8em;
+				color : @color-main;
+			}
+
+			.emojione{
+				width : 16px;
+				height : 16px;
+			}
+		}
+	}
+
+	.emptyNew,
+	.empty{
+		color : @color-gray-light;
+		font-size: 0.9em;
+		text-align: center;
+		margin : 3 * @rhythm 0;
+	}
+
+	.panel{
+		margin-top : @rhythm;
+		font-size: 0.8em;
+		text-align: center;
+	}
+}
+
+#content{
+
+	#notifications{
+		max-width: 900px;
+
+		.ncaption{
+			padding-bottom: 3 * @rhythm;
+		}
+
+		.panel{
+			display: none;
+		}
+	}
+
+		
+}
+
+.notificationTolltip{
+	width: 100%;
+	max-height: none;
+	height: 100%; 
+	z-index: 100!important;
+	max-width: none!important;
+	
+
+	.tooltipster-content{
+		padding: 0;
+		position: relative;
+		width: 100%;
+		height: 100%;
+	}
+
+	.tooltipster-box{
+		background: transparent;
+		border : 0;
+		box-shadow: 0 0 5000px 3000px fade(@color-black, 70);
+		
+	}
+}
+#content{
+
+	#notifications{
+		.subcaption{
+			display: block;
+			padding-top : 2 * @rhythm;
+		}
+
+		.ncaptionWrapper {
+			display: none;
+		}
+
+		.emptyNew,
+		.empty{
+			margin : 0;
+			padding : 4 * @rhythm;
+		}
+	}
+	
+}
+.tooltipster-content{
+	#notifications{
+		padding: 0;
+		width: 100%;
+		height: 100%;
+		position: relative;
+
+		.group{
+			.groupCaption{
+				padding : 4 * @rhythm 2 * @rhythm;
+	
+				.caption{
+					font-size: 2em;
+					font-weight: 100;
+				}
+			}
+	
+			
+		}
+
+		.closentooltipth{
+			position: fixed;
+			z-index: 1;
+			left : 0;
+			right : 0;
+			top : 0;
+			bottom : 0;
+			background: fade(@color-black, 20);
+			display: block;
+		}
+	
+
+		.closentooltipsecond{
+			position: absolute;
+			right : 0;
+			top : 0;
+			background: fade(@color-black, 20);
+			display: block;
+			color : @color-gray-mlight;
+			height: 65px;
+			width : 65px;
+			line-height : 65px;
+			cursor: pointer;
+			text-align: center;
+			z-index: 2;
+			.transition(0.3s);
+			&:hover{
+				color : @color-gray-light;
+				background: fade(@color-black, 25);
+
+				
+			}
+		}
+
+		.closentooltip{
+			position: absolute;
+			right : 565px;
+			left: 0;
+			top: 0;
+			bottom: 0;
+			padding : 0;
+			background: fade(@color-black, 50);
+			display: block;
+			color : @color-gray-mlight;
+			cursor: pointer;
+			.transition(0.3s);
+			z-index: 2;
+
+			&:hover{
+				color : @color-gray-light;
+
+				.closecsscross{
+					opacity: 0.6;
+				}
+			}
+
+			.table{
+				>div{
+					vertical-align: middle;
+					text-align: center;
+				}
+			}
+		}
+
+		.wrk{
+			position: absolute;
+			width : 500px;
+			right: 65px;
+			top: 0;
+			bottom: 0;
+			padding : 0;
+			background: #fff;
+			box-shadow: 0 0 5000px 3000px fade(@color-black, 70);
+			z-index: 1;
+		}
+
+		.npWrapper{
+			position: relative;
+			width: 100%;
+			height: 100%;
+		}
+
+		.ncaptionWrapper{
+			>div{
+
+				&.showAll{
+
+					display : table-cell;
+				}
+			}
+		}
+
+		.nabsWrapper{
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			top: 0;
+		}
+
+		.ncaption{
+			
+		}
+
+		.ncaptionAbsWrapper{
+			padding: @rhythm;
+			position: absolute;
+			height: 60px;
+			left: 0;
+			right: 0;
+			top: 0;
+		}
+
+		.nabsContentWrapper{
+			position: absolute;
+			top: 60px;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			overflow: auto;
+		}
+
+		.panel{
+			position: absolute;
+			bottom: 0;
+			height: 60px;
+			left: 0;
+			right: 0;
+			padding: 2 * @rhythm;
+		}
+	}
+}
+
+html.stblack{
+	#notifications{
+		
+		.nabsWrapper{
+			background: @color-block;
+		}
+		.error{
+			color : @color-main;
+		}
+		
+		.group{
+			.groupCaption{
+	
+				.caption{
+					color : @color-main;
+				}
+			}
+	
+			
+		}
+	
+	
+		.ncaptionWrapper{
+			>div{
+	
+				&.showAll{
+					color : @color-bright;
+					&:hover{
+						color : @color-contrast;
+					}
+				}
+			}
+		}
+	
+		.nwrapper{
+	
+			.notification{
+				border-bottom: 1px solid fade(@color-main, 20);
+				color : @color-gray-mlight;
+	
+				&:hover{
+					color : @color-main;
+				}
+	
+	
+				.date{
+					color : @color-bright;
+				}
+			}
+		}
+	
+		.emptyNew,
+		.empty{
+			color : @color-black4;
+		}
+	
+	}
+	
+	.notificationTolltip{
+	
+	
+		.tooltipster-box{
+			box-shadow: 0 0 5000px 3000px fade(@color-black, 70);
+			background: transpanent;
+			border : 0;
+		}
+
+	}
+	
+	.tooltipster-content{
+		#notifications{
+			
+			
+			.closentooltipth{
+				background: fade(@color-black, 20);
+			}
+		
+	
+			.closentooltipsecond{
+				background: fade(@color-black, 20);
+				color : @color-main;
+			
+				&:hover{
+					color : @color-bright;
+					background: fade(@color-black, 50);
+				}
+			}
+	
+			.closentooltip{
+				background: fade(@color-black, 20);
+				color : @color-main;
+				
+				&:hover{
+					color : @color-bright;
+				}
+	
+			}
+	
+			.wrk{
+				background: @color-black;
+				box-shadow: 0 0 5000px 3000px fade(@color-black, 70);
+			}
+	
+		}
+	}	
+}
+
+/*t*/ @media only screen and (max-width: 768px){
+#notifications{
+	
+	.wrk{
+		padding : 0 ;
+	}
+
+	._wrp{
+		padding : 0 2 * @rhythm;
+		
+
+		.data{
+			overflow: hidden;
+		}
+	}
+
+	.notification{
+		
+	}
+
+	.group{
+		.groupCaption{
+			padding : 2 * @rhythm 0;
+			border-bottom : 1px solid fade(@color-black2, 8);
+			border-top : 1px solid fade(@color-black2, 8);
+			background: fade(@color-black2, 5);
+			
+
+			.caption{
+				font-size: 1.2em;
+				font-weight: 700;
+			}
+		}
+
+		&:nth-child(1){
+			
+		}
+		
+	}
+
+	.subcaption{
+		padding-top : 0!important;
+		margin-bottom: @rhythm;
+	}
+	.nwrapper {
+		.notification{
+			padding-left: 0; 
+			padding-right: 0;
+
+			 
+		}
+	}
+}
+}

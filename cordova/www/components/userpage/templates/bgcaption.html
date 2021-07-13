@@ -1,0 +1,71 @@
+<% var name = app.platform.api.clearname(deep(app, 'platform.sdk.user.storage.me.name') || user.address.value.toString('hex') ) %>
+
+
+<div class="bgCaption">
+	<div class="bgCaptionInner">
+	
+<div class="infoWrapper">
+	<div class="work">
+		<div class="cwrapper table">
+
+			<div class="cell cellforimage">
+				<div class="icon">
+
+					<% var src = deep(app, 'platform.sdk.user.storage.me.image')  %>
+
+					<div class="usericon" image="<%-src || ''%>">
+
+						<% if(!src) {%>
+
+							<i class="far fa-user"></i>
+
+						<% } %>
+
+					</div>
+				</div>
+			</div>
+
+			<div class="ccell">
+				<div class="infomain">
+					<div class="captionWrapperFloat">
+						<div class="caption">
+							<b class="adr"><%-name%></b>
+						</div>
+						
+						<% if(deep(app, 'platform.sdk.user.storage.me.name')) {%>
+							<div class="addressseparateWrapper">
+								<div class="addressseparate">
+									<b><%=e('pnetAddress')%>:</b>
+								</div>
+								<div class="addressseparate">
+									<span class="copyaddress">
+										<%- user.address.value.toString('hex') %>
+									</span>
+
+
+									<a external='external' href="https://<%-app.options.url%>/blockexplorer/address/<%- user.address.value.toString('hex') %>"> <i class="fas fa-th"></i></a>
+
+									
+								</div>
+							</div>
+
+						<% } %>
+					</div>
+
+					
+
+					<div class="tips">
+						<a href="<%-app.platform.api.authorlink(user.address.value.toString('hex'))%>">
+							<button class="contrast profile"><%=e('profile')%></button>
+						</a>
+						
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+	</div>
+</div>

@@ -1,0 +1,68 @@
+<div class="linkForDepositReady">
+
+	<div class="linksubcaption res"><%=e('e13211')%></div>
+
+	<div class="linkparams">
+
+		<div class="row table">
+			<div class="label">
+				<span><%=e('address')%>:</span>
+			</div>
+
+			<div class="value">
+				<b><%-address%></b>
+			</div>
+		</div>
+		<div class="row table">
+			<div class="label">
+				<span><%=e('amount')%>:</span>
+			</div>
+
+			<div class="value">
+				<b><%-app.platform.mp.coin(d.parameters.depositamount.value)%></b>
+			</div>
+		</div>
+
+		<% if(d.parameters.label.value) {%>
+			<div class="row table">
+				<div class="label">
+					<span><%=e('label')%>:</span>
+				</div>
+
+				<div class="value">
+					<%-d.parameters.label.value%>
+				</div>
+			</div>
+		<% } %>
+
+		<div class="row table">
+			<div class="label">
+				<span><%=e('message')%>:</span>
+			</div>
+
+			<div class="value">
+				<%-d.parameters.message.value%>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="row table">
+		<div class="address">
+			<div class="inputWrapper">
+				<textarea class="linkInTextArea">https://pocketnet.app/send?address=<%-address%>&amount=<%-d.parameters.depositamount.value%>&message=<%-hexEncode(d.parameters.message.value)%>&label=<%-d.parameters.label.value%></textarea>
+			</div>
+		</div>
+
+	</div>
+	
+
+	<div class="row table">
+		
+		<div class="cell">
+			<button class="copylink"><i class="fas fa-clone"></i> <%=e('copylink')%></button>
+		</div>
+
+		
+	</div>
+</div>

@@ -12869,7 +12869,7 @@ Platform = function (app, listofnodes) {
 
                     },
 
-                    share: function (inputs, share, clbk, p, fromTG) {
+                    share: function (inputs, share, fee, clbk, p, fromTG) {
 
                         
                         if (!fromTG && self.app.user.features.telegram) {
@@ -12908,7 +12908,7 @@ Platform = function (app, listofnodes) {
 
                         }
 
-                        this.common(inputs, share, TXFEE, clbk, p)
+                        this.common(inputs, share, fee, clbk, p)
                     },
 
                     userInfo: function (inputs, userInfo, clbk, p) {

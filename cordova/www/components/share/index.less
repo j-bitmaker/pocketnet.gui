@@ -1,0 +1,2538 @@
+@import "../../css/__cssvar";
+
+#share{
+	position: relative;
+
+	.mobilecaption{
+		display: none;
+	}
+
+	@bg : #fff;
+	@placeholder : #838688;
+
+	.table{
+		height: auto;
+	}
+
+	.emojionearea, .emojionearea.form-control{
+		font-size: 1em;
+	}
+
+	::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+	    color:    @placeholder;
+	}
+	:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+	   color:    @placeholder;
+	}
+	::-moz-placeholder { /* Mozilla Firefox 19+ */
+	   color:    @placeholder;
+	}
+	:-ms-input-placeholder { /* Internet Explorer 10-11 */
+	   color:    @placeholder;
+	}
+	:placeholder-shown { 
+	  color:    @placeholder;
+	}
+
+	.sLoader{
+		display: none;
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		padding :  3 * @rhythm 2 * @rhythm;
+		background: fade(#FAFAFA, 90);
+		z-index: 150;
+	}
+
+	&.loading{
+		.sLoader{
+			display: block;
+		}
+	}
+	
+	/*.txtwrapper{
+		>div{
+			vertical-align: top;
+			padding : 2 * @rhythm;
+
+			&.iconWrapper{
+				width: 6 * @rhythm;
+				padding-top: 2.3 * @rhythm;
+				padding-left: 0;
+				padding-right: 0;
+			}
+
+		}
+		
+	}*/
+
+	.iconWrapper{
+		width: 8 * @rhythm;
+		padding-top: 2.3 * @rhythm;
+		padding-left: 2 * @rhythm;
+		padding-right: 0;
+		float: left;
+	}
+
+	#sortableBody{
+		padding-top : 2 * @rhythm;
+	}
+
+	.cntwrk{
+		margin-left: 8 * @rhythm;
+		padding-left : 2 * @rhythm;
+	}
+
+
+
+	.repostShareWrapper{
+		position: relative;
+		overflow: hidden;
+		padding : @rhythm;
+
+		.repostShare{
+			border-radius: 3px;
+			background: #fff;
+			padding : 2 * @rhythm;
+			padding-right: 4 * @rhythm;
+			padding-left: 0;
+		}
+
+		.repostCaption{
+			position: absolute;
+			right : 4 * @rhythm;
+			top : 4 * @rhythm;
+			cursor: pointer;
+
+
+			&:hover{
+				color : @color-main;
+			}
+
+			.table{
+				width: auto;
+
+				i,
+				span{
+					font-size: 0.8em;
+				}
+
+				>div{
+					padding : @rhythm;
+
+					&.icon{
+						padding-left: 0;
+					}
+				}
+			}
+		}
+
+		/*.repostShare{
+			padding : 2 * @rhythm 0;
+		}*/
+	}	
+
+	#post{
+		.share{
+			/*background: fade(#fff, 50);*/
+			.work{
+				padding : 0;
+				padding-right: 30px;
+			}
+
+			.iconWrapper{
+			}
+
+		}
+		.metapanel{
+			display: none!important;
+		}
+
+		.iconWrapper{
+			width: 8 * @rhythm;
+			padding-left: 3 * @rhythm;
+
+			.usericon{
+				width: 5 * @rhythm;
+				height: 5 * @rhythm;
+			}
+		}
+	
+		.cntswrk{
+			margin-left: 8 * @rhythm;
+		}
+
+		.images{
+			max-width: 700px;
+			padding : 2 * @rhythm 0;
+			opacity: 0;
+			.transition(0.3s);
+			overflow : hidden;
+
+			&.active{
+				opacity: 1;
+			}
+
+			.imagesWrapper{
+				width: 140px;
+				height: 140px;
+				float: left;
+				background: @color-gray-slight;
+				
+
+				.image{
+					opacity: 0;
+					width: 100%;
+					height: 100%;
+					.transition(0.3s);
+					cursor: pointer;
+
+					&.active{
+						opacity: 1;
+					}
+				}
+
+			}
+
+			.imagesContainer{
+				&.one{
+					.imagesWrapper{
+						width: 400px;
+						height: 400px;
+
+						&.w2{
+							width: 600px
+						}
+
+						&.h2{
+							width: 400px;
+						}
+					}
+				}
+
+				&.two{
+					.imagesWrapper{
+						width: 200px;
+						height: 200px;
+
+						&.w2{
+							width: 400px
+						}
+
+						&.h2{
+							width: 200px; 
+						}
+					}
+				}
+
+				&.four{
+					.imagesWrapper{
+						width: 200px;
+						height: 200px;
+						&.w2{
+							width: 400px
+						}
+
+						&.h2{
+							width: 200px; 
+						}
+					}
+				}
+
+				&.articleImages{
+					.imagesWrapper{
+						width: 60px;
+						height: 60px;
+						border-radius: 30px;
+						overflow: hidden;
+						margin-right: @rhythm;
+					}
+				}
+			}
+			.videoOpen{
+				position: relative;
+
+				.playicon{
+					background: fade(#000, 50);
+					color : #fff;
+					position: absolute;
+					right : @rhythm;
+					bottom : @rhythm;
+					padding : @rhythm 2 * @rhythm;
+					padding-top: 0.3em;
+					padding-right: 0.8em;
+					border-radius: 3px;
+					i{
+						font-size: 0.8em;
+					}
+				}
+			}
+			
+		}
+		.postWrapper{
+			background: transparent;
+		}
+
+		#post{
+	
+			.iconWrapper{
+				width: 7 * @rhythm;
+				padding-left: 2 * @rhythm;
+	
+			
+			}
+		
+			.cntswrk{
+				margin-left: 7 * @rhythm;
+			}
+	
+			.postWrapper{
+				background: transparent;
+			}
+		}
+	}
+
+
+
+	
+
+	select{
+		background: transparent;
+		border : 0px;
+		background-image: url(../../img/arrow.png);
+    	background-position: right 10px center;
+    	background-repeat: no-repeat;
+	}
+
+	.changeAddressWrapper{
+		margin-bottom: @rhythm;
+		padding-top : @rhythm / 2;
+	}
+
+	.cpt{
+		margin-bottom: @rhythm;
+		display: none;
+		&.active{
+			display: block;
+		}
+		input{
+			width: 100%;
+			border-radius: 3px;
+			border : 0;
+			background: @bg;
+			outline: none;
+			padding : 2 * @rhythm 0;
+			padding-left : @rhythm;
+			padding-right : @rhythm;
+		}
+	}
+
+	.captionshare{
+		.shadowSmall();
+	}
+
+
+	.txt{
+		margin-bottom : @rhythm;
+		textarea{
+			width: 100%;
+			min-height: 78px;
+			border-radius: 3px;
+			border : 0;
+			background: @bg;
+			outline: none;
+			padding : 2 * @rhythm 0;
+			padding-left : @rhythm;
+			padding-right : @rhythm;
+			overflow: auto;
+		}
+		.emojionearea,
+		.emojionearea.form-control{
+			border : 0;
+			border-radius: 3px;
+			//overflow: hidden;
+			.shadowSmall();
+
+			.emojionearea-editor{
+				margin-right: 0;
+			}
+		}
+
+
+		
+		.emojionearea-editor{
+			padding : 2 * @rhythm 0;
+			padding-left : @rhythm;
+			padding-right : @rhythm;
+			background: @bg;
+			outline: none;
+			border : 0;
+			min-height: 78px;
+			border-radius: 3px;
+		}
+	}
+
+	.wallpaperUpload {
+		margin-bottom: @rhythm;
+
+		padding : 2 * @rhythm 0;
+		padding-left : @rhythm;
+		padding-right : @rhythm;
+
+		.wallpaperShareInput {
+			display: none;
+		}
+	
+		.wallpaperShareLabel {
+			cursor: pointer;
+
+			color: @placeholder;
+
+			transition: color 0.2s linear;
+
+			&:hover {
+				color: @color-add;
+				text-decoration: underline;
+			}
+		}
+	}
+
+	.imagesWrapper{
+		>div{
+			margin-top: 2 * @rhythm;
+			margin-bottom : 2 * @rhythm;
+		}
+	}
+	.urlWrapper{
+		>div{
+			margin-top: 2 * @rhythm;
+			margin-bottom : 2 * @rhythm;
+		}
+	}
+	.sortablepaddingspacer{
+		padding-right : 30px;
+	}
+	.draggablepart{
+
+		&.itisvideopart{
+			padding-right: 4 * @rhythm;
+		}
+		
+		
+		.draggablewrapper{
+			>div {
+				vertical-align: top;
+
+				&.draggablemarkerwrapper{
+					width: 30px;
+				}
+			}
+		}
+
+		.marker{
+			width: 30px;
+			height: 30px;
+			line-height: 30px;
+			text-align: center;
+			cursor: pointer;
+			color : @color-gray-slight;
+			display: none;
+		}
+
+		&.filled{
+			cursor : pointer;
+			border-radius: 3px;
+
+			.marker{
+				display: block;
+			}
+
+			&:hover{
+				background: fade(@color-white, 10);
+			}
+		}
+
+		
+	}
+
+	.pollWrapper{
+
+		.poll{
+			padding-top: 1em;
+			padding-bottom: 1em;
+			position: relative;
+
+			.title{
+				color: @color-main;
+			}
+	
+			.removeWrapper{
+				position: absolute;
+				left: 70px;
+				bottom: 40px;
+				
+				.removelink {
+					// position: absolute;
+					// right: 4 * @rhythm;
+					// top: 2 *  @rhythm;
+					width: 40px;
+					height: 40px;
+					line-height: 40px;
+					text-align: center;
+					color : fade(#000, 50);
+					border-radius: 50%;
+					cursor: pointer;
+					background : fade(#000, 10);
+					.transition(0.3s);
+					opacity: 0;
+	
+					&:hover{
+						background : fade(#000, 20);
+					}
+				}
+				
+			}
+	
+			&:hover{
+				.removelink{
+					opacity: 1;
+				}
+			}
+	
+		};
+	}
+
+
+	.imagesWrapper{
+			
+
+		.imagesEmbWr{
+			overflow: hidden;
+			/*opacity: 0;*/
+			&.active{
+				opacity: 1;
+			}
+		}
+
+		
+
+		.imageContainer{
+			/*padding-right : @rhythm;
+			padding-bottom:  @rhythm;*/
+			float: left;
+			width: 200px;
+
+			.imageContainerCnt{
+				position: relative;
+			}
+			.imageWrapper{
+				position: relative;
+
+			}
+			img{
+				width: 100%;
+			}
+
+			.imgpanel{
+				display: none;
+				position: absolute;
+				left: 50%;
+				bottom : 20%;
+				background: fade(@color-black, 80);
+				border-radius : 20px;
+				padding : 5px;
+				margin-left: -34px;
+				
+				.item{
+					margin-left: 6px;
+					border-radius : 15px;
+					float: right;
+					width: 30px;
+					height: 30px;
+					line-height: 30px;
+					text-align: center;
+					color : fade(@color-gray-slight, 90);
+					cursor: pointer;
+					.transition(0.3s);
+
+					&:hover{
+						background : fade(@color-gray, 60);
+					}
+
+					&:nth-last-child(1){
+						margin-left: 0;
+					}
+
+				}
+			}
+
+			&:hover{
+				.imgpanel{
+					display: block;
+				}
+			}
+
+			.spinnerWrapperCnt{
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				background: fade(#fff, 30);
+
+				.spinnerWrapper{
+					width: 100%;
+					height: 100%;
+
+					>div{
+						vertical-align: middle;
+						text-align: center;
+					}
+				}
+			}
+
+		}
+	}
+
+	.attachements{
+
+		.urlcnt{
+
+			.removelink{
+				border-radius: 50%;
+				height: 30px;
+				width: 30px;
+				line-height: 30px;
+				text-align: center;
+				cursor: pointer;
+				.transition(0.3s);
+				color : @color-bad;
+
+				&:hover{
+					background : @color-gray-slight;
+				}
+			}
+
+			.linkcnt{
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				max-width: 200px;
+				word-break: break-all;
+			}
+
+			.videoWrapper{
+				margin-top: @rhythm;
+				margin-bottom : @rhythm;
+				
+			}
+
+			.verticalVideo {
+				max-width: 400px;
+				margin: 0 auto;
+			}
+
+			.squareVideo{
+				max-width: 550px;
+				margin: 0 auto;
+			}
+
+			span{
+				font-size: 0.8em;
+				color : @color-main;
+				text-decoration: underline;
+			}
+
+			.urlcnttable{
+				width: auto;
+				height: auto;
+
+				>div{
+					vertical-align: middle;
+
+					&.removeWrapper{
+						padding-left: @rhythm;
+					}
+				}
+			}
+			
+
+		}
+
+		.urlhtmlcontent{
+			font-size: 0.8em;
+
+
+
+			.ogtable{
+				>div{
+					vertical-align: top;
+					padding : @rhythm 0;
+
+					&.image{
+						width: 100px;
+						padding-right : 2 * @rhythm;
+						position: relative;
+						cursor: default;
+
+						.removeImage{
+							position: absolute;
+							right: 4 * @rhythm;
+							top: 2 *  @rhythm;
+							width: 40px;
+							height: 40px;
+							line-height: 40px;
+							text-align: center;
+							color : fade(#000, 50);
+							border-radius: 50%;
+							cursor: pointer;
+							background : fade(#000, 10);
+							display: none;
+							opacity: 0;
+							.transition(0.3s);
+
+							&:hover{
+								background : fade(#000, 20);
+							}
+						}
+
+						img{
+							border-radius : 3px;
+							width: 100%;
+						}
+
+						&:hover{
+							.removeImage{
+								opacity: 1;
+							}
+						}
+
+					}
+
+					&.cnt{
+						.title{
+							font-weight: 700;
+							color : @color-main;
+						}
+
+						.description{
+							margin-top : @rhythm;
+						}
+					}
+				}
+			}
+		}
+
+		&.bigimageinlink{
+			.urlhtmlcontent{
+
+				.ogtable{
+					max-width: 600px;
+					border-radius: 3px;
+					
+					display: block;
+
+					>div{
+						display: block;
+
+						&.image{
+							width: auto;
+
+							img{
+								width: 100%;
+							}
+
+							.removeImage{
+								display: block;
+							}
+
+						}
+
+						&.cnt{
+							.title{
+								max-width: none;
+							}
+
+							.description{
+								max-width: none;
+							}
+						}
+					}
+				}
+			}
+		}
+
+
+		.jsPlayerLoading{
+			display: none;
+		}
+
+		.videoTips{
+			display: none;
+		}
+
+		.vjs-paused{
+			.vjs-poster{
+				display: block!important;
+			}
+
+			video{
+				opacity: 0!important;
+			}
+
+			.vjs-overlay,
+			.vjs-control-bar{
+				display: none!important;
+
+				&.warning-overlay{
+					display: block!important;
+				}
+			}
+		}
+
+		.vjs-big-play-button{
+			left : 2 * @rhythm;
+			bottom : 2 *  @rhythm;
+			top : auto;
+			font-size: 2em;
+			margin-top : 0!important;
+			margin-left : 0!important;
+			width: 1em;
+			.shadowText();
+		}
+
+		.videoWrapper{
+			position: relative;
+		}
+
+		.squareVideo{
+			max-width: 550px;
+		}
+		.verticalVideo {
+			max-width: 400px;
+		}
+
+		.peertubepanel{
+			position: absolute;
+			left : @rhythm / 2;
+			top : @rhythm;
+
+			.item{
+				padding :  @rhythm 1.5 * @rhythm;
+				padding-right: 2 * @rhythm;
+				margin-right: @rhythm / 2;
+				background: fade(#000, 80);
+				.shadowSmaller();
+				color : #fff;
+				border-radius: 30px;
+				position: relative;
+				float: left;
+				.transition(0.3s);
+
+				&:hover{
+					background: fade(#000, 50);
+
+					&.removepeertube{
+						background: fade(@color-bad, 50);
+					}
+				}
+
+				&.streaminfo{
+					background: fade(@color-main, 70);
+
+					&:hover{
+						background: fade(#000, 30);
+					}
+				}
+
+				input{
+					cursor: pointer!important;
+					&:hover{
+						cursor: pointer!important;
+					}
+				}
+
+				.fileUploader,
+				.elContent{
+					position: relative;
+				}
+
+				span
+				{
+					font-size: 0.8em;
+				}
+				i{
+					font-size: 0.8em;
+					width: 24px;
+					text-align: center;
+				}
+			}
+		}
+		
+		
+    }
+    
+    .postlineWrapper{
+		margin-top: 3 * @rhythm;
+		/*padding-left: 1em;
+		padding-right: 30px;*/
+    }   
+
+	.postpanel{
+
+		.language{
+			font-weight: 700;
+			img{
+				vertical-align: top;
+				opacity: 0.8;
+			}
+		}
+
+		.times{
+			opacity: 0.3;
+
+			&:hover{
+				opacity: 1;
+			}
+		}
+		
+		>div{
+			vertical-align: middle;
+
+			&.postWrapper{
+				width: 140px;
+				padding-right : 0;
+				text-align: right;
+				overflow: hidden;
+
+				.element{
+					float : right;
+				}
+				
+				button{
+					min-width: 140px;
+					font-size: 0.7em;
+
+					&.shadow{
+						.shadowSmall();
+					}
+				}
+
+				.selectedTimeWrapper{
+					padding : 2 * @rhythm 0;	
+					margin-right : 2 * @rhythm;
+
+					span,
+					i{
+						color : @color-main;
+						cursor: pointer;
+					}
+				}
+
+				
+			}
+
+		}
+	}
+	
+
+	.error{
+		text-align : right;
+		color : @color-bad;
+		font-weight: 400;
+		font-size: 0.8em;
+		margin-top: @rhythm;
+		min-height: 20px;
+	}
+
+	.panel{
+		height: 35px;
+
+		.hide{
+			display: none;
+		}
+
+
+		>div{
+			width : 32px;
+			height: 32px;
+			border-radius: 50%;
+			line-height: 32px;
+			color : @color-black2;
+		
+			float: left;
+			text-align: center;
+			font-size: 0.8em;
+			margin-right : 1 * @rhythm;
+			cursor: pointer;
+			.transition(0.3s);
+
+			&.nowidth{
+				width: auto;
+				i{
+					width: 32px;
+				}
+			}
+
+			&:hover{
+				color : @color-contrast;
+
+			}
+		}
+	}
+
+	.emojionearea .emojionearea-editor:empty:before{
+		color : @placeholder;
+	}
+
+	.waitpost{
+		display: none;
+		.tempPreloader{
+			width: 100%;
+
+			>div{
+				vertical-align: middle;
+			}
+			.iconwr{
+				text-align: center;
+				width: 60px;
+			}
+			.count{
+				padding-top : @rhythm;
+				.label{
+					font-size: 0.8em;
+					color : @color-contrast;
+				}
+			}
+		}
+	}
+
+	/*&.waitActions{
+		.dopost{
+			display: none;
+		}
+		.waitpost{
+			display: block;
+		}
+	}*/
+
+	.item.tooltip.disabledShare {
+		color: #c8cbcc;
+		cursor: auto;
+		pointer-events:none;
+
+		&:hover {
+			color: #c8cbcc;
+		}
+	}
+
+	.videoStatsWrapper {
+		font-weight: 100;
+
+		padding-top: @rhythm;
+	}
+}
+
+.sharedate{
+	.selectDateTableWrapper{
+		width : 500px;
+		>div{
+			padding : @rhythm;
+			&.dateWrapper{
+				width : 250px;
+			}
+
+			&.dWrapper{
+				text-align: center;
+				width : 30px;
+			}
+
+			&:nth-clild(1){
+				padding-left: 0;
+			}
+
+			&:nth-last-clild(1){
+				padding-right: 0;
+			}
+
+			select{
+				width : 100%;
+			}
+
+			
+		}
+	}
+
+	.buttons>div{
+		float: right;
+	}
+}
+
+.wnd.wndsharepost{
+
+	._close {
+		color : #fff;
+		
+		width: 44px;
+		height: 44px;
+		line-height: 44px;
+	}
+
+    .wndinner{
+		max-height: 450px;
+		
+    }
+	.wndcontent{
+        overflow: hidden;
+        padding-right: 4 * @rhythm;
+		top : 0;
+		background: #FAFAFA;
+
+        .result{
+            margin-top : 0;
+        }
+
+		#share{
+			position: absolute;
+			left: 0;
+			right: 0;
+			top : 0;
+			bottom : 0;
+			
+			.txtwrapper{
+				>div{
+					&.iconWrapper{
+						width : 3.5em;
+					}
+				}
+			}
+
+            .mobilecaption{
+                display: block;
+				padding : 2 * @rhythm 0;
+				position: absolute;
+				left : 2 * @rhythm;
+				right : 0;
+				top : 0;
+
+                span{
+                    font-size: 1.5em;
+                }
+			}
+			
+			.absolutetxwrapper{
+				position: absolute;
+				left : 0;
+				right : 0;
+				top : 65px;
+				padding-bottom : 2 * @rhythm;
+				bottom : 65px;
+				overflow-y: auto;
+
+				.txtwrapper{
+					height: 100%;
+
+					>div{
+						&.shareWrapper{
+							height: 100%;
+							position: relative;
+							
+							.relativeContainer{
+								width : 100%;
+								left: 0;
+								top : 0;
+								bottom : 90px;
+								position: absolute;
+								overflow-y: auto;
+							}
+						}
+					}
+				}
+			}
+
+			.error{
+				position : absolute;
+				bottom : 65px;
+				left : 0;
+				right : 0;
+				text-align: center;
+				background: fade(#FAFAFA, 70);
+			}
+
+            .postlineWrapper{
+                position : absolute;
+                left : 0;
+                right  :0;
+                bottom : 0;
+                margin-top : 0;
+				padding : 2 * @rhythm;
+				margin-left: 0;
+
+			}
+			
+			.sLoader{
+				left : 8 * @rhythm;
+				top : 6 * @rhythm;
+				background: fade(#FAFAFA, 90);
+				padding-top : 2.75em;
+			}
+        }
+	}
+}
+
+html.stblack{
+	#share{
+		
+
+		.repostShareWrapper{
+	
+			.repostShare{
+				background: @color-black2;
+			}
+	
+			
+		}	
+	
+		@bg : @color-black3;
+		@placeholder : @color-add;
+		
+	
+		::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+			color:    @placeholder;
+		}
+		:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+		   color:    @placeholder;
+		}
+		::-moz-placeholder { /* Mozilla Firefox 19+ */
+		   color:    @placeholder;
+		}
+		:-ms-input-placeholder { /* Internet Explorer 10-11 */
+		   color:    @placeholder;
+		}
+		:placeholder-shown { 
+		  color:    @placeholder;
+		}
+	
+		.sLoader{
+			background: fade(@color-black3, 90);
+			
+		}
+
+		.mobilecaption{
+			color : @color-bright;
+		}
+	
+		#post{
+			.share{
+				/*background: fade(@color-black3, 50);*/
+				
+				background: @color-black2;
+			}
+			
+	
+			.images{
+				max-width: 700px;
+				padding : 2 * @rhythm 0;
+				opacity: 0;
+				.transition(0.3s);
+				overflow : hidden;
+	
+				&.active{
+					opacity: 1;
+				}
+	
+				.imagesWrapper{
+					width: 140px;
+					height: 140px;
+					float: left;
+					background: @color-gray-slight;
+					
+	
+					.image{
+						opacity: 0;
+						width: 100%;
+						height: 100%;
+						.transition(0.3s);
+						cursor: pointer;
+	
+						&.active{
+							opacity: 1;
+						}
+					}
+	
+				}
+	
+				.imagesContainer{
+					&.one{
+						.imagesWrapper{
+							width: 400px;
+							height: 400px;
+	
+							&.w2{
+								width: 600px
+							}
+	
+							&.h2{
+								width: 400px;
+							}
+						}
+					}
+	
+					&.two{
+						.imagesWrapper{
+							width: 200px;
+							height: 200px;
+	
+							&.w2{
+								width: 400px
+							}
+	
+							&.h2{
+								width: 200px; 
+							}
+						}
+					}
+	
+					&.four{
+						.imagesWrapper{
+							width: 200px;
+							height: 200px;
+							&.w2{
+								width: 400px
+							}
+	
+							&.h2{
+								width: 200px; 
+							}
+						}
+					}
+	
+					&.articleImages{
+						.imagesWrapper{
+							width: 60px;
+							height: 60px;
+							border-radius: 30px;
+							overflow: hidden;
+							margin-right: @rhythm;
+						}
+					}
+				}
+				.videoOpen{
+					position: relative;
+	
+					.playicon{
+						background: fade(#000, 50);
+						color : #fff;
+						position: absolute;
+						right : @rhythm;
+						bottom : @rhythm;
+						padding : @rhythm 2 * @rhythm;
+						padding-top: 0.3em;
+						padding-right: 0.8em;
+						border-radius: 3px;
+						i{
+							font-size: 0.8em;
+						}
+					}
+				}
+				
+			}
+
+			.postWrapper{
+				background: transparent;
+			}
+	
+			#post{
+				.postWrapper{
+					background: transparent;
+				}
+			}
+		}
+	
+	
+	
+		.tgs{
+			margin-bottom: @rhythm;
+	
+			.search{
+	
+	
+				.searchFastResultWrapper{
+					background: @bg;
+	
+					.result{
+						color : @color-main;
+	
+						&:hover{
+							color : @color-bright;
+						}
+					}
+				}
+	
+				input{
+					background: @bg;
+				}
+	
+				.searchPanel{
+					background: @bg;
+				}
+	
+			}
+			.tagsWrapper{			
+	
+				>div{
+					
+					&.label{
+						color : @color-add;
+					}
+	
+				}
+			}
+	
+			.tag{
+				background: @bg;
+	
+				.tagInner{
+				
+					>div{
+						
+						&.label{
+							color : @color-bright;
+	
+						}
+	
+						&.remove{
+							color : @color-main;
+	
+							&:hover{
+								color : @color-bright;
+							}
+						}
+					}
+				}
+			}
+		}
+	
+		select{
+			background-image: url(../../img/arrow.png);
+		}
+	
+	
+		.cpt{
+			input{
+				background: @bg;
+			}
+		}
+	
+		.txt{
+			textarea{
+				background: @bg;
+				color : @color-gray-slight;
+			}
+			
+	
+			.emojionearea-editor{
+				background: @bg;
+				color : @color-gray-slight;
+			}
+		}
+		
+		.draggablepart{
+			
+		
+			.marker{
+				color : @color-main;
+			}
+	
+			&.filled{
+				&:hover{
+					background: fade(@color-black, 10);
+				}
+			}
+			
+		}
+	
+		.imagesWrapper{
+				
+	
+			.imageContainer{
+	
+				.imgpanel{
+					background: fade(@color-black2, 80);
+					.item{
+					
+						color : fade(@color-gray2, 90);
+						
+						&:hover{
+							background : fade(@color-gray2, 60);
+						}
+	
+					}
+				}
+	
+			
+				.spinnerWrapperCnt{
+					background: fade(@color-black, 30);
+	
+				}
+	
+			}
+		}
+	
+		.attachements{
+	
+			.urlcnt{
+	
+				.removelink{
+					color : @color-bad;
+	
+					&:hover{
+						background : @color-main;
+					}
+				}
+	
+		
+				span{
+					color : @color-main;
+				}
+	
+				
+	
+			}
+	
+			.urlhtmlcontent{
+			
+	
+				.ogtable{
+					>div{
+					
+	
+						&.image{
+	
+							.removeImage{
+							
+								color : fade(#000, 50);
+							
+								background : fade(#000, 10);
+								
+								&:hover{
+									background : fade(#000, 20);
+								}
+							}
+	
+						}
+	
+						&.cnt{
+							.title{
+								color : @color-main;
+							}
+	
+						}
+					}
+				}
+			}
+	
+		
+			
+		}
+		
+		.postpanel{
+			
+			>div{
+				
+				&.postWrapper{
+					
+					.selectedTimeWrapper{
+						span,
+						i{
+							color : @color-main;
+						}
+					}
+	
+					
+				}
+	
+			}
+		}
+		
+	
+		.error{
+			color : @color-bad;
+		}
+	
+		.panel{
+	
+			>div{
+				color : @color-gray;
+				&:hover{
+					color : @color-contrast;
+	
+				}
+			}
+		}
+	
+		.emojionearea .emojionearea-editor:empty:before{
+			color : @placeholder;
+		}
+	
+		.waitpost{
+			.tempPreloader{
+	
+				.count{
+					.label{
+						color : @color-contrast;
+					}
+				}
+			}
+		}
+	
+	
+	}	
+
+	
+	.wnd.wndsharepost{
+	
+		._close {
+			color : @color-main;
+		}
+		.wndcontent{
+			background: @color-black;
+	
+			#share{
+	
+				.error{
+					background: fade(@color-black, 70);
+				}
+				
+				.sLoader{
+					background: fade(@color-black, 90);
+				}
+			}
+		}
+	}
+	
+}
+
+/*t*/ @media only screen and (max-width: 768px){
+.wnd.wndsharepost{
+
+	
+	
+	._close {
+		color : #000;
+	}
+
+	.wndinner{
+		max-height: none;
+		
+	}
+
+	.wndcontent{
+		overflow-y: auto;
+		padding-right: 2 * @rhythm;
+		top : 0;
+		background: #FAFAFA;
+
+		.result{
+			margin-top : 0;
+		}
+
+		#share{
+			position: static;
+			
+		
+					.iconWrapper{
+						width : 3.5em;
+					}
+					.cntwrk{
+						margin-left: 3.5em;
+					}
+			
+
+			.mobilecaption{
+				display: block;
+				padding : 2 * @rhythm 0;
+				position: static;
+				left : 2 * @rhythm;
+				right : 0;
+				top : 0;
+
+				span{
+					font-size: 1.5em;
+				}
+			}
+
+			
+			
+			.absolutetxwrapper{
+				position: static;
+				padding-bottom : 0;
+
+				.txtwrapper{
+					height: 100%;
+
+					>div{
+						&.shareWrapper{
+							height: 100%;
+							position: relative;
+							
+							.relativeContainer{
+								width : 100%;
+								left: 0;
+								top : 0;
+								bottom : 90px;
+								position: static;
+								overflow-y: auto;
+							}
+						}
+					}
+				}
+			}
+
+			.error{
+				position: static;
+				bottom : 65px;
+				left : 0;
+				right : 0;
+				text-align: center;
+				background: fade(#FAFAFA, 70);
+			}
+
+			.postlineWrapper{
+				position: static;
+				padding : 0;
+				
+
+			}
+			
+			.sLoader{
+				left : 2 * @rhythm;
+				top : 2 * @rhythm;
+				background: fade(#FAFAFA, 90);
+				padding-top : 2.75em;
+			}
+
+			.cntwrk{
+				margin-left: 0;
+			}
+		}
+	}
+}
+#share{
+	background: #FAFAFA;
+
+	.iconWrapper{
+		display: none;
+	}
+
+
+	.cntwrk{
+		margin-left: 0;
+		padding-left : 0;
+	}
+
+	#taginput .tgs .tagsWrapper>div.tagsInputWrapper{
+		width: 100%;
+	}
+
+	#taginput .tgs .tagsWrapper>div.tagsInputWrapper>div{
+		margin-right: 0;
+	}
+
+	.repostShareWrapper{
+
+		.repostShare{
+			padding : 0;
+		}
+
+		.repostCaption{
+			right :  @rhythm;
+			top : 2 * @rhythm;
+		}
+	}	
+
+	#post{
+		.share{
+			background: fade(#fff, 50);
+			
+		}
+
+		.iconWrapper{
+			width: 7 * @rhythm;
+			padding-top: @rhythm;
+			padding-left: @rhythm;
+			padding-right: 0;
+			display: block;
+		}
+	
+		.cntswrk{
+			margin-left: @rhythm;
+			padding-left : 0;
+			padding-right : 0;
+	
+			&.formeta{
+				margin-left: 7 * @rhythm;
+				padding-left : @rhythm;
+			}
+		}
+
+		.images{
+			padding : @rhythm 0;
+			opacity: 0;
+			.transition(0.3s);
+			overflow : hidden;
+
+			&.active{
+				opacity: 1;
+			}
+
+			.imagesWrapper{
+				width: 100%;
+				margin-bottom : 2 * @rhythm;
+			
+				background: transparent;
+				
+
+				.image{
+					opacity: 0;
+					width: 100%;
+					height: 100%;
+					margin : 0 auto;
+					
+					.transition(0.3s);
+					cursor: pointer;
+
+					&.active{
+						opacity: 1;
+					}
+				}
+
+				&.forvideo{
+					display : none;
+				}
+
+			}
+
+			.imagesContainer{
+				&.one{
+					.imagesWrapper{
+						width: 100%;
+						height: auto;
+
+						&.w2{
+							width: 100%;
+						}
+
+						&.h2{
+							width: 100%;
+						}
+					}
+				}
+
+				&.two{
+					.imagesWrapper{
+						width: 100%;
+						height: auto;
+
+						&.w2{
+							width: 100%;
+						}
+
+						&.h2{
+							width: 100%;
+						}
+					}
+				}
+
+				&.four{
+					.imagesWrapper{
+						width: 100%;
+						height: auto;
+
+						&.w2{
+							width: 100%;
+						}
+
+						&.h2{
+							width: 100%;
+						}
+					}
+				}
+
+				&.articleImages{
+					.imagesWrapper{
+						width: 60px;
+						height: 60px;
+						border-radius: 30px;
+						overflow: hidden;
+						margin-right: @rhythm;
+					}
+				}
+			}
+		}
+
+		#post{
+	
+			.iconWrapper{
+				width: 7 * @rhythm;
+				padding-top: @rhythm;
+				padding-left: @rhythm;
+				padding-right: 0;
+				display: block;
+			}
+		
+			.cntswrk{
+				margin-left: @rhythm;
+				padding-left : 0;
+				padding-right : 0;
+		
+				&.formeta{
+					margin-left: 7 * @rhythm;
+					padding-left : @rhythm;
+				}
+			}
+	
+			.postWrapper{
+				background: transparent;
+			}
+		}
+	}
+
+	.emojionearea, .emojionearea.form-control{
+		font-size: 1em;
+	}
+
+	.emojionearea .emojionearea-button-close{
+		right: 32px;
+	}
+	
+	.draggablepart.itisvideopart{
+		padding-right: 0;
+	}
+
+	.mobilecaption{
+		display: block;
+		font-weight: 700;
+		color : @color-black2;
+		padding : 2 * @rhythm @rhythm;
+		margin-bottom : @rhythm;
+		margin-top : @rhythm;
+		padding-top: 2 * @rhythm;
+
+		span{
+			font-size: 1.5em;
+		}
+	}
+
+	.sLoader{
+		left: 0;
+		background: fade(#FAFAFA, 90);
+
+		.prwrapper{
+			position : absolute;
+			left: 0;
+			right: 0;
+			bottom: 6 * @rhythm;
+
+			.prwrappermiddle{
+				text-align: center;
+			}
+		}
+	}
+	
+	
+	.txtwrapper{
+		>div{
+			vertical-align: top;
+			padding : @rhythm 0;
+			padding-top : 0;
+
+			&.iconWrapper{
+				display: none;
+			}
+
+		}
+
+		.emojionearea-editor{
+			padding-left: 2 * @rhythm;
+			padding-right: 2 * @rhythm;
+		}
+	}
+
+	.paddingmobilewrapper{
+		padding : 0 @rhythm;
+	}
+
+	.txt{
+		.emojionearea {
+			box-shadow: none;
+		}
+	}
+	
+	.tgs{
+		margin-bottom: @rhythm;
+
+		
+		.tagsWrapper{	
+			display: block;		
+
+			>div{
+				display: block;
+				width: 100%;
+
+				&.tagsCont{
+					
+				}
+
+				&.tagsInputWrapper{
+					
+					width: 100%;
+
+					.inputWrapper{
+						box-shadow: none!important;
+
+						.sminput{
+							line-height: 32px;
+							padding : 2 * @rhythm;
+						}
+					}
+
+					>div{
+						margin-right: 0;
+					}
+				}
+			}
+		}
+
+		.tag{
+			margin-top : @rhythm;
+			margin-right: @rhythm / 2;
+			margin-left: @rhythm / 2;
+			margin-bottom : 0;
+		}
+	}
+
+	.imagesWrapper{
+			
+
+		.imagesEmbWr{
+			overflow: hidden;
+			opacity: 1;
+		}
+
+		
+
+		.imageContainer{
+			/*padding-right : @rhythm;
+			padding-bottom:  @rhythm;*/
+			float: none;
+			width: 100%;
+			margin : 0 auto;
+
+			.imageContainerCnt{
+				position: relative;
+			}
+			.imageWrapper{
+				position: relative;
+
+			}
+			img{
+				width: 100%;
+			}
+
+			.imgpanel{
+				display: block;
+				position: absolute;
+				left: 0;
+				right: 0;
+				padding : 5px;
+				margin-left: 0;
+				
+				.item{
+					margin : 0;
+					width: 50%;
+
+				}
+			}
+
+			&:hover{
+				.imgpanel{
+					display: block;
+				}
+			}
+
+			.spinnerWrapperCnt{
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				background: fade(#fff, 30);
+
+				.spinnerWrapper{
+					width: 100%;
+					height: 100%;
+
+					>div{
+						vertical-align: middle;
+						text-align: center;
+					}
+				}
+			}
+
+		}
+	}
+
+	.attachements{
+
+		padding : 0 @rhythm;
+		
+		.urlcnt{
+
+			.removelink{
+				border-radius: 50%;
+				height: 30px;
+				width: 30px;
+				line-height: 30px;
+				text-align: center;
+				cursor: pointer;
+				.transition(0.3s);
+				color : @color-bad;
+
+				&:hover{
+					background : @color-gray-slight;
+				}
+			}
+
+			.linkcnt{
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				max-width: 240px;
+			}
+
+			.videoWrapper{
+				margin-top: @rhythm;
+				margin-bottom : @rhythm;
+			}
+
+			.verticalVideo {
+				max-width: 200px;
+				margin: 0 auto;
+			}
+
+			.squareVideo{
+				margin: 0 auto;
+				max-width: 350px;
+			}
+
+			span{
+				font-size: 0.8em;
+				color : @color-main;
+				text-decoration: underline;
+			}
+
+			.urlcnttable{
+				width: auto;
+				height: auto;
+
+				>div{
+					vertical-align: middle;
+
+					&.removeWrapper{
+						padding-left: @rhythm;
+					}
+				}
+			}
+			
+
+		}
+
+		.urlhtmlcontent{
+			font-size: 0.8em;
+			.ogtable{
+				>div{
+					vertical-align: top;
+					padding : @rhythm 0;
+
+					&.image{
+						width: 100px;
+						padding-right : 2 * @rhythm;
+
+						img{
+							border-radius : 3px;
+							width: 100%;
+						}
+
+
+					}
+
+					&.cnt{
+						.title{
+							font-weight: 700;
+							color : @color-main;
+						}
+
+						.description{
+							margin-top : @rhythm;
+						}
+					}
+				}
+			}
+		}
+
+
+
+		.jsPlayerLoading{
+			display: none;
+		}
+
+		.videoTips{
+			display: none;
+		}
+
+		
+	}
+	.repostWrapper {
+		padding : 0;
+	}
+	.sortablepaddingspacer{
+		padding-right : 0;
+	}
+	.draggablepart{
+		
+		
+		.draggablewrapper{
+			display: block;
+			>div {
+				display: block;
+				width: 100%;
+				&.draggablemarkerwrapper{
+					display: none;
+					width: 100%;
+					text-align: center;
+				}
+			}
+		}
+
+		.marker{
+			margin : 0 auto;
+			padding-bottom : @rhythm;
+			height: auto;
+			color : #fff;
+		}
+
+		
+		
+    }
+    
+    .postlineWrapper{
+		margin-top : 0;
+		padding-left: 0;
+		padding-right: 0;
+    }
+
+	.postpanel{
+		display: block;
+		margin-top : 0;
+		>div{
+			display: block;
+			width: 100%;
+
+			&.postWrapper{
+				margin-top : 0;
+				width: 100%;
+				text-align: right;
+				button{
+					width: 100%;
+					min-width: 0;
+					font-size: 1em;
+				}
+
+				.dopost {
+					float: none;
+					width : 100%;
+				}
+
+				.cancelpost{
+					float: none;
+					width : 100%;
+					margin-top: 2 * @rhythm;
+				}
+
+				.postWrapper{
+
+				}
+				.postTimeWrapper,
+				.selectedTimeWrapper{
+					float: right;
+					width: 50%;
+					margin-left: 0;
+					margin-right: 0;
+				}
+
+				
+			}
+
+			&.panelWrapper{
+				width: 100%;
+
+				.panel{
+					.item {
+						margin-top : @rhythm;
+						font-size: 1em;
+						width: 100%;
+						float: none;
+						margin : 0;
+						margin-bottom : @rhythm;
+						border-radius: 0px;
+						color : #838688;
+						text-align: left;
+						background: #fff;
+						height: auto;
+						padding-left: @rhythm;
+						padding-right : @rhythm;
+						padding : 2 * @rhythm;
+						.mobiledevice{
+							margin-left : @rhythm;
+							display: inline!important;
+						}
+					}
+				}
+			}
+		}
+	}
+	
+
+	.error{
+		text-align : right;
+		color : @color-bad;
+		font-weight: 400;
+		font-size: 1em;
+		margin-top: @rhythm;
+		min-height: 20px;
+	}
+
+	.panel{
+		overflow: hidden;
+		height: auto;
+
+		>div{
+			width : 32px;
+			height: 32px;
+			border-radius: 50%;
+			line-height: 32px;
+			background: @color-main;
+			color : #fff;
+		
+			float: left;
+			text-align: center;
+			font-size: 1em;
+			margin-right : 1 * @rhythm;
+			cursor: pointer;
+			.transition(0.3s);
+
+			&:hover{
+				background : @color-contrast;
+
+			}
+
+			&.nowidth{
+				width: auto;
+				i{
+					width: auto;
+				}
+
+				span{
+					margin-left: @rhythm;
+				}
+			}
+		}
+	}
+
+}	
+
+html.stblack{
+	.wnd.wndsharepost{
+
+	
+	
+		._close {
+			color : @color-main;
+		}
+	
+	
+		.wndcontent{
+			background: @color-black;
+	
+	
+			#share{
+				
+	
+				.error{
+					background: fade(@color-black, 70);
+				}
+	
+				.postlineWrapper{
+					position: static;
+					padding : 0;
+					
+	
+				}
+				
+				.sLoader{
+					background: fade(@color-black, 90);
+				}
+			}
+		}
+	}
+	#share{
+		background: @color-black;
+	
+	
+		#post{
+			.share{
+				/*background: fade(@color-black, 50);*/
+			}
+	
+			.iconWrapper{
+				width: 7 * @rhythm;
+				padding-top: @rhythm;
+				padding-left: @rhythm;
+				padding-right: 0;
+				display: block;
+			}
+
+			.images{
+	
+				.imagesWrapper{
+					background: transparent;
+					
+	
+	
+				}
+	
+			}
+		}
+	
+		.sLoader{
+			left: 0;
+			background: fade(@color-black, 90);
+	
+			
+		}
+		
+	
+		.imagesWrapper{
+			
+	
+			.imageContainer{
+	
+				.spinnerWrapperCnt{
+					background: fade(@color-black, 30);
+	
+				}
+	
+			}
+		}
+	
+		.attachements{
+	
+			
+			.urlcnt{
+	
+				.removelink{
+					color : @color-bad;
+	
+					&:hover{
+						background : @color-main;
+					}
+				}
+	
+				
+	
+				span{
+					color : @color-main;
+				}
+				
+	
+			}
+
+			.videoviews{
+				span{
+					color : @color-main;
+					font-size: 0.8em;
+					text-decoration: none;
+				}
+				
+			}
+	
+			.urlhtmlcontent{
+				.ogtable{
+					>div{
+	
+						&.cnt{
+							.title{
+								color : @color-main;
+							}
+	
+							.description{
+								margin-top : @rhythm;
+							}
+						}
+					}
+				}
+			}
+	
+			
+		}
+		.draggablepart{
+			
+	
+			.marker{
+				color : @color-main;
+			}
+	
+			
+			
+		}
+	
+		.postpanel{
+			>div{
+	
+				&.panelWrapper{
+	
+					.panel{
+						.item {
+							color : @color-main;
+							background: @color-black;
+						}
+					}
+				}
+			}
+		}
+		
+	
+		.error{
+			color : @color-bad;
+		}
+	
+		.panel{
+	
+			>div{
+				background: @color-main;
+				color : #fff;
+	
+				&:hover{
+					background : @color-contrast;
+	
+				}
+			}
+		}
+	
+	}	
+}
+
+}

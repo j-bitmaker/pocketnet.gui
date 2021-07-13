@@ -1,0 +1,2295 @@
+@import "../../css/__cssvar";
+
+#wallet{
+	min-height: 600px;
+	padding-bottom: 8 * @rhythm;
+	position: relative;
+
+	.caption{
+
+		padding : 2 * @rhythm;
+		padding-top: 4 * @rhythm;
+
+		span{
+			font-size: 1.4em;
+			color : #010E30;
+			font-weight: 100;
+		}
+	}
+
+	.copyaddress{
+		cursor: pointer;
+	}
+
+	.toblockexplorer{
+		font-size: 0.8em;
+		color : @color-gray-slight;
+		.transition(0.3s);
+		cursor: pointer;
+		width: 30px;
+		text-align: center;
+
+		&:hover{
+			color : @color-main;
+		}
+
+	}
+
+	.withloading{
+		.nlpart{
+			display: inline-block;
+		}
+
+		.lpart{
+			display: none;
+		}
+
+		&.loading{
+			cursor: default!important;
+			.nlpart{
+				display: none;
+			}
+	
+			.lpart{
+				display: inline-block;
+			}
+		}
+	}
+
+	.circularprogress{
+		overflow: hidden;
+		height: 0px;
+		position: absolute;
+		left : 0;
+		right : 0;
+		top : 0;
+		
+
+		.circularprogressWrapper{
+			padding : 2 * @rhythm;
+			text-align: center;
+			canvas{
+				margin : 0 auto;
+			}
+		}		
+	}
+
+	.panel{
+		overflow: hidden;
+		.item{
+			float: right;
+			margin-left: @rhythm;
+			text-align: center;
+
+			button{
+				min-width: 180px;
+			}
+			
+		}
+	}
+
+	.slide{
+		margin-top: 2 * @rhythm;
+		padding-top : 2 * @rhythm;
+
+		color: @color-black2;
+
+		.required{
+			color : @color-bad;
+		}
+
+		.subcaptionWrapperTable{
+			width: auto;
+			margin-bottom: 2 * @rhythm;
+			>div{
+				vertical-align: middle;
+			}
+
+			.panel{
+				overflow : hidden;
+
+				.item{
+					margin-right : 4 * @rhythm;
+					float: right;
+					cursor: pointer;
+					color : @color-main;
+					.transition(0.3s);
+
+					&:hover{
+						color : @color-contrast;
+					}
+				}
+			}
+		}
+
+		.subcaptionWrapperTableCnt{
+			padding : 2 * @rhythm 4 * @rhythm;
+		}
+
+		.subcaption{
+			span{
+				font-weight : 700;
+				color: @color-black2;
+			}
+		}
+
+		.bottomPanel{
+			margin-top: 4 * @rhythm;
+			padding : 2 * @rhythm 4 * @rhythm;
+
+			overflow : hidden;
+
+			>div{
+				float: left;
+
+				button{
+					height: 37px;
+					line-height: 35px;
+					padding : 0;
+					min-width: 280px;
+				}
+			}
+		}
+
+		.closeAdditional{
+			padding : @rhythm;
+			text-align: center;
+			padding-bottom: 2 * @rhythm;
+			cursor: pointer;
+			.transition(0.3s);
+
+			&:hover{
+				color : @color-main;
+			}
+
+			span{
+				font-size: 0.8em;
+				text-decoration: underline;
+			}
+		}
+
+		.linksubcaption{
+			font-weight: 700;
+			font-size: 0.8em;
+			text-align: center;
+			margin-bottom : 4 * @rhythm;
+			margin-top : 6 * @rhythm;
+			padding-left : @rhythm;
+
+			&.res{
+				color : @color-contrast;
+			}
+			
+		}
+
+		._stepclose{
+			display: none;
+		}
+
+		._stepback{
+			display: none;
+		}
+
+		._subcaptionlevel{
+			padding-left : @rhythm;
+			color : @color-main;
+		}
+
+		&:nth-child(1){
+			padding-top : 0;
+			margin-top : 0;
+		}
+	}
+
+
+	.total{
+		
+		background: #F1F1F1;
+		padding : 2 * @rhythm;
+		padding-bottom : 0;
+		overflow : hidden;
+		position: relative;
+
+		.tttlforerror{
+			position: absolute;
+			font-size: 0.8em;
+			font-weight: 100;
+			left : 0;
+			right: 0;
+			top : 0;
+			bottom : 0;
+			background: fade(#F1F1F1, 95);
+			display: none;
+
+			&.active{
+				display: block;
+			}
+
+			.table{
+				>div{
+					vertical-align: middle;
+					text-align: center;
+					color : @color-gray-mlight;
+				}
+			}
+		}
+
+		.totalItem{
+			padding :0 2 * @rhythm;
+			padding-bottom: @rhythm;
+			float: left;
+			width: 33%;
+
+
+
+			.canvasWrapper{
+				width: 100%;
+				position: relative;
+
+				canvas{
+					width: 100%;
+					height: 100%;
+				}
+
+				.infoWrapper{
+					position : absolute;
+					left: 0;
+					right: 0;
+					top: 0;
+					bottom: 0;
+
+				}
+
+				.infoWrapperTable{
+					>div{
+						vertical-align: middle;
+						text-align: center;
+						padding : 3 * @rhythm;
+					}
+				}
+			}
+
+		}
+
+		.balance{
+			.balanceWrapper{
+				font-size: 1.6em;
+				color : #626262;
+
+				.table{
+					margin : 0 auto;
+				}
+			}
+		}
+
+		.summary{
+			margin-top: @rhythm;
+			.line{
+				width: 100%;
+				height: 2px;
+
+				>div{
+					float: left;
+					height: 100%;
+				}
+
+				.positive{
+					background: @color-good;
+				}
+
+				.negative{
+					background: @color-bad;
+				}
+			}
+
+			.numbers{
+				>div{
+					width: 50%;
+					float: left;
+					height: 100%;
+
+					span{
+						font-size: 0.8em;
+					}
+				}
+
+				.positive{
+					color: @color-good;
+				}
+
+				.negative{
+					color: @color-bad;
+					text-align: right;
+				}
+			}
+		}
+
+		.label{
+			padding : @rhythm 0;
+
+			span{
+				font-size: 0.7em;
+				font-weight: 700;
+			}
+		}
+
+
+	}
+
+	.htls,
+	.crowdfunding,
+	.deposit,
+	.send{
+		display: none;
+		border : 1px solid #CACACA;
+		border-radius: 5px;
+		padding-bottom: 4 * @rhythm;
+
+		.linkForDepositReady,
+		.linkForDeposit,
+		.addressForDeposit,
+		.action{
+			margin-top: 2 * @rhythm;
+			padding :  2 * @rhythm 3 * @rhythm;
+		}
+
+		.info{
+			padding : 0  @rhythm;
+
+			b{
+				color : @color-good;
+			}
+
+			.infotable{
+
+				>div{
+					vertical-align: middle;
+					padding : @rhythm;
+
+					&.label{
+						width: 120px;
+						padding-left : 0;
+					}
+
+					b{
+						font-size: 0.9em;
+					}
+				}
+			}
+		}
+
+		.linkForDepositReady,
+		.linkForDeposit{
+			margin-top: 0;
+			border-top : 1px solid #E6E6E6;
+		}
+
+		.linkparams{
+			padding : 2 * @rhythm 0;
+		}
+
+		button{
+			max-width : 310px;
+			width: 100%;
+			height: 37px;
+			line-height: 35px;
+			padding : 0;
+			margin-top: 10px;
+		}
+
+		.labelWrapper{
+			font-size: 0.8em;
+			margin-top : @rhythm;
+			margin-bottom : @rhythm;
+			color : @color-main;
+
+			&.abs{
+				padding-bottom : 3 * @rhythm;
+			}
+		}
+
+		.cashWrapper{
+			width: 100%;
+			height: 100%;
+		}
+
+		textarea,
+		input{
+			width: 100%;
+		}
+
+		.inputWrapper{
+			.vc_valuecustom,
+			input{
+				width: 100%;
+			}
+		}
+
+		.row{
+			>div{
+				padding : @rhythm;
+				vertical-align: middle;
+
+				&.changer{
+					text-align: center;
+					width: 50px;
+
+					.change{
+						cursor: pointer;
+						.transition(0.3s);
+
+						&:hover{
+							color : @color-main;
+						}
+					}
+				}
+
+				&.address{
+					width: 50%;
+				}
+
+				&.source{
+
+				}
+
+				&.label{
+					width: 20%;
+
+					span{
+						font-size : 0.8em;
+					}
+				}
+			}
+		}
+
+		.notvalidaddress{
+			color : @color-bad;
+		}
+	}
+	.crowdfunding{
+		border-radius: 0;
+		border : 2px solid @color-main;
+
+		&[view="showListcount"]{
+			.action{
+				display: none;
+			}
+		}
+
+		&[view="olddeal"],
+		&[view="newdeal"]{
+			.action{
+				display: none;
+			}
+
+			.todeal{
+				i{
+					display: none;
+				}
+			}
+		}
+
+		
+
+		.listcountWrapper{
+			font-size: 0.8em;
+			font-weight: 700;
+			cursor: pointer;
+			color : @color-contrast;
+
+			.transition(0.3s);
+
+			&:hover{
+				color : @color-black2;
+			}
+		}
+
+		.listcr{
+			padding : 4 * @rhythm;
+
+			.item{
+				>div{
+					vertical-align: middle;
+					padding : @rhythm;
+
+					&.amount{
+						padding-left: 0;
+						width: 100px;
+					}
+
+					&.address{
+						
+						width: 270px;
+					}
+
+					&.update{
+						width: 50px;
+					}
+
+					&.remove{
+						width: 50px;
+					}
+
+					span{
+						font-size: 0.8em;
+					}
+
+					.removecr,
+					.updatecr{
+						color : @color-gray-light;
+						cursor: pointer;
+						.transition(0.3s);
+					}
+					.updatecr{
+						&:hover{
+							color : @color-main;
+						}
+					}
+					.removecr{
+						&:hover{
+							color : @color-bad;
+						}
+					}
+				}	
+			}
+
+			.header{
+				.item{
+					font-weight: 700;
+				}
+			}
+		}
+
+		.statustable{
+			>div{
+				vertical-align: middle;
+			}
+
+			.todeal{
+				cursor: pointer;
+				.transition(0.3s);
+
+				&:hover{
+					color : @color-good;
+				}
+			}
+
+			.segment{
+
+				&.ended{
+					.segmenttable{
+						>div{
+							
+							&.iconWrapper{
+								
+								.iended{
+									display: block;
+								}
+
+								.iwaiting{
+									display: none;
+								}
+							}
+						}
+					}
+				}
+
+				&.bad{
+					.segmenttable{
+						.linebg{
+							
+							.line{
+								background: @color-bad;
+							}
+						}
+					}
+				}
+				
+			}
+
+			.segmenttable{
+				>div{
+					vertical-align: middle;
+					overflow: hidden;
+					.transition(0.3s);
+
+					&.labelWrapper{
+						width: 60%;
+					}
+
+					&.iconWrapper{
+						width: 26px;
+						text-align: center;
+						color : @color-gray-light;
+
+						.iended{
+							display: none;
+						}
+						.finish{
+							color : @color-good;
+						}
+
+						.finishbad{
+							color : @color-bad;
+						}
+					}
+				}
+
+				.linebg{
+					width: 100%;
+					height: 2px;
+					background: @color-gray-light;
+					border-radius: 2px;
+					overflow: hidden;
+					position: relative;
+
+					.line{
+						position: absolute;
+						left: 0;
+						top: 0;
+						height: 100%;
+						.transition(0.3s);
+						background: @color-main;
+					}
+				}
+			}
+		}
+
+		.pocstatus{
+			.current{
+				display: none;
+			}
+		}
+		.copyaddress1,
+		.copyaddress2{
+			cursor: pointer;
+		}
+		.crdeal{
+			padding : 0 4 * @rhythm;
+
+			.statustable{
+				
+
+				.segment{
+
+					
+				}
+
+				.segmenttable{
+					>div{
+
+						&.labelWrapper{
+							display: none;
+						}
+
+						
+					}
+
+					
+				}
+			}
+
+			.pocstatus{
+				.current{
+					padding : 2 * @rhythm;
+					display: block;
+					color : @color-main;
+					text-align: center;
+				}
+			}
+
+			.reactivate{
+				margin : 0 auto;
+				margin-top : 2 * @rhythm;
+				width: 150px;
+				background: @color-main;
+				color : #fff;
+				text-align: center;
+				padding : @rhythm;
+				cursor: pointer;
+				.transition(0.3s);
+				border : 1px solid @color-main;
+				font-size : 0.8em;
+
+				&:hover{
+					background : #fff;
+					color : @color-main;
+				}
+			}
+
+		}
+
+		.infosteptable{
+			.infostepcaption{
+				padding : @rhythm 0 ;
+
+				span{
+					font-size: 0.8em;
+					font-weight: 700;
+					color : @color-main;
+				}
+			}
+
+			.infostep{
+				margin-top : @rhythm;
+				height: auto;
+				>div{
+					vertical-align: middle;
+					padding : @rhythm 0;
+
+					&.left{
+						width: 70%;
+					}
+				}
+			}
+			.label{
+				padding : @rhythm 0;
+				span{
+					color : @color-gray-light;
+					font-size: 0.8em;
+				}
+			}
+
+			
+		}
+
+		.infowrapper{
+			>div{
+				padding : 2 * @rhythm;
+				&.infostepqrcell{
+					width: 250px;
+
+					.infostepcaption{
+						text-align: center;
+					}
+
+					.qrcodewrapper{
+						text-align: center;
+					}
+				}
+
+				&:nth-child(1){
+					padding-left: 0;
+				}
+
+				&:nth-last-child(1){
+					padding-right: 0;
+				}
+			}
+		}
+
+		.steptext{
+			padding : 2 * @rhythm 0 ;
+			span{
+				font-size: 0.8em;
+				color : @color-contrast;
+			}
+			
+		}
+	}
+	.deposit{
+		border : 0;
+		background: #F8F6F9;
+
+		
+
+		.qrcoderesult{
+			.imageqr{
+				width: 225px;
+				height: 225px;
+				margin : 0 auto;
+			}
+		}
+
+		.depositaddress{
+			.adrwrapper{
+				padding : 4 * @rhythm;
+
+				.adr{
+					text-align: center;
+					font-size: 2em;
+					color : @color-black2;
+					font-weight : 700;
+				}
+			}
+		}
+
+		.actionbody{
+		
+			textarea{
+				padding : 2 * @rhythm;
+			}
+
+			button{
+				width: 100%;
+				min-width : 0;
+			}
+
+			
+		}
+	}
+
+	&.loading{
+        .ntf{
+            display: none;
+        }
+    }
+
+	&.api{
+		._stepback{
+			display: none!important;
+		}
+
+		._stepclose {
+			display: none!important;
+		}
+
+		.actionbody{
+			border-bottom: 0!important;
+		}
+
+		.actionstep .send{
+			padding-bottom : 0!important;
+		}
+	}
+
+	.addresses{
+
+
+		.addressesGroupCaption{
+			padding : 2 * @rhythm 4 * @rhythm;
+		
+			span{
+				font-size: 0.8em;
+			}
+		}
+
+		.adressesTable{
+			border-bottom: 1px solid #D9D9D9;
+
+			>div{
+				vertical-align: top;
+				padding : 3 *@rhythm @rhythm;
+
+				&.name{
+					padding-left: 4 * @rhythm;
+					font-weight: 500;
+
+					.alabel{
+						font-weight: 300;
+						font-size: 0.8em;
+						color : @color-main;
+					}
+				}
+
+				&.balance{
+					width: 25%;
+					font-weight: 700;
+				}
+
+				&.percent{
+					font-weight: 700;
+					width: 100px;
+				}
+
+				&.panel{
+					padding-right: 4 * @rhythm;
+					width: 110px;
+				}
+
+				&:nth-last-child(1){
+					padding-right: 4 * @rhythm;
+					text-align: right;
+				}
+
+				span{
+					font-size: 0.9em;
+				}
+			}
+		}
+
+		.captionTable{
+			>div{
+				padding : 2 *@rhythm @rhythm;
+				span{
+					font-weight: 700;
+					font-size : 0.8em;
+				}
+			}
+		}
+
+		
+	}
+
+	.actionstep{
+
+		._stepclose{
+			display: block;
+		}
+
+		._stepback{
+			display: block;
+			width: 60px;
+			padding-left: 0;
+			padding-right: 0;
+
+			.back{
+				background: #F5F5F5;
+				border-radius: 50%;
+				width: 44px;
+				height: 44px;
+				cursor: pointer;
+				color : @color-black2;
+				.transition(0.3s);
+				text-align: center;
+				line-height: 44px;
+				font-size: 0.8em;
+
+				&:hover{
+					color : @color-main;
+				}
+			}
+		}
+
+		.deposit{
+			border-radius: 3px;
+			border : 1px solid #D8D8D8;
+			background: #fff;
+			padding : 3 * @rhythm 0;
+
+			.changer,
+			.recievecoins{
+				display: none;
+			}
+
+			._stepback{
+				display: table-cell;
+			}
+		}
+
+		.send{
+			border-radius: 3px;
+			border : 1px solid #D8D8D8;
+			background: #fff;
+			padding : 3 * @rhythm 0;
+
+			.actionbody {
+				background: #F8F8F8;
+				border-bottom : 1px solid #D8D8D8;
+
+				button{
+					width: 100%;
+				}
+			}
+
+			.changerremove,
+			.sendcoins{
+				display: none;
+			}
+
+			._stepback{
+				display: table-cell;
+			}
+		}
+
+
+		.htls{
+			border-radius: 3px;
+			border : 1px solid #D8D8D8;
+			background: #fff;
+			padding : 3 * @rhythm 0;
+
+			.actionbody {
+				background: #F8F8F8;
+				border-bottom : 1px solid #D8D8D8;
+
+				button{
+					width: 100%;
+				}
+			}
+
+			
+			.changerremove,
+			.sendcoins{
+				display: none;
+			}
+
+			._stepback{
+				display: table-cell;
+			}
+		}
+
+		.animation{
+
+			.htls,
+			.send,
+			.deposit{
+				border : 1px solid transparent;
+			}
+			
+		}
+	}
+
+	.walletempvalue{
+		padding-bottom:  0.5 * @rhythm;
+		padding-top: 0.5 * @rhythm;
+
+		span{
+			font-size: 0.8em;
+		}
+	}
+	
+	.walletdfvalue{
+		padding-bottom:  0.5 * @rhythm;
+		padding-top: 0.5 * @rhythm;
+
+		span{
+			font-size: 0.8em;
+			font-weight: 700;
+		}
+	}
+	.walletuservalue{
+		position: relative;
+		padding-bottom: 0.5 * @rhythm;
+		padding-top: 0.5 * @rhythm;
+
+		>div{
+			vertical-align: middle;
+
+			&.namecell{
+				padding-left: 1.2 * @rhythm;
+				font-weight: 700;
+				font-size: 0.8em;
+			}
+
+			&.iconcell{
+				width: 28px;
+
+				img{
+					width: 28px;
+					height: 28px;
+					border-radius: 50%;
+				}
+			}
+		}
+	}
+}
+
+html.stblack{
+	#wallet{
+		
+		.caption{
+			span{
+				color : @color-main;
+			}
+		}
+	
+		.slide{
+	
+			color: @color-gray-mlight;
+	
+			.required{
+				color : @color-bad;
+			}
+	
+			.subcaptionWrapperTable{
+			
+	
+				.panel{
+	
+					.item{
+						color : @color-main;
+	
+						&:hover{
+							color : @color-contrast;
+						}
+					}
+				}
+			}
+	
+			.subcaption{
+				span{
+					color: @color-bright;
+				}
+			}
+	
+			
+			.closeAdditional{
+	
+				&:hover{
+					color : @color-main;
+				}
+			}
+	
+			.linksubcaption{
+	
+				&.res{
+					color : @color-contrast;
+				}
+				
+			}
+	
+		
+			._subcaptionlevel{
+				color : @color-main;
+			}
+	
+		}
+	
+	
+		.total{
+			
+			background: @color-black3;
+	
+			.tttlforerror{
+				background: fade(@color-black, 95);
+	
+				.table{
+					>div{
+						color : @color-gray-mlight;
+					}
+				}
+			}
+	
+			.balance{
+				.balanceWrapper{
+					color : @color-gray-light;
+	
+				}
+			}
+	
+			.summary{
+				.line{
+					
+					.positive{
+						background: @color-good;
+					}
+	
+					.negative{
+						background: @color-bad;
+					}
+				}
+	
+				.numbers{
+					
+					.positive{
+						color: @color-good;
+					}
+	
+					.negative{
+						color: @color-bad;
+					}
+				}
+			}
+	
+	
+		}
+		
+		.htls,
+		.crowdfunding,
+		.deposit,
+		.send{
+	
+			border : 1px solid fade(@color-main, 50);
+	
+	
+			.info{
+	
+				b{
+					color : @color-good;
+				}
+	
+			}
+	
+			.linkForDepositReady,
+			.linkForDeposit{
+				border-top : 1px solid fade(@color-main, 50);
+			}
+	
+	
+			.labelWrapper{
+				color : @color-main;
+			}
+	
+	
+			.row{
+				>div{
+	
+					&.changer{
+						
+						.change{
+	
+							&:hover{
+								color : @color-main;
+							}
+						}
+					}
+	
+				}
+			}
+	
+			.notvalidaddress{
+				color : @color-bad;
+			}
+		}
+		.crowdfunding{
+			border : 2px solid @color-main;
+	
+		
+			
+	
+			.listcountWrapper{
+				color : @color-contrast;
+	
+				&:hover{
+					color : @color-gray-mlight;
+				}
+			}
+	
+			.listcr{
+	
+				.item{
+					>div{
+						
+						.removecr,
+						.updatecr{
+							color : @color-gray-light;
+						}
+						.updatecr{
+							&:hover{
+								color : @color-main;
+							}
+						}
+						.removecr{
+							&:hover{
+								color : @color-bad;
+							}
+						}
+					}	
+				}
+	
+			}
+	
+			.statustable{
+	
+				.todeal{
+	
+					&:hover{
+						color : @color-good;
+					}
+				}
+	
+				.segment{
+	
+					
+					&.bad{
+						.segmenttable{
+							.linebg{
+								
+								.line{
+									background: @color-bad;
+								}
+							}
+						}
+					}
+					
+				}
+	
+				.segmenttable{
+					>div{
+						
+						&.iconWrapper{
+							color : @color-gray-light;
+	
+							.finish{
+								color : @color-good;
+							}
+	
+							.finishbad{
+								color : @color-bad;
+							}
+						}
+					}
+	
+					.linebg{
+						background: fade(@color-main, 50);
+	
+						.line{
+							background: @color-main;
+						}
+					}
+				}
+			}
+	
+			.crdeal{
+				
+				.pocstatus{
+					.current{
+						color : @color-main;
+					}
+				}
+	
+				.reactivate{
+					
+					background: fade(@color-main,30);
+					color : @color-gray-mlight;
+					border : 1px solid @color-main;
+	
+					&:hover{
+						background: fade(@color-main, 50);
+						color : @color-gray-slight;
+					}
+				}
+	
+			}
+	
+			.infosteptable{
+				.infostepcaption{
+					span{
+						color : @color-main;
+					}
+				}
+	
+				
+				.label{
+					span{
+						color : @color-bright;
+					}
+				}
+	
+				
+			}
+	
+	
+			.steptext{
+				span{
+					color : @color-contrast;
+				}
+				
+			}
+		}
+		.deposit{
+			background: transparent;
+	
+	
+			.depositaddress{
+				.adrwrapper{
+	
+					.adr{
+						color : @color-gray-mlight;
+					}
+				}
+			}
+	
+		}
+	
+		.addresses{
+	
+			.adressesTable{
+				border-bottom: 1px solid fade(@color-main, 50);
+
+	
+				>div{
+	
+					&.name{
+	
+						.alabel{
+							color : @color-main;
+						}
+					}
+	
+				}
+			}
+	
+	
+			
+		}
+	
+		.actionstep{
+	
+			._stepback{
+			
+	
+				.back{
+					background: @color-black2;
+					color : @color-main;
+	
+					&:hover{
+						color : @color-bright;
+					}
+				}
+			}
+	
+			.deposit{
+				border : 1px solid fade(@color-main, 50);
+	
+			}
+	
+			.send{
+				border : 1px solid fade(@color-main, 50);
+				background: @color-black;
+	
+				.actionbody {
+					background: @color-black2;
+					border-bottom : 1px solid fade(@color-main, 50);
+	
+				}
+	
+			}
+	
+			.animation{
+	
+				.send,
+				.deposit{
+					border : 1px solid transparent;
+				}
+				
+			}
+		}
+	}	
+}
+
+.walletwindow{
+
+	.wndinner{
+		width: 100%;
+		max-width: 550px;
+		height: 80%;
+		max-height: 640px;
+	}
+
+	#wallet{
+		min-height: none;
+
+		.workstation{
+			display: none;
+		}
+
+		.caption{
+			padding-left: 0;
+		}
+
+		.mobiledevice{
+			display: block;
+		}
+	
+		
+		.slide{
+			margin-top: 2 * @rhythm;
+			padding-top : 2 * @rhythm;
+	
+			
+	
+			.subcaptionWrapperTable{
+				width: auto;
+				margin-bottom: 2 * @rhythm;
+				>div{
+					vertical-align: middle;
+				}
+	
+				.panel{
+					overflow : hidden;
+	
+					.item{
+						margin-right : 4 * @rhythm;
+						float: right;
+						cursor: pointer;
+						color : @color-main;
+						.transition(0.3s);
+	
+						&:hover{
+							color : @color-contrast;
+						}
+					}
+				}
+			}
+	
+			.subcaptionWrapperTableCnt{
+				padding : @rhythm;
+			}
+	
+			.subcaption{
+				span{
+					font-weight : 700;
+					color: @color-black2;
+				}
+			}
+	
+			.bottomPanel{
+				margin-top: 4 * @rhythm;
+				padding : @rhythm;
+	
+				>div{
+					float: left;
+					width: 100%;
+	
+					button{
+						width: 100%;
+						height: 37px;
+						line-height: 35px;
+						padding : 0;
+						min-width: 280px;
+					}
+				}
+			}
+	
+			.closeAdditional{
+				padding : @rhythm;
+				text-align: center;
+				padding-bottom: 2 * @rhythm;
+				cursor: pointer;
+				.transition(0.3s);
+	
+				&:hover{
+					color : @color-main;
+				}
+	
+				span{
+					font-size: 0.8em;
+					text-decoration: underline;
+				}
+			}
+	
+			.linksubcaption{
+				font-weight: 700;
+				font-size: 0.8em;
+				text-align: center;
+				margin-bottom : 4 * @rhythm;
+				margin-top : 6 * @rhythm;
+				padding-left : @rhythm;
+	
+				&.res{
+					color : @color-contrast;
+				}
+				
+			}
+	
+			._stepclose{
+				display: none;
+			}
+	
+			._stepback{
+				display: none;
+			}
+	
+			._subcaptionlevel{
+				padding-left : @rhythm;
+				color : @color-main;
+			}
+	
+			&:nth-child(1){
+				padding-top : 0;
+				margin-top : 0;
+			}
+		}
+	
+	
+		.total{
+			
+			background: #F1F1F1;
+			padding : 0;
+			overflow : hidden;
+	
+			.totalItem{
+				padding : 0 2 * @rhythm;
+				padding-bottom: @rhythm;
+				float: left;
+				width: 100%;
+	
+	
+	
+				.canvasWrapper{
+					width: 100%;
+					position: relative;
+	
+					canvas{
+						width: 100%;
+						height: 100%;
+					}
+	
+					.infoWrapper{
+						position : absolute;
+						left: 0;
+						right: 0;
+						top: 0;
+						bottom: 0;
+	
+					}
+	
+					.infoWrapperTable{
+						>div{
+							vertical-align: middle;
+							text-align: center;
+							padding : 3 * @rhythm;
+						}
+					}
+				}
+	
+			}
+	
+			
+	
+	
+		}
+		
+		.htls,
+		.crowdfunding,
+		.deposit,
+		.send{
+	
+			border : 1px solid #CACACA;
+			border-left : 0;
+			border-right : 0;
+			border-radius: 0;
+	
+			.linkForDepositReady,
+			.linkForDeposit,
+			.addressForDeposit,
+			.action{
+				margin-top: @rhythm;
+				padding :  @rhythm 0;
+			}
+	
+			.linkparams{
+				padding : 2 * @rhythm 0;
+	
+				.value{
+					font-size: 0.9em;
+				}
+	
+	
+			}
+	
+			button{
+				min-width : 0;
+				width: 100%;
+			}
+	
+			
+	
+			.row{
+				display: block;
+	
+				>div{
+					display: block;
+					width: 100%;
+	
+					&.changer{
+						display: none;
+	
+					}
+	
+					&.address{
+						width: 100%;
+					}
+	
+					&.source{
+	
+					}
+	
+					&.label{
+						width: 100%;
+					}
+				}
+			}
+		}
+	
+		.crowdfunding{
+			border : 0;
+			background: #F8F6F9;
+		}
+	
+		.deposit{
+			border : 0;
+			background: #F8F6F9;
+	
+			
+	
+			.qrcoderesult{
+				.imageqr{
+					width: 225px;
+					height: 225px;
+					margin : 0 auto;
+				}
+			}
+	
+			.depositaddress{
+				.adrwrapper{
+					padding : 2 * @rhythm 0;
+	
+					.adr{
+						font-size: 0.9em;
+					}
+				}
+			}
+	
+			.actionbody{
+			
+				textarea{
+					padding : @rhythm;
+					height: 150px;
+				}
+	
+				button{
+					width: 100%;
+					min-width : 0;
+				}
+	
+				
+			}
+		}
+	
+		.addresses{
+	
+	
+			.addressesGroupCaption{
+				padding : @rhythm;
+			
+			}
+	
+			.adressesTable{
+				border-bottom: 1px solid #D9D9D9;
+				padding : 0 @rhythm;
+	
+				>div{
+					vertical-align: top;
+					padding : 3 * @rhythm 0;
+	
+					&.name{
+						padding-left: 0;
+						font-weight: 500;
+						overflow: hidden;
+						text-overflow: ellipsis;
+	
+						
+					}
+	
+					&.panel{
+						display: none;
+					}
+	
+	
+					&.balance{
+						padding-left: 2 * @rhythm;
+						width: 31%;
+						font-weight: 700;
+					}
+	
+					&.percent{
+						font-weight: 700;
+						width: 22%;
+					}
+	
+					
+	
+					&:nth-last-child(1){
+						padding-right: 0;
+					}
+				}
+			}
+	
+			
+		}
+	
+		.actionstep{
+	
+			._stepclose{
+				display: block;
+			}
+	
+			._stepback{
+				display: block;
+				width: 60px;
+				padding-left: 0;
+				padding-right: 0;
+	
+				.back{
+					background: #F5F5F5;
+					border-radius: 50%;
+					width: 44px;
+					height: 44px;
+					cursor: pointer;
+					color : @color-black2;
+					.transition(0.3s);
+					text-align: center;
+					line-height: 44px;
+					font-size: 0.8em;
+	
+					&:hover{
+						color : @color-main;
+					}
+				}
+			}
+	
+			.deposit{
+				border-radius: 3px;
+				border : 1px solid #D8D8D8;
+				background: #fff;
+				padding : 3 * @rhythm 0;
+	
+				.changer,
+				.recievecoins{
+					display: none;
+				}
+	
+				._stepback{
+					display: table-cell;
+				}
+			}
+			
+			.htls,
+			.send{
+				border-radius: 3px;
+				border : 1px solid #D8D8D8;
+				background: #fff;
+				padding : 3 * @rhythm 0;
+	
+				.actionbody {
+					background: #F8F8F8;
+					border-bottom : 1px solid #D8D8D8;
+	
+					button{
+						width: 100%;
+					}
+				}
+	
+				
+				.changerremove,
+				.sendcoins{
+					display: none;
+				}
+	
+				._stepback{
+					display: table-cell;
+				}
+			}
+	
+			.animation{
+				
+				.htls,
+				.send,
+				.deposit{
+					border : 1px solid transparent;
+				}
+				
+			}
+		}
+	}
+}
+
+/*t*/ @media only screen and (max-width: 768px){
+#wallet{
+	min-height: none;
+
+	
+	.slide{
+		margin-top: 2 * @rhythm;
+		padding-top : 2 * @rhythm;
+
+		
+
+		.subcaptionWrapperTable{
+			width: auto;
+			margin-bottom: 2 * @rhythm;
+			>div{
+				vertical-align: middle;
+			}
+
+			.panel{
+				overflow : hidden;
+
+				.item{
+					margin-right : 4 * @rhythm;
+					float: right;
+					cursor: pointer;
+					color : @color-main;
+					.transition(0.3s);
+
+					&:hover{
+						color : @color-contrast;
+					}
+				}
+			}
+		}
+
+		.subcaptionWrapperTableCnt{
+			padding : @rhythm;
+		}
+
+		.subcaption{
+			span{
+				font-weight : 700;
+				color: @color-black2;
+			}
+		}
+
+		.bottomPanel{
+			margin-top: 4 * @rhythm;
+			padding : @rhythm;
+
+			>div{
+				float: left;
+				width: 100%;
+
+				button{
+					width: 100%;
+					height: 37px;
+					line-height: 35px;
+					padding : 0;
+					min-width: 280px;
+				}
+			}
+		}
+
+		.closeAdditional{
+			padding : @rhythm;
+			text-align: center;
+			padding-bottom: 2 * @rhythm;
+			cursor: pointer;
+			.transition(0.3s);
+
+			&:hover{
+				color : @color-main;
+			}
+
+			span{
+				font-size: 0.8em;
+				text-decoration: underline;
+			}
+		}
+
+		.linksubcaption{
+			font-weight: 700;
+			font-size: 0.8em;
+			text-align: center;
+			margin-bottom : 4 * @rhythm;
+			margin-top : 6 * @rhythm;
+			padding-left : @rhythm;
+
+			&.res{
+				color : @color-contrast;
+			}
+			
+		}
+
+		._stepclose{
+			display: none;
+		}
+
+		._stepback{
+			display: none;
+		}
+
+		._subcaptionlevel{
+			padding-left : @rhythm;
+			color : @color-main;
+		}
+
+		&:nth-child(1){
+			padding-top : 0;
+			margin-top : 0;
+		}
+	}
+
+
+	.total{
+		
+		background: #F1F1F1;
+		padding : 0;
+		overflow : hidden;
+
+		.totalItem{
+			padding : 0 2 * @rhythm;
+			padding-bottom: @rhythm;
+			float: left;
+			width: 100%;
+
+
+
+			.canvasWrapper{
+				width: 100%;
+				position: relative;
+
+				canvas{
+					width: 100%;
+					height: 100%;
+				}
+
+				.infoWrapper{
+					position : absolute;
+					left: 0;
+					right: 0;
+					top: 0;
+					bottom: 0;
+
+				}
+
+				.infoWrapperTable{
+					>div{
+						vertical-align: middle;
+						text-align: center;
+						padding : 3 * @rhythm;
+					}
+				}
+			}
+
+		}
+
+		
+
+
+	}
+
+	.htls,
+	.crowdfunding,
+	.deposit,
+	.send{
+
+		border : 1px solid #CACACA;
+		border-left : 0;
+		border-right : 0;
+		border-radius: 0;
+
+		.linkForDepositReady,
+		.linkForDeposit,
+		.addressForDeposit,
+		.action{
+			margin-top: @rhythm;
+			padding :  @rhythm 0;
+		}
+
+		.linkparams{
+			padding : 2 * @rhythm 0;
+
+			.value{
+				font-size: 0.9em;
+			}
+
+
+		}
+
+		button{
+			min-width : 0;
+			width: 100%;
+		}
+
+		
+
+		.row{
+			display: block;
+
+			>div{
+				display: block;
+				width: 100%;
+
+				&.changer{
+					display: none;
+
+				}
+
+				&.address{
+					width: 100%;
+				}
+
+				&.source{
+
+				}
+
+				&.label{
+					width: 100%;
+				}
+			}
+		}
+	}
+
+	.crowdfunding{
+		border : 0;
+		background: #F8F6F9;
+	}
+
+	.deposit{
+		border : 0;
+		background: #F8F6F9;
+
+		
+
+		.qrcoderesult{
+			.imageqr{
+				width: 225px;
+				height: 225px;
+				margin : 0 auto;
+			}
+		}
+
+		.depositaddress{
+			.adrwrapper{
+				padding : 2 * @rhythm 0;
+
+				.adr{
+					font-size: 0.9em;
+				}
+			}
+		}
+
+		.actionbody{
+		
+			textarea{
+				padding : @rhythm;
+				height: 150px;
+			}
+
+			button{
+				width: 100%;
+				min-width : 0;
+			}
+
+			
+		}
+	}
+
+	.addresses{
+
+
+		.addressesGroupCaption{
+			padding : @rhythm;
+		
+		}
+
+		.adressesTable{
+			border-bottom: 1px solid #D9D9D9;
+			padding : 0 @rhythm;
+
+			>div{
+				vertical-align: top;
+				padding : 3 * @rhythm 0;
+
+				&.name{
+					padding-left: 0;
+					font-weight: 500;
+					overflow: hidden;
+					text-overflow: ellipsis;
+
+					
+				}
+
+				&.panel{
+					display: none;
+				}
+
+
+				&.balance{
+					padding-left: 2 * @rhythm;
+					width: 31%;
+					font-weight: 700;
+				}
+
+				&.percent{
+					font-weight: 700;
+					width: 22%;
+				}
+
+				a{
+					display: none;
+				}
+
+				&:nth-last-child(1){
+					padding-right: 0;
+				}
+			}
+		}
+
+		
+	}
+
+	.actionstep{
+
+		._stepclose{
+			display: block;
+		}
+
+		._stepback{
+			display: block;
+			width: 60px;
+			padding-left: 0;
+			padding-right: 0;
+
+			.back{
+				background: #F5F5F5;
+				border-radius: 50%;
+				width: 44px;
+				height: 44px;
+				cursor: pointer;
+				color : @color-black2;
+				.transition(0.3s);
+				text-align: center;
+				line-height: 44px;
+				font-size: 0.8em;
+
+				&:hover{
+					color : @color-main;
+				}
+			}
+		}
+
+		.deposit{
+			border-radius: 3px;
+			border : 1px solid #D8D8D8;
+			background: #fff;
+			padding : 3 * @rhythm 0;
+
+			.changer,
+			.recievecoins{
+				display: none;
+			}
+
+			._stepback{
+				display: table-cell;
+			}
+		}
+
+		.htls,
+		.send{
+			border-radius: 3px;
+			border : 1px solid #D8D8D8;
+			background: #fff;
+			padding : 3 * @rhythm 0;
+
+			.actionbody {
+				background: #F8F8F8;
+				border-bottom : 1px solid #D8D8D8;
+
+				button{
+					width: 100%;
+				}
+			}
+
+			
+			.changerremove,
+			.sendcoins{
+				display: none;
+			}
+
+			._stepback{
+				display: table-cell;
+			}
+		}
+
+		.animation{
+
+			.htls,
+			.send,
+			.deposit{
+				border : 1px solid transparent;
+			}
+			
+		}
+	}
+}
+
+.walletwindow{
+	#wallet{
+		padding-left: @rhythm;
+		padding-right: @rhythm;
+	}
+}
+}

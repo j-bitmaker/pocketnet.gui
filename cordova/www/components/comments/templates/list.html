@@ -1,0 +1,298 @@
+<%
+
+
+var commentpanel = function(comment, _class){  %>
+	<div class="commentpanel">
+
+		<div class="items">
+			<% if((!state || mestate.reputation >= -50) && !comment.deleted) { %> 
+				<div class="item reply">
+					<div class="cact">
+						<div class="label">
+							<span><%=e('reply').toUpperCase()%></span>
+						</div>
+					</div>
+				</div>
+			<% } %>
+
+			<% if(_class == 'firstcomment') {
+
+				var h = 'hidden';
+
+				if(comment.children > 0) h = ''
+
+			%>
+
+				<div class="item replies <%-h%>">
+					<div class="cact">
+						<div class="iconlabelWrapper table">
+							<div class="label">
+								<span><%=e('e13037').toUpperCase()%> (<b class="repliescount"><%- comment.children %></b>)</span>
+							</div>
+							<div class="icon">
+								<i class="fas fa-angle-down"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			<% } %> 
+
+			<% if(!comment.deleted) { 
+				
+				
+				%> 
+				<div class="item upvoteCommentWrapper">
+
+					<div class="upvoteComment scoreUp <% if(comment.myScore && comment.myScore > 0) {%> ratedScore <% } %>"  score="scoreUp">
+						<div class="upvoteCommentTable table">
+							<div class="upvoteCommentCell">
+								<i class="fas fa-thumbs-up"></i>
+							</div>
+
+							<div class="upvoteCommentCell">
+								<span class="commentScore">
+									<% if(comment.scoreUp) {%><%- compressedNumber(comment.scoreUp, 1) %> <% } %>
+								</span>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="item upvoteCommentWrapper">
+
+					<div class="upvoteComment scoreDown <% if(comment.myScore && comment.myScore < 0) {%> ratedScore <% } %>" score="scoreDown">
+						<div class="upvoteCommentTable table">
+							<div class="upvoteCommentCell">
+								<i class="fas fa-thumbs-down fa-flip-horizontal"></i>
+							</div>
+
+							<div class="upvoteCommentCell">
+								<span class="commentScore">
+									<% if(comment.scoreDown) {%><%- compressedNumber(comment.scoreDown, 1) %> <% } %>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			<% } %>
+		</div>
+
+	</div>
+<% }
+
+%>
+
+
+<% _.each(comments, function(comment){ 
+
+	var me = app.platform.sdk.user.me()
+
+	if(me && me.relation(comment.address, 'blocking')) return
+
+
+	var m = '' %> 
+
+	<div class="comment <% if(comment.my(app)) {%> mycomment <% } %> <% if(comment.deleted) {%> deleted <% } %> <% if(comment.myScore) {%> rated <% } %> <% if(comment.temp) {%> temptransaction <% } %> <% if(Number(comment.timeUpd) === Number(comment.time)) {%> commentnotedited <% } %> <%-newcomments%> <%- _class %>" id="<%-comment.id%>" aid="<%-comment.answerid%>" pid='<%-comment.parentid%>'>
+
+		<div class="commentPaddingWrapper">
+
+			<div class="commentWrapper table">
+
+				<div class="iconWrapper">
+					<% if(!app.curation()) {%><a href="<%-app.platform.api.authorlink(comment.address)%>"><% } %>
+						<% var src = deep(app, 'platform.sdk.usersl.storage.'+comment.address+'.image')  %>
+
+						<div class="icon">
+							<div class="usericon" image="<%-src || ''%>">
+							
+
+								<% if(deep(app, 'platform.real.'+comment.address)) {%>
+									<div class="realperson">
+
+										<span class="fa-stack fa-2x">
+											<i class="fas fa-certificate fa-stack-2x"></i>
+											<i class="fas fa-check fa-stack-1x"></i>
+										  </span>
+									</div>
+								<% } %>
+							</div>
+						</div>
+					<% if(!app.curation()) {%></a><% } %>
+				
+
+				</div>
+
+				<div class="commentBody">
+
+					<div class="metatable table">
+						<div class="author">
+
+							<% if(!app.curation()) {%><a href="<%-app.platform.api.authorlink(comment.address)%>"><% } %>
+							
+							<b><span class="adr"><%-deep(app, 'platform.sdk.usersl.storage.'+comment.address+'.name') || comment.address %></span></b> <% if(!app.curation()) {%></a><% } %> &middot;
+							<span class="date realtime" time="<%-comment.time%>"><%- app.reltime(comment.time) %></span>
+
+							<% if(Number(comment.timeUpd) > Number(comment.time) && !comment.deleted) {%>
+
+								&middot; <span class="edited"><i class="fas fa-pen-alt"></i></span>
+
+							<% } %>
+						</div>
+
+						
+						<div class="panelWrapper">
+							<% if(!comment.deleted) {%>
+
+								<div class="panel">
+									<i class="fas fa-ellipsis-h"></i>
+								</div>
+
+								<div class="temppanel">
+									<div class="preloader5"><span></span><span></span><span></span></div>
+								</div>
+
+							<% } %>
+						</div>
+
+
+
+					</div>
+
+					<div class="cbodyWrapper">
+
+						<div class="commentcontenttable table">
+							<div class="commentcontent">
+
+								<% if(comment.deleted) {%>
+
+									<div class="commentmessage">
+										<div><%=e('e13033')%></div>
+									</div>
+
+								<% } %>
+
+								<% if(comment.message && !comment.deleted) {
+
+									var l = findAndReplaceLink(filterXSS(comment.message, {
+										whiteList: [],
+										stripIgnoreTag: true
+									}), true)
+
+
+									if(comment.answerid){
+										l = app.platform.sdk.users.replacePattern(l, replaceName, {
+											comment : comment.answerid
+										})
+									}
+
+									else
+									{
+										l = app.platform.sdk.users.replacePattern(l, replaceNameNoComment)
+									}
+
+									m = joypixels.toImage(l)
+
+								%>
+
+									<div class="commentmessage">
+										<div><%=nl2br(trimrn(m))%></div>
+									</div>
+
+								<% } %>
+
+								<% 								
+								
+								if(comment.images.length && !comment.deleted) {
+									var additionall = 0;
+									var icClass = '';
+					
+									if (comment.images.length + additionall == 1) icClass = 'one';
+									if (comment.images.length + additionall == 2) icClass = 'two';
+									if (comment.images.length + additionall == 2) icClass = 'three';
+									if (comment.images.length + additionall == 4) icClass = 'four';
+									if (comment.images.length + additionall > 4) icClass = 'more';
+									
+									 %>
+					 
+									<div class="commentimages">
+										<div class="imagesContainer <%-icClass%>">
+											<% _.each(comment.images, function(image){ %>
+					
+												<div class="imagesWrapper">
+													<div class="image imageCommentOpen" image="<%-image%>" i="<%-image%>">
+													</div>
+												</div>
+					
+											<% }) %>
+					
+										</div>
+									</div>
+					
+							<% } %>
+
+								
+
+								<!--<% if(comment.url) {%>
+
+									<div class="url">
+										<span>
+											<a href="<%-comment.url%>"><%-comment.url%></a>
+										</span>
+									</div>
+
+								<% } %>-->
+
+								
+							</div>
+
+							
+							
+						</div>
+
+
+							<% commentpanel(comment, _class) %>
+
+
+
+					</div>
+
+
+
+					
+					<div class="edit">
+					</div>
+				
+
+					
+
+					<% if(_class == 'firstcomment') {%>
+
+						<div class="repliesloaderWrapper hidden">
+							<div class="preloader5">
+							    <span></span>
+							    <span></span>
+							    <span></span>
+							</div>
+						</div>
+
+						<div class="answers">
+						</div>
+
+					<% } %>
+
+					
+				</div>
+
+			</div>
+
+		</div>
+
+		<% if(_class == 'firstcomment') {%>
+			<div class="answer" for="<%-comment.id%>">
+			</div>
+		<% } %>
+	</div>
+
+<% }) %>

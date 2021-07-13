@@ -1,0 +1,145 @@
+@import "../../css/__cssvar";
+
+
+#navigation{
+	display: none;
+	width: 100%;
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	padding-bottom : 30px;
+	height: 90px;
+	z-index: 200;
+	background: fade(#fff, 95);
+	.transition(0.3s);
+
+	.fakem{
+		color : #fff;
+		.shadowText();
+		text-align: center;
+		padding-top : 30px;
+	}
+
+	.nmenu{
+		height: 100%;
+	}
+
+	.items{
+		.item{
+			vertical-align: middle;
+			text-align: center;
+			overflow : hidden;
+
+			i{
+				
+				font-size: 0.9em;
+			}
+		}
+
+		.icon{
+			width: 20px;
+			margin : 0 auto;
+		}
+
+		.iconWrapper{
+			border-radius: 50%;
+			height: 100%;
+			width: 100%;
+			line-height: 60px;
+			margin : 0 auto;
+			
+			color : fade(#000,70);
+			text-align: center;
+
+			.pnetsymb{
+				font-size: 1.7em;
+				font-weight: 500;
+			}
+
+
+			&.shr{
+				font-size: 1.7em;
+				color : @color-bright;
+
+				&.active{
+					color : @color-gray-light;
+				}
+			}
+
+			&.reg{
+				color : @color-bright;
+			}
+
+		}
+	}
+
+	.linkButtonWrapper{
+		height: 100%;
+		display: block;
+	}
+
+	.upbuttonWrapper{
+		height: 100%;
+		display: none;
+	}
+
+	&.scrolled{
+		.linkButtonWrapper{
+			display: none;
+		}
+	
+		.upbuttonWrapper{
+			display: block;
+		}
+	}
+
+}
+
+html.stblack{
+	#navigation{
+		background: fade(@color-black4, 95);
+	
+	
+		.items{
+			
+	
+			.iconWrapper{
+				
+				color : fade(@color-main,70);
+				
+				&.shr{
+					color : @color-contrast;
+	
+					&.active{
+						color : @color-gray-mlight;
+					}
+				}
+	
+			}
+		}
+	
+	
+	}	
+}
+
+.html{
+	.iphone{
+		#navigation{
+			padding-bottom : 30px;
+			height: 90px;
+		}
+	}
+}
+
+/*t*/ @media only screen and (max-width: 768px){
+	#navigation{
+		display: block;
+	}
+}
+
+.ipad {
+	#navigation{
+		display: block;
+	}
+}

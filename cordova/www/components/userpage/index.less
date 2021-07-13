@@ -1,0 +1,769 @@
+@import "../../css/__cssvar";
+
+#userpage{
+
+	.bgCaptionSpacer{
+		padding-bottom : 4 * @rhythm;
+		padding-top : 2 * @rhythm;
+		height: 1px;
+	}
+
+	.fillUserWrapper{
+		height: 400px;
+		background: #F1F1F1;
+
+
+		.caption{
+			
+			margin : 0 auto;
+			margin-bottom: 6 * @rhythm;
+			max-width : 450px;
+
+			span{
+				font-weight: 100;
+				font-size: 1.5em;
+			}
+		}
+
+		.table{
+			height: 100%;
+
+			>div{
+				vertical-align: middle;
+				text-align: center;
+			}
+
+			button{
+				min-width: 270px;
+				font-weight: 100;
+				padding : 2 * @rhythm;
+			}
+		}
+	}
+
+
+	.bgCaption{
+		background: #F1F1F1;
+		color : @color-black2;
+		height: 160px;
+		position: relative;
+		margin-bottom : 4 * @rhythm;
+		margin-top : 2 * @rhythm;
+
+		.adr{
+			max-width: 500px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			vertical-align: bottom;
+			display: inline-block;
+		}
+		.create{
+			min-width: 250px;
+		}
+
+		.tips{
+
+			.profile{
+				padding-left: 6 * @rhythm;
+				padding-right: 6 * @rhythm;
+			}
+		}
+
+		.cellforimage{
+			width: 95px;
+
+			.usericon{
+				width: 75px;
+				height: 75px;
+				line-height: 73px;
+				color : @color-gray-light;
+				font-size: 1.5em;
+
+				
+			}
+		}
+
+		.addressseparate{
+			margin-top : @rhythm;
+			font-size: 0.8em;
+		}
+
+		.copyaddress{
+			width : 33px;
+			cursor: pointer;
+		}
+
+		.captionWrapperFloat{
+			overflow : hidden;
+
+			>div{
+
+				float: left;
+
+				&.caption{
+					width : 60%;
+				}
+
+				&.addressseparateWrapper{
+
+					padding-top : 2 * @rhythm;
+					width : 40%;
+					text-align: right;
+				}
+			}
+		}
+
+
+		.infoWrapper{
+			position: absolute;
+			left: 0;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			z-index: 1;
+		}
+
+		.imagiconWrapper{
+			position: absolute;
+			left: 0;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			z-index: 0;
+
+			.imagejdenticon{
+				position: absolute;
+				left: -60px;
+				right: 0;
+				top: -100px;
+				bottom: 0;
+				z-index: 0;
+				opacity: 0.1;
+			}
+			
+		}
+
+		.work{
+			position: relative;
+			overflow: hidden;
+		}
+	}
+
+	.general{
+		padding-top: @rhythm;
+	}
+
+
+	.profile{
+
+		.table{
+
+			>div{
+				vertical-align: middle;
+			}
+		}
+
+		
+
+		.infoWrapper{
+			.name{
+				font-family: @color-main;
+			}
+			.email{
+				color: @color-gray;
+				font-size: 0.8em;
+			}
+
+			
+		}
+	}
+
+	.maketsWrapper{
+
+		overflow: hidden;
+
+		.maket{
+			&.left{
+				float: left;
+				width: 150px;
+			}
+
+			&.right{
+				padding-left: 2 * @rhythm;
+				margin-left: 150px;
+			}
+		}
+
+
+		.contents{
+
+			
+			padding-top: 4 * @rhythm; 
+
+			.added{
+				text-align: right;
+			}
+
+			.add{
+				margin-left: 2 * @rhythm;
+				color : @color-bright;
+			}
+
+			.additional{
+				margin-top: 4 * @rhythm;
+			}
+
+			.captionContents{
+				font-size: 0.7em;
+				padding-left: @rhythm / 2;
+				border-bottom: 1px solid @color-main;
+				padding-top: @rhythm / 2;
+				padding-bottom: @rhythm / 2;
+			}
+
+			.reportCaption{
+				font-weight: 700;
+				cursor: pointer;
+				line-height: 26px;
+				padding-top: @rhythm / 2;
+				padding-bottom: @rhythm / 2;
+				padding-left: @rhythm / 2;
+				margin-top: @rhythm / 2;
+				color : #3A373F;
+				.transition(0.3s);
+
+				&:nth-child(1){
+					padding-top: @rhythm ;
+				}
+
+				&.openReport{
+					&.active{
+
+						color : @color-raspberry;
+						font-weight: 700!important;
+					}
+				}
+			}
+
+			.addmenu{
+				.reportCaption{
+					font-weight: 400;
+				}
+			}
+
+			>div.reportCaption{
+	    		text-transform: uppercase;
+	    		font-weight: 700;
+
+	    	}
+
+			.group{
+				.groupContent{
+					display: none;
+					margin-top: @rhythm;
+					margin-bottom: @rhythm;
+				}
+
+
+		        &.active{
+		            >div.groupContent{
+		                display: block;
+		            }
+
+		            >div.groupNameTable{
+		            	.reportCaption{
+		            		color : @color-contrast;
+		            	}
+		                .groupNamePanelWrapper{
+		                    transform: rotate(180deg);
+		                    -webkit-transform: rotate(180deg);
+
+		                 
+		                }
+		            }
+		        }
+
+		        &[level='0']{
+		        	>div.groupNameTable{
+		            	.reportCaption{
+		            		text-transform: uppercase;
+		            		font-weight: 700;
+		            	}
+		            }
+
+	            	.groupContent{
+	            		.reportCaption{
+	            			font-weight: 400;
+			                font-size: 0.8em;
+			                padding-left:  2 * @rhythm;
+			                padding-top:0;
+							padding-bottom: 0;
+			            }
+	            	}
+		           
+		            
+		        }
+
+		        &[level='1']{
+		        	
+	            	.groupContent{
+	            		.reportCaption{
+			                padding-left:  4 * @rhythm;
+			            }
+	            	}
+		           
+		            
+		        }
+
+		        &[levelid='filings']{
+		        	font-size: 0.8em;
+		        	width : 80%;
+
+		        	margin-top: 4 * @rhythm;
+
+		        	[level="1"]{
+		        		font-size: 1.2em;
+		        	}
+		        }
+
+
+			}
+
+
+
+			.groupNameTable{
+
+		        >div{
+		            vertical-align: middle;
+		        }
+		        .groupNamePanel{
+		            width: 26px;
+		        }
+
+		        .groupName{
+		        	.reportCaption{
+
+		        	}
+		        }
+
+		        .groupNamePanelWrapper{
+
+		            width: 26px;
+		            height: 26px;
+		            margin : 0 auto;
+		            margin-top: 5px;
+		            text-align : center;
+		            line-height: 24px;
+		            border-radius: 50%;
+		            font-size: 0.8em;
+		            
+		            cursor: pointer;
+		            .transition(0.2s);
+
+		            &:hover{
+		                transform: rotate(180deg);
+		                -webkit-webkit-transform: rotate(180deg);
+		            }
+		        }
+		    }
+
+
+		}
+
+
+		
+		.report{
+			.work{
+		    	width : 100%;
+			}
+			
+			.preloaderWrapper{
+				padding : 4 * @rhythm;
+			}
+
+		    #test{
+
+		    	.work{
+		    		padding : 0 4 * @rhythm;
+		    	}
+
+		    	.userPanel{
+		    		padding : 4 * @rhythm 4 * @rhythm;
+		    	}
+
+		    	.caption{
+		    		padding-top : 0.5 * @rhythm;
+		    		padding-left: @rhythm;
+		    	}
+		    }
+
+		    #messenger{
+		    	padding : 3 * @rhythm 0;
+		    	padding-left: @rhythm;
+
+		    	&.toChat{
+		    		padding-top : 2 * @rhythm;
+		    	}
+		    }
+
+		    #notifications{
+				background: #F7F7F7;
+				min-height: 600px;
+
+				.notification {
+					padding-left: 0;
+					padding-right: 0;
+				}
+		    }
+		}
+
+	}
+
+	.tooltipPanel{
+		margin-top: @rhythm;
+		text-align: right;
+	}
+
+	.activitiesCnt{
+		padding-top: .5 * @rhythm;
+	}
+
+	&.validate{
+		.maketsWrapper{
+	
+			.contents{
+				
+	
+				.reportCaption{
+
+					&[rid="followers"],
+					&[rid="following"],
+					&[rid="notifications"],
+					&[rid="ustate"],
+					&[rid="wallet"],
+					&[rid="accounts"]{
+						opacity : 0.5;
+					}
+
+				}
+	
+	
+			}
+		}
+	}
+
+	&.unathorized{
+		.maketsWrapper{
+	
+			.contents{
+				.reportCaption{
+
+					&[rid="followers"],
+					&[rid="following"],
+					&[rid="notifications"],
+					&[rid="ustate"],
+					&[rid="wallet"],
+					&[rid="accounts"]{
+						display: none;
+					}
+
+				}
+	
+	
+			}
+		}
+	}
+}
+html.stblack{
+	#userpage{
+
+		.fillUserWrapper{
+			background: @color-black2;
+	
+		}
+	
+	
+		.bgCaption{
+			background: fade(@color-bright, 20);
+			color : fade(@color-gray-slight, 60);
+			
+			margin-top: 0;
+			.cellforimage{
+	
+				.usericon{
+					color : @color-gray-light;
+					
+				}
+			}
+	
+		
+		}
+	
+	
+	
+		.profile{
+	
+			.infoWrapper{
+
+				.name{
+					font-family: @color-main;
+				}
+
+				.email{
+					color: @color-gray-light;
+				}
+	
+				
+			}
+		}
+	
+		.maketsWrapper{
+	
+	
+	
+			.contents{
+	
+	
+				.add{
+					color : @color-bright;
+				}
+	
+				
+	
+				.captionContents{
+					border-bottom: 1px solid @color-main;
+				}
+	
+				.reportCaption{
+					color : @color-gray-light;
+					&.openReport{
+						&.active{
+	
+							color : @color-contrast;
+						}
+					}
+				}
+	
+				.group{
+	
+	
+					&.active{
+						>div.groupNameTable{
+							.reportCaption{
+								color : @color-contrast;
+							}
+						}
+					}
+	
+	
+	
+				}
+	
+	
+	
+	
+			}
+	
+	
+			
+			.report{
+	
+				#notifications{
+					background: @color-block;
+					
+				}
+			}
+		}
+	
+	}
+}
+
+
+/*t*/ @media only screen and (max-width: 768px){
+
+#userpage{
+
+	.profile{
+		display: none;
+	}
+	
+	.activitiesWrapper{
+		margin-top: 2 * @rhythm;
+
+		.usermenu{
+			display: none;
+		}
+
+		.usercnt{
+			padding-left: 0;
+			margin-left: 0;
+		}
+
+		
+	}
+}
+}
+/*t*/ @media only screen and (max-width: 768px){
+#userpage{
+	min-height: 0;
+		
+	.bgCaption{
+		display: none;
+	}
+
+	>div{
+		&.work{
+			padding : 0;
+		}
+	}
+	.maketsWrapper{
+		overflow: inherit;
+		.contents{
+			padding-top : 0;
+
+			.contentsInner{
+				padding-bottom : 6 * @rhythm;
+			}
+
+			.contentmenu{
+				padding-top : 4 * @rhythm;
+				
+				
+			}
+
+			.reportCaption {
+				padding-bottom :  @rhythm;
+
+				&[rid="followers"]{
+					margin-top : @rhythm;
+					padding-top : 2 * @rhythm;
+					border-top : 1px solid @color-gray-light;
+				}
+
+				&[rid="following"]{
+					margin-bottom : @rhythm;
+					padding-bottom : 2 * @rhythm;
+					border-bottom : 1px solid @color-gray-light;
+				}
+
+				/*&[rid="staking"]{
+					margin-top : @rhythm;
+					color : @color-orange;
+				}*/
+
+				&[rid="authorization"]{
+					margin-top : @rhythm;
+					color : @color-orange;
+				}
+			}
+		
+		}
+		.maket{
+			&.left{
+				width: 100%;
+				float: none;
+				padding : 0 2 * @rhythm;
+
+				.vc_valuecustom{
+					width: 100%;
+
+					.vc_textInput {
+						.vc_inputWrapper{
+							border: 0;
+
+							input{
+								opacity: 1!important;
+								.transition(0.3s);
+								color : #fff;
+								border-top-left-radius: 0px;
+								border-bottom-left-radius: 0px;
+								padding-left : 30px;
+								height: 38px;
+								text-align: center;
+
+								&[disabled="disabled"]{
+									opacity: 1;
+								}
+							}
+						}
+
+						.vc_iconWrapper{
+							color : #fff;
+							.transition(0.3s);
+							border-top-right-radius: 0px;
+							border-bottom-right-radius: 0px;
+							border : 0;
+						}
+					}
+
+					&.opened{
+						.vc_textInput {
+							.vc_inputWrapper{
+								border: 0;
+
+								input{
+									border-bottom-left-radius: 0;
+								}
+							}
+
+							.vc_iconWrapper{
+								
+								border-bottom-right-radius: 0;
+								
+							}
+						}
+					}
+
+					.vc_selectInput {
+						max-height: 400px;
+						.shadowSmall();
+						.vc_value{
+							padding : 2 * @rhythm;
+							text-align: center;
+						}
+					}
+				}
+			}
+			
+			&.right{
+				padding-left: 0;
+				margin-left: 0;
+				border : 0;
+
+				
+			}
+
+			
+		}	
+
+		.report{
+			.work{
+		    	width : 100%;
+		    }
+
+		    #test{
+				padding-top : 2 * @rhythm;
+				padding-bottom : 6 * @rhythm;
+
+		    	.userPanel{
+		    		padding: 0;
+		    	}
+
+		    	.caption{
+		    		padding-left: 0;
+		    		padding-bottom : 2 * @rhythm;
+		    	}
+		    }
+
+
+
+		    #notifications{
+		    	padding : 2 * @rhythm 0;
+		    	background: #F7F7F7;
+		    }
+		}
+	}
+
+
+}
+}

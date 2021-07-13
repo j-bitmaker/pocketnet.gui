@@ -1,0 +1,59 @@
+<div class="dumpedinfo">
+    <div class="infotable table">
+        <div class="label">
+            <%=e('address')%>:
+        </div>
+        <div class="forcopy">
+            <div class="copyvalue"><i class="fas fa-copy"></i></div>
+        </div>
+        <div class="value">
+            <%-address%>
+        </div>
+    </div>
+
+    <div class="infotable table">
+        <div class="label">
+            <%=e('privatekey')%>:
+        </div>
+
+        <div class="forcopy">
+            <div class="copyvalue"><i class="fas fa-copy"></i></div>
+        </div>
+
+        <div class="value">
+            <%-private%>
+        </div>
+    </div>
+
+    <% if(privateWif) {%>
+
+    <div class="infotable table">
+        <div class="label">
+            Wif:
+        </div>
+
+        <div class="forcopy">
+            <div class="copyvalue"><i class="fas fa-copy"></i></div>
+        </div>
+
+        <div class="value">
+            <%-privateWif%>
+        </div>
+    </div>
+
+    <% } %>
+
+    <div class="infotable table">
+        <div class="label">
+            <%=e('qrcode')%>:
+        </div>
+        <div class="forcopy">
+        </div>
+        <div class="value">
+            <div class="code">
+
+            </div>
+        </div>
+    </div>
+    
+</div>

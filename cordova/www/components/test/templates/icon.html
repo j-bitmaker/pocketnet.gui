@@ -1,0 +1,50 @@
+<div class="pgroup">
+	<div class="subcaption">
+		<% if(ed.wizard) {%>
+
+			<%=e('upicset')%> <span class="require">*</span>
+
+		<% } else { %> 
+
+			<%=e('upic')%>
+
+		<% }%>
+			
+	</div>
+
+	<div class="parameters iconParameters">
+
+
+		<div class="uploadPhoto">
+			<div class="uploadTable table">
+				<div class="iconWrapper">
+					<div class="icon">
+
+						<% 
+							var src = tempInfo.image 
+						%>
+
+						<div class="usericon" image="<%-src || ''%>">
+
+							<% if(!src) {%>
+
+								<i class="far fa-user"></i>
+
+							<% } %>
+						</div>
+					</div>
+				</div>
+
+				<div class="label">
+
+					<%=e('uchangeicon')%> <span class="require">*</span>
+
+				</div>
+			</div>
+		</div>
+
+
+
+	</div>
+
+</div>

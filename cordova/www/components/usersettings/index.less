@@ -1,0 +1,522 @@
+@import "../../css/__cssvar";
+
+#usersettings{
+	min-height: 600px;
+	background: #F7F7F7;
+	padding-bottom : 8 * @rhythm;
+	.mwork{
+		padding : 0 8 * @rhythm;
+
+		&.gk{
+			border-top: 1px solid @color-gray-light;
+			border-bottom: 1px solid @color-gray-light;
+		}
+		&.wh{
+			background: #FAFAFA;
+		}
+	}
+
+	.tokenResult{
+		display:inline-block; 
+		font-size:30px; 
+		padding: 5px; 
+		margin-left: @rhythm;
+
+		&.success{
+			color: @color-good;
+		}
+
+		&.failed{
+			color: @color-bad
+		}
+
+
+		i {
+			font-size: .8em;
+		}
+	}
+	
+	
+	.cacheContent{
+		border-top : @rhythm solid @color-white;
+		margin-top : 2 * @rhythm;
+		.panel{
+			
+			padding : 4 * @rhythm 0;
+		}
+
+
+		.pending{
+			padding : 2 * @rhythm 0;
+
+			i{
+				width: 44px;
+				text-align: center;
+			}
+
+			i,
+
+			span{
+				font-size: 0.9em;
+			}
+		}
+		.empty{
+			padding : 4 * @rhythm 0;
+
+			span{
+				font-size: 0.9em;
+			}
+		}
+	}
+	
+
+	.caption{
+		max-width: 700px;
+		padding-top: 2 * @rhythm;
+		font-size : 2em;
+		font-weight: 100;
+	}
+
+	.pInputsTable{
+		>div{
+			vertical-align: middle;
+		}
+	}
+
+	.settingsGroup{
+		&:nth-child(1){
+			.mwork{
+				
+				&.gk{
+					border-top: 0;
+				}
+			}
+		}
+	}
+
+	.groupHeader{
+		.parameter{
+			>div{
+				vertical-align: middle;
+				color : @color-main;
+				padding : 2 * @rhythm 0;
+
+				&.pName{
+					vertical-align: middle;
+					vertical-align: top;
+				}
+
+				.pInput{
+					font-weight: 700;
+					font-size: 0.8em;
+				}
+
+				.iWrapper{
+					display: table;
+					font-size: .8em;
+	
+					i{
+						display: table-cell;
+						vertical-align: middle;
+					}
+				}
+			}
+		}
+	}
+
+	.parameter{
+		max-width: 600px;
+
+		.picker{
+			select{
+				height: auto;
+			}
+		}
+
+		>div{
+			padding: @rhythm 0;
+			vertical-align: top;
+		}
+
+		.pName{
+			vertical-align: top;
+			padding-top: 2 * @rhythm;
+			padding-right : @rhythm;
+			width: 190px;
+
+			.downloads {
+				padding-bottom: 2*@rhythm;
+			}
+
+			.pNameW{
+				padding-top : @rhythm  / 3;
+				font-weight: 700;
+				font-size: 0.8em;
+				line-height: 1.4em;
+
+			}
+
+			.unit{
+				font-weight: 700;
+				color : @color-bright;
+			}
+
+			.require{
+				color : @color-bad;
+			}
+		}
+
+		
+		.pInput{
+			position: relative;
+			vertical-align: top;
+
+			.echo{
+				padding: @rhythm;
+				color : @color-contrast;
+				font-weight: 700;
+			}
+
+			.vm_valuesmulti{
+				padding-top: @rhythm / 2;
+			}
+
+
+		}
+
+		.panel{
+			vertical-align: top;
+			padding-top: 2 * @rhythm;
+			width: 20px;
+
+			.clear{
+				text-align: right;
+				cursor: pointer;
+				color : @color-gray-slight;
+				.transition(0.3s);
+				&:hover{
+					color : @color-main;
+				}
+			}
+			
+		}
+
+		select,
+		textarea,
+		input{
+			width: 100%;
+			padding: @rhythm;
+			border : 1px solid @color-gray-light;
+			border-radius: 2px;
+
+			&.error{
+				border : 1px solid @color-bad;
+			}
+		}
+
+		.error{
+			select,
+			textarea,
+			input{
+				border : 1px solid @color-bad;
+			}
+			
+		}
+
+		select{
+			height: 38px;
+			padding-right: 25px;
+			width: auto;
+		}
+
+		
+
+		.vc_valuecustom{
+			width: 100%;
+		}
+
+		.vc_valuecustom,
+		.vc_valuecustom_multibig{
+			.vc_textInput{
+				background: #fff;
+			}
+		}
+
+		.vmt_valuesmultitree,
+		.vm_value{
+			padding : 0;
+			.checkbox{
+				&+label {
+			        &:before {
+			        	font-size : 1.6em;
+			        	line-height: 19px;
+			        }
+			    }
+			}
+		}
+
+		
+	}
+
+	.settingsGroup{
+		margin-bottom : 2  @rhythm;
+
+		.groupCaption{
+			padding : 3 * @rhythm 0;
+			font-size: 1.2em;
+			color : @color-main;
+		}
+	}
+
+	.theme{
+		.pInput{
+			overflow: hidden;
+			>div{
+				float : left;
+				margin-right: @rhythm;
+
+				.themeicon{
+					width : 38px;
+					height: 38px;
+					border-radius: 50%;
+					border: 2px solid @color-gray;
+					.shadowSmaller();
+					position: relative;
+					cursor: pointer;
+					.transition(0.3s);
+
+					&:hover{
+						border: 2px solid @color-main;
+						.shadowSmall();
+					}
+				}
+
+				.thbadge{
+					color : @color-good;
+					display: none;
+					bottom : -4px;
+					right : -2px;
+					position: absolute;
+				}
+
+				&.active{
+					.themeicon{
+						border: 2px solid @color-main;
+					}	
+
+					.thbadge{
+						display: block;
+					}
+				}
+
+				&[theme="white"]{
+					.themeicon{
+						background: #fafafa;
+					}
+				}
+
+				&[theme="black"]{
+					.themeicon{
+						background: @color-black4;
+					}
+				}
+			}
+		}
+	}
+
+	&.unathorized{
+		.settingsGroup{
+			&.notifications{
+				display: none;
+			}
+		}
+	}
+}
+
+html.stblack{
+	#usersettings{
+		background: transparent;
+
+		.cacheContent{
+			border-top : @rhythm solid @color-black2;
+			background: @color-block;
+		}
+
+		.mwork{
+	
+			&.gk{
+				border-top: 1px solid fade(@color-main, 50);
+				border-bottom: 1px solid fade(@color-main, 50);
+				background: @color-block;
+			}
+			&.wh{
+				background: transparent;
+			}
+		}
+		
+	
+		.groupHeader{
+			.parameter{
+				>div{
+					color : @color-main;
+				}
+			}
+		}
+	
+		.parameter{
+			
+			.pName{
+				
+				.unit{
+					color : @color-bright;
+				}
+	
+				.require{
+					color : @color-bad;
+				}
+			}
+	
+			
+			.pInput{
+	
+				.echo{
+					color : @color-contrast;
+				}
+	
+	
+			}
+	
+			.panel{
+	
+				.clear{
+					color : fade(@color-main, 50);
+					&:hover{
+						color : @color-main;
+					}
+				}
+				
+			}
+	
+			select,
+			textarea,
+			input{
+				border : 1px solid fade(@color-main, 50);
+				border-radius: 2px;
+	
+				&.error{
+					border : 1px solid @color-bad;
+				}
+			}
+	
+			.error{
+				select,
+				textarea,
+				input{
+					border : 1px solid @color-bad;
+				}
+				
+			}
+	
+		
+			.vc_valuecustom,
+			.vc_valuecustom_multibig{
+				.vc_textInput{
+					background: @color-black;
+				}
+			}
+	
+		}
+	
+		.settingsGroup{
+	
+			.groupCaption{
+				color : @color-main;
+			}
+		}
+	}
+}
+
+/*t*/ @media only screen and (max-width: 768px){
+	#usersettings{
+
+		background: #fff;
+
+		.caption{
+	
+			span{
+				color : #010E30;
+				font-weight: 100;
+			}
+		}
+
+		.mwork{
+			padding : 0 2 * @rhythm;
+
+			&.wh{
+				background: #FAFAFA;
+			}
+		}
+
+		.parameter {
+			max-width: none;
+			>div{
+				&.pName{
+					width : auto;
+
+					.downloads {
+						padding-bottom: 2*@rhythm;
+					}
+				}
+				&.pCheckbox{
+					width : 40px;
+				}
+			}
+		}
+
+		.checkbox+label:before{
+			border-radius: 50%;
+			margin-top : 4px;
+			width : 30px;
+			height : 30px;
+			line-height: 30px;
+			font-family: "Font Awesome 5 Free";
+			font-weight: 700;
+			content: '';
+			font-size: 1.2em;
+			text-align: center;
+		}
+
+		
+		.checkbox:checked {
+			&+label{
+				&:before {             
+					content: '\f00c';
+				}
+			}
+		} 
+
+	}
+
+	html.stblack{
+		#usersettings{
+
+			background: @color-black;
+	
+			.caption{
+		
+				span{
+					color : @color-contrast;
+					font-weight: 100;
+				}
+			}
+	
+			.mwork{
+	
+				&.wh{
+					background: @color-black;
+				}
+			}
+	
+		}
+	}
+}
