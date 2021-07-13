@@ -417,8 +417,6 @@ var comments = (function(){
 											sitemessage(errors[type])
 	
 										}	
-
-										console.log('self.essenseData.address === self.sdk.address.pnet().address', self.essenseData.address, self.sdk.address.pnet().address)
 										if (self.essenseData.address === self.sdk.address.pnet().address){
 
 											sitemessage(self.app.localization.e('donateself'));
