@@ -416,13 +416,28 @@ var comments = (function(){
 	
 											sitemessage(errors[type])
 	
-										}		
-																		
-										renders.donate(id, p)
+										}	
+
+										console.log('self.essenseData.address === self.sdk.address.pnet().address', self.essenseData.address, self.sdk.address.pnet().address)
+										if (self.essenseData.address === self.sdk.address.pnet().address){
+
+											sitemessage(self.app.localization.e('donateself'));
+
+										} else {
+
+
+											if (result){
+
+												renders.donate(id, p)
+	
+											}	
+												
+										}
+							
 
 									} else {
 
-										sitemessage('insufficient funds')
+										sitemessage(self.app.localization.e('incoins'))
 									}
 
 								})

@@ -134,6 +134,8 @@ ____loclib.wsend = "Send";
 ____loclib.calcfeesandsend = "Calculate Fees And Send";	
 ____loclib.wstrfees = "Transaction Fees";	
 ____loclib.wsfees = "Fees";	
+____loclib.donateself = "You can't donate yourself";
+____loclib.incoins = "Not enough coins";
 
 ____loclib.wssendto = "SEND COINS TO";	
 ____loclib.wssendb = "SEND";	
