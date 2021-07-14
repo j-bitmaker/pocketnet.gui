@@ -559,14 +559,23 @@ Comment = function(txid){
 				images : _.map(self.images.v, function(i){
 					return encodeURIComponent(i)
 				})
-				// donate : _.map(self.donate.v, function(i){
-				// 	return encodeURIComponent(i)
-				// }),
+
 			})
 		}
 
 		if(self.id){
 			r.id = self.id
+		}
+
+		//included multi donates!!!
+		if (self.donate && self.donate.v.length){
+
+			r.donation = 'true';
+			r.amount = self.donate.v.reduce(function(prev, next){
+				return prev + next.amount;
+			}, 0)
+
+			r.amount *= 100000000;
 		}
 
 		return r
@@ -581,9 +590,6 @@ Comment = function(txid){
 		v.msgparsed = JSON.parse(v.msg)
 
 		self.url.set(decodeURIComponent(v.msgparsed.url))
-		// self.donate.set(_.map(v.msgparsed.donate, function(i){
-		// 	return decodeURIComponent(i)
-		// }))
 		self.message.set(decodeURIComponent(v.msgparsed.message))
 		self.images.set(_.map(v.msgparsed.images, function(i){
 			return decodeURIComponent(i)
