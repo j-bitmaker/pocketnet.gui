@@ -12623,7 +12623,7 @@ Platform = function (app, listofnodes) {
         
                                 totalDonate = 0;
 
-                                if (obj.donate && obj.donate.v){
+                                if (obj.donate && obj.donate.v.length){
 
                                     obj.donate.v.forEach(function(d){
 
@@ -12642,11 +12642,14 @@ Platform = function (app, listofnodes) {
 
                                 var totalReturn = Number((amount - totalDonate - (fees || 0)).toFixed(0));
 
-                                if (totalReturn < 0 || totalDonate <= fees){
+                                if (obj.donate && obj.donate.v.length && (totalReturn < 0 || totalDonate <= fees)){
 
                                     if (clbk){
                                         clbk(null, 'incorrectdonate')
                                     }
+
+                                    return;
+                                    
                                 } else {
 
                                     txb.addOutput(address.address, totalReturn);
