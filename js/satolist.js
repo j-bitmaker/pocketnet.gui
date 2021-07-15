@@ -17858,12 +17858,17 @@ Platform = function (app, listofnodes) {
 
                 fastMessage: function (data) {
 
+                    console.log('data!!!!!', data.donation);
+
                     var text = '';
                     var html = '';
 
                     var extra = ''
                     extra += '<div class="tcell foranswer">'
-                    extra += '<button class="reply ghost">'+self.app.localization.e('reply')+'</button>'
+
+                    extra += '<button class="reply ghost">' + self.app.localization.e('reply') + '</button>'
+
+
                     extra += '</div>'
 
                     if (data.user && data.user.address){
@@ -17879,9 +17884,18 @@ Platform = function (app, listofnodes) {
                         (!platform.sdk.usersettings.meta.comments || platform.sdk.usersettings.meta.comments.value)) {
 
                         text = self.tempates.comment(data.comment, self.tempates.share(data.share))
-
+                      
                         if (text) {
-                            html += self.tempates.user(data.user, '<div class="text">' + text + '</div>', true, ' ' + self.app.localization.e('e13337'), extra, data.time)
+
+                            var toptext = self.app.localization.e('e13337')
+
+                            if (data.donation == 'true' && data.amount){
+
+                                var amount = String(Number(data.amount) / smulti || 0);
+                                toptext = self.app.localization.e('donated') + ' ' + amount + ' PKOIN </span>';
+                            }   
+
+                            html += self.tempates.user(data.user, '<div class="text">' + text + '</div>', true, ' ' + toptext, extra, data.time)
                         }
                     }
 
@@ -18666,10 +18680,6 @@ Platform = function (app, listofnodes) {
 
         self.messageHandler = function (data, clbk) {
 
-            console.log('data!!!', data, clbk, data.addr);
-
-            console.log('self.messages', self.messages);
-
             data || (data = {})
 
             if (data.msg || data.mesType) {
@@ -18744,8 +18754,14 @@ Platform = function (app, listofnodes) {
 
                             if (html) {
 
-                                if(!self.showedIds[data.txid]) {
-                                    self.showedIds[data.txid] = true
+                                var txid = data.txid
+
+                                if (data.donation === 'true'){
+                                    txid += '_donation'
+                                }
+
+                                if(!self.showedIds[txid]) {
+                                    self.showedIds[txid] = true
 
 
                                     var message = self.fastMessage(html, function () {
@@ -19021,8 +19037,8 @@ Platform = function (app, listofnodes) {
 
 		// 	self.messageHandler(
         //         {"addr":"PCBpHhZpAUnPNnWsRKxfreumSqG6pn9RPc","msg":"transaction","txid":"7557aa43735781a805a4a37d11432fa05e502e14d4b4a93d9e3c6f1836895dd6","time":1626282614,"amount":"30000000","nout":"1","type":"comment","node":"64.235.46.85:36061:6067"},
-        //         {"addr":"PCBpHhZpAUnPNnWsRKxfreumSqG6pn9RPc","msg":"event","txid":"7557aa43735781a805a4a37d11432fa05e502e14d4b4a93d9e3c6f1836895dd6","time":1626282614,"addrFrom":"PSmGDYWzcPrrhvqFnGVxnhPbpsTK6LCZYd","answerid":"","mesType":"comment","parentid":"","posttxid":"a72301f9b54e81f14b896651e9089905e27467107c986fddd574cb2d6fd13d1e","reason":"post","node":"64.235.46.85:36061:6067"},
-        //         {"addr":"PCBpHhZpAUnPNnWsRKxfreumSqG6pn9RPc","msg":"event","txid":"7557aa43735781a805a4a37d11432fa05e502e14d4b4a93d9e3c6f1836895dd6","time":1626282614,"addrFrom":"PCBpHhZpAUnPNnWsRKxfreumSqG6pn9RPc","answerid":"","mesType":"comment","parentid":"","posttxid":"a72301f9b54e81f14b896651e9089905e27467107c986fddd574cb2d6fd13d1e","reason":"post","node":"64.235.46.85:36061:6067"}
+        //         {"addr":"PCBpHhZpAUnPNnWsRKxfreumSqG6pn9RPc","donation":"true","amount":"12123232","msg":"event","txid":"7557aa43735781a805a4a37d11432fa05e502e14d4b4a93d9e3c6f1836895dd6","time":1626282614,"addrFrom":"PSmGDYWzcPrrhvqFnGVxnhPbpsTK6LCZYd","answerid":"","mesType":"comment","parentid":"","posttxid":"a72301f9b54e81f14b896651e9089905e27467107c986fddd574cb2d6fd13d1e","reason":"post","node":"64.235.46.85:36061:6067"},
+        //         {"addr":"PCBpHhZpAUnPNnWsRKxfreumSqG6pn9RPc","donation":"true","amount":"12123232","msg":"event","txid":"7557aa43735781a805a4a37d11432fa05e502e14d4b4a93d9e3c6f1836895dd6","time":1626282614,"addrFrom":"PCBpHhZpAUnPNnWsRKxfreumSqG6pn9RPc","answerid":"","mesType":"comment","parentid":"","posttxid":"a72301f9b54e81f14b896651e9089905e27467107c986fddd574cb2d6fd13d1e","reason":"post","node":"64.235.46.85:36061:6067"}
         //     )
 
 
