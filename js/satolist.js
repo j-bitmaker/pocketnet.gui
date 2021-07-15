@@ -18666,6 +18666,10 @@ Platform = function (app, listofnodes) {
 
         self.messageHandler = function (data, clbk) {
 
+            console.log('data!!!', data, clbk, data.addr);
+
+            console.log('self.messages', self.messages);
+
             data || (data = {})
 
             if (data.msg || data.mesType) {
@@ -18688,15 +18692,15 @@ Platform = function (app, listofnodes) {
                     }
                 }
 
-                if (data.txid) {
+                // if (data.txid) {
 
-                    if (txidstorage[data.txid]) return;
+                //     if (txidstorage[data.txid]) return;
 
-                    txidstorage[data.txid] = true
+                //     txidstorage[data.txid] = true
 
 
-                    if (platform.sdk.notifications.find(data.txid)) return
-                }
+                //     if (platform.sdk.notifications.find(data.txid)) return
+                // }
 
 
 
@@ -18734,6 +18738,8 @@ Platform = function (app, listofnodes) {
                         if (m.fastMessage && !m.refs.all && !m.refs[data.RefID]) {
 
                             var html = m.fastMessage(data, loadedData);
+
+                            console.log('html', html);
 
 
                             if (html) {
@@ -19011,13 +19017,21 @@ Platform = function (app, listofnodes) {
 
         }
 
-        /*setTimeout(function(){
+        // setTimeout(function(){
 
-			self.messageHandler(
-				{"addr":"PR7srzZt4EfcNb3s27grgmiG8aB9vYNV82","msg":"event","txid":"87973d606381aa8d11dfd45b089ad441c0f9546ec16d58a413252c62ce603235","time":1613218605,"addrFrom":"PP582V47P8vCvXjdV3inwYNgxScZCuTWsq","mesType":"upvoteShare","posttxid":"f2c6f75ba47c6da07d375dc2d7e81f4ae57b63c9796adea027730bd9e694dd91","upvoteVal":"5","node":"185.148.147.15:38081:8087"}
-			)
+		// 	self.messageHandler(
+        //         {"addr":"PCBpHhZpAUnPNnWsRKxfreumSqG6pn9RPc","msg":"transaction","txid":"7557aa43735781a805a4a37d11432fa05e502e14d4b4a93d9e3c6f1836895dd6","time":1626282614,"amount":"30000000","nout":"1","type":"comment","node":"64.235.46.85:36061:6067"},
+        //         {"addr":"PCBpHhZpAUnPNnWsRKxfreumSqG6pn9RPc","msg":"event","txid":"7557aa43735781a805a4a37d11432fa05e502e14d4b4a93d9e3c6f1836895dd6","time":1626282614,"addrFrom":"PSmGDYWzcPrrhvqFnGVxnhPbpsTK6LCZYd","answerid":"","mesType":"comment","parentid":"","posttxid":"a72301f9b54e81f14b896651e9089905e27467107c986fddd574cb2d6fd13d1e","reason":"post","node":"64.235.46.85:36061:6067"},
+        //         {"addr":"PCBpHhZpAUnPNnWsRKxfreumSqG6pn9RPc","msg":"event","txid":"7557aa43735781a805a4a37d11432fa05e502e14d4b4a93d9e3c6f1836895dd6","time":1626282614,"addrFrom":"PCBpHhZpAUnPNnWsRKxfreumSqG6pn9RPc","answerid":"","mesType":"comment","parentid":"","posttxid":"a72301f9b54e81f14b896651e9089905e27467107c986fddd574cb2d6fd13d1e","reason":"post","node":"64.235.46.85:36061:6067"}
+        //     )
 
-		}, 4000)*/
+
+		// }, 4000)
+
+
+
+
+
     }
 
     self.convertUTCSS = function (str) {
