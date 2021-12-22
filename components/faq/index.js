@@ -618,6 +618,8 @@ var faq = (function(){
 						a : 'On the top of the video cabinet page you can see your Daily Uploading Quota, Total Referral Users, Total Ratings, Total Video Views, Unique Raters, Search Field and also you can sort your videos.',
 						img: '<img src="img/Myvideos6.jpg" alt="" />'
 					},
+
+					
 					
 				]
 			
