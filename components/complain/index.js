@@ -49,14 +49,14 @@ var complain = (function(){
 					if(ess == 'post'){
 							
 						if(mestate && !mestate.trial){
-							var complainShare = sobj.complain(selected);
+							var complainContent = sobj.complain(selected);
 
 							topPreloader(30);
 
 						
 							self.sdk.node.transactions.create.commonFromUnspent(
 
-								complainShare,
+								complainContent,
 
 								function(tx, error){
 

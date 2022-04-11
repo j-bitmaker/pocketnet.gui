@@ -776,8 +776,15 @@ UpvoteShare = function(){
 	return self;
 }
 
-ComplainShare = function(){
+ComplainContent = function(){
 	var self = this;
+
+	self.contentType = {
+		set : function(_v){
+			this.v = _v;
+		},
+		v : ''
+	}
 
 	self.s2 = {
 		set : function(_v){
@@ -802,6 +809,11 @@ ComplainShare = function(){
 	
 
 	self.validation = function(){
+
+		if (!self.contentType.v){
+			return 'contentType';
+		}
+
 		if(!self.s2.v){
 			return 'txid'
 		}
@@ -841,7 +853,62 @@ ComplainShare = function(){
 			
 	}
 
-	self.type = 'CONTENT_POST'
+	self.type = 'modFlag'
+
+	return self;
+}
+
+ComplainShare = function(){
+	var self = this;
+
+	self.share = {
+		set : function(_v){
+			this.v = _v
+		},
+		v : ''
+	};
+
+	self.reason = {
+		set : function(_v){
+			this.v = _v
+		},
+		v : ''
+	};
+
+	
+
+	self.validation = function(){
+		if(!self.share.v){
+			return 'share'
+		}
+
+		if(!self.reason.v){
+			return 'reason'
+		}
+	}
+
+	self.serialize = function(){
+		return self.share.v + '_' + self.reason.v
+	}
+
+	self.export = function(){
+		return {
+			share : self.share.v,
+			reason : self.reason.v
+		}
+	}
+
+	self.import = function(p){
+
+		if (p.share)
+			self.share.v =  p.share
+
+		if (p.reason)
+			self.reason.v = p.reason
+			
+	}
+
+	self.type = 'complainShare'
 
 	return self;
 }
@@ -2301,13 +2368,14 @@ pShare = function(){
 	}
 
 	self.complain = function(reason){
-		var complainShare = new ComplainShare();
+		var complainContent = new ComplainContent();
 
-		complainShare.s2.set(self.txid);
-		complainShare.s3.set(self.address);
-		complainShare.i1.set(reason);
+		complainContent.contentType.set('CONTENT_POST');
+		complainContent.s2.set(self.txid);
+		complainContent.s3.set(self.address);
+		complainContent.i1.set(reason);
 
-		return complainShare;
+		return complainContent;
 	}
 
 	self.alias = function(){
@@ -2567,6 +2635,7 @@ kits = {
 	c : {
 		userInfo : UserInfo,
 		share : Share,
+		complainContent : complainContent,
 		complainShare : ComplainShare,
 		upvoteShare : UpvoteShare,
 		cScore : СScore,

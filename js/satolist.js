@@ -18537,6 +18537,11 @@ Platform = function (app, listofnodes) {
                         self.sdk.activity.adduser('like', upvoteShare.address.v)
                     },
 
+                    modFlag: function (inputs, complainContent, clbk, p) {
+
+                        this.common(inputs, complainContent, TXFEE, clbk, p)
+                    },
+
                     complainShare: function (inputs, complainShare, clbk, p) {
                         this.common(inputs, complainShare, TXFEE, clbk, p)
                     },

@@ -1940,3 +1940,8 @@ ____loclib.optimizationtip_show = "Показать"
 
 ____loclib.thankTheAuthor = 'Thank the author';
 ____loclib.encourageAuthor = "Поддержите автора поста";
+
+____loclib.complainPorn = "Порнография";
+____loclib.complainPedo = "Педофилия - любые изображения/видео/тексты, даже отдаленно наводящие на размышления о детях или подростках";
+____loclib.complainViolence = "Прямые угрозы насилия";
+____loclib.complainNarco = "Нелегальные наркотики - любая пропаганда/реклама нелегальных наркотических средств";
