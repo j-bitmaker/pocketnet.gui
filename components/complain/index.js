@@ -13,175 +13,27 @@ var complain = (function(){
 		var reasons = {
 
 			post : [
-
 				{
-					name : 'Sexual content',
-
-					gid : 1,
-
-					group : [
-						{
-							name : 'Graphic sexual activity',
-							id : '1'						
-						},
-						{
-							name : 'Nudity',
-							id : '2'						
-						},
-						{
-							name : 'Suggestive, but without nudity',
-							id : '3'						
-						},
-						{
-							name : 'Content involving minors',
-							id : '4'						
-						},
-						{
-							name : 'Abusive title or description',
-							id : '5'						
-						},
-						{
-							name : 'Other sexual content',
-							id : '6'						
-						}
-						
-					]
-				},
-
-				{
-					name : 'Violent or repulsive content',
-					gid : 2,
-					group : [
-						{
-							name : 'Adults fighting',
-							id : '7'						
-						},
-						{
-							name : 'Physical attack',
-							id : '8'						
-						},
-						{
-							name : 'Youth violence',
-							id : '9'						
-						},
-						{
-							name : 'Animal abuse',
-							id : '10'						
-						}
-						
-					]
-				},
-
-				{
-					name : 'Hateful or abusive content',
-					gid : 3,
-					group : [
-						{
-							name : 'Promotes hatred or violence',
-							id : '11'						
-						},
-						{
-							name : 'Abusing vulnerable individuals',
-							id : '12'						
-						},
-						{
-							name : 'Bullying',
-							id : '13'						
-						},
-						{
-							name : 'Abusive title or description',
-							id : '14'						
-						}
-						
-					]
-				},
-
-				
-
-				{
-					name : 'Harmful dangerous acts',
-					gid : 4,
-					group : [
-						{
-							name : 'Pharmaceutical or drug abuse',
-							id : '19'						
-						},
-						{
-							name : 'Abuse of fire or explosives',
-							id : '20'						
-						},
-						{
-							name : 'Suicide or self injury',
-							id : '21'						
-						},
-						{
-							name : 'Other dangerous acts',
-							id : '22'						
-						}
-						
-					]
+					name : self.app.localization.e('complainPorn'),
+					gid : 1
 				},
 				{
-					name : 'Child abuse',
-					id : '23'						
+					name : self.app.localization.e('complainPedo'),
+					gid : 2
 				},
-
 				{
-					name : 'Promotes terrorism',
-					id : '24'						
+					name : self.app.localization.e('complainViolence'),
+					gid : 3
 				},
-
 				{
-					name : 'Spam or misleading',
-					gid : 6,
-					group : [
-						{
-							name : 'Mass advertising',
-							id : '25'						
-						},
-						{
-							name : 'Pharmaceutical drugs for sale',
-							id : '26'						
-						},
-						{
-							name : 'Misleading text',
-							id : '27'						
-						},
-						{
-							name : 'Misleading thumbnail',
-							id : '28'						
-						},
-						{
-							name : 'Scams / fraud',
-							id : '29'						
-						}
-						
-					]
-				},
+					name : self.app.localization.e('complainNarco'),
+					gid : 4
+				}
 
-				{
-					name : 'Infringes my rights',
-					gid : 7,
-					group : [
-						{
-							name : 'Infringes my copyright',
-							id : '30'						
-						},
-						{
-							name : 'Invades my privacy',
-							id : '31'						
-						},
-						{
-							name : 'Other legal claim',
-							id : '32'						
-						}
-						
-					]
-				}			
-
-			]
+			]			
 
 		}
+
 
 		var actions = {
 			find : function(id){
@@ -196,12 +48,6 @@ var complain = (function(){
 
 					if(ess == 'post'){
 							
-					
-
-						
-
-						
-
 						if(mestate && !mestate.trial){
 							var complainShare = sobj.complain(selected);
 
@@ -283,6 +129,7 @@ var complain = (function(){
 			},	
 
 			nextActive : function(){
+
 				if(selected || textreason){
 
 					el.next.removeClass('disabled')
@@ -338,13 +185,7 @@ var complain = (function(){
 
 						$(this).addClass('active')
 
-						if (reason.group){
-							renders.selector(reason)
-						}
-						else
-						{
-							selected = reason.id
-						}
+						selected = reason.gid						
 
 						actions.nextActive()
 					}
@@ -366,49 +207,8 @@ var complain = (function(){
 				}, function(p){
 					p.el.find('.reason').on('click', events.select)
 				})
-			},
-
-			selector : function(rgroup){
-
-				var _el = el.c.find('.reason[reason="'+rgroup.gid+'"] .reasongroupIn')
-
-				var labels = _.map(rgroup.group, function(r){
-					return r.name
-				})
-
-				var values = _.map(rgroup.group, function(r){
-					return r.id
-				})
-
-				var param = new Parameter({
-					type : "VALUES",
-					name : rgroup.name,
-					id : rgroup.gid,
-					possibleValues : values,
-					possibleValuesLabels : labels,
-					placeholder : "Choose one"
-				})
-
-				param._onChange = function(v){
-					selected = v || null
-
-					actions.nextActive()
-				}
-
-				self.shell({
-					name :  'selector',
-					inner : html,
-					el : _el,
-					data : {
-						selector : param
-					},
-
-				}, function(p){
-					
-					ParametersLive([param], p.el)
-
-				})
 			}
+
 		}
 
 		var state = {

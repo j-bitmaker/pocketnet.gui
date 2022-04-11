@@ -2150,3 +2150,9 @@ ____loclib.optimizationtip_show = "Show"
 ____loclib.thankTheAuthor = 'Thank the author';
 
 ____loclib.encourageAuthor = "Encourage author";
+
+____loclib.complainPorn = "Pornography";
+____loclib.complainPedo = "Pedophilia - any even remotely suggestive images/videos/texts with children or adolescents";
+____loclib.complainViolence = "Direct threat of violence";
+____loclib.complainNarco = "Illegal narcotics - any positive or promotion of illegal narcotics";
+

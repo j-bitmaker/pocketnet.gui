@@ -779,54 +779,69 @@ UpvoteShare = function(){
 ComplainShare = function(){
 	var self = this;
 
-	self.share = {
+	self.s2 = {
 		set : function(_v){
 			this.v = _v
 		},
 		v : ''
 	};
 
-	self.reason = {
+	self.s3 = {
+		set: function(_v){
+			this.v = _v
+		}, 
+		v : ''
+	};
+
+	self.i1 = {
 		set : function(_v){
 			this.v = _v
 		},
 		v : ''
 	};
-
 	
 
 	self.validation = function(){
-		if(!self.share.v){
-			return 'share'
+		if(!self.s2.v){
+			return 'txid'
 		}
 
-		if(!self.reason.v){
+		if (!self.s3.v){
+			return 'address'
+		}
+
+		if(!self.i1.v){
 			return 'reason'
 		}
 	}
 
 	self.serialize = function(){
-		return self.share.v + '_' + self.reason.v
+		return self.s2.v + self.s3.v + self.i1.v
 	}
 
 	self.export = function(){
 		return {
-			share : self.share.v,
-			reason : self.reason.v
+			s2 : self.s2.v,
+			s3 : self.s3.v,
+			i1 : self.i1.v
 		}
 	}
 
 	self.import = function(p){
 
-		if (p.share)
-			self.share.v =  p.share
+		if (p.s2)
+			self.s2.v = p.s2;
 
-		if (p.reason)
-			self.reason.v = p.reason
+		if (p.s3)
+			self.s3.v = p.s3;
+
+		if (p.i1)
+			self.i1.v = p.i1;
+
 			
 	}
 
-	self.type = 'complainShare'
+	self.type = 'CONTENT_POST'
 
 	return self;
 }
@@ -2288,8 +2303,9 @@ pShare = function(){
 	self.complain = function(reason){
 		var complainShare = new ComplainShare();
 
-		complainShare.share.set(self.txid);
-		complainShare.reason.set(reason);
+		complainShare.s2.set(self.txid);
+		complainShare.s3.set(self.address);
+		complainShare.i1.set(reason);
 
 		return complainShare;
 	}
