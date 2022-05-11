@@ -18,8 +18,10 @@ var system16 = (function(){
 		var stacking = null
 
 		var changes = {
-			server : {}
+			server : {},
+			emails: {}
 		}
+
 
 		var settings = {
 			charts : {
@@ -84,6 +86,7 @@ var system16 = (function(){
 
 							changes.server.firebase = ch
 
+							renders.webserveremails(el.c)
 							renders.webserveradmin(el.c)
 
 							return true
@@ -138,6 +141,7 @@ var system16 = (function(){
 
 							changes.server.ssl = ch
 
+							renders.webserveremails(el.c)
 							renders.webserveradmin(el.c)
 
 							return true
@@ -155,6 +159,23 @@ var system16 = (function(){
 				if(changes.server.enabled == system.server.enabled) delete changes.server.enabled
 
 				renders.webserveradmin(el.c)
+			},
+			'emailssecure' : function(_el){
+
+				var secure = true;
+
+				var secureValue = _el.attr('value');
+
+				if (secureValue === 'Yes'){
+
+					secure = false;
+
+				}
+
+				changes.emails.secure = secure;
+				if(changes.emails.secure === system.emails.secure) delete changes.emails.secure;
+
+				renders.webserveremails(el.c)
 			},
 			'nodeenabled' : function(){
 
@@ -346,7 +367,6 @@ var system16 = (function(){
 				}
 			},
 
-
 			removeBot : function(address){
 				topPreloader(30);
 
@@ -415,7 +435,6 @@ var system16 = (function(){
 			},
 
 			ticksettings : function(settings, s, changed){
-
 
 				if (changed){
 					system = settings
@@ -2292,26 +2311,29 @@ var system16 = (function(){
 				function(p){
 					renders.webserverstatus(p.el)
 					renders.webserveradmin(p.el)
+					renders.webserveremails(p.el)
+
 
 					if (clbk)
 						clbk()
 				})
 			},
-			webserveradmin : function(elc, clbk){
+
+			webserveremails : function(elc, clbk){
 
 				if(actions.admin() && system){
 
 					self.shell({
 						inner : html,
-						name : 'webserveradmin',
+						name : 'webserveremails',
 						data : {
-							admin : actions.admin(),
 							system : system,
 							proxy : proxy,
-							changes : changes.server
+							emails : changes.emails,
+							results : system.emails.results || []
 						},
 
-						el : elc.find('.adminPanelWrapper')
+						el : elc.find('.emailsPanelWrapper')
 
 					},
 					function(p){
@@ -2349,41 +2371,49 @@ var system16 = (function(){
 
 						p.el.find('.save').on('click', function(){
 
-							if(changes.server.https || changes.server.wss){
-								changes.server.ports = {
-									https : changes.server.https,
-									wss : changes.server.wss
-								}
-							}
-
 							var _make = function(){
-
 
 								globalpreloader(true)
 
-								proxy.fetchauth('manage', {
-									action : 'set.server.settings',
+											
+								for (var ekey in system.emails){
+
+									if (changes.emails[ekey] == undefined){
+
+										changes.emails[ekey] = system.emails[ekey];
+									}
+								}
+
+								proxy.fetch('manage', {
+									action : 'set.emails',
 									data : {
-										settings : changes.server
+										emails: changes.emails
 									}
 	
 								}).catch(e => {
+
 									globalpreloader(false)
 									return Promise.resolve()
 		
 								}).then(r => {
-									changes.server = {}
-		
-									make(proxy || api.get.current());
 
-									globalpreloader(false)
+									// actions.emails();		
+									// make(proxy || api.get.current());
+
+									system.emails = changes.emails;
+									changes.emails = {}
+
+									make(proxy || api.get.current());
 				
 									topPreloader(100);
+
+									globalpreloader(false)
+
 		
 								})
 							}
 
-							if(typeof changes.server.enabled != 'undefined' || changes.server.https || changes.server.wss || changes.server.ssl){
+							if(typeof changes.emails.emailshost != 'undefined' || changes.emails.port || changes.emails.secure || changes.emails.login || changes.emails.password){
 
 
 								dialog({
@@ -2404,39 +2434,215 @@ var system16 = (function(){
 
 						})
 
-						p.el.find('.clearfirebase').on('click', function(){
-							
-							dialog({
-								class : 'zindex',
-								html : "Do you really want to clear all firebase settings?",
-								btn1text : self.app.localization.e('dyes'),
-								btn2text : self.app.localization.e('dno'),
-								success : function(){	
+						
+						p.el.find('.discard').on('click', function(){
 
-									proxy.fetchauth('manage', {
-										action : 'set.server.firebase.clear',
-										data : {
-										}
-									}).then(r => {
-			
-										make(proxy || api.get.current());
-			
-									}).catch(e => {
-			
-										sitemessage(self.app.localization.e('e13293'))
-			
-									})
+							changes.emails = {}
 
-								}
-							})
-							
-							
+							renders.webserveremails(elc)
+
 						})
 
 						p.el.find('[remove]').on('click', function(){
 							var s = $(this).attr('remove')
 
-							if (s) delete changes.server[s]
+							if(s) delete changes.emails[s]
+
+							renders.webserveremails(elc)
+						})
+
+						p.el.find('.port').on('change', function(){
+							var port = $(this).val()
+
+							console.log('port', port);
+
+							$(this).val(port)
+
+							if (port == changes.emails.port){
+								delete changes.emails.port
+							}
+							else{
+								changes.emails.port = port;
+							}
+
+							renders.webserveremails(elc)
+						})
+
+						p.el.find('.login').on('change', function(){
+
+							var login = $(this).val()
+
+							$(this).val(login)
+
+							if (login == changes.emails.login){
+								delete changes.emails.login
+							}
+							else{
+								changes.emails.login = login
+							}
+
+							renders.webserveremails(elc)
+						})
+
+						p.el.find('.password').on('change', function(){
+
+							var password = $(this).val()
+
+							$(this).val(password)
+
+							if (password == changes.emails.password){
+								delete changes.emails.password
+							}
+							else{
+								changes.emails.password = password
+							}
+
+							renders.webserveremails(elc)
+						})
+
+
+						
+						p.el.find('.emailshost').on('change', function(){
+
+							var emailshost = $(this).val()
+
+							$(this).val(emailshost)
+
+							if (emailshost == changes.emails.emailshost){
+								delete changes.emails.emailshost
+							}
+							else{
+								changes.emails.emailshost = emailshost
+							}
+
+							renders.webserveremails(elc)
+						})
+																
+						if (clbk)
+							clbk()
+					})
+
+				}
+				else{
+					if (clbk)
+						clbk()
+				}
+			},
+			webserveradmin : function(elc, clbk){
+
+				if(actions.admin() && system){
+
+					self.shell({
+						inner : html,
+						name : 'webserveradmin',
+						data : {
+							admin : actions.admin(),
+							system : system,
+							proxy : proxy,
+							changes : changes.server
+						},
+
+						el : elc.find('.adminPanelWrapper')
+
+					},
+					function(p){
+
+						actions.settings(p.el)
+
+						p.el.find('.todefaultcert').on('click', function(){
+							dialog({
+								class : 'zindex',
+								html : "Do you really want to cancel Certificate changes and set Default self-signed Certificate?",
+								btn1text : self.app.localization.e('dyes'),
+								btn2text : self.app.localization.e('dno'),
+								success : function(){	
+
+									proxy.fetch('manage', {
+										
+										action : 'set.server.defaultssl',
+										data : {}
+		
+									}).catch(e => {
+										
+										return Promise.resolve()
+			
+									}).then(r => {
+			
+										make(proxy || api.get.current());
+					
+										topPreloader(100);
+			
+									})
+
+								}
+							})
+						})
+
+						p.el.find('.save').on('click', function(){
+
+							if(changes.server.https || changes.server.wss){
+								changes.server.ports = {
+									https : changes.server.https,
+									wss : changes.server.wss
+								}
+							}
+
+							console.log(' changes.server',  changes.server);
+
+							var _make = function(){
+
+								globalpreloader(true)
+
+								proxy.fetch('manage', {
+									action : 'set.server.settings',
+									data : {
+										settings : changes.server,
+									}
+	
+								}).catch(e => {
+									globalpreloader(false)
+									return Promise.resolve()
+		
+								}).then(r => {
+									changes.server = {}
+		
+									make(proxy || api.get.current());
+
+									globalpreloader(false)
+				
+									topPreloader(100);
+		
+								})
+							}
+
+							if(typeof changes.server.enabled != 'undefined' || changes.server.https || changes.server.wss || changes.server.ssl){
+
+								console.log('inside')
+
+								dialog({
+									class : 'zindex',
+									html : "Do you really want to change this settings?",
+									btn1text : self.app.localization.e('dyes'),
+									btn2text : self.app.localization.e('dno'),
+									success : function(){	
+										_make()
+									}
+								})
+
+							}
+							else{
+
+								console.log('outside')
+								_make()
+							}
+							
+
+						})
+
+						p.el.find('[remove]').on('click', function(){
+							var s = $(this).attr('remove')
+
+							if(s) delete changes.server[s]
 
 							renders.webserveradmin(elc)
 						})
@@ -2566,6 +2772,50 @@ var system16 = (function(){
 			},
 			webdistributionwallets : function(elc, clbk){
 
+				var registration = system.wallet.addresses.registration;
+				var dropdownCheck = new Parameter({
+					type: "VALUES",
+					name: 'checkUnique',
+					id: 'telegram',
+					placeholder: '',
+					value: registration.check,
+					possibleValues: ['uniqAddress', 'uniqEmails'],
+					possibleValuesLabels: ['addresses', 'addresses and emails'],
+					defaultValue: registration.check,
+
+					_onChange: function (value) {
+
+
+						globalpreloader(true)
+
+
+						proxy.fetch('manage', {
+							action : 'set.wallet.setcheck',
+							data : {
+								key: 'registration',
+								check: value
+							}
+
+						}).catch(e => {
+
+							
+							actions.refresh();
+
+							d.destroy();
+
+							globalpreloader(false)
+							return Promise.resolve()
+
+						}).then(r => {
+
+
+							globalpreloader(false)
+
+
+						})
+					}
+				});
+
 
 				self.shell({
 					inner : html,
@@ -2574,13 +2824,17 @@ var system16 = (function(){
 						wallets : info.wallet,
 						info : info,
 						proxy : proxy,
-						admin : actions.admin()
+						check: system.wallet.addresses.registration.check,
+						admin : actions.admin(),
+						dropdownCheck: dropdownCheck
 					},
 
 					el : elc.find('.webdistributionwalletsWrapper')
 
 				},
 				function(p){
+
+					ParametersLive([dropdownCheck], elc)
 
 					p.el.find('.coins').on('click', function(){
 						var key = $(this).closest('.wallet').attr('key')
@@ -3432,6 +3686,8 @@ var system16 = (function(){
 				renders.webadminscontent(el.c)
 				renders.webdistributionwallets(el.c)
 				renders.webserveradmin(el.c)
+				renders.webserveremails(el.c)
+				
 			},
 
 			stats : function(update){
@@ -3541,17 +3797,21 @@ var system16 = (function(){
 						renders.webserveradmin(el.c)
 					},500)	
 
-					if (actions.admin()) {
-					  return proxy
-						.fetchauth('peertube/stats')
-						.then((data) => (peertubePerformance = { ...data }))
-						.then(() => proxy.system.request('get.settings'))
-						.then((r) => {
-						  system = r;
-		  
-						  renders.allsettings();
-		  
-						  return Promise.resolve();
+					if (actions.admin()){
+
+						return proxy.system.request('get.settings').then(r => {
+
+							system = r
+
+							renders.allsettings()
+
+							return Promise.resolve()
+						}).then(r => {
+							return proxy.system.request('bots.get')
+
+						}).then(r => {
+							bots = r.bots || []
+							renders.bots(el.c)
 						})
 						.then((r) => {
 						  return proxy.system.request('bots.get');
