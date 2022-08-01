@@ -318,6 +318,7 @@ var usersettings = (function(){
 				var data = {};
 
 				clbk(data);
+				
 
 			},
 
