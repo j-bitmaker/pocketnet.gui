@@ -84,7 +84,7 @@ Application = function(p)
     self.test = true
   }
 
-  self.boost = !(window.cordova && isios());
+  self.boost = false;
 
   self.options = {
 
@@ -924,6 +924,8 @@ Application = function(p)
 
   self.init = function(p){
 
+    self.boost = !(window.cordova && isios());
+
     if (navigator.webdriver && !self.test && !parameters().webdrivertest) return
 
     if (typeof localStorage == 'undefined')
@@ -983,6 +985,7 @@ Application = function(p)
 
     self.mobile.inputs.init()
     self.mobile.reload.initparallax()
+
   }
 
   self.reload = function(p){
