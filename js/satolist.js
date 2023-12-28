@@ -10485,6 +10485,11 @@ Platform = function (app, listofnodes) {
                         clbk();
 
                 })
+                .catch(e => {
+                    console.error(e)
+                    if (clbk)
+                        clbk(null, e)
+                })
 
             },
 
