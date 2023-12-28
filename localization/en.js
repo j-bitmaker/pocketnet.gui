@@ -2619,3 +2619,7 @@ _l.howToBuy = "How to buy PKOIN";
 
 _l.clearLocal = 'Clear Local Storage';
 _l.clearLocalQuestion = 'Do you really want to clear Local Storage?';
+
+_l.accountBanned = "Your account has been blocked for actions contrary to the Bastyon rules. Reason: ";
+_l.accountBannedActions = "You can't post, comment, and do other similar activities, but you can continue to use your wallet.";
+

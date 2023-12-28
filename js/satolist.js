@@ -10453,6 +10453,41 @@ Platform = function (app, listofnodes) {
 
             },
 
+            getbans : function(clbk){
+
+                var address = self.app.platform.sdk.address && self.app.platform.sdk.address.pnet().address;
+
+                console.log('getbans', address);
+
+                var params = [address];
+
+                self.app.api.rpc('getbans', params).then(d => {
+
+                    console.log('DDDD', d);
+
+                    if (d && d[0] && d[0].reason){
+
+                        
+                        new dialog({
+                            html: self.app.localization.e('accountBanned') + self.app.localization.e('lowstar_reason_' + d[0].reason) + '. ' + self.app.localization.e('accountBannedActions'),
+                            btn1text: 'OK',
+            
+                            class: 'zindex accepting accepting2 one',
+            
+                        })
+
+                        self.app.platform.sdk.user.blocked = true;
+
+                    }
+
+                        
+                    if (clbk)
+                        clbk();
+
+                })
+
+            },
+
             _get: function (clbk, update) {
 
                 var storage = self.sdk.user.storage
@@ -10749,6 +10784,8 @@ Platform = function (app, listofnodes) {
             },
 
             reputationBlockedMe : function(address, count){
+
+                if (self.app.platform.sdk.user.blocked) return true;
 
                 if(!address) address = (self.app.platform.sdk.address.pnet() || {}).address
 
@@ -12336,6 +12373,7 @@ Platform = function (app, listofnodes) {
             },
 
             getone: function (address, clbk, light, reload) {
+
                 var s = self.sdk.users.storage;
                 var l = self.sdk.users.loading;
 
@@ -12405,6 +12443,7 @@ Platform = function (app, listofnodes) {
                 }
             },
             get: function (addresses, clbk, light) {
+
                 if (!_.isArray(addresses)) addresses = [addresses]
 
                 var ia = addresses
@@ -12437,7 +12476,6 @@ Platform = function (app, listofnodes) {
                         if (light) {
                             params.push('1')
                         }
-
 
                         self.app.api.rpc('getuserprofile', params).then(d => {
 
@@ -19240,6 +19278,10 @@ Platform = function (app, listofnodes) {
                     }
                         else {
                             
+                            self.app.platform.sdk.jury.getalljury();
+
+                            self.app.platform.sdk.jury.getjurymoderators('d8a01ca0f53d89262683f2cc2a3dfc6f545dc8c4bd81ac93f82fdf4095a74918');
+
                             self.app.platform.sdk.jury.getjuryassigned(p.address).then((shares) => {
                                 console.log(shares);
 
@@ -30323,6 +30365,7 @@ Platform = function (app, listofnodes) {
                     self.sdk.addresses.init,
                     self.sdk.ustate.me,
                     self.sdk.user.get,
+                    self.sdk.user.getbans,
                     self.sdk.usersettings.init,
                     self.matrixchat.importifneed,
                     self.ws.init,
@@ -30578,7 +30621,6 @@ Platform = function (app, listofnodes) {
 
                     if(self.sdk.user.reputationBlockedMe()) return
                     if(self.sdk.user.myaccauntdeleted()) return
-
 
                     var pnet = self.app.platform.sdk.address.pnet()
 
