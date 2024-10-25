@@ -138,6 +138,7 @@ var nodecontrol = (function(){
 			},
 			ticksettings : function(settings, s, changed){
 
+
 				if (changed){
 					system = settings
 				}
@@ -147,9 +148,17 @@ var nodecontrol = (function(){
                     ///cancelAnimationFrame(rif)
                 }
 
-				rif = rifticker.add(() => {
+				rif = rifticker.add((i) => {
+					
+					let compareNodeControl = compareObjects(s.nodeControl, info.nodeControl)
+					let compareNodeManager = compareObjects(s.nodeManager, info.nodeManager)
+
+					info = s
 					rif = null
-					renders.all()
+
+					if (!compareNodeControl || !compareNodeManager){
+						renders.all()
+					}
 				})
 				
 			},
@@ -275,15 +284,15 @@ var nodecontrol = (function(){
 
 				if (el.c){
 
-					
-						renders.nodelanding(el.c)
-						renders.electronfornode()
+				
+					renders.nodelanding(el.c)
+					renders.electronfornode()
 
-						renders.nodecontentmanage(el.c, function(){
-							renders.nodecontentstate(el.c)
-							renders.nodecontentmanagestacking(el.c)
-							renders.nodecontentmanagewallet(el.c)
-						})
+					renders.nodecontentmanage(el.c, function(){
+						renders.nodecontentstate(el.c)
+						renders.nodecontentmanagestacking(el.c)
+						renders.nodecontentmanagewallet(el.c)
+					})
 
 
 					
@@ -297,13 +306,9 @@ var nodecontrol = (function(){
 						inner : html,
 						name : 'nodecontentmanagestacking',
 						data : {
-							info : info,
-							manager : info.nodeManager,
 							nodestate : info.nodeControl.state,
 							nc : info.nodeControl,
-							proxy : proxy,
-							admin : actions.admin(),
-							system : system,
+							proxy : proxy
 						},
 
 						el : elc.find('.stakingWrapper')
@@ -323,13 +328,9 @@ var nodecontrol = (function(){
 						inner : html,
 						name : 'nodecontentmanagewallet',
 						data : {
-							info : info,
-							manager : info.nodeManager,
 							nodestate : info.nodeControl.state,
 							nc : info.nodeControl,
 							proxy : proxy,
-							admin : actions.admin(),
-							system : system,
 						},
 
 						el : elc.find('.walletWrapper')
@@ -444,7 +445,6 @@ var nodecontrol = (function(){
 					name : 'landing',
 					data : {
 						nc : info.nodeControl,
-						admin : actions.admin(),
 						system : system,
 					},
 
@@ -513,12 +513,10 @@ var nodecontrol = (function(){
 						inner : html,
 						name : 'nodecontentmanage',
 						data : {
-							info : info,
-							manager : info.nodeManager,
+							test : info.test,
 							nodestate : info.nodeControl.state,
 							nc : info.nodeControl,
 							proxy : proxy,
-							admin : actions.admin(),
 							system : system,
 							dis : false,
 							showdirect : true
@@ -679,12 +677,9 @@ var nodecontrol = (function(){
 						inner : html,
 						name : 'nodecontentstate',
 						data : {
-							info : info,
 							manager : info.nodeManager,
 							nodestate : info.nodeControl.state,
 							nc : info.nodeControl,
-							proxy : proxy,
-							admin : actions.admin(),
 						},
 
 						el : elc.find('.nodestateWrapper')
@@ -767,7 +762,7 @@ var nodecontrol = (function(){
 			if (proxy) {
 
 				proxy.system.clbks.tick.components_nodecontrol = actions.ticksettings
-				proxy.clbks.tick.components_nodecontrol = actions.tick
+				// proxy.clbks.tick.components_nodecontrol = actions.tick
 			
 				proxy.get.info().then(r => {
 
