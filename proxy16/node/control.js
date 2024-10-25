@@ -43,6 +43,24 @@ var Control = function(settings, proxy) {
                 name: "latest.tgz",
                 url: 'https://snapshot.pocketnet.app/latest.tgz'
             }
+        },
+
+        darwin: {
+            bin: {
+                name: "_macos_x64_daemon.bin",
+                url: 'https://api.github.com/repos/pocketnetapp/pocketnet.core/releases/latest',
+                page: 'https://github.com/pocketnetteam/pocketnet.core/releases/latest'
+            },
+            snapshot_latest: {
+                permanent: true,
+                name: "latest.tgz",
+                url: 'https://snapshot.pocketnet.app/latest.tgz'
+            },
+            bin_permanent: {
+                permanent: true,
+                name: "https://dev.pocketnet.app/binaries/core/pocketcoind",
+                url: 'https://dev.pocketnet.app/binaries/core/pocketcoind'
+            },
         }
     }, proxy)
     
