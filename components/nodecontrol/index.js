@@ -153,12 +153,35 @@ var nodecontrol = (function(){
 					let compareNodeControl = compareObjects(s.nodeControl, info.nodeControl)
 					let compareNodeManager = compareObjects(s.nodeManager, info.nodeManager)
 
+					console.log('compare: ', compareNodeControl, compareNodeManager);
+
 					info = s
 					rif = null
 
-					if (!compareNodeControl || !compareNodeManager){
-						renders.all()
+					if (el.c){
+
+						if (!compareNodeControl){
+				
+							renders.nodelanding(el.c)
+							renders.electronfornode()
+	
+
+							renders.nodecontentmanage(el.c, function(){
+								renders.nodecontentstate(el.c)
+								renders.nodecontentmanagestacking(el.c)
+								renders.nodecontentmanagewallet(el.c)
+							})
+
+						} 
+						
+						if (!compareNodeManager){
+
+							renders.nodecontentstate(el.c)
+
+						}
+						
 					}
+
 				})
 				
 			},
@@ -513,6 +536,7 @@ var nodecontrol = (function(){
 						inner : html,
 						name : 'nodecontentmanage',
 						data : {
+							step: 1,
 							test : info.test,
 							nodestate : info.nodeControl.state,
 							nc : info.nodeControl,
@@ -527,7 +551,26 @@ var nodecontrol = (function(){
 					},
 					function(p){
 
+						console.log('ppppppp!!!!!!', p)
+
+						const folderInput = p.el.find('.folderInput');
+			
+						console.log('folderInput', folderInput);
+
 						actions.settings(p.el)
+
+						setTimeout(() => {
+
+							window.myAPI.selectFolder().then(result=>{console.log('result!!!!', result)});
+
+						}, 20000); 
+
+						if (folderInput){
+			
+							folderInput.on('change', function() {
+								console.log('??', document.getElementById("folderInput").files[0].path)
+							});
+						}
 
 						p.el.find('.updatenode').on('click', function(){
 							new dialog({
@@ -743,6 +786,18 @@ var nodecontrol = (function(){
 			el.c.on('click', '.collapsepart .subcaption', function(){
 				$(this).closest('.collapsepart').toggleClass('expanded')
 			})
+
+			el.c.on('click', '.saveFilePath', async function(){
+
+				try {
+					const directoryHandle = await window.showDirectoryPicker();
+					console.log('Selected folder path:', directoryHandle);
+				  } catch (error) {
+					console.error('Error choosing folder:', error);
+				  }
+
+			})
+
 
 		}
 
