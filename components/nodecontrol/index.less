@@ -1,6 +1,8 @@
 @import "../../css/__cssvar";
 
 #nodecontrol{
+    background: rgb(var(--background-secondary-theme));
+	padding-bottom : 8 * @rhythm;
 
     .testnetwork{
         padding : 4 * @rhythm;
@@ -82,6 +84,19 @@
         }
     }
 
+
+    .scaption{
+        padding : @rhythm 0;
+        font-size: 1.2em;
+
+        span{
+            font-weight: 800;
+            color : rgb(var(--neutral-grad-3));
+        }
+    }
+
+
+
     .ssubcaption{
         padding : @rhythm 0;
 
@@ -90,6 +105,7 @@
             color : rgb(var(--neutral-grad-3));
         }
     }
+
 
     .stacking{
         .canstacking{
@@ -119,10 +135,9 @@
     }
 
     .systemreq{
-        padding : @rhythm;
         padding-top : 0;
         border-radius: 5px;
-        border : 1px solid rgb(var(--neutral-grad-1));
+
         .scaption{
             padding : @rhythm 0;
             span{
@@ -134,7 +149,7 @@
         .req{
             padding : 2 * @rhythm 0;
             div{
-                font-size: 0.8em;
+                font-size: 0.9em;
             }
         }
     }
@@ -216,6 +231,25 @@
             .value {
                 color : rgb(var(--neutral-grad-2));
             }
+
+            .pathWrapper{
+                margin-top: @rhythm;
+                display: flex;
+                justify-content: space-between;
+
+                .path{
+                    width: 100%;
+                    padding : @rhythm * 2;
+                    border-radius: 4px;
+                    background: rgb(var(--background-secondary-theme));
+                }
+
+                .choosePath{
+                    margin-left: @rhythm * 2;
+                    display: flex;
+                    align-items: center
+                }
+            }
         }
     }
 
@@ -225,7 +259,9 @@
     }
 
     .managepanel{
-        padding : 4 * @rhythm;
+        background: rgb(var(--background-total-theme));
+        margin : 4 * @rhythm;
+        padding: 2 * @rhythm;
     }
 
     .nodecontentstate{
@@ -271,16 +307,20 @@
     
     .notfound{
         text-align: center;
-        padding : 4 * @rhythm 0;
+        margin-top: 3 * @rhythm;
+        padding : 1 * @rhythm 0;
         color : rgb(var(--neutral-grad-3));
         
         &.install {
+            background : rgba(var(--color-cc-dark-blue), .9);
+            color: #FFFFFF;
             cursor: pointer;
+            border-radius: 8px;
 
             .transition(0.3s);
 
             &:hover{
-                color : rgb(var(--neutral-grad-3));
+                background : rgba(var(--color-cc-dark-blue, 1));
             }
         }
 
