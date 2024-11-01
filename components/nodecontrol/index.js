@@ -9,7 +9,7 @@ var nodecontrol = (function(){
 		var primary = deep(p, 'history');
 
 
-		var el, api = null, proxy = null,  info = null, system = null;
+		var el, api = null, proxy = null,  info = null, system = null, step = 1;
 
 		var systemsettings = {
 		
@@ -536,7 +536,7 @@ var nodecontrol = (function(){
 						inner : html,
 						name : 'nodecontentmanage',
 						data : {
-							step: 1,
+							step: step,
 							test : info.test,
 							nodestate : info.nodeControl.state,
 							nc : info.nodeControl,
@@ -552,6 +552,20 @@ var nodecontrol = (function(){
 					function(p){
 
 						console.log('ppppppp!!!!!!', p)
+
+						p.el.find('.start').on('click', function(){
+
+							step = 2;
+							p.el.find('.notinstalled').addClass('second');
+
+						})
+
+						p.el.find('.back').on('click', function(){
+
+							step = 1;
+							p.el.find('.notinstalled').removeClass('second');
+							
+						})
 
 						const folderInput = p.el.find('.folderInput');
 			

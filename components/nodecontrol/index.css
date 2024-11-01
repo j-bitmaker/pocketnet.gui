@@ -67,8 +67,8 @@
   color: rgb(var(--neutral-grad-3));
 }
 #nodecontrol .scaption {
+  margin-top: 1.5em;
   padding: 0.5em 0;
-  font-size: 1.2em;
 }
 #nodecontrol .scaption span {
   font-weight: 800;
@@ -97,21 +97,29 @@
   color: rgb(var(--color-txt-ac));
 }
 #nodecontrol .systemreq {
-  padding-top: 0;
+  margin-top: 1.5em;
   border-radius: 5px;
+  padding: 0.5em;
+  border: 1px dashed rgb(var(--color-txt-ac));
 }
 #nodecontrol .systemreq .scaption {
   padding: 0.5em 0;
+  margin-top: 0.5em;
 }
 #nodecontrol .systemreq .scaption span {
   font-size: 0.9em;
   font-weight: 700;
 }
 #nodecontrol .systemreq .req {
+  flex-wrap: wrap;
   padding: 1em 0;
 }
 #nodecontrol .systemreq .req div {
-  font-size: 0.9em;
+  padding: 0.5em;
+  font-size: 0.8em;
+  background: #F5F5F5;
+  border-radius: 5px;
+  margin-bottom: 0.5em;
 }
 #nodecontrol .staterowTable,
 #nodecontrol .settingTable {
@@ -233,13 +241,50 @@
   font-size: 0.8em;
   color: rgb(var(--neutral-grad-3));
 }
+#nodecontrol .back {
+  margin-top: 0.5em;
+  cursor: pointer;
+}
+#nodecontrol .notinstalled .step-install {
+  display: none;
+}
+#nodecontrol .notinstalled.second .step-install {
+  display: block;
+}
+#nodecontrol .notinstalled.second .step-start {
+  display: none;
+}
+#nodecontrol .init {
+  display: flex;
+}
+#nodecontrol .init .caption {
+  font-size: 1.25em;
+  font-weight: 800;
+}
+#nodecontrol .init .description {
+  margin-top: 0.5em;
+}
+#nodecontrol .init .init-left {
+  margin-right: 20px;
+  height: 100%;
+  flex: 1;
+}
+#nodecontrol .init .init-right {
+  display: flex;
+  flex: 1;
+}
+#nodecontrol .init .init-right img {
+  border-radius: 20px;
+  width: 88%;
+}
 #nodecontrol .notfound {
   text-align: center;
   margin-top: 1.5em;
   padding: 0.5em 0;
   color: rgb(var(--neutral-grad-3));
 }
-#nodecontrol .notfound.install {
+#nodecontrol .notfound.install,
+#nodecontrol .notfound.start {
   background: rgba(var(--color-cc-dark-blue), 0.9);
   color: #FFFFFF;
   cursor: pointer;
@@ -249,7 +294,8 @@
   -webkit-transition: 0.3s;
   transition: 0.3s;
 }
-#nodecontrol .notfound.install:hover {
+#nodecontrol .notfound.install:hover,
+#nodecontrol .notfound.start:hover {
   background: rgba(var(--color-cc-dark-blue, 1));
 }
 #nodecontrol .notfound.loading .stopInstall {

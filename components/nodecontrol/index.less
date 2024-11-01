@@ -86,8 +86,8 @@
 
 
     .scaption{
+        margin-top : @rhythm * 3;
         padding : @rhythm 0;
-        font-size: 1.2em;
 
         span{
             font-weight: 800;
@@ -135,11 +135,15 @@
     }
 
     .systemreq{
-        padding-top : 0;
+        margin-top : @rhythm * 3;
         border-radius: 5px;
+        padding: @rhythm;
+        border: 1px dashed rgb(var(--color-txt-ac));
 
         .scaption{
             padding : @rhythm 0;
+            margin-top: @rhythm;
+
             span{
                 font-size: 0.9em;
                 font-weight:700;
@@ -147,9 +151,14 @@
         }
 
         .req{
+            flex-wrap: wrap;
             padding : 2 * @rhythm 0;
             div{
-                font-size: 0.9em;
+                padding: @rhythm;
+                font-size: 0.8em;
+                background: #F5F5F5;
+                border-radius: 5px;
+                margin-bottom: @rhythm;
             }
         }
     }
@@ -304,6 +313,60 @@
             color: rgb(var(--neutral-grad-3));
         }
     }
+
+    .back{
+        margin-top: @rhythm;
+        cursor: pointer;
+    }
+
+    .notinstalled{
+
+        .step-install{
+            display: none;
+        }
+
+        &.second{
+            .step-install{
+                display: block;
+            }
+
+            .step-start{
+                display: none;
+            }
+        }
+    }
+
+    .init{
+        display: flex;
+
+        .caption{
+            font-size: @rhythm * 2.5;
+            font-weight: 800;
+        }
+
+        .description{
+            margin-top: @rhythm;
+        }
+
+        .init-left{
+            margin-right: 20px;
+            height: 100%;
+            flex: 1;
+        }
+
+        .init-right{
+            display: flex;
+
+            flex: 1;
+
+            img{
+                border-radius: 20px;
+                width: 88%;
+            }
+        }
+
+
+    }
     
     .notfound{
         text-align: center;
@@ -311,7 +374,7 @@
         padding : 1 * @rhythm 0;
         color : rgb(var(--neutral-grad-3));
         
-        &.install {
+        &.install, &.start {
             background : rgba(var(--color-cc-dark-blue), .9);
             color: #FFFFFF;
             cursor: pointer;
@@ -323,6 +386,7 @@
                 background : rgba(var(--color-cc-dark-blue, 1));
             }
         }
+
 
         &.loading {
             .stopInstall {
