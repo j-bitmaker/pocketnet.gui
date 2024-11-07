@@ -56,6 +56,22 @@
             </div>
         <% } %>
 
+        <div class="setting systempath systempathchoosen">
+     
+            <div class="settingTable table pathWrapperChosen">
+
+                <div class="label">
+                    <span><%-e('easyNode_e100121')%></span>
+                </div>
+
+                <div class="value path">
+                    <span><%- nc.node.dataPath %></span>
+                </div>
+
+
+            </div>
+        </div>
+
         <% if(nodestate.info.lastblock) {%>
             <div class="setting">
                 <div class="settingTable table">

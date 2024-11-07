@@ -48,7 +48,118 @@
                     <div class="walletWrapper"></div>
                 <% } %>
 
+                <div class="nodecontent collapsepart">
+                    <div class="work configurationBox">
+    
+                        <div elementsid="nodestatebox" class="scaption weight">
+                            <span><%-e('rsettings')%></span>
+                        </div>
+            
+    
+                        <div class="collapsingpart">
+                            <div class="setting togglebutton">
+                                        
+                                <div class="settingTable table">
+                                    <div class="label">
+                                        <span><%-e('easyNode_e10010')%></span>
+                                    </div>
+    
+                                    <% if(!dis) {%>
+    
+                                        <div class="value" sys="nodeenabled">
+                                            <% if (system.node.enabled) { %>
+                                                <span><%-e('dyes')%></span>
+                                            <% } else { %>
+                                                <span><%-e('dno')%></span>
+                                            <% } %>
+                                        </div>
+    
+                                    <% } else { %> 
+                                        
+                                        <div class="value">
+                                            <div class="preloader5"><img src="./img/three-dots.svg"/></div>
+                                        </div>
+    
+                                    <% } %>
+                                </div>
+                            </div>
+    
+                                <% if(!nc.lock && (proxy.direct || showdirect)) {%>
+                                    
+                                    <% if((system.node.ndataPath || system.node.binPath) && !system.node.enabled) {%>
+                                        <div class="setting systempathsDefaults">
+                                            <div class="settingTable table">
+                                                <div class="label">
+                                                    <span><%-e('easyNode_e10013')%></span>
+                                                </div>
+                            
+                                                <div elementsid="toDefaultPath" class="value toDefaultPath">
+                                                    <div>
+                                                        <span>
+                                                            <%-e('easyNode_e10014')%>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <% } %>
+    
+                                <% } %>
+    
+                                <% if(nc.hasbin && !nc.lock) {%>
+                                    <div class="setting update">
+                                        <div class="settingTable table">
+                                            <div class="label">
+                                                <span><%-e('easyNode_e10015')%></span>
+                                            </div>
+    
+                                            <div class="value">
+                                                <% if(nodestate.hasUpdate) {%>
+                                                    <button elementsid="buttonsmallupdatenode" class="button small updatenode">
+                                                        <%-e('easyNode_e10015')%>
+                                                    </button>
+                                                <% } else { %> 
+    
+                                                    <span class="noupdatenode"><%-e('easyNode_e10016')%></span>
+                                                    
+                                                <% }%>
+                                            </div>
+    
+                                        </div>
+                                    </div>
+    
+                                    <% if(!system.node.enabled) {%>
+    
+                                        <div class="setting">
+                                            <div class="settingTable table">
+                                                <div class="label">
+                                                    <span><%-e('easyNode_e10017')%></span>
+                                                </div>
+                            
+                                                <!-- <div class="value">
+                                                    <button elementsid="buttonsmallremovenode" class="button small orange removenode">
+                                                        <%-e('easyNode_e10018')%>
+                                                    </button>
+                                                </div> -->
+    
+                                                <div class="value">
+                                                    <button elementsid="buttonsmallghostremovenodeall" class="button small orange removenodeall">
+                                                        <%-e('easyNode_e10019')%>
+                                                    </button>
+                                                </div>
+    
+                                            </div>
+                                        </div>
+    
+                                    <% } %>
+    
+                                <% } %>
+                        </div>
+                    </div>
+                </div>
+
             <% } %>
+
 
             <% if(!nc.lock && !nc.hasbin) {%>
 
