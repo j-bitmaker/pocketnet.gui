@@ -438,7 +438,8 @@ var Control = function(settings, proxy) {
                 return makeconfig()
 
             }).then(r => {
-                
+                return Promise.resolve();
+
                 state.install.progress = { percent: 0 }
                 state.install.title = ''
                 state.install.status = ''
