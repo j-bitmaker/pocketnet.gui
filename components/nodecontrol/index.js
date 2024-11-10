@@ -1,3 +1,6 @@
+var checkDiskSpace = require('check-disk-space').default
+
+
 var nodecontrol = (function(){
 
 	var self = new nModule();
@@ -7,7 +10,6 @@ var nodecontrol = (function(){
 	var Essense = function(p){
 
 		var primary = deep(p, 'history');
-
 
 		var el, api = null, proxy = null,  info = null, system = null, step = 1;
 
@@ -551,6 +553,29 @@ var nodecontrol = (function(){
 					},
 					function(p){
 
+						enabledInstall = 0;
+
+						var toggleEnabled = function(num){
+
+							enabledInstall = num;
+
+							if (enabledInstall === 1){
+
+								p.el.find('.nodecontentmanage .second').addClass('enabled');
+								p.el.find('.nodecontentmanage .second').removeClass('error');
+
+							} else if (enabledInstall === -1){
+
+								p.el.find('.nodecontentmanage .second').removeClass('enabled');
+								p.el.find('.nodecontentmanage .second').addClass('error');
+
+							} else {
+
+								p.el.find('.nodecontentmanage .second').removeClass('enabled');
+								p.el.find('.nodecontentmanage .second').remoceClass('error');
+							}
+						}
+
 						console.log('ppppppp!!!!!!', p)
 
 						p.el.find('.start').on('click', function(){
@@ -558,12 +583,31 @@ var nodecontrol = (function(){
 							step = 2;
 							p.el.find('.notinstalled').addClass('second');
 
+							checkDiskSpace(system.node.ndataPath).then((diskSpace) => {
+
+								var freeGB = (diskSpace.free / 1000 / 1000 / 1000).toFixed(1);
+								var sizeGB = (diskSpace.size  / 1000 / 1000 / 1000).toFixed(1);
+
+								console.log("freeEl", p.el.find('.free'));
+								p.el.find('.free').text(String(freeGB));
+								p.el.find('.size').text(String(sizeGB));
+
+								toggleEnabled(freeGB > 150 ? 1 : -1)
+
+								console.log('diskspace', diskSpace, freeGB, sizeGB);
+
+								
+							})
+
 						})
 
 						p.el.find('.back').on('click', function(){
 
 							step = 1;
+
+							toggleEnabled(0);
 							p.el.find('.notinstalled').removeClass('second');
+
 							
 						})
 
@@ -631,6 +675,15 @@ var nodecontrol = (function(){
 						})
 
 						p.el.find('.install').on('click', () => {
+
+							if (enabledInstall === 0){
+								return sitemessage(self.app.localization.e('e28error'));
+							}
+
+
+							if (enabledInstall === -1){
+								return sitemessage(self.app.localization.e('eDiskSpace'));
+							}
 
 							topPreloader(20);
 

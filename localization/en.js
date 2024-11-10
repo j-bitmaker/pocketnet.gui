@@ -3249,3 +3249,5 @@ _l.appsdisclaimer='Every app is already a wallet for pcoin. Except for the IOS';
 
 _l.BarteronOffer = "Barteron - 0% commission"
 _l.windows7 = "Download for Windows 7"
+_l.outof= "out of";
+_l.eDiskSpace = "There is not enough disk space. Please free up some space.";

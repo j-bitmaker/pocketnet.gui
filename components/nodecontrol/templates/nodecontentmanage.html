@@ -376,6 +376,38 @@
     
                         <% if(!nc.hasbin && !nc.other && nc.hasapplication) {%>
     
+                            <div class="stats">
+                                <div class="required">
+                                    <span>
+                                        <%-e('required')%>: 150 GB
+                                    </span>
+                                </div>
+                                <div class="available">
+                                    <div>
+                                        <%-e('e13208')%>:
+                                    </div>
+                                    <div class="space">
+                                        <span class="free">
+                                        </span>
+                                        <span class="gb">
+                                            GB
+                                        </span>
+                                        <span>
+                                            <%-e('outof')%>
+                                        </span>
+                                        <span class="size">
+                                        </span>
+                                        <span>
+                                            GB
+                                        </span>
+                                    </div>
+                                    <div class="preloaderWrapper">
+                                        <span class="preloader5"><img src="./img/three-dots.svg"/></span>
+                                    </div>
+
+                                </div>
+                                
+                            </div>
     
                             <div elementsid="notfoundinstall" class="notfound install">
                                 <div class="text">
