@@ -1,13 +1,10 @@
 {
     "name": "pocketnet",
     "project": "Bastyon",
-
     "version": "0.9.102",
-
     "versionsuffix": "4",
     "cordovaversion": "1.8.102",
     "cordovaversioncode": "1801024",
-
     "description": "Bastyon desktop application",
     "author": "Pocketnet Community <support@pocketnet.app>",
     "company": "Pocketnet Community",
@@ -60,7 +57,7 @@
         "arch": "^2.2.0",
         "auto-launch": "^5.0.5",
         "axios": "^1.6.5",
-        "check-disk-space": "^3.3.0",
+        "check-disk-space": "^3.4.0",
         "clone-deep": "^4.0.1",
         "compression": "^1.7.4",
         "deep-extend": "^0.6.0",

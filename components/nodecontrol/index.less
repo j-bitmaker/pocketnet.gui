@@ -263,6 +263,7 @@
     }
 
     .manage{
+        padding-top: @rhythm * 2;
         border-radius: 10px;
         background: rgb(var(--neutral-grad-1), 0.2);
     }
@@ -323,15 +324,75 @@
 
         .step-install{
             display: none;
+
+            .stats{
+
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin: @rhythm * 2;
+                padding-top: @rhythm * 2;
+                border-top: 1px solid rgb(var(--neutral-grad-3));
+
+                .available{
+                    display: flex;
+                    align-items: center;
+
+                    .space, .preloaderWrapper{
+                        padding-left: 10px;
+                        min-width: 170px
+                    }
+                }
+            }
+
+            .space{
+                display: none;
+            }
+
+
         }
 
         &.second{
+
+            .install{
+                background: rgb(var(--neutral-grad-2));
+                color: #FFFFFF;
+                border-radius: 8px;
+            }
+
             .step-install{
                 display: block;
             }
 
             .step-start{
                 display: none;
+            }
+
+            &.enabled, &.error{
+                .available{
+                    
+                    .preloaderWrapper{
+                        display: none;
+                    }
+
+                    .space{
+                        display: block;
+                    }
+                }
+            }
+
+            &.enabled{
+
+                .install {
+                    background : rgba(var(--color-cc-dark-blue), .9);
+                    cursor: pointer;
+        
+                    .transition(0.3s);
+        
+                    &:hover{
+                        background : rgba(var(--color-cc-dark-blue, 1));
+                    }
+                }
             }
         }
     }
@@ -361,7 +422,7 @@
 
             img{
                 border-radius: 20px;
-                width: 88%;
+                width: 89%;
             }
         }
 
@@ -374,7 +435,7 @@
         padding : 1 * @rhythm 0;
         color : rgb(var(--neutral-grad-3));
         
-        &.install, &.start {
+        &.start {
             background : rgba(var(--color-cc-dark-blue), .9);
             color: #FFFFFF;
             cursor: pointer;
@@ -508,3 +569,16 @@
         max-height: 230px;
     }
 }
+
+@media (max-width: 640px){
+
+    #nodecontrol{
+
+        .init .init-right{
+            display: none;;
+        }
+    }
+
+}
+
+
