@@ -117,7 +117,7 @@
 #nodecontrol .systemreq .req div {
   padding: 0.5em;
   font-size: 0.8em;
-  background: #F5F5F5;
+  background: rgb(var(--background-secondary-theme));
   border-radius: 5px;
   margin-bottom: 0.5em;
 }

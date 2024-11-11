@@ -572,7 +572,7 @@ var nodecontrol = (function(){
 							} else {
 
 								p.el.find('.nodecontentmanage .second').removeClass('enabled');
-								p.el.find('.nodecontentmanage .second').remoceClass('error');
+								p.el.find('.nodecontentmanage .second').removeClass('error');
 							}
 						}
 
@@ -626,24 +626,7 @@ var nodecontrol = (function(){
 							
 						})
 
-						const folderInput = p.el.find('.folderInput');
-			
-						console.log('folderInput', folderInput);
-
 						actions.settings(p.el)
-
-						setTimeout(() => {
-
-							window.myAPI.selectFolder().then(result=>{console.log('result!!!!', result)});
-
-						}, 20000); 
-
-						if (folderInput){
-			
-							folderInput.on('change', function() {
-								console.log('??', document.getElementById("folderInput").files[0].path)
-							});
-						}
 
 						p.el.find('.updatenode').on('click', function(){
 							new dialog({
