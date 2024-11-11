@@ -249,6 +249,9 @@
 #nodecontrol .notinstalled .step-install {
   display: none;
 }
+#nodecontrol .notinstalled .step-install .snapshot {
+  margin-top: 1em;
+}
 #nodecontrol .notinstalled .step-install .stats {
   display: flex;
   justify-content: space-between;
@@ -256,6 +259,9 @@
   margin: 1em;
   padding-top: 1em;
   border-top: 1px solid rgb(var(--neutral-grad-3));
+}
+#nodecontrol .notinstalled .step-install .stats .required .icon {
+  color: rgb(var(--color-good));
 }
 #nodecontrol .notinstalled .step-install .stats .available {
   display: flex;

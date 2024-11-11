@@ -325,6 +325,10 @@
         .step-install{
             display: none;
 
+            .snapshot{
+                margin-top: @rhythm * 2;
+            }
+
             .stats{
 
                 display: flex;
@@ -333,6 +337,12 @@
                 margin: @rhythm * 2;
                 padding-top: @rhythm * 2;
                 border-top: 1px solid rgb(var(--neutral-grad-3));
+
+                .required{
+                    .icon{
+                        color: rgb(var(--color-good));
+                    }
+                }
 
                 .available{
                     display: flex;

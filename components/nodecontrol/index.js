@@ -576,12 +576,7 @@ var nodecontrol = (function(){
 							}
 						}
 
-						console.log('ppppppp!!!!!!', p)
-
-						p.el.find('.start').on('click', function(){
-
-							step = 2;
-							p.el.find('.notinstalled').addClass('second');
+						var toggleDiskSpace = function(){
 
 							checkDiskSpace(system.node.ndataPath).then((diskSpace) => {
 
@@ -598,6 +593,26 @@ var nodecontrol = (function(){
 
 								
 							})
+						}
+
+						if (step === 2){
+							toggleDiskSpace();
+						}
+
+						console.log('ppppppp!!!!!!', p)
+
+						p.el.find('.choosePath').on('click', function(){
+
+							systemsettings.ndataPath();
+
+						})
+
+						p.el.find('.start').on('click', function(){
+
+							step = 2;
+							p.el.find('.notinstalled').addClass('second');
+
+							toggleDiskSpace();
 
 						})
 
