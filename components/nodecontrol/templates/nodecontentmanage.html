@@ -231,38 +231,8 @@
                                 <div elementsid="nodestatebox" class="scaption weight">
                                     <span><%-e('easyNode_e10009')%></span>
                                 </div>
-                                <div class="sdescription">
-                                    <span><%-e('easyNode_e100091')%></span>
-                                </div>
-    
-    
                             <div class="collapsingpart">
-                                <div class="setting togglebutton">
-                                            
-                                    <div class="settingTable table">
-                                        <div class="label">
-                                            <span><%-e('easyNode_e10010')%></span>
-                                        </div>
-    
-                                        <% if(!dis) {%>
-    
-                                            <div class="value" sys="nodeenabled">
-                                                <% if (system.node.enabled) { %>
-                                                    <span><%-e('dyes')%></span>
-                                                <% } else { %>
-                                                    <span><%-e('dno')%></span>
-                                                <% } %>
-                                            </div>
-    
-                                        <% } else { %> 
-                                            
-                                            <div class="value">
-                                                <div class="preloader5"><img src="./img/three-dots.svg"/></div>
-                                            </div>
-    
-                                        <% } %>
-                                    </div>
-                                </div>
+
     
                                     <% if(!nc.lock && (proxy.direct || showdirect)) {%>
                                         <!-- <div class="setting systempath">
@@ -286,19 +256,45 @@
                                         </div> -->
     
                                         <div class="setting systempath">
-                                            <div>
-                                                <span><%-e('easyNode_e10012')%></span>
-                                            </div>
+                                      
                                             <div class="settingTable table pathWrapper">
-    
     
                                                 <div class="path" <% if(!system.node.enabled) {%> sys="ndataPath" <% } %> path="<%-system.node.ndataPath%>" >
                                                     <span><%- nc.node.dataPath %></span>
                                                 </div>
                                                 <div class="choosePath">
-                                                    <input type="file" class="folderInput" id="folderInput" webkitdirectory>
+                                                    <button class="choosePathButton">
+                                                        <%-e('change')%>
+                                                    </button>
                                                 </div>
     
+                                            </div>
+                                        </div>
+
+                                        <div class="snapshot setting togglebutton">
+                                            
+                                            <div class="settingTable table">
+                                                <div class="label">
+                                                    <span><%-e('easyNode_e10010')%></span>
+                                                </div>
+            
+                                                <% if(!dis) {%>
+            
+                                                    <div class="value" sys="nodeenabled">
+                                                        <% if (system.node.enabled) { %>
+                                                            <span><%-e('dyes')%></span>
+                                                        <% } else { %>
+                                                            <span><%-e('dno')%></span>
+                                                        <% } %>
+                                                    </div>
+            
+                                                <% } else { %> 
+                                                    
+                                                    <div class="value">
+                                                        <div class="preloader5"><img src="./img/three-dots.svg"/></div>
+                                                    </div>
+            
+                                                <% } %>
                                             </div>
                                         </div>
                                         
@@ -378,6 +374,9 @@
     
                             <div class="stats">
                                 <div class="required">
+                                    <span class="icon">
+                                        <i class="fas fa-check-circle"></i>
+                                    </span>
                                     <span>
                                         <%-e('required')%>: 150 GB
                                     </span>

@@ -155,6 +155,8 @@ var IPC = function(ipc, wc, ComLayer){
 				return Promise.reject()
 			})
         }
+
+
 	}
 
 	var middles = {
@@ -170,8 +172,9 @@ var IPC = function(ipc, wc, ComLayer){
 							ndataPath : res[0]
 						}
 
+						console.log('message: ', message);
 
-						return Promise.resolve()
+						return Promise.resolve(res[0])
 
 					})
 				},
