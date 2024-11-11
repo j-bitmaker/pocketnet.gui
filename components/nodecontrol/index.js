@@ -578,7 +578,7 @@ var nodecontrol = (function(){
 
 						var toggleDiskSpace = function(){
 
-							checkDiskSpace(system.node.ndataPath).then((diskSpace) => {
+							checkDiskSpace(info.nodeControl.node.dataPath).then((diskSpace) => {
 
 								var freeGB = (diskSpace.free / 1000 / 1000 / 1000).toFixed(1);
 								var sizeGB = (diskSpace.size  / 1000 / 1000 / 1000).toFixed(1);
