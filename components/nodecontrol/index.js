@@ -534,6 +534,8 @@ var nodecontrol = (function(){
 						dis = (new Date()) < ((new Date(timestamp)).addSeconds(5))
 					}
 
+					console.log('info.nodeControl', info.nodeControl, system.node);
+
 					self.shell({
 						inner : html,
 						name : 'nodecontentmanage',
@@ -587,7 +589,7 @@ var nodecontrol = (function(){
 								p.el.find('.free').text(String(freeGB));
 								p.el.find('.size').text(String(sizeGB));
 
-								toggleEnabled(freeGB > 150 ? 1 : -1)
+								toggleEnabled(freeGB > 120 ? 1 : -1)
 
 								console.log('diskspace', diskSpace, freeGB, sizeGB);
 
@@ -673,6 +675,10 @@ var nodecontrol = (function(){
 						})
 
 						p.el.find('.install').on('click', () => {
+
+							if (!system.node.ndataPath){
+								return sitemessage(self.app.localization.e('easyNode_e10009'));
+							}
 
 							if (enabledInstall === 0){
 								return sitemessage(self.app.localization.e('e28error'));
