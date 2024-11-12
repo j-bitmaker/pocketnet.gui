@@ -84,7 +84,7 @@
                                 </div>
                             </div>
     
-                                <% if(!nc.lock && (proxy.direct || showdirect)) {%>
+                                <!-- <% if(!nc.lock && (proxy.direct || showdirect)) {%>
                                     
                                     <% if((system.node.ndataPath || system.node.binPath) && !system.node.enabled) {%>
                                         <div class="setting systempathsDefaults">
@@ -105,7 +105,7 @@
                                     <% } %>
     
                                 <% } %>
-    
+     -->
                                 <% if(nc.hasbin && !nc.lock) {%>
                                     <div class="setting update">
                                         <div class="settingTable table">
@@ -260,7 +260,7 @@
                                             <div class="settingTable table pathWrapper">
     
                                                 <div class="path" <% if(!system.node.enabled) {%> sys="ndataPath" <% } %> path="<%-system.node.ndataPath%>" >
-                                                    <span><%- nc.node.dataPath %></span>
+                                                    <span><%- system.node.ndataPath %></span>
                                                 </div>
                                                 <div class="choosePath">
                                                     <button class="choosePathButton">
@@ -270,6 +270,24 @@
     
                                             </div>
                                         </div>
+
+                                        <% if((system.node.ndataPath || system.node.binPath) && !system.node.enabled) {%>
+                                            <div class="setting systempathsDefaults">
+                                                <div class="settingTable table">
+                                                    <div class="label">
+                                                        <span><%-e('easyNode_e10013')%></span>
+                                                    </div>
+                                
+                                                    <div elementsid="toDefaultPath" class="value toDefaultPath">
+                                                        <div>
+                                                            <span>
+                                                                <%-e('easyNode_e10014')%>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <% } %>
 
                                         <div class="snapshot setting togglebutton">
                                             
@@ -297,24 +315,6 @@
                                                 <% } %>
                                             </div>
                                         </div>
-                                        
-                                        <% if((system.node.ndataPath || system.node.binPath) && !system.node.enabled) {%>
-                                            <div class="setting systempathsDefaults">
-                                                <div class="settingTable table">
-                                                    <div class="label">
-                                                        <span><%-e('easyNode_e10013')%></span>
-                                                    </div>
-                                
-                                                    <div elementsid="toDefaultPath" class="value toDefaultPath">
-                                                        <div>
-                                                            <span>
-                                                                <%-e('easyNode_e10014')%>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        <% } %>
     
                                     <% } %>
     
@@ -408,12 +408,13 @@
                                 
                             </div>
     
-                            <div elementsid="notfoundinstall" class="notfound install">
+                            <div elementsid="notfoundinstall" class="notfound install <%- system.node.ndataPath ? 'active' : 'inactive' %> ">
                                 <div class="text">
                                     <%-e('easyNode_e10001')%>
                                 </div>
                             </div>  
     
+
                         <% } else if (!nc.hasbin && !nc.other) { %> 
                             
                             <div class="notfound">

@@ -237,6 +237,8 @@
         }
 
         &.systempath {
+            margin-bottom: @rhythm * 2;
+            
             .value {
                 color : rgb(var(--neutral-grad-2));
             }
@@ -254,9 +256,14 @@
                 }
 
                 .choosePath{
+                    padding: 0;
                     margin-left: @rhythm * 2;
                     display: flex;
-                    align-items: center
+                    align-items: center;
+
+                    .choosePathButton{
+                        padding: @rhythm * 2;
+                    }
                 }
             }
         }
@@ -325,10 +332,6 @@
         .step-install{
             display: none;
 
-            .snapshot{
-                margin-top: @rhythm * 2;
-            }
-
             .stats{
 
                 display: flex;
@@ -394,14 +397,18 @@
             &.enabled{
 
                 .install {
-                    background : rgba(var(--color-cc-dark-blue), .9);
-                    cursor: pointer;
-        
-                    .transition(0.3s);
-        
-                    &:hover{
-                        background : rgba(var(--color-cc-dark-blue, 1));
+
+                    &.active{
+                        background : rgba(var(--color-cc-dark-blue), .9);
+                        cursor: pointer;
+            
+                        .transition(0.3s);
+            
+                        &:hover{
+                            background : rgba(var(--color-cc-dark-blue, 1));
+                        }
                     }
+
                 }
             }
         }
