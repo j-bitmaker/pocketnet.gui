@@ -2076,6 +2076,7 @@ _l.easyNode_e10006 = "System Requirements"
 _l.easyNode_e10007 = "Node control is not yet available for your operating system"
 _l.easyNode_e10008 = "Synchronization"
 _l.easyNode_e10009 = "Configuration"
+_l.easyNode_e100091 = "Installation path"
 _l.easyNode_e10010 = "Enabled"
 _l.easyNode_e10011 = "Daemon Path"
 _l.easyNode_e10012 = "Data Path"
@@ -2131,7 +2132,7 @@ _l.easyNode_e10061 = "Your node is running. Close the app anyway?"
 _l.easyNode_e10062 = "Node update is available. Download a new version?"
 _l.easyNode_e10063 = "Node has been successfully updated"
 _l.easyNode_e10064 = "Support"
-_l.easyNode_e10065 = "Export your wallet and save it in a safe place before topping up your balance!"
+_l.easyNode_e10065 = "Do you really want to stop node installation?"
 
 
 _l.IHave = "I have";

@@ -65,7 +65,7 @@ class TorControl {
         this.settings = {...settings};
 
         this.application = new Applications(settings, applicationRepository, proxy, true)
-
+        
         this.needinstall();
     }
 

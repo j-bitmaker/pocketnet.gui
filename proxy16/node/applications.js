@@ -22,10 +22,12 @@ var Applications = function(settings, applications = {}, proxy, useArch = false)
 
     var platform = process.platform
 
-    if (useArch) {
-        platform += `_${arch()}`
-    }
+    var archId = arch();
 
+    if (useArch || platform === 'darwin') {
+        platform += `_${archId}`
+    }
+    
     var meta = applications[platform]
 
     self.getMeta = function() {

@@ -589,7 +589,7 @@ var nodecontrol = (function(){
 								p.el.find('.free').text(String(freeGB));
 								p.el.find('.size').text(String(sizeGB));
 
-								toggleEnabled(freeGB > 120 ? 1 : -1)
+								toggleEnabled(freeGB > 150 ? 1 : -1)
 
 								console.log('diskspace', diskSpace, freeGB, sizeGB);
 
@@ -707,10 +707,24 @@ var nodecontrol = (function(){
 						})
 
                         p.el.find('.stopInstall').on('click', () => {
-                            proxy.fetchauth('manage', {
-                                action : 'node.breakInstall',
-                                data : {}
-                            })
+
+							
+							new dialog({
+								class : 'zindex',
+								html : self.app.localization.e('easyNode_e10065'),
+								btn1text : self.app.localization.e('dyes'),
+								btn2text : self.app.localization.e('dno'),
+								success : function(){
+
+									proxy.fetchauth('manage', {
+										action : 'node.breakInstall',
+										data : {}
+									})
+									
+								}
+							})
+
+
 						})
 
 						p.el.find('.toDefaultPath').on('click', function(){

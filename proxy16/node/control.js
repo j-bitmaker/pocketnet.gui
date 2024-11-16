@@ -45,9 +45,27 @@ var Control = function(settings, proxy) {
             }
         },
 
-        darwin: {
+        darwin_x64: {
             bin: {
                 name: "_macos_x64_daemon.bin",
+                url: 'https://api.github.com/repos/pocketnetapp/pocketnet.core/releases/latest',
+                page: 'https://github.com/pocketnetteam/pocketnet.core/releases/latest'
+            },
+            snapshot_latest: {
+                permanent: true,
+                name: "latest.tgz",
+                url: 'https://snapshot.pocketnet.app/latest.tgz'
+            },
+            bin_permanent: {
+                permanent: true,
+                name: "https://dev.pocketnet.app/binaries/core/pocketcoind",
+                url: 'https://dev.pocketnet.app/binaries/core/pocketcoind'
+            },
+        },
+
+        darwin_arm64: {
+            bin: {
+                name: "_macos_arm64_daemon.bin",
                 url: 'https://api.github.com/repos/pocketnetapp/pocketnet.core/releases/latest',
                 page: 'https://github.com/pocketnetteam/pocketnet.core/releases/latest'
             },
