@@ -2073,6 +2073,9 @@ _l.easyNode_e10007 = "Node control is not yet available for your operating syste
 _l.easyNode_e10008 = "Synchronization"
 _l.easyNode_e10009 = "Configuration"
 _l.easyNode_e100091 = "Installation path"
+_l.change = "Change"
+
+
 _l.easyNode_e10010 = "Enabled"
 _l.easyNode_e10011 = "Daemon Path"
 _l.easyNode_e10012 = "Data Path"
@@ -2129,6 +2132,9 @@ _l.easyNode_e10062 = "Node update is available. Download a new version?"
 _l.easyNode_e10063 = "Node has been successfully updated"
 _l.easyNode_e10064 = "Support"
 _l.easyNode_e10065 = "Do you really want to stop node installation?"
+
+_l.easyNode_e100065 = "What is staking?"
+_l.easyNode_e100066 = "Staking is the act of depositing 32 ETH to activate the validator software. As a validator, you will be responsible for storing data, processing transactions, and adding new blocks to the blockchain. This will keep Ethereum secure for everyone and earn you ETH in the process."
 
 
 _l.IHave = "I have";
