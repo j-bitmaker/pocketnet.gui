@@ -57,6 +57,8 @@ const privates = {
     dumpwallet: true,
     importwallet: true,
     sendtoaddress: true,
+    gethdseed: true,
+    sethdseed: true
 }
 
 const posts = {
@@ -466,6 +468,8 @@ RpcClient.callspec = {
     //listAccounts: 'int',
     listaddressgroupings: '',
     getnewaddress: '',
+    gethdseed: '',
+    sethdseed: '',
     listaddresses: '',
     listReceivedByAccount: 'int bool',
     listReceivedByAddress: 'int bool',
