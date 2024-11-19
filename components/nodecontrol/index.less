@@ -522,7 +522,7 @@
                 justify-content: center;
 
                 img{
-                    height: 95px;
+                    height: 125px;
                 }
             }
 
@@ -572,13 +572,15 @@
                     font-size: @rhythm * 2.5;
                     background: rgb(var(--background-total-theme));
                     color: rgba(var(--neutral-grad-3), .9);
-                    border: 1px solid rgb(var(--neutral-grad-3));
+                    border: 1px solid rgba(var(--neutral-grad-3), .8);
                     cursor: pointer;
                     border-radius: 8px;
                     .transition(0.3s);
                     
                     &:hover{
                         color: rgba(var(--neutral-grad-3), 1);
+                        border: 1px solid rgba(var(--neutral-grad-3), 1);
+
                     }
                 }
 

@@ -32,7 +32,7 @@
             <!-- Section `Node state` -->
             <% if(nc.hasbin && !nc.lock) { %>
 
-                <% if(imported) { %>
+                <% if(!imported) { %>
 
                     <div class="nodecontent">
                         <div class="work nodestatebox">
@@ -316,32 +316,6 @@
                                             </div>
                                         <% } %>
 
-                                        <div class="snapshot setting togglebutton">
-                                            
-                                            <div class="settingTable table">
-                                                <div class="label">
-                                                    <span><%-e('easyNode_e10010')%></span>
-                                                </div>
-            
-                                                <% if(!dis) {%>
-            
-                                                    <div class="value" sys="nodeenabled">
-                                                        <% if (system.node.enabled) { %>
-                                                            <span><%-e('dyes')%></span>
-                                                        <% } else { %>
-                                                            <span><%-e('dno')%></span>
-                                                        <% } %>
-                                                    </div>
-            
-                                                <% } else { %> 
-                                                    
-                                                    <div class="value">
-                                                        <div class="preloader5"><img src="./img/three-dots.svg"/></div>
-                                                    </div>
-            
-                                                <% } %>
-                                            </div>
-                                        </div>
     
                                     <% } %>
     
