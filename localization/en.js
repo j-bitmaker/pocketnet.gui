@@ -2151,6 +2151,12 @@ _l.easyNode_e2002_1 = " earns "
 _l.easyNode_e2002_2 = "Pocketcoin. Your computer can be one of those nodes, assuming you have at least 50 GB of free SSD space and a decent internet connection.  Node has to lock some Pocketcoin in it to"
 _l.easyNode_e2002_2_1 = " earn "
 _l.easyNode_e2002_2_2 = "more Pocketcoin. That is called staking in cryptocurency."
+
+_l.easyNode_e2003 = "Node installation completed";
+_l.easyNode_e2004 = "Create a new wallet or import an existing one";
+_l.easyNode_e2005 = "Create new";
+_l.easyNode_e2006 = "Import";
+
 _l.minPkoin = function (p){
 	return  String(p) + " PKOIN Minimum"
 }

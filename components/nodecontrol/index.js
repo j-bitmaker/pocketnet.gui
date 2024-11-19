@@ -97,6 +97,7 @@ var nodecontrol = (function(){
 				})
 			},
             'importWallet' : function(caller, defaultPath){
+
 				return proxy.system.request('set.node.importWallet', {}).then(r => {
 
                     sitemessage(`${self.app.localization.e('easyNode_e10042')}`, null, 5000) // self.app.localization.e('successcopied')
@@ -547,7 +548,8 @@ var nodecontrol = (function(){
 							proxy : proxy,
 							system : system,
 							dis : false,
-							showdirect : true
+							showdirect : true,
+							imported: false
 						},
 
 						el : elc.find('.manage')

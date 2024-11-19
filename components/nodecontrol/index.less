@@ -514,6 +514,80 @@
             font-weight: 400;
         }
 
+        .chooseWallet{
+
+            .imgWrapper{
+                margin-top: @rhythm * 3;
+                display: flex;
+                justify-content: center;
+
+                img{
+                    height: 95px;
+                }
+            }
+
+            .textsWrapper{
+                margin-top: @rhythm * 3;
+
+                .title, .subtitle{
+                    text-align: center;
+                }
+
+                .title{
+                    font-weight: 800;
+                    font-size: @rhythm * 2.5;
+                }
+                
+                .subtitle{
+                    margin-top: @rhythm;
+                    font-size: @rhythm * 2.5;
+                }
+            }
+
+            .buttonsWrapper{
+                display: flex;
+                gap: 10px;
+                margin-top: @rhythm * 6;
+                padding-bottom: 20px;
+
+
+                .createWallet{
+                    width: 100%;
+                    font-size: @rhythm * 2.5;
+                    background : rgba(var(--color-cc-dark-blue), .9);
+                    color: #FFFFFF;
+                    cursor: pointer;
+                    border-radius: 8px;
+        
+                    .transition(0.3s);
+        
+                    &:hover{
+                        background : rgba(var(--color-cc-dark-blue, 1));
+                    }
+                    
+                }
+
+                .importWallet {
+                    width: 100%;
+                    font-size: @rhythm * 2.5;
+                    background: rgb(var(--background-total-theme));
+                    color: rgba(var(--neutral-grad-3), .9);
+                    border: 1px solid rgb(var(--neutral-grad-3));
+                    cursor: pointer;
+                    border-radius: 8px;
+                    .transition(0.3s);
+                    
+                    &:hover{
+                        color: rgba(var(--neutral-grad-3), 1);
+                    }
+                }
+
+
+            }
+
+
+        }
+
         .installingStep{
 
 
@@ -583,7 +657,6 @@
 
                 }
             }
-
 
             .stopInstall {
                 margin-top: @rhythm * 4;

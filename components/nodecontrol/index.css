@@ -388,6 +388,66 @@
 #nodecontrol .nodecontentmanage .value.balance {
   font-weight: 400;
 }
+#nodecontrol .nodecontentmanage .chooseWallet .imgWrapper {
+  margin-top: 1.5em;
+  display: flex;
+  justify-content: center;
+}
+#nodecontrol .nodecontentmanage .chooseWallet .imgWrapper img {
+  height: 95px;
+}
+#nodecontrol .nodecontentmanage .chooseWallet .textsWrapper {
+  margin-top: 1.5em;
+}
+#nodecontrol .nodecontentmanage .chooseWallet .textsWrapper .title,
+#nodecontrol .nodecontentmanage .chooseWallet .textsWrapper .subtitle {
+  text-align: center;
+}
+#nodecontrol .nodecontentmanage .chooseWallet .textsWrapper .title {
+  font-weight: 800;
+  font-size: 1.25em;
+}
+#nodecontrol .nodecontentmanage .chooseWallet .textsWrapper .subtitle {
+  margin-top: 0.5em;
+  font-size: 1.25em;
+}
+#nodecontrol .nodecontentmanage .chooseWallet .buttonsWrapper {
+  display: flex;
+  gap: 10px;
+  margin-top: 3em;
+  padding-bottom: 20px;
+}
+#nodecontrol .nodecontentmanage .chooseWallet .buttonsWrapper .createWallet {
+  width: 100%;
+  font-size: 1.25em;
+  background: rgba(var(--color-cc-dark-blue), 0.9);
+  color: #FFFFFF;
+  cursor: pointer;
+  border-radius: 8px;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+#nodecontrol .nodecontentmanage .chooseWallet .buttonsWrapper .createWallet:hover {
+  background: rgba(var(--color-cc-dark-blue, 1));
+}
+#nodecontrol .nodecontentmanage .chooseWallet .buttonsWrapper .importWallet {
+  width: 100%;
+  font-size: 1.25em;
+  background: rgb(var(--background-total-theme));
+  color: rgba(var(--neutral-grad-3), 0.9);
+  border: 1px solid rgb(var(--neutral-grad-3));
+  cursor: pointer;
+  border-radius: 8px;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+#nodecontrol .nodecontentmanage .chooseWallet .buttonsWrapper .importWallet:hover {
+  color: rgba(var(--neutral-grad-3), 1);
+}
 #nodecontrol .nodecontentmanage .installingStep .title {
   font-size: 1.25em;
   text-align: start;
