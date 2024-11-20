@@ -83,6 +83,19 @@ var nodecontrol = (function(){
 				}).catch(e => {
 				})
 			},
+			'createWallet' : function(caller, defaultPath){
+				return proxy.system.request('set.node.dumpWallet', {}).then(r => {
+
+                    if (r.filename)
+                        sitemessage(`${self.app.localization.e('easyNode_e10041')} ${r.filename}`, null, 5000) // self.app.localization.e('successcopied')
+
+				}).catch(e => {
+                    if (e.code && e.message)
+                        sitemessage(`(${self.app.localization.e('dcode')} ${e.code}): ${e.message}`, null, 5000)
+                    else
+                        sitemessage(`Unknown error`)
+				})
+			},
             'dumpWallet' : function(caller, defaultPath){
 				return proxy.system.request('set.node.dumpWallet', {}).then(r => {
 

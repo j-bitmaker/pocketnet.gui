@@ -32,7 +32,7 @@
             <!-- Section `Node state` -->
             <% if(nc.hasbin && !nc.lock) { %>
 
-                <% if(!imported) { %>
+                <% if(imported) { %>
 
                     <div class="nodecontent">
                         <div class="work nodestatebox">
@@ -176,7 +176,7 @@
                             </div>
                         </div>
                         <div class="buttonsWrapper">
-                            <button elementsid="nodedumpwallet" sys="dumpWallet" class="createWallet"><%-e('easyNode_e2005')%></button>
+                            <button elementsid="nodecreatewallet" sys="createWallet" class="createWallet"><%-e('easyNode_e2005')%></button>
                             <button elementsid="nodeimportwallet" sys="importWallet" class="importWallet"><%-e('easyNode_e2006')%></button>
                         </div>
 
