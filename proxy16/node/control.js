@@ -227,7 +227,8 @@ var Control = function(settings, proxy) {
                     'rpcuser=' + f.randomString(10) + EOL +
                     'rpcpassword=' + f.randomString(256) + EOL +
                     'api=1' + EOL +
-                    'rest=0' + EOL
+                    'rest=0' + EOL +
+                    'autowallet=0' + EOL
     
                 fs.writeFileSync(node.confPath, data)
             }
