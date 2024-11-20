@@ -220,6 +220,8 @@ var Control = function(settings, proxy) {
                     'server=1' + EOL +
                     'port=37070' + EOL +
                     'rpcport=37071' + EOL +
+                    'rpcbind=127.0.0.1' + EOL +
+                    'rpcallowip=127.0.0.1' + EOL +
                     'publicrpcport=38081' + EOL +
                     'staticrpcport=38082' + EOL +
                     'restrpcport=38083' + EOL +
@@ -227,7 +229,8 @@ var Control = function(settings, proxy) {
                     'rpcuser=' + f.randomString(10) + EOL +
                     'rpcpassword=' + f.randomString(256) + EOL +
                     'api=1' + EOL +
-                    'rest=0' + EOL
+                    'rest=0' + EOL +
+                    'autowallet=0' + EOL
     
                 fs.writeFileSync(node.confPath, data)
             }
