@@ -231,6 +231,15 @@ __map =  {
 
 	],
 
+
+    hdseed  : {
+		uri : "hdseed",
+		href : "hdseed",
+		add : insertingfunc,
+
+
+	},   
+
     pkview  : {
 		uri : "pkview",
 		href : "pkview",
@@ -1108,6 +1117,13 @@ __map =  {
 			{src : 'js/vendor/qr/qrscanner.js',			   f : 'js'},	
 			
 		]
+	},
+
+	importwallet : {
+		uri : "importwallet",
+		href : "importwallet",
+		add : insertingfunc
+
 	},
 
 	complain : {

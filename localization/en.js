@@ -2161,6 +2161,19 @@ _l.easyNode_e2004 = "Create a new wallet or import an existing one";
 _l.easyNode_e2005 = "Create new";
 _l.easyNode_e2006 = "Import";
 
+_l.easyNode_e2007 = "Export wallet file";
+_l.easyNode_e2008 = "Obtain HDSEED key";
+
+_l.easyNode_e2009 = "This is the HDSEED key for your wallet. Do not lose it and do not share it with anyone.";
+_l.easyNode_e2010 = "Save or write down this key for your wallet to avoid losing access to it. We do not store your personal data.";
+_l.easyNode_e2011 = "HDSEED key";
+_l.easyNode_e2012 = "Copy HDSEED key";
+
+_l.createwalletq = "Do you really want to create wallet?"
+
+_l.loadwalletfile = "Import wallet file (dump)"
+
+
 _l.minPkoin = function (p){
 	return  String(p) + " PKOIN Minimum"
 }

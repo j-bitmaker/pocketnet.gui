@@ -197,7 +197,9 @@ var IPC = function(ipc, wc, ComLayer){
 
 					})
 				},
+
                 dumpWallet : function(message) {
+					console.log('dumpWallet!!')
 					return helpers.saveFileDialog({
 						properties: ['dontAddToRecent'],
                         defaultPath: message.data.defaultPath || ''
@@ -210,25 +212,26 @@ var IPC = function(ipc, wc, ComLayer){
 						return Promise.resolve()
 					})
 				},
-                importWallet : function(message) {
-					return helpers.openFileDialog({
-						properties: ['openFile'],
-                        defaultPath: message.data.defaultPath || ''
-					}).then(res => {
+                // importWallet : function(message) {
+				// 	return helpers.openFileDialog({
+				// 		properties: ['openFile'],
+                //         defaultPath: message.data.defaultPath || ''
+				// 	}).then(res => {
 
-                        message.data = {
-							path : res[0]
-						}
+                //         message.data = {
+				// 			path : res[0]
+				// 		}
 
-						return Promise.resolve()
-					}).catch(e => {
-                        return Promise.reject({
-							cancel : true
-						})
-                    })
-				},
+				// 		return Promise.resolve()
+				// 	}).catch(e => {
+                //         return Promise.reject({
+				// 			cancel : true
+				// 		})
+                //     })
+				// },
 			}
 		}
+
 
 	}
 

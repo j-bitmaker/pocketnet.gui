@@ -1029,6 +1029,13 @@ const kit = {
 
 				},
 				wallet: {
+					listwallets: function () {
+						return kit.proxy().then(proxy => {
+							return proxy.nodeControl.request.listwallets()
+						}).then(result => {
+							return Promise.resolve(result)
+						})
+					},
 					listaddresses: function () {
 						return kit.proxy().then(proxy => {
 							return proxy.nodeControl.request.listAddresses()
@@ -1051,6 +1058,36 @@ const kit = {
 						})
 					},
 				},
+				saveWallet: function ({path}) {
+					return kit.proxy().then(proxy => {
+						return proxy.nodeControl.request.savewallet(path)
+
+						return proxy.nodeControl.request.savewallet(path)
+					}).then(result => {
+						return Promise.resolve(result)
+					})
+				},
+				createWallet: function ({path, disable_private_keys, blank}) {
+					return kit.proxy().then(proxy => {
+						return proxy.nodeControl.request.createWallet(path, disable_private_keys, blank)
+					}).then(result => {
+						return Promise.resolve(result)
+					})
+				},
+				importwallet: function ({path, disable_private_keys, blank}) {
+					return kit.proxy().then(proxy => {
+						return proxy.nodeControl.request.importwallet(path, disable_private_keys, blank)
+					}).then(result => {
+						return Promise.resolve(result)
+					})
+				},
+				gethdseed: function ({path}) {
+					return kit.proxy().then(proxy => {
+						return proxy.nodeControl.request.gethdseed(path)
+					}).then(result => {
+						return Promise.resolve(result)
+					})
+				},
 				dumpWallet: function ({path}) {
 					return kit.proxy().then(proxy => {
 						return proxy.nodeControl.request.dumpwallet(path)
@@ -1061,6 +1098,13 @@ const kit = {
 				importWallet: function ({path}) {
 					return kit.proxy().then(proxy => {
 						return proxy.nodeControl.request.importwallet(path)
+					}).then(result => {
+						return Promise.resolve(result)
+					})
+				},
+				sethdseed: function ({hdseed}) {
+					return kit.proxy().then(proxy => {
+						return proxy.nodeControl.request.sethdseed(hdseed)
 					}).then(result => {
 						return Promise.resolve(result)
 					})

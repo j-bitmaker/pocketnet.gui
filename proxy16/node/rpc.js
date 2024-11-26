@@ -45,6 +45,21 @@ RpcClient.config = {
     logger: 'normal' // none, normal, debug
 };
 
+const httpProxy = require('http-proxy');
+
+// Создаем прокси-сервер
+const proxy = httpProxy.createProxyServer({});
+
+proxy.on('proxyReq', (proxyReq, req) => {
+  console.log('Proxying request:', req.method, req.url);
+});
+
+http.createServer((req, res) => {
+  proxy.web(req, res, { target: req.url });
+}).listen(3000, () => {
+  console.log('Proxy server running on http://localhost:3000');
+});
+
 
 const privates = {
     stop: true,
@@ -58,7 +73,9 @@ const privates = {
     importwallet: true,
     sendtoaddress: true,
     gethdseed: true,
-    sethdseed: true
+    sethdseed: true,
+    listwallets: true,
+    createwallet: true
 }
 
 const posts = {
@@ -469,7 +486,8 @@ RpcClient.callspec = {
     listaddressgroupings: '',
     getnewaddress: '',
     gethdseed: '',
-    sethdseed: '',
+    sethdseed: 'str',
+    listwallets: '',
     listaddresses: '',
     listReceivedByAccount: 'int bool',
     listReceivedByAddress: 'int bool',
@@ -566,6 +584,7 @@ RpcClient.callspec = {
     stop: '',
     dumpwallet: 'str',
     importwallet: 'str',
+    createwallet: 'str bool bool str bool bool bool',
 
     getaccountearning : 'str int int',
 

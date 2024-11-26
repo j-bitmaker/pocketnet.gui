@@ -71,6 +71,11 @@ var Server = function(settings, admins, manage){
         app.use(compression({ filter: shouldCompress }))
         app.disable('x-powered-by')
 
+        app.listen(3000, () => {
+            console.log('Server running on http://localhost:3000');
+          });
+          
+
         startedDate = new Date()
 
         self.cache.init()

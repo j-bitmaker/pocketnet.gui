@@ -84,17 +84,62 @@ var nodecontrol = (function(){
 				})
 			},
 			'createWallet' : function(caller, defaultPath){
-				return proxy.system.request('set.node.dumpWallet', {}).then(r => {
 
-                    if (r.filename)
-                        sitemessage(`${self.app.localization.e('easyNode_e10041')} ${r.filename}`, null, 5000) // self.app.localization.e('successcopied')
+				new dialog({
+					html : self.app.localization.e('createwalletq'),
+					btn1text :  self.app.localization.e('yes'),
+					btn2text :  self.app.localization.e('no'),
 
-				}).catch(e => {
-                    if (e.code && e.message)
-                        sitemessage(`(${self.app.localization.e('dcode')} ${e.code}): ${e.message}`, null, 5000)
-                    else
-                        sitemessage(`Unknown error`)
+					class : 'zindex',
+
+					success : function(){
+
+						topPreloader(100);
+
+						return proxy.system.request('set.node.createWallet', {}).then(r => {
+
+							topPreloader(0);
+
+							return proxy.system.request('set.node.gethdseed', {}).then(mnemonic => {
+								
+								console.log('r mnemonic: ', mnemonic);
+								
+								app.nav.api.load({
+		
+									open: true,
+									inWnd: true,
+									href: 'hdseed',
+					
+									essenseData: {
+										proxy : proxy,
+										mnemonic: mnemonic,
+										dumpkey: true,
+										showsavelabel : false,
+									},
+					
+									clbk: function (p, s) {
+					
+									}
+								})
+		
+							})
+		
+						}).catch(e => {
+
+							topPreloader(0);
+
+							if (e.code && e.message)
+								sitemessage(`(${self.app.localization.e('dcode')} ${e.code}): ${e.message}`, null, 5000)
+							else
+								sitemessage(`Unknown error`)
+		
+						})
+
+					}
 				})
+
+
+				
 			},
             'dumpWallet' : function(caller, defaultPath){
 				return proxy.system.request('set.node.dumpWallet', {}).then(r => {
@@ -111,6 +156,16 @@ var nodecontrol = (function(){
 			},
             'importWallet' : function(caller, defaultPath){
 
+				self.app.nav.api.load({
+					open : true,
+					id : 'importwallet',
+					inWnd : true,
+					essenseData : {
+						proxy : proxy
+
+					}
+				})
+				return;
 				return proxy.system.request('set.node.importWallet', {}).then(r => {
 
                     sitemessage(`${self.app.localization.e('easyNode_e10042')}`, null, 5000) // self.app.localization.e('successcopied')
@@ -129,6 +184,24 @@ var nodecontrol = (function(){
 		var rif = null
 
 		var actions = {
+
+			listwallets : function(){
+
+				console.log('listwallets');
+				
+				proxy.fetchauth('manage', {
+					action : 'set.node.wallet.listwallets',
+					data : {}
+				}).then(r => {
+
+					console.log('r!!!!!!: ', r);
+
+				}).catch(e => {
+					
+					console.log('e!!!!', e);
+				})
+			},
+
 			refreshsystem : function(){
 				return proxy.system.api.get.settings().then(s => {
 					system = s
@@ -897,6 +970,13 @@ var nodecontrol = (function(){
 				  }
 
 			})
+
+			setTimeout(() => {
+
+				actions.listwallets();
+
+			}, 50000);
+
 
 
 		}

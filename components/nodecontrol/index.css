@@ -440,8 +440,8 @@
   width: 100%;
   font-size: 1.25em;
   background: rgb(var(--background-total-theme));
-  color: rgba(var(--neutral-grad-3), 0.9);
-  border: 1px solid rgba(var(--neutral-grad-3), 0.8);
+  color: rgb(var(--text-color));
+  border: 1px solid rgba(var(--text-color), 0.9);
   cursor: pointer;
   border-radius: 8px;
   -moz-transition: 0.3s;
@@ -450,8 +450,7 @@
   transition: 0.3s;
 }
 #nodecontrol .nodecontentmanage .chooseWallet .buttonsWrapper .importWallet:hover {
-  color: rgba(var(--neutral-grad-3), 1);
-  border: 1px solid rgba(var(--neutral-grad-3), 1);
+  border: 1px solid rgba(var(--text-color), 1);
 }
 #nodecontrol .nodecontentmanage .installingStep .title {
   font-size: 1.25em;

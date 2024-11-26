@@ -379,6 +379,12 @@ var Control = function(settings, proxy) {
     }
 
     self.request = {
+        listwallets: function() {
+            return self.kit.rpc('listwallets').then(result => {
+                console.log('result!!!!: ', result);
+                return Promise.resolve(result)
+            })
+        },
         getNodeInfo : function(){
             return self.kit.rpc('getnodeinfo')
         },
@@ -415,6 +421,19 @@ var Control = function(settings, proxy) {
             return self.kit.rpc('importprivkey', private)
         },
 
+        gethdseed: function() {
+            return self.kit.rpc('gethdseed', []).then(result => {
+                return Promise.resolve(result)
+            })
+        },
+        
+        createWallet: function(filePath = '', disable_private_keys = false, blank = false) {
+            console.log('createWallet???', filePath, disable_private_keys, blank);
+            return self.kit.rpc('createwallet', [filePath, disable_private_keys, blank]).then(result => {
+                return Promise.resolve(result)
+            })
+        },
+
         dumpwallet: function(filePath) {
             return self.kit.rpc('dumpwallet', filePath).then(result => {
                 return Promise.resolve(result)
@@ -422,9 +441,24 @@ var Control = function(settings, proxy) {
         },
 
         importwallet: function(filePath) {
+            console.log('importwallet???', filePath);
             return self.kit.rpc('importwallet', filePath).then(result => {
                 return Promise.resolve(result)
             })
+        },
+
+        sethdseed: function(hdseed) {
+            var request =  self.kit.rpc('sethdseed', hdseed).then((result, req, body) => {
+                console.log('reesult', result, req, body);
+                return Promise.resolve(result)
+            }).catch((err, req, body) => {
+                console.log('error: ', err, req, body);
+
+            })
+
+            console.log('request: ', request);
+
+            return request;
         },
 
         getNotifications: function(blocks) {

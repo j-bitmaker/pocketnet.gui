@@ -1,0 +1,129 @@
+#importwallet .work {
+  padding-top: 2em !important;
+  padding-bottom: 2em !important;
+}
+#importwallet .maket.leftPart {
+  background: rgb(var(--background-main));
+}
+#importwallet .caption {
+  font-size: 4.1em;
+  font-weight: 100;
+  margin-bottom: 0.5em !important;
+}
+#importwallet button {
+  min-width: 350px;
+}
+#importwallet button.toRegistration {
+  min-width: 190px;
+}
+#importwallet .inputTable > div {
+  vertical-align: middle;
+}
+#importwallet .inputTable > div .upload .fileUploader,
+#importwallet .inputTable > div .upload .fileUploader .elContent {
+  position: relative;
+}
+#importwallet .inputTable > div.actionButtonsWrapper {
+  width: 120px;
+  text-align: center;
+}
+#importwallet .inputTable > div.actionButtonsWrapper .fileUploader .inputWrapper input::-webkit-file-upload-button {
+  display: none;
+}
+#importwallet .inputTable > div.actionButtonsWrapper > div {
+  color: rgb(var(--color-txt-ac));
+  font-size: 0.8em;
+}
+#importwallet .sitelogin .form {
+  margin-top: 1.5em;
+}
+#importwallet .sitelogin .form .item {
+  margin-bottom: 1em;
+  width: 100%;
+}
+#importwallet .sitelogin .form .item.e {
+  margin-top: 2em;
+}
+#importwallet .sitelogin .form .item .label {
+  width: 100%;
+  font-size: 0.9em;
+  color: rgb(var(--color-txt-ac));
+  font-weight: 700;
+}
+#importwallet .sitelogin .form .item input {
+  margin: 0 auto;
+  padding: 1em;
+  width: 100%;
+  font-size: 1.5em;
+  font-weight: 100;
+  background: rgb(var(--background-total-theme));
+  color: rgb(var(--color-txt-ac));
+  border: 1px solid transparent;
+  -moz-transition: 0.4s;
+  -o-transition: 0.4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+#importwallet .sitelogin .form .item input:focus {
+  border: 1px solid rgb(var(--neutral-grad-1));
+  background: rgb(var(--background-total-theme));
+  color: rgb(var(--text-color));
+}
+#importwallet .sitelogin .form .item .validationFail {
+  color: rgb(var(--color-bad));
+  margin-left: 0.5em;
+  padding: 0.75em 0.5em;
+}
+.wnd.importwalletwnd .wndinner {
+  width: 100%;
+  height: 100%;
+  max-width: 570px;
+  max-height: 450px;
+}
+.wnd.importwalletwnd .wndcontent {
+  padding: 0;
+}
+.wnd.importwalletwnd #importwallet .work {
+  padding-top: 1em !important;
+  padding-bottom: 1em !important;
+}
+.wnd.importwalletwnd #importwallet .caption {
+  font-size: 2.1em;
+}
+.wnd.importwalletwnd #importwallet .inputTable > div {
+  vertical-align: middle;
+}
+.wnd.importwalletwnd #importwallet .inputTable > div .upload .fileUploader,
+.wnd.importwalletwnd #importwallet .inputTable > div .upload .fileUploader .elContent {
+  position: relative;
+}
+.wnd.importwalletwnd #importwallet .inputTable > div.actionButtonsWrapper {
+  width: 120px;
+  text-align: center;
+}
+.wnd.importwalletwnd #importwallet .inputTable > div.actionButtonsWrapper > div {
+  color: rgb(var(--color-txt-ac));
+  font-size: 0.8em;
+}
+/*t*/
+@media only screen and (max-width: 768px) {
+  #importwallet .work {
+    padding-top: 1em !important;
+    padding-bottom: 1em !important;
+    padding-left: 0.5em !important;
+    padding-right: 0.5em !important;
+  }
+  #importwallet .caption {
+    font-size: 2.1em;
+  }
+  #importwallet button {
+    width: 100%;
+    min-width: 0;
+  }
+  #importwallet button.toRegistration {
+    min-width: 0;
+  }
+  #importwallet .inputTable > div.actionButtonsWrapper {
+    width: 50%;
+  }
+}
