@@ -429,7 +429,7 @@ var Control = function(settings, proxy) {
         
         createWallet: function(filePath = '', disable_private_keys = false, blank = false) {
             console.log('createWallet???', filePath, disable_private_keys, blank);
-            return self.kit.rpc('createwallet', [filePath, disable_private_keys, blank]).then(result => {
+            return self.kit.rpc('createwallet', [filePath, disable_private_keys, blank, '', false, false, true]).then(result => {
                 return Promise.resolve(result)
             })
         },
