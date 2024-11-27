@@ -448,17 +448,9 @@ var Control = function(settings, proxy) {
         },
 
         sethdseed: function(hdseed) {
-            var request =  self.kit.rpc('sethdseed', hdseed).then((result, req, body) => {
-                console.log('reesult', result, req, body);
+            return self.kit.rpc('sethdseed', [true, hdseed]).then((result, req, body) => {
                 return Promise.resolve(result)
-            }).catch((err, req, body) => {
-                console.log('error: ', err, req, body);
-
             })
-
-            console.log('request: ', request);
-
-            return request;
         },
 
         getNotifications: function(blocks) {

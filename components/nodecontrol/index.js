@@ -161,23 +161,18 @@ var nodecontrol = (function(){
 					id : 'importwallet',
 					inWnd : true,
 					essenseData : {
-						proxy : proxy
+						proxy : proxy,
+						success : function(mnemonic){
 
-					}
+							console.log("success!!!", mnemonic);
+
+							sitemessage(`${self.app.localization.e('easyNode_e10042')}`, null, 5000);
+
+						}
+
+					}, 
 				})
-				return;
-				return proxy.system.request('set.node.importWallet', {}).then(r => {
 
-                    sitemessage(`${self.app.localization.e('easyNode_e10042')}`, null, 5000) // self.app.localization.e('successcopied')
-
-				}).catch(e => {
-                    if (!e.cancel) {
-                        if (e.code && e.message)
-                            sitemessage(`(${self.app.localization.e('dcode')} ${e.code}): ${e.message}`, null, 5000)
-                        else
-                            sitemessage(`Unknown error`)
-                    }
-				})
 			},
 		}
 
@@ -1061,8 +1056,6 @@ var nodecontrol = (function(){
 				el.c = p.el.find('#' + self.map.id);
 
 				make(proxy);
-
-
 				initEvents();
 
 				p.clbk(null, p);

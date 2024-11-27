@@ -30,13 +30,39 @@ var importwallet = (function(){
 			add : function(){
 				var p = {};
 
-				var mnemonicKey = trim(el.login.val());
+				var hdseed = trim(el.login.val());
 
-				if (essenseData.success)
-					essenseData.success(mnemonicKey);
+				globalpreloader(true);
 
-				self.closeContainer()
-				
+				return proxy.system.request('set.node.createWallet', {blank: true}).then(r => {
+
+					return proxy.system.request('set.node.sethdseed', {hdseed: hdseed}).then(mnemonic => {
+
+						console.log('r importwallet: ', mnemonic);
+
+						if (essenseData.success)
+							essenseData.success(mnemonic);
+
+						globalpreloader(false);
+
+						self.closeContainer();
+
+					})
+
+				}).catch(e => {
+
+					globalpreloader(false);
+
+
+					if (e.code && e.message)
+						sitemessage(`(${self.app.localization.e('dcode')} ${e.code}): ${e.message}`, null, 5000)
+					else
+						sitemessage(`Unknown error`)
+
+					self.closeContainer()
+
+
+				})				
 
 			},
 
@@ -103,19 +129,22 @@ var importwallet = (function(){
 				}, 10);
 			});
 
-			el.c.find('.uploadFile').on('change', function(file){
+			el.c.find('.inputUploadFile').on('change', function(file){
 
-				console.log('file!!!!::::??', file, this.files[0].mozFullPath, this.files[0]);	
-				
 				console.log('file!!!', file.path);
 
-				topPreloader(100);
+				globalpreloader(true);
 
 				return proxy.system.request('set.node.createWallet', {}).then(r => {
 
-					topPreloader(0);
-
 					return proxy.system.request('set.node.importwallet', {path: this.files[0].path}).then(mnemonic => {
+
+						globalpreloader(false);
+						
+						if (essenseData.success)
+							essenseData.success(mnemonic);
+
+						self.closeContainer();
 						
 						console.log('r importwallet: ', mnemonic);
 					
@@ -124,7 +153,7 @@ var importwallet = (function(){
 
 				}).catch(e => {
 
-					topPreloader(0);
+					globalpreloader(false);
 
 
 					if (e.code && e.message)

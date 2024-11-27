@@ -486,7 +486,7 @@ RpcClient.callspec = {
     listaddressgroupings: '',
     getnewaddress: '',
     gethdseed: '',
-    sethdseed: 'str',
+    sethdseed: 'bool str',
     listwallets: '',
     listaddresses: '',
     listReceivedByAccount: 'int bool',

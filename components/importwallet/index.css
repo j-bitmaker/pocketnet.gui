@@ -24,15 +24,21 @@
   position: relative;
 }
 #importwallet .inputTable > div.actionButtonsWrapper {
-  width: 120px;
+  width: 130px;
   text-align: center;
 }
-#importwallet .inputTable > div.actionButtonsWrapper .fileUploader .inputWrapper input::-webkit-file-upload-button {
+#importwallet .inputTable > div.actionButtonsWrapper .uploadFile {
+  cursor: pointer;
+}
+#importwallet .inputTable > div.actionButtonsWrapper .uploadFile input {
   display: none;
 }
 #importwallet .inputTable > div.actionButtonsWrapper > div {
   color: rgb(var(--color-txt-ac));
   font-size: 0.8em;
+}
+#importwallet .inputTable > div.actionButtonsWrapper i {
+  color: rgb(var(--color-txt-ac));
 }
 #importwallet .sitelogin .form {
   margin-top: 1.5em;
@@ -98,7 +104,7 @@
   position: relative;
 }
 .wnd.importwalletwnd #importwallet .inputTable > div.actionButtonsWrapper {
-  width: 120px;
+  width: 130px;
   text-align: center;
 }
 .wnd.importwalletwnd #importwallet .inputTable > div.actionButtonsWrapper > div {
