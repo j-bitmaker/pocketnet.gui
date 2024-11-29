@@ -438,6 +438,7 @@ var nodecontrol = (function(){
 							nodestate : info.nodeControl.state,
 							nc : info.nodeControl,
 							proxy : proxy,
+							address: 'jsd382x832ksa82a'
 						},
 
 						el : elc.find('.walletWrapper')

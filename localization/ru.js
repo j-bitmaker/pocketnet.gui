@@ -1908,8 +1908,8 @@ _l.easyNode_e10032 = "Версия"
 _l.easyNode_e10033 = "Блокчейн"
 _l.easyNode_e10034 = "Описание"
 _l.easyNode_e10035 = "Высота"
-_l.easyNode_e10036 = "Осталось меньше часа"
-_l.easyNode_e10037 = function(v) { return "Осталось менее "+v+"ч" }
+_l.easyNode_e10036 = "осталось меньше часа"
+_l.easyNode_e10037 = function(v) { return "осталось менее "+v+"ч" }
 _l.easyNode_e10038 = "Хеш блока"
 _l.easyNode_e10039 = "Выключить Ноду"
 _l.easyNode_e10040 = "Включить Ноду"
@@ -1977,6 +1977,11 @@ _l.easyNode_e2013= "Импортировать кошелёк";
 _l.easyNode_e2014 = "Введите HDSEED ключ или загрузите dump файл кошелька"
 _l.easyNode_e2015 =  "HDSEED ключ кошелька";
 _l.loadwalletfile = "Импортировать файл кошелька (dump)"
+
+_l.max = "Макс";
+_l.easyNode_e2013 = "Сумма ставки";
+_l.easyNode_e2014 = "В стекинге";
+_l.easyNode_e2015 = "Награды";
 
 
 _l.minPkoin = function (p){

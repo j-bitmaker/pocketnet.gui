@@ -10,7 +10,7 @@
 
 <% if(system && system.node) { %>
 
-    <div class="nodecontentmanage managepanel">
+    <div class="nodecontentmanage managepanel <%- (nc.hasbin && !nc.lock && imported) ? 'installed' : 'notinstalled' %>">
         
         <div class="felock">
             <div class="work">
@@ -36,20 +36,19 @@
 
                     <div class="nodecontent">
                         <div class="work nodestatebox">
-                            <div elementsid="nodestatebox" class="ssubcaption">
-                                <span><%-e('easyNode_e10008')%></span>
-                            </div>
                             <div class="nodestateWrapper"></div>
                         </div>
                     </div>
-    
+
+                    <% if(system.node.enabled && nodestate && !_.isEmpty(nodestate.info)) { %>
+                        <div class="walletWrapper"></div>
+                    <% } %>
+                    
                     <% if(system.node.enabled && nodestate && !_.isEmpty(nodestate.info)) { %>
                         <div class="stakingWrapper"></div>
                     <% } %>
                     
-                    <% if(system.node.enabled && nodestate && !_.isEmpty(nodestate.info)) { %>
-                        <div class="walletWrapper"></div>
-                    <% } %>
+
     
                     <div class="nodecontent collapsepart">
                         <div class="work configurationBox">

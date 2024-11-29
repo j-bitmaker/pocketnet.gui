@@ -2107,7 +2107,7 @@ _l.easyNode_e10032 = "Version"
 _l.easyNode_e10033 = "Chain"
 _l.easyNode_e10034 = "Description"
 _l.easyNode_e10035 = "Height"
-_l.easyNode_e10036 = "Less than an hour left"
+_l.easyNode_e10036 = "less than an hour left"
 _l.easyNode_e10037 = function(v) { return v + " hour(s) remaining" }
 _l.easyNode_e10038 = "Block Hash"
 _l.easyNode_e10039 = "Disable Node"
@@ -2168,6 +2168,13 @@ _l.easyNode_e2009 = "This is the HDSEED key for your wallet. Do not lose it and 
 _l.easyNode_e2010 = "Save or write down this key for your wallet to avoid losing access to it. We do not store your personal data.";
 _l.easyNode_e2011 = "HDSEED key";
 _l.easyNode_e2012 = "Copy HDSEED key";
+
+_l.max = "Max";
+_l.easyNode_e2013 = "Stake amount";
+_l.easyNode_e2014 = "In Stacking";
+_l.easyNode_e2015 = "Rewards";
+
+
 
 _l.createwalletq = "Do you really want to create wallet?"
 
