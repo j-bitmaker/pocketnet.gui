@@ -121,7 +121,7 @@ var hdseed = (function(){
 
 					p.el.find('.save').on('click', function(){
 
-						return proxy.system.request('set.node.dumpWallet', {}).then(r => {
+						return proxy.system.request('set.node.dumpWallet', {defaultPath: 'wallet.txt'}).then(r => {
 
 							console.log('r filename', r, r.filename);
 
