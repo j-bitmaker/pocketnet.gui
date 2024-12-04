@@ -2174,11 +2174,13 @@ _l.easyNode_e2013 = "Stake amount";
 _l.easyNode_e2014 = "In Stacking";
 _l.easyNode_e2015 = "Rewards";
 
-
-
-_l.createwalletq = "Do you really want to create wallet?"
-
+_l.easyNode_e2016 = "Import wallet";
+_l.easyNode_e2017 = "Enter HDSEED key or upload wallet dump file";
+_l.easyNode_e2018 = "Wallet HDSEED key";
 _l.loadwalletfile = "Import wallet file (dump)"
+
+_l.easyNode_nodeLoading = "The node is starting. Please wait.";
+_l.createwalletq = "Do you really want to create wallet?"
 
 
 _l.minPkoin = function (p){

@@ -590,6 +590,15 @@
 #nodecontrol .nodecontentmanage.lock .felock {
   display: block;
 }
+#nodecontrol .nodecontentmanage .nodeLoading {
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  padding: 1em;
+  min-height: 200px;
+  background: rgb(var(--background-total-theme));
+}
 #nodecontrol .nodecontentmanage .felock {
   position: absolute;
   left: 0;

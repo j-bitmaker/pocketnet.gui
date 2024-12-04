@@ -1971,17 +1971,18 @@ _l.easyNode_e2010 = "Сохраните или запишите этот клю�
 _l.easyNode_e2011 =  "HDSEED ключ";
 _l.easyNode_e2012 =  "Скопировать HDSEED ключ";
 
-_l.createwalletq = "Вы действительно хотите создать новый кошелек?"
-
-_l.easyNode_e2013= "Импортировать кошелёк";
-_l.easyNode_e2014 = "Введите HDSEED ключ или загрузите dump файл кошелька"
-_l.easyNode_e2015 =  "HDSEED ключ кошелька";
-_l.loadwalletfile = "Импортировать файл кошелька (dump)"
-
-_l.max = "Макс";
+_l.max = "Максимум";
 _l.easyNode_e2013 = "Сумма ставки";
 _l.easyNode_e2014 = "В стейкинге";
 _l.easyNode_e2015 = "Награды";
+
+_l.easyNode_e2016= "Импортировать кошелёк";
+_l.easyNode_e2017 = "Введите HDSEED ключ или загрузите dump файл кошелька"
+_l.easyNode_e2018 =  "HDSEED ключ кошелька";
+_l.loadwalletfile = "Импортировать файл кошелька (dump)"
+
+_l.easyNode_nodeLoading = "Нода запускается. Пожалуйста, подождите.";
+_l.createwalletq = "Вы действительно хотите создать новый кошелек?"
 
 
 _l.minPkoin = function (p){

@@ -10,20 +10,20 @@
 
 <% if(system && system.node) { %>
 
-    <div class="nodecontentmanage managepanel <%- (nc.hasbin && !nc.lock && imported) ? 'installed' : 'notinstalled' %>">
+        <div class="nodecontentmanage managepanel <%- (nc.hasbin && !nc.lock && imported) ? 'installed' : 'notinstalled' %>">
         
-        <div class="felock">
-            <div class="work">
-                <div class="felockcnt loading">
-                    <div class="text">
-                        <%-e('easyNode_e10003')%>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-spinner fa-spin"></i>
+            <div class="felock">
+                <div class="work">
+                    <div class="felockcnt loading">
+                        <div class="text">
+                            <%-e('easyNode_e10003')%>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-spinner fa-spin"></i>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
         <% if(!nc.hasbin && !nc.lock && !nc.other && !nc.hasapplication) {%>
 
@@ -34,7 +34,18 @@
                 
                 <% if(nodeLoading) { %>
 
-                    NODELOADING...
+                    <div class="nodeLoading">
+                        <div class="work">
+                            <div class="felockcnt loading">
+                                <div class="text">
+                                    <%-e('easyNode_nodeLoading')%>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                 <% } else if(imported || (!system.node.enabled || nc.state.status === 'stopped')) { %>
 
@@ -530,7 +541,7 @@
                     <% }%>
 
                 <% }%>
-            </div>
+        </div>
         <% } %>
 
 
