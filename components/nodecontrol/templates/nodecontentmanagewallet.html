@@ -14,9 +14,12 @@
                         <i class="fa fa-copy"></i>
                     </div>
                 </div>
-                <span class="question">
+                <div 
+                    class="question caption-container quality-limit-container tooltip"
+                    title="<%= e('videoQualityInfo') %>"
+                    >
                     <i class="far fa-question-circle"></i>
-                </span>
+                </div>
             </div>
             <div class="contentWrapper">
                 <div class="stakeWrapper">
@@ -24,7 +27,9 @@
                         <span><%-e('easyNode_e2013')%></span>
                     </div>
                     <div class="stakeInputWrapper">
-                        <input type="text" class="inputSum">
+                        <div class="inputSumWrapper">
+                            <input type="number" class="inputSum" id="inputSum" value="0">
+                        </div>
                         <div class="pkoinLabel">
                             <img src="favicon.svg">
                             <span>PKOIN</span>
@@ -38,7 +43,7 @@
                             </span>
                         </div>
                         <div class="progressContainer">
-                            <input type="range" min="0" max="100" value="40" class="progressBar" />
+                            <input type="range" min="0" max="100" value="0" class="progressBar" />
                         </div>                         
                         <div class="plus">
                             <span class="plus">
@@ -52,7 +57,7 @@
                                 <%-e('wbalance')%>:
                             </div>
                             <div class="amount">
-                                <%- (Number.isFinite(nodestate.wallet.total) ? (nodestate.wallet.total/100000000.0) : 0).toFixed(3).toLocaleString(undefined, {minimumFractionDigits:8}) %>
+                                <%- (Number.isFinite(nodestate.wallet.total) ? (nodestate.wallet.total/100000000.0) : 0).toFixed(3) %>
                             </div>
                             <div class="pkoin">
                                 PKOIN
@@ -101,9 +106,12 @@
 
                 </div>
                 <div class="right">
-                    <span class="question">
+                    <div 
+                        class="question tooltip"
+                        title="<%- e('videoQualityInfo') %>"
+                        >
                         <i class="far fa-question-circle"></i>
-                    </span>
+                    </div>
                 </div>
                     
             </div>
@@ -137,9 +145,12 @@
 
                 </div>
                 <div class="right">
-                    <span class="question">
+                    <div 
+                        class="question tooltip"
+                        title="<%- e('videoQualityInfo') %>"
+                        >
                         <i class="far fa-question-circle"></i>
-                    </span>
+                    </div>
                 </div>
                     
             </div>

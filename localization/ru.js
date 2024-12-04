@@ -1980,7 +1980,7 @@ _l.loadwalletfile = "Импортировать файл кошелька (dump)
 
 _l.max = "Макс";
 _l.easyNode_e2013 = "Сумма ставки";
-_l.easyNode_e2014 = "В стекинге";
+_l.easyNode_e2014 = "В стейкинге";
 _l.easyNode_e2015 = "Награды";
 
 

@@ -7,7 +7,7 @@
       
                 <div class="stat stat-top">
                     
-                    <% fork = (nodestate.info.lastblock.height - manager.chain.bestHeight) > 15,
+                    <%  var fork = (nodestate.info.lastblock.height - manager.chain.bestHeight) > 15,
                     percent = (nodestate.info.lastblock.height * 100 / manager.chain.commonHeight).toFixed(1)
                     %>
                         <div class="sync">
@@ -45,9 +45,12 @@
                                     </span>
                                 <% } %>
                             <% } %>
-                            <span class="question">
+                            <duv 
+                                class="question tooltip"
+                                title="<%- e('videoQualityInfo') %>"
+                                >
                                 <i class="far fa-question-circle"></i>
-                            </span>
+                                </duv>
                         </div>
 
                         <div class="version">

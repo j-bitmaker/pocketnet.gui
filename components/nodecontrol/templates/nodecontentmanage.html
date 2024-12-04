@@ -31,8 +31,12 @@
             
             <!-- Section `Node state` -->
             <% if(nc.hasbin && !nc.lock) { %>
+                
+                <% if(nodeLoading) { %>
 
-                <% if(imported) { %>
+                    NODELOADING...
+
+                <% } else if(imported || (!system.node.enabled || nc.state.status === 'stopped')) { %>
 
                     <div class="nodecontent">
                         <div class="work nodestatebox">

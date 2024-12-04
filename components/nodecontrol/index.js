@@ -11,7 +11,8 @@ var nodecontrol = (function(){
 
 		var primary = deep(p, 'history');
 
-		var el, api = null, proxy = null,  info = null, system = null, step = 1;
+		var el, api = null, proxy = null,  info = null, system = null, step = 1, imported = false, 
+		nodeLoading = true, getListwallets = true, listwalletsError = false, lastState = {};
 
 		var systemsettings = {
 		
@@ -44,6 +45,10 @@ var nodecontrol = (function(){
 					var items = [{
 						text : self.app.localization.e('easyNode_e10040'),
 						action : function (clbk) {
+
+							getListwallets = true;
+							nodeLoading = true;
+
 
 							return proxy.system.request('set.node.enabled', {enabled : true}).then(r => {
 								actions.refresh().then(r => {
@@ -103,6 +108,9 @@ var nodecontrol = (function(){
 							return proxy.system.request('set.node.gethdseed', {}).then(mnemonic => {
 								
 								console.log('r mnemonic: ', mnemonic);
+
+								imported = true;
+								renders.all();
 								
 								app.nav.api.load({
 		
@@ -115,6 +123,7 @@ var nodecontrol = (function(){
 										mnemonic: mnemonic,
 										dumpkey: true,
 										showsavelabel : false,
+			
 									},
 					
 									clbk: function (p, s) {
@@ -168,6 +177,11 @@ var nodecontrol = (function(){
 
 							sitemessage(`${self.app.localization.e('easyNode_e10042')}`, null, 5000);
 
+							imported = true;
+
+							renders.all();
+
+
 						}
 
 					}, 
@@ -180,6 +194,26 @@ var nodecontrol = (function(){
 
 		var actions = {
 
+			percToSum : function(perc, input){
+
+				var sum = info.nodeControl.state.wallet.total * (perc / 100) / 100000000;
+
+				input.val(sum);
+			},
+
+			sumToPerc : function(sum){
+
+				sum = Number(sum);
+
+				console.log('sum!!!', sum);
+
+				var perc = Number(sum / (info.nodeControl.state.wallet.total / 10000000000)).toFixed(2);
+
+				return perc
+
+
+			},
+
 			listwallets : function(){
 
 				console.log('listwallets');
@@ -189,11 +223,30 @@ var nodecontrol = (function(){
 					data : {}
 				}).then(r => {
 
-					console.log('r!!!!!!: ', r);
+					console.log('listwallets success:', r);
+
+
+					if (r && r.length){
+
+						imported = true;
+
+					} 
+
+					listwalletsError = false;
+
+					nodeLoading = false;					
+
+					renders.all();
+
+
 
 				}).catch(e => {
 					
-					console.log('e!!!!', e);
+					console.log('listwallets err:', e)
+					listwalletsError = true;
+					nodeLoading = false;
+					renders.all();
+
 				})
 			},
 
@@ -218,7 +271,7 @@ var nodecontrol = (function(){
 				renders.all()
 			},
 			tick : function(state){
-				info = state
+				info = state;
 			},
 			ticksettings : function(settings, s, changed){
 
@@ -233,18 +286,68 @@ var nodecontrol = (function(){
                 }
 
 				rif = rifticker.add((i) => {
+
+					if (info.nodeControl.hasbin && (system && system.node && !system.node.enabled && getListwallets)){
+
+						getListwallets = false;
+						nodeLoading = false;
+						renders.all();
+
+					}
+
+					if (!info.nodeControl.lock && system && system.node && system.node.enabled && info.nodeControl.hasbin && getListwallets){
+
+						console.log('info.nodeControl.state', info.nodeControl.state);
+						
+						if (getListwallets){
+
+							if (info.nodeControl.state && !_.isEmpty(info.nodeControl.state.info)){
+
+								getListwallets = false;
+
+								actions.listwallets();
+
+							}
+
+							if (info.nodeControl.state.status === 'stopped'){
+								getListwallets = false;
+								nodeLoading = false;
+								renders.all();
+							}
+
+
+						}
+
+					}
+
+					var newState = {
+						step: step,
+						test : info.test,
+						hasbin: info?.nodeControl?.hasbin,
+						lock: info?.nodeControl?.lock,
+						other: info?.nodeControl?.other,
+						hasapplication: info?.nodeControl?.hasapplication,
+						status: info?.nodeControl?.state?.status,
+						info: _.isEmpty(info?.nodeControl?.state?.info || {}),
+						enabled: system.node.enabled,
+						hasUpdate: info?.nodeControl?.state?.hasUpdate,
+						imported: imported,
+					};
 					
+					let compareState = compareObjects(lastState, newState);
 					let compareNodeControl = compareObjects(s.nodeControl, info.nodeControl)
-					let compareNodeManager = compareObjects(s.nodeManager, info.nodeManager)
 
-					console.log('compare: ', compareNodeControl, compareNodeManager);
 
-					info = s
+					console.log('compareState:', compareState);
+
+					lastState = newState;
+
+					info = s;
 					rif = null
 
 					if (el.c){
 
-						if (!compareNodeControl){
+						if (!compareState || info?.nodeControl?.lock == 'installing'){
 				
 							renders.nodelanding(el.c)
 							renders.electronfornode()
@@ -256,9 +359,7 @@ var nodecontrol = (function(){
 								renders.nodecontentmanagewallet(el.c)
 							})
 
-						} 
-						
-						if (!compareNodeManager){
+						} else if (compareNodeControl){
 
 							renders.nodecontentstate(el.c)
 
@@ -431,6 +532,10 @@ var nodecontrol = (function(){
 			nodecontentmanagewallet : function(elc, clbk){
 				if (actions.admin() && info.nodeControl.state.wallet) {
 
+					console.log('info.nodeControl.state', info.nodeControl.state);
+
+					info.nodeControl.state.wallet.total = 15400000000;
+
 					self.shell({
 						inner : html,
 						name : 'nodecontentmanagewallet',
@@ -447,6 +552,103 @@ var nodecontrol = (function(){
 					function(p) {
 
                         actions.settings(p.el)
+
+						p.el.find('.copy').on('click', function(){
+
+							copyText(p.el.find('.address'))
+
+							sitemessage(self.app.localization.e('waddresswascop'))
+						})
+
+						var inputSum = p.el.find('.inputSum')
+
+						inputSum.on('change', function(){
+
+							var v = Number($(this).val() || 0);
+
+							var perc = actions.sumToPerc(v);
+
+							p.el.find('.progressBar').val(perc);
+
+						})
+
+						inputSum.on('blur', function(){
+
+							var v = Number($(this).val() || 0);
+							var total = info.nodeControl.state.wallet.total / 100000000
+							console.log('v total', v, total);
+
+							if (v >= total){
+								v = total
+								p.el.find('.inputSum').val(v);
+							}
+
+							var perc = actions.sumToPerc(v);
+
+							p.el.find('.progressBar').val(perc);
+							
+						})
+
+						p.el.find('.progressBar').on('change', function(){
+
+							var finalValue = $(this).val();
+							console.log('New value after change:', finalValue);
+
+							actions.percToSum(finalValue, inputSum);
+						
+						})
+
+						p.el.find('.max').on('click', function(){
+
+							var $range = p.el.find('.progressBar');
+							var maxValue = $range.attr('max');						
+							$range.val(maxValue);
+
+							actions.percToSum(maxValue, inputSum);
+						
+						})
+
+						p.el.find('.plus').on('click', function(){
+
+							var $range = p.el.find('.progressBar');
+							var currentValue = $range.val();
+							var maxValue = $range.attr('max');
+							var newValue = parseInt(currentValue) + (maxValue * 0.01); 
+						
+							if (newValue <= maxValue) {
+							  $range.val(newValue);
+							} else {
+							  $range.val(maxValue); 
+							}
+
+							actions.percToSum(newValue, inputSum);
+						})
+
+						p.el.find('.minus').on('click', function(){
+
+							var $range = p.el.find('.progressBar');
+							var currentValue = $range.val();
+							var minValue = $range.attr('min');
+							var maxValue = $range.attr('max');
+
+							var newValue = parseInt(currentValue) - (maxValue * 0.01); 
+						
+							if (newValue >= minValue) {
+							  $range.val(newValue);
+							} else {
+							  $range.val(newValue); 
+							}
+
+							actions.percToSum(minValue, inputSum);
+						})
+
+						p.el.find('.tooltip').tooltipster({
+							theme: 'tooltipster-light',
+							maxWidth: 600,
+							zIndex: 1006,
+							position: 'bottom',
+							contentAsHTML: true,
+						});
 
 						p.el.on('click', '.nodebalancedeposit', function() {
                             topPreloader(30);
@@ -617,7 +819,7 @@ var nodecontrol = (function(){
 						dis = (new Date()) < ((new Date(timestamp)).addSeconds(5))
 					}
 
-					console.log('info.nodeControl', info.nodeControl, system.node);
+					console.log('info.nodeControl', info.nodeControl, system.node, imported);
 
 					self.shell({
 						inner : html,
@@ -631,7 +833,9 @@ var nodecontrol = (function(){
 							system : system,
 							dis : false,
 							showdirect : true,
-							imported: false
+							imported: imported,
+							nodeLoading: nodeLoading,
+							listwalletsError: listwalletsError
 						},
 
 						el : elc.find('.manage')
@@ -897,7 +1101,16 @@ var nodecontrol = (function(){
 						el : elc.find('.nodestateWrapper')
 
 					},
-					function(){
+					function(p){
+
+						p.el.find('.tooltip').tooltipster({
+							theme: 'tooltipster-light',
+							maxWidth: 600,
+							zIndex: 1006,
+							position: 'bottom',
+							contentAsHTML: true,
+						});
+
 						if (clbk)
 							clbk()
 					})
@@ -967,13 +1180,6 @@ var nodecontrol = (function(){
 
 			})
 
-			setTimeout(() => {
-
-				actions.listwallets();
-
-			}, 50000);
-
-
 
 		}
 
@@ -996,7 +1202,6 @@ var nodecontrol = (function(){
 				// proxy.clbks.tick.components_nodecontrol = actions.tick
 			
 				proxy.get.info().then(r => {
-
 
 					info = r.info
 

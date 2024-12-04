@@ -159,6 +159,7 @@
   border-radius: 10px;
   background: #F5F5F5;
   color: #3448F0;
+  cursor: pointer;
 }
 #nodecontrol .managewallet .blockWrapper .buttonWrapper {
   margin-top: 1.5em;
