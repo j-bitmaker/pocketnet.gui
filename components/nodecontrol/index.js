@@ -272,6 +272,7 @@ var nodecontrol = (function(){
 			},
 			tick : function(state){
 				info = state;
+
 			},
 			ticksettings : function(settings, s, changed){
 
@@ -319,31 +320,32 @@ var nodecontrol = (function(){
 						}
 
 					}
-
+					
 					var newState = {
 						step: step,
-						test : info.test,
-						hasbin: info?.nodeControl?.hasbin,
-						lock: info?.nodeControl?.lock,
-						other: info?.nodeControl?.other,
-						hasapplication: info?.nodeControl?.hasapplication,
-						status: info?.nodeControl?.state?.status,
-						info: _.isEmpty(info?.nodeControl?.state?.info || {}),
+						test : s.test,
+						hasbin: s?.nodeControl?.hasbin,
+						lock: s?.nodeControl?.lock,
+						other: s?.nodeControl?.other,
+						hasapplication: s?.nodeControl?.hasapplication,
+						status: s?.nodeControl?.state?.status,
+						info: _.isEmpty(s?.nodeControl?.state?.info || {}),
 						enabled: system.node.enabled,
-						hasUpdate: info?.nodeControl?.state?.hasUpdate,
+						hasUpdate: s?.nodeControl?.state?.hasUpdate,
 						imported: imported,
 					};
 					
 					let compareState = compareObjects(lastState, newState);
 					let compareNodeControl = compareObjects(s.nodeControl, info.nodeControl)
 
-
-					console.log('compareState:', compareState);
+					console.log('compareState:', compareState, compareNodeControl);
 
 					lastState = newState;
 
 					info = s;
-					rif = null
+					rif = null;
+
+					if (info?.nodeControl?.state?.wallet) info.nodeControl.state.wallet.total = 15400000000;
 
 					if (el.c){
 
@@ -355,11 +357,10 @@ var nodecontrol = (function(){
 
 							renders.nodecontentmanage(el.c, function(){
 								renders.nodecontentstate(el.c)
-								renders.nodecontentmanagestacking(el.c)
 								renders.nodecontentmanagewallet(el.c)
 							})
 
-						} else if (compareNodeControl){
+						} else if (!compareNodeControl){
 
 							renders.nodecontentstate(el.c)
 
@@ -498,7 +499,6 @@ var nodecontrol = (function(){
 
 					renders.nodecontentmanage(el.c, function(){
 						renders.nodecontentstate(el.c)
-						renders.nodecontentmanagestacking(el.c)
 						renders.nodecontentmanagewallet(el.c)
 					})
 
@@ -507,34 +507,10 @@ var nodecontrol = (function(){
 					
 				}
 			},
-		    nodecontentmanagestacking : function(elc, clbk) {
-				if (actions.admin() && info.nodeControl.state.staking){
 
-					self.shell({
-						inner : html,
-						name : 'nodecontentmanagestacking',
-						data : {
-							nodestate : info.nodeControl.state,
-							nc : info.nodeControl,
-							proxy : proxy
-						},
-
-						el : elc.find('.stakingWrapper')
-
-					},
-					function(p){
-
-						if (clbk)
-							clbk()
-					})
-				}
-			},
 			nodecontentmanagewallet : function(elc, clbk){
 				if (actions.admin() && info.nodeControl.state.wallet) {
 
-					console.log('info.nodeControl.state', info.nodeControl.state);
-
-					info.nodeControl.state.wallet.total = 15400000000;
 
 					self.shell({
 						inner : html,
@@ -934,20 +910,6 @@ var nodecontrol = (function(){
 							})
 						})
 
-						p.el.find('.removenodeall').on('click', function(){
-							new dialog({
-								class : 'zindex',
-								html : self.app.localization.e('easyNode_e10052'),
-								btn1text : self.app.localization.e('dyes'),
-								btn2text : self.app.localization.e('dno'),
-								success : function(){
-									lock()
-									actions.removeNode(true)
-									
-								}
-							})
-						})
-
 						p.el.find('.removenode').on('click', function(){
 							new dialog({
 								class : 'zindex',
@@ -1093,6 +1055,8 @@ var nodecontrol = (function(){
 						inner : html,
 						name : 'nodecontentstate',
 						data : {
+							dis : false,
+							system : system,
 							manager : info.nodeManager,
 							nodestate : info.nodeControl.state,
 							nc : info.nodeControl,
@@ -1103,6 +1067,8 @@ var nodecontrol = (function(){
 					},
 					function(p){
 
+						actions.settings(p.el)
+
 						p.el.find('.tooltip').tooltipster({
 							theme: 'tooltipster-light',
 							maxWidth: 600,
@@ -1110,6 +1076,20 @@ var nodecontrol = (function(){
 							position: 'bottom',
 							contentAsHTML: true,
 						});
+
+						p.el.find('.removenodeall').on('click', function(){
+							new dialog({
+								class : 'zindex',
+								html : self.app.localization.e('easyNode_e10052'),
+								btn1text : self.app.localization.e('dyes'),
+								btn2text : self.app.localization.e('dno'),
+								success : function(){
+									lock()
+									actions.removeNode(true)
+									
+								}
+							})
+						})
 
 						if (clbk)
 							clbk()

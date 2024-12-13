@@ -529,42 +529,107 @@
         .stat{
             display: flex;
             align-items: center;
+            justify-content: space-between;
 
-            >div{
-                margin-right: @rhythm * 4;
+            .stat-part{
+                display: flex;
+                align-items: center;
             }
 
-            .value{
-                margin-left: 3px;
-            }
+            .stat-left{
 
-            .loader {
-                margin-left: 5px;
-                margin-right: 5px;
-
-                i {
-                    color: rgb(var(--color-bg-ac-bright));
+                >div{
+                    margin-right: @rhythm * 4;
                 }
-            }
-
-
-            .version{
-                .version-value{
-                    margin-left: 3px;
-                }
-
-                .blockchain{
-                    margin-left: 3px;
-                    padding: 5px;
+                
+    
+                .launch{
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    gap: 7px;
+                    border: 1px solid #E2E2E2;
+                    padding: @rhythm @rhythm * 1.5; 
                     border-radius: 10px;
-                    background: #F5F5F5;
+                    background : rgba(var(--color-cc-dark-blue), .9);
+                    color: white;      
+    
+                   &.enabled{
+                        background: #19e619;
+                    }
+    
+                    i, svg{
+                        font-size: 1.2em;
+                    }
                 }
+    
+                .value{
+                    margin-left: 3px;
+                }
+    
+                .loader {
+                    margin-left: 5px;
+                    margin-right: 5px;
+    
+                    i {
+                        color: rgb(var(--color-bg-ac-bright));
+                    }
+                }
+    
+    
+                .version{
+                    .version-value{
+                        margin-left: 3px;
+                    }
+    
+                    .blockchain{
+                        margin-left: 3px;
+                        padding: 5px;
+                        border-radius: 10px;
+                        background: #F5F5F5;
+                    }
+                }
+    
+    
+                .update{
+    
+                    .update-icon{
+    
+                        display: inline-block;
+                        padding: 0.5em;
+                        background: #E2E2E2;
+                        color : rgba(var(--neutral-grad-3), .7);
+                        border-radius: 50%;
+                        text-align: center;
+    
+                        i{
+                            font-size: .9em;
+                        }
+    
+                        &.available{
+                            color: #6372F4; 
+                            background: rgba(52, 72, 240, 0.08);
+                            cursor: pointer;
+                        }
+                
+                    }                
+                }
+    
+                .question{
+                    margin-left: 3px;
+                }
+
+
             }
 
-            .question{
-                margin-left: 3px;
-            }
+            .stat-right{
 
+                .addSettings{
+                    cursor: pointer;
+                }
+
+            }
+        
 
         }
 
@@ -624,6 +689,18 @@
                     background: rgb(var(--color-bg-orange));
                 }
             }
+        }
+
+        .removenodeall{
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            border: 1px solid #E2E2E2;
+            padding: @rhythm @rhythm * 1.5; 
+            border-radius: 10px;
+            background : rgb(var(--color-bg-orange));
+            color: white;      
         }
 
 

@@ -1,86 +1,163 @@
 <div class="nodecontentstate">
 
-    <% if(nc.hasbin && !nc.lock) {%>
+    <% if(nc.hasbin) {%>
 
-        <% if(nodestate.info.lastblock) {console.log('nodestate.info.lastblock.height', ((nodestate.info.lastblock.height / manager.chain.bestHeight) * 100).toFixed(1))%>
+        <% if(true) {%>
             <div class="settingBlock">
       
                 <div class="stat stat-top">
-                    
-                    <%  var fork = (nodestate.info.lastblock.height - manager.chain.bestHeight) > 15,
-                    percent = (nodestate.info.lastblock.height * 100 / manager.chain.commonHeight).toFixed(1)
-                    %>
-                        <div class="sync">
-                            <span><%-e('easyNode_e10008')%>:</span>
-                            <span class="loader">
-                                <i class="fas fa-spinner fa-spin"></i>
-                            </span>
-                            <span class="<%- fork ? 'bad' : '' %> perc">
-                                <%- percent %>% 
-                                <!-- <%- nodestate.info.lastblock.height.toLocaleString() %>
-                                <%- manager.chain && Math.abs(nodestate.info.lastblock.height - manager.chain.bestHeight) > 15
-                                    ?
-                                    ` / ${Number(manager.chain.bestHeight).toLocaleString()}`
-                                    :
-                                    ''
-                                %> -->
-                            </span>
-                            <% if (Number.isFinite(nodestate.sync.left) && nodestate.sync.left > 0) { %>
-                    
-                                <% if(nodestate.sync.left < 1) { %>
-                                    <span class="syncLeft">
-                                        (<%-e('easyNode_e10036')%>)
-                                    </span>
+
+                    <div class="stat-part stat-left">
+
+  
+    
+                        <% if(!dis) {%>
+    
+                            <div class="launch <%- system.node.enabled ? 'enabled' : 'disabled' %>" sys="nodeenabled">
+                                <!-- <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7.00001 6.15278V0.875M9.125 2.81873C11.601 3.68816 13.375 6.03411 13.375 8.79168C13.375 12.2895 10.5208 15.125 7 15.125C3.47918 15.125 0.625 12.2895 0.625 8.79168C0.625 6.03411 2.39897 3.68816 4.875 2.81873" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg> -->
+                                <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7.00001 6.15278V0.875M9.125 2.81873C11.601 3.68816 13.375 6.03411 13.375 8.79168C13.375 12.2895 10.5208 15.125 7 15.125C3.47918 15.125 0.625 12.2895 0.625 8.79168C0.625 6.03411 2.39897 3.68816 4.875 2.81873" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
                                 
-                                <% } else if(nodestate.sync.left >= 1) { %>
-                                    <span class="syncLeft">
-                                        (<%-e('easyNode_e10037', nodestate.sync.left)%>)
-                                    </span>
-                                <% }%>
+                                <!-- <i class="fa fa-circle-notch"></i> -->
+                                <span><%-e(system.node.enabled ? 'easyNode_e10023' : 'easyNode_e10040')%></span>
+                            </div>
+    
+                        <% } else { %> 
+                            
+                            <div class="value">
+                                <div class="preloader5"><img src="./img/three-dots.svg"/></div>
+                            </div>
+    
+                        <% } %>
 
-                            <% } else { %>
-                                <% if (fork) { %>
-                                    <span class="syncLeft">
-                                        <i class="fas fa-code-branch bad"></i>
-                                    </span>
+                        <% if(nodestate.info.lastblock) {%>
+
+                            <%  var fork = nodestate.info.lastblock.height - manager.chain.bestHeight > 15,
+                                percent = (nodestate.info.lastblock.height * 100 / manager.chain.commonHeight).toFixed(1);
+                            %>
+
+                            <div class="sync">
+                                <span><%-e('easyNode_e10008')%>:</span>
+                                <span class="loader">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                </span>
+
+
+                                <span class="<%- fork ? 'bad' : '' %> perc">
+                                    <%- percent %>% 
+                                    <!-- <%- nodestate.info.lastblock.height.toLocaleString() %>
+                                    <%- manager.chain && Math.abs(nodestate.info.lastblock.height - manager.chain.bestHeight) > 15
+                                        ?
+                                        ` / ${Number(manager.chain.bestHeight).toLocaleString()}`
+                                        :
+                                        ''
+                                    %> -->
+                                </span>
+
+
+                                <% if (Number.isFinite(nodestate.sync.left) && nodestate.sync.left > 0) { %>
+                        
+                                    <% if(nodestate.sync.left < 1) { %>
+                                        <span class="syncLeft">
+                                            ( <%-e('easyNode_e10036')%> )
+                                        </span>
+                                    
+                                    <% } else if(nodestate.sync.left >= 1) { %>
+                                        <span class="syncLeft">
+                                            ( <%-e('easyNode_e10037', nodestate.sync.left)%> )
+                                        </span>
+                                    <% }%>
+        
+                                <% } else { %>
+                                    <% if (fork) { %>
+                                        <span class="syncLeft">
+                                            <i class="fas fa-code-branch bad"></i>
+                                        </span>
+                                    <% } %>
                                 <% } %>
-                            <% } %>
-                            <duv 
-                                class="question tooltip"
-                                title="<%- e('videoQualityInfo') %>"
-                                >
-                                <i class="far fa-question-circle"></i>
+
+                                <% 
+                                    var syncTitle = "<div>" + e('easyNode_e10038') + ":</div><div>" +  nodestate.info.lastblock.hash + "</div><br/>"  
+
+                                    + "<div><div>" + e('easyNode_e10021') + ":</div><div>" + ((_.isEmpty(nodestate.staking)) ? '<i class="fas fa-spinner fa-spin"></i> <span class="">' 
+                                        + e('easyNode_e10022') + '</span>' : (nodestate.staking.staking && nodestate.staking.enabled) ? '<i class="fas fa-check-circle good"></i> <span class="good">' + e('easyNode_e10023') + '</span>' : '<i class="far fa-times-circle bad"></i> <span class="bad">' + e('easyNode_e10024') + '</span>' ) + '</div><br>'
+   
+                                    
+                                    + "<div><div>" + e('easyNode_e100121') + ":</div><div>"  + nc.node.dataPath +  "</div></div>";
+                                    
+                                    %>
+
+
+
+                                <duv 
+                                    class="question tooltip"
+                                    title="<%- syncTitle %>"
+                                    >
+                                    <i class="far fa-question-circle"></i>
                                 </duv>
-                        </div>
 
-                        <div class="version">
-                            <span class="version-label"><%-e('easyNode_e10032')%>: </span>
-                            <span class="version-value">
-                                <%- nodestate.info.version %>
-                            </span>
-                            <span class="blockchain">
-                                <%- nodestate.info.chain %>
-                            </span>
-                        </div>
+                            </div>
 
 
-                </div>
+    
+                            <div class="version">
+                                <span class="version-label"><%-e('easyNode_e10032')%>: </span>
+                                <span class="version-value">
+                                    <%- nodestate.info.version %>
+                                </span>
+                                <span class="blockchain">
+                                    <%- nodestate.info.chain %>
+                                </span>
+                            </div>
 
-            </div>
-            <div class="settingBlock">
-                <div class="stat stat-second">
-                    <div>
-                        <div class="label">
-                            <span><%-e('easyNode_e10038')%>:</span>
+                        <% } %>
+
+    
+                        <div class="update">
+    
+                            <div 
+                                class="update-icon  <%- nodestate.hasUpdate ? 'available' : 'no'%>"
+                                title="<%- e(nodestate.hasUpdate ? 'easyNode_e10015' : 'easyNode_e10016') %>"
+                                >
+                                <i class="fa fa-upload"></i>
+                            </div>
+    
                         </div>
-                        <div class="value">
-                            <span><%-nodestate.info.lastblock.hash%></span>
-                        </div>
+
                     </div>
+
+                    <% if(system.node.enabled) {%>
+
+                        <div class="stat-part stat-right">
+
+                            <div class="addSettings">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8 0.875C8.90809 0.875 9.64423 1.61114 9.64423 2.51923C9.64423 2.66856 9.74156 2.79957 9.88181 2.85083C10.0275 2.90408 10.1703 2.96334 10.3099 3.02831C10.4454 3.09139 10.6071 3.06758 10.7129 2.96187C11.355 2.31976 12.396 2.31976 13.0381 2.96187C13.6803 3.60398 13.6803 4.64507 13.0381 5.28718C12.9324 5.39289 12.9086 5.55457 12.9717 5.69012C13.0367 5.82972 13.0959 5.97252 13.1492 6.11821C13.2004 6.25845 13.3315 6.35577 13.4808 6.35577C14.3889 6.35577 15.125 7.09191 15.125 8C15.125 8.90809 14.3889 9.64423 13.4808 9.64423C13.3315 9.64423 13.2004 9.74155 13.1492 9.88179C13.0959 10.0275 13.0367 10.1703 12.9717 10.3099C12.9086 10.4455 12.9324 10.6071 13.0381 10.7129C13.6802 11.355 13.6803 12.396 13.0381 13.0381C12.396 13.6802 11.355 13.6802 10.7129 13.0381C10.6071 12.9324 10.4454 12.9086 10.3099 12.9717C10.1703 13.0367 10.0275 13.0959 9.88181 13.1492C9.74156 13.2004 9.64423 13.3314 9.64423 13.4808C9.64423 14.3889 8.90809 15.125 8 15.125C7.09191 15.125 6.35577 14.3889 6.35577 13.4808C6.35577 13.3314 6.25844 13.2004 6.11819 13.1492C5.97251 13.0959 5.82972 13.0367 5.69012 12.9717C5.55457 12.9086 5.39289 12.9324 5.28716 13.0381C4.64505 13.6802 3.60398 13.6802 2.96187 13.0381C2.31976 12.396 2.31976 11.355 2.96187 10.7129C3.06759 10.6071 3.09141 10.4455 3.02832 10.3099C2.96334 10.1703 2.90408 10.0275 2.85082 9.88179C2.79955 9.74155 2.66855 9.64423 2.51923 9.64423C1.61114 9.64423 0.875 8.90809 0.875 8C0.875 7.09191 1.61114 6.35577 2.51923 6.35577C2.66855 6.35577 2.79955 6.25845 2.85082 6.11821C2.90407 5.97252 2.96334 5.82972 3.02831 5.69011C3.09139 5.55457 3.06758 5.3929 2.96187 5.28718C2.31976 4.64504 2.31976 3.60398 2.96187 2.96187C3.60398 2.31976 4.64505 2.31976 5.28716 2.96187C5.39288 3.06758 5.55455 3.09139 5.6901 3.02831C5.8297 2.96334 5.9725 2.90409 6.11819 2.85083C6.25844 2.79957 6.35577 2.66856 6.35577 2.51923C6.35577 1.61114 7.09191 0.875 8 0.875Z" stroke="black"/>
+                                    <path d="M11.1667 8C11.1667 9.7489 9.7489 11.1667 8 11.1667C6.2511 11.1667 4.83333 9.7489 4.83333 8C4.83333 6.2511 6.2511 4.83333 8 4.83333C9.7489 4.83333 11.1667 6.2511 11.1667 8Z" stroke="black"/>
+                                </svg>                                
+                            </div>
+                            
+                        </div>
+
+                    <% } else {%>
+
+                        <div class="value">
+                            <button elementsid="buttonsmallghostremovenodeall" class="removenodeall">
+                                <%-e('easyNode_e10019')%>
+                            </button>
+                        </div>
+
+                    <% } %>
+
+
                 </div>
 
             </div>
-            <div class="settingBlock">
+
+            <!-- <div class="settingBlock">
                 <div class="stat stat-second">
                     <div>
                         <div class="label">
@@ -105,19 +182,9 @@
                             </div>
                         </div>
                     <% } %>
-                    <div class="systempath systempathchoosen">
-    
-                        <div class="label">
-                            <span><%-e('easyNode_e100121')%>:</span>
-                        </div>
-        
-                        <div class="value">
-                            <span><%- nc.node.dataPath %></span>
-                        </div>
-    
-                    </div>
+  
                 </div>
-            </div>
+            </div> -->
 
         <% } %>
 

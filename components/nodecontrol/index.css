@@ -412,31 +412,73 @@
 #nodecontrol .nodecontentstate .stat {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
-#nodecontrol .nodecontentstate .stat > div {
+#nodecontrol .nodecontentstate .stat .stat-part {
+  display: flex;
+  align-items: center;
+}
+#nodecontrol .nodecontentstate .stat .stat-left > div {
   margin-right: 2em;
 }
-#nodecontrol .nodecontentstate .stat .value {
+#nodecontrol .nodecontentstate .stat .stat-left .launch {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid #E2E2E2;
+  padding: 0.5em 0.75em;
+  border-radius: 10px;
+  background: rgba(var(--color-cc-dark-blue), 0.9);
+  color: white;
+}
+#nodecontrol .nodecontentstate .stat .stat-left .launch.enabled {
+  background: #19e619;
+}
+#nodecontrol .nodecontentstate .stat .stat-left .launch i,
+#nodecontrol .nodecontentstate .stat .stat-left .launch svg {
+  font-size: 1.2em;
+}
+#nodecontrol .nodecontentstate .stat .stat-left .value {
   margin-left: 3px;
 }
-#nodecontrol .nodecontentstate .stat .loader {
+#nodecontrol .nodecontentstate .stat .stat-left .loader {
   margin-left: 5px;
   margin-right: 5px;
 }
-#nodecontrol .nodecontentstate .stat .loader i {
+#nodecontrol .nodecontentstate .stat .stat-left .loader i {
   color: rgb(var(--color-bg-ac-bright));
 }
-#nodecontrol .nodecontentstate .stat .version .version-value {
+#nodecontrol .nodecontentstate .stat .stat-left .version .version-value {
   margin-left: 3px;
 }
-#nodecontrol .nodecontentstate .stat .version .blockchain {
+#nodecontrol .nodecontentstate .stat .stat-left .version .blockchain {
   margin-left: 3px;
   padding: 5px;
   border-radius: 10px;
   background: #F5F5F5;
 }
-#nodecontrol .nodecontentstate .stat .question {
+#nodecontrol .nodecontentstate .stat .stat-left .update .update-icon {
+  display: inline-block;
+  padding: 0.5em;
+  background: #E2E2E2;
+  color: rgba(var(--neutral-grad-3), 0.7);
+  border-radius: 50%;
+  text-align: center;
+}
+#nodecontrol .nodecontentstate .stat .stat-left .update .update-icon i {
+  font-size: 0.9em;
+}
+#nodecontrol .nodecontentstate .stat .stat-left .update .update-icon.available {
+  color: #6372F4;
+  background: rgba(52, 72, 240, 0.08);
+  cursor: pointer;
+}
+#nodecontrol .nodecontentstate .stat .stat-left .question {
   margin-left: 3px;
+}
+#nodecontrol .nodecontentstate .stat .stat-right .addSettings {
+  cursor: pointer;
 }
 #nodecontrol .nodecontentstate .stat-second > div {
   display: flex;
@@ -477,6 +519,17 @@
 }
 #nodecontrol .nodecontentstate .nodestateheightprogress .nodestateheightprogressinner.fork {
   background: rgb(var(--color-bg-orange));
+}
+#nodecontrol .nodecontentstate .removenodeall {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid #E2E2E2;
+  padding: 0.5em 0.75em;
+  border-radius: 10px;
+  background: rgb(var(--color-bg-orange));
+  color: white;
 }
 #nodecontrol .back {
   margin-top: 0.5em;
