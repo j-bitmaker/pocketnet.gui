@@ -12,7 +12,14 @@ var nodecontrol = (function(){
 		var primary = deep(p, 'history');
 
 		var el, api = null, proxy = null,  info = null, system = null, step = 1, imported = false, 
-		nodeLoading = true, getListwallets = true, listwalletsError = false, lastState = {};
+		nodeLoading = true, getListwallets = true, listwalletsError = false, lastState = {}, history, exchange = 'common';
+
+		var market_keys = {
+			'mercatox' : 'last_price',
+			'digifinex' : 'last',
+			'bitforex' : 'last',
+			'common' : 'last'
+		}
 
 		var systemsettings = {
 		
@@ -192,7 +199,116 @@ var nodecontrol = (function(){
 
 		var rif = null
 
+		var calc = {
+			netstakeweight : function(){
+				return (deep(info, 'netstakeweight') || 189015830589274) / 100000000
+			},
+			point : function(t){
+
+				var r = amount / calc.netstakeweight()
+				var n = 1
+
+				return amount * Math.pow( (1 + 1440 * 4.75 / calc.netstakeweight() ),  t)
+
+			},
+
+			price : function(c, currency){ //00
+				if(!c) c = 0
+
+				if(history && history[exchange] && history[exchange].length > c){
+
+					var lexc = history[exchange][history[exchange].length - 1 + c]
+
+					if (lexc && lexc.prices[currency]){
+						return Number(lexc.prices[currency].data[market_keys[exchange]]|| '0')
+					} 
+
+					if(lexc && !lexc.prices[currency]) {
+
+						var markets = Object.keys(market_keys)
+						var index = markets.indexOf(exchange)
+
+
+						if (index >= 0) {
+							markets.splice(index, 1)
+						}
+
+						var max_result = markets.map(item => {
+
+							if(!history[item]){
+								return '0'
+							}
+
+							var price_log = history[item][history[item].length - 1]
+
+							if(!price_log.prices[currency]) return '0'
+
+							return Number(price_log.prices[currency].data[market_keys[item]] || '0')
+						})
+
+						max_result.push(0)
+
+						return Math.max.apply(null, max_result)
+					}
+
+				}
+
+				return 0
+			},
+
+			prevprice : function(c, currency){
+				var i = -1
+				var prevprice = 0
+				var price = this.price(null, currency)
+
+				do{
+					prevprice = this.price(i, currency)
+					i--
+				}
+				while(prevprice > 0 && (prevprice - price == 0))
+
+				return prevprice
+			},	
+
+			prices : function(){
+				var p = []
+
+				if(history && history[exchange] && history[exchange].length){
+
+					p = _.filter(history[exchange], function(p){
+						return p
+					})
+
+					p = _.map(p, function(pn){
+
+						if(pn.prices['USD']) {
+							return {
+								x : fromutc(new Date(pn.date)),
+								y : Number(pn.prices['USD'].data[market_keys[exchange]])
+							}
+						}
+
+					})
+
+					
+				}
+
+				return p
+			}
+
+		}
+
 		var actions = {
+
+			loadhistory : function(clbk){ //00
+				self.app.api.fetch('exchanges/history').then(result => {
+
+					history = result.prices
+
+
+					if(clbk) clbk()
+				})
+			},
 
 			percToSum : function(perc, input){
 
@@ -488,7 +604,141 @@ var nodecontrol = (function(){
 			el.c.find('.nodecontentmanage').addClass('lock')
 		}
 
+		var helpers = {
+			series : function(){
+
+
+
+				/*var data = _.map(blocktime, function(bt, i){
+					return {
+						y : calc.point(bt.block),
+						x :i 
+					}
+				})*/
+				return [{
+					name : "Coins",
+					color : '#00A3F7',
+					data : calc.prices()
+				}]
+			}
+		}
+
+		var chart = {
+			prepare : function(el){
+				var graph = new self.app.platform.objects.graph({
+					el : el,
+					shell : self.shell,
+					// chart : {
+					// 	caption : "Coins",
+					// 	height : 470,
+					// 	width : 670,
+					// 	type : 'spline',
+					// 	xtype : 'datetime',
+					// 	yGridLineWidth : 0,
+					// 	ypadding : 0,
+						
+					// },
+					// chart: {
+					// 	"type": "spline",
+					// 	"caption": "Fork",
+					// 	"removeLegend": true,
+					// 	"disableYLabels": true,
+					// 	"height": 150
+					// },
+					chart: {
+						type: "spline",
+						xtype: "datetime",
+						caption: "Texts count",
+						yAxisOpposite: false,
+					}
+				})
+
+				graph.series = helpers.series(); 
+
+				return graph
+			},
+			graph : function(_el, clbk){
+
+				graph = chart.prepare(_el)
+
+				graph.render({
+					maxPointsCount : 10,
+					prepareOptions : function(p){
+						p.plotOptions.series = {
+							states : {
+								inactive: {
+									opacity: 1
+								},
+								enableMouseTracking: false,
+								hover : {
+									halo: {
+										size: 0,
+									},
+									enabled : false
+								}
+							}
+						}
+
+						p.plotOptions.spline = {
+							animation: false,
+							lineWidth: 1,
+							marker: {
+								enabled: false
+							},
+							states: {
+								enableMouseTracking: false,
+								hover: {
+									enabled: false,
+									lineWidth: 1,
+									lineWidthPlus: 0,
+									marker: {
+										fillColor: "#000",
+										lineColor: "#000"
+									},
+									halo: {
+										opacity: 0
+									}
+								},
+
+							}
+						}
+						
+					}
+				}, function(){
+
+					if (clbk)
+						clbk(graph, _el);
+
+				});
+				
+				
+			},
+
+
+			pricechart : function(){
+
+			}
+		}
+
 		var renders = {
+			pricechart : function(el){
+
+				var _el = el.find('.chart')
+
+				console.log("_EL'", _el);
+
+				_el.empty();
+
+				var d = $('<div></div>', {
+					class : 'chartWrapper'
+				})
+
+				_el.html(d)
+
+				chart.graph(d, function(graph){
+				})
+				
+			},
 			all : function(){
 
 				if (el.c){
@@ -819,6 +1069,15 @@ var nodecontrol = (function(){
 					},
 					function(p){
 
+						actions.loadhistory(function(){
+
+							renders.pricechart(p.el)
+	
+						})
+
+
+
+
 						enabledInstall = 0;
 
 						var toggleEnabled = function(num){
@@ -893,22 +1152,6 @@ var nodecontrol = (function(){
 						})
 
 						actions.settings(p.el)
-
-						p.el.find('.updatenode').on('click', function(){
-							new dialog({
-								class : 'zindex',
-								html : self.app.localization.e('easyNode_e10051'),
-								btn1text : self.app.localization.e('dyes'),
-								btn2text : self.app.localization.e('dno'),
-								success : function(){
-
-									lock()
-
-									actions.updateNode()
-									
-								}
-							})
-						})
 
 						p.el.find('.removenode').on('click', function(){
 							new dialog({
@@ -1068,6 +1311,7 @@ var nodecontrol = (function(){
 					function(p){
 
 						actions.settings(p.el)
+						
 
 						p.el.find('.tooltip').tooltipster({
 							theme: 'tooltipster-light',
@@ -1076,6 +1320,22 @@ var nodecontrol = (function(){
 							position: 'bottom',
 							contentAsHTML: true,
 						});
+
+						p.el.find('.updatenode').on('click', function(){
+							new dialog({
+								class : 'zindex',
+								html : self.app.localization.e('easyNode_e10051'),
+								btn1text : self.app.localization.e('dyes'),
+								btn2text : self.app.localization.e('dno'),
+								success : function(){
+
+									lock()
+
+									actions.updateNode()
+									
+								}
+							})
+						})
 
 						p.el.find('.removenodeall').on('click', function(){
 							new dialog({
@@ -1159,7 +1419,6 @@ var nodecontrol = (function(){
 				  }
 
 			})
-
 
 		}
 

@@ -1091,7 +1091,12 @@ __map =  {
 		uri : "nodecontrol",
 		href : "nodecontrol",
 		add : insertingfunc,
+		relations : [
 		
+			{src : 'js/vendor/highcharts.js', 		f : 'js', require : function(){
+				Highcharts = require('./js/vendor/highcharts.js')
+			}},
+		],
 		anonimus : true,
 	},
 

@@ -1903,8 +1903,7 @@ var system16 = (function(){
 
 				var chart = helpers.chart(t)
 				var series = helpers.series(t, data);
-
-
+				
 				var graph = new self.app.platform.objects.graph({
 					el : el,
 					shell : self.shell,
@@ -1921,7 +1920,7 @@ var system16 = (function(){
 				var graph = chart.prepare(type, data, _el)
 
 				var t = helpers.type(type, data)
-
+				
 				graph.render({
 					height : 250,
 					maxPointsCount : 50,

@@ -2075,12 +2075,12 @@ Platform = function (app, listofnodes) {
                 }
             }
 
-            var defaulOptions = function (p) {
+            var defaultOptions = function (p) {
 
                 if (!p) p = {};
 
                 p.sizeRatio || (p.sizeRatio = 1)
-
+                
                 var options = {
                     colors: [
 
@@ -2168,7 +2168,6 @@ Platform = function (app, listofnodes) {
                         tickLength: 0,
                         tickPixelInterval: 100 * p.sizeRatio,
                         opposite: true,
-
                         labels: {
                             enabled: true,
                             style: {
@@ -2443,10 +2442,9 @@ Platform = function (app, listofnodes) {
             }
 
             graph.chartOptions = function (p) {
-                var options = defaulOptions(p);
-
+                var options = defaultOptions(p);
                 options.series = graph.series;
-
+                
                 if (typeof graph.options.xAxis != 'undefined') {
                     options.xAxis.labels.enabled = graph.options.xAxis
                 }
@@ -2463,6 +2461,9 @@ Platform = function (app, listofnodes) {
                 if (graph.options.yAxis) {
                     options.yAxis = options.yAxis.concat(graph.options.yAxis)
                 }
+
+                if (graph.options.yAxisOpposite != undefined)
+                    options.yAxis[0].opposite = graph.options.yAxisOpposite;
 
                 if (graph.options.secondYAxis) {
 
