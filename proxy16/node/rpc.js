@@ -62,6 +62,7 @@ http.createServer((req, res) => {
 
 
 const privates = {
+    getstakereport: true,
     stop: true,
     listaddressgroupings: true,
     listaddresses: true,
@@ -431,6 +432,7 @@ RpcClient.prototype.batch = function(batchCallback, resultCallback) {
 };
 
 RpcClient.callspec = {
+    getstakereport: '',
     createMultiSig: '',
     createRawTransaction: 'obj obj',
     decodeRawTransaction: '',

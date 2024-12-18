@@ -21,6 +21,49 @@ var nodecontrol = (function(){
 			'common' : 'last'
 		}
 
+		var transactionTypes = {
+			0: 'Not Supported',
+	
+			1: 'PKOIN',
+			2: 'Coinbase',
+			3: 'Coinstake',
+	
+			100: 'Account (User)',
+			101: 'Account (Video Server)',
+			102: 'Account (Message Server)',
+			103: 'Account Settings',
+	
+			200: 'Post',
+			201: 'Video',
+			202: 'Article',
+			// 203: 'Server Ping',
+	
+			204: 'Comment',
+			205: 'Comment (Edit)',
+			206: 'Comment (Delete)',
+	
+			207: 'Delete Content',
+	
+			208: 'Boost Content',
+	
+			300: 'Rating',
+			301: 'Rating (Comment)',
+	
+			302: 'Follow',
+			303: 'Follow (Private)',
+			304: 'Unfollow',
+	
+			305: 'Blocking',
+			306: 'Unblocking',
+	
+			307: 'Complain',
+	
+			400: 'Moderation Request',
+			401: 'Moderation Register',
+			410: 'Moderation Flag',
+			420: 'Moderation Vote',
+		}
+
 		var systemsettings = {
 		
 			'nodeenabled' : function(){
@@ -281,12 +324,12 @@ var nodecontrol = (function(){
 
 					p = _.map(p, function(pn){
 
-						if(pn.prices['USD']) {
+						// if(pn.prices['USD']) {
 							return {
 								x : fromutc(new Date(pn.date)),
 								y : Number(pn.prices['USD'].data[market_keys[exchange]])
 							}
-						}
+						//}
 
 					})
 
@@ -617,7 +660,23 @@ var nodecontrol = (function(){
 				})*/
 				return [{
 					name : "Coins",
-					color : '#00A3F7',
+
+					// color: {
+					// 	linearGradient: {
+					// 		angle: 90,
+					// 		opacity: 0.5
+					// 	},
+					// 	stops: [
+					// 		[0, 'rgba(52, 72, 240, 0.62)'],
+					// 		[1, 'rgba(52, 72, 240, 0.62)']
+					// 	]
+					// },
+
+					lineWidth: 3, // Make the line bold
+					fillOpacity: 0.3, // Make the area more prominent with opacity
+					color: "rgba(52, 72, 240, 0.6)",// Line color
+					fillColor:  "rgba(52, 72, 240, 0.2)", // Area color (same as line)
+
 					data : calc.prices()
 				}]
 			}
@@ -646,10 +705,10 @@ var nodecontrol = (function(){
 					// 	"height": 150
 					// },
 					chart: {
-						type: "spline",
+						type: "area",
 						xtype: "datetime",
 						caption: "Texts count",
-						yAxisOpposite: false,
+						yAxisOpposite: false,		
 					}
 				})
 
@@ -862,10 +921,11 @@ var nodecontrol = (function(){
 							if (newValue >= minValue) {
 							  $range.val(newValue);
 							} else {
+								newValue = minValue
 							  $range.val(newValue); 
 							}
 
-							actions.percToSum(minValue, inputSum);
+							actions.percToSum(newValue, inputSum);
 						})
 
 						p.el.find('.tooltip').tooltipster({
@@ -1068,6 +1128,48 @@ var nodecontrol = (function(){
 
 					},
 					function(p){
+
+						var address = self.app.user.address.value;
+
+						self.app.api.rpc('getaddresstransactions', [address, 3072586, 0, 10, 0, [1, 2, 3]])
+						.then(transactions => {
+							console.log('a!!!!!!!!!!', transactions);
+
+							self.shell({
+								inner : html,
+								name : 'nodecontenthistory',
+								data : {
+									transactions: transactions,
+									transactionTypes: transactionTypes
+								},
+		
+								el : p.el.find('.historyWrapper')
+		
+							}, function(p){
+
+								p.el.find('.copy').on('click', function(){
+
+									copyText($(this).find('.text'))
+
+									sitemessage(self.app.localization.e('successcopied'))
+								})
+
+							})
+
+							
+						})
+						.catch(e => {
+
+							return Promise.reject(e)
+						})
+
+						self.app.api.rpc('getstakereport').then(d => {
+
+							console.log('d!!!!!!!!???', d);
+
+						}).catch(err => {
+							console.log('errrr????', err);
+						})
 
 						actions.loadhistory(function(){
 
@@ -1350,6 +1452,7 @@ var nodecontrol = (function(){
 								}
 							})
 						})
+						
 
 						if (clbk)
 							clbk()
@@ -1419,6 +1522,7 @@ var nodecontrol = (function(){
 				  }
 
 			})
+			
 
 		}
 

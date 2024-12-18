@@ -1,0 +1,59 @@
+<div class="nodecontenthistory">
+    <div class="history-top">
+        <span><%- e('showtransactionhistory') %></span>
+    </div>
+    <div class="history-table">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Transaction</th>
+                    <th>Type</th>
+                    <th>Date</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <% _.each(transactions, function(tr){ %>
+
+                    <tr>
+                        <td>
+                            <div class="txid copy">
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M9.65385 3.44231C10.2592 3.44231 10.75 2.95154 10.75 2.34615C10.75 1.74076 10.2592 1.25 9.65385 1.25C9.04846 1.25 8.55769 1.74076 8.55769 2.34615M9.65385 3.44231C9.04846 3.44231 8.55769 2.95154 8.55769 2.34615M9.65385 3.44231V8.55769M8.55769 2.34615H3.44231M8.55769 9.65385C8.55769 10.2592 9.04846 10.75 9.65385 10.75C10.2592 10.75 10.75 10.2592 10.75 9.65385C10.75 9.04846 10.2592 8.55769 9.65385 8.55769M8.55769 9.65385C8.55769 9.04846 9.04846 8.55769 9.65385 8.55769M8.55769 9.65385H3.44231M3.44231 2.34615C3.44231 2.95154 2.95154 3.44231 2.34615 3.44231M3.44231 2.34615C3.44231 1.74076 2.95154 1.25 2.34615 1.25C1.74076 1.25 1.25 1.74076 1.25 2.34615C1.25 2.95154 1.74076 3.44231 2.34615 3.44231M2.34615 3.44231V8.55769M3.44231 9.65385C3.44231 10.2592 2.95154 10.75 2.34615 10.75C1.74076 10.75 1.25 10.2592 1.25 9.65385C1.25 9.04846 1.74076 8.55769 2.34615 8.55769M3.44231 9.65385C3.44231 9.04846 2.95154 8.55769 2.34615 8.55769" stroke="#595D62" stroke-linecap="round"/>
+                                </svg>
+                                <span class="text">
+                                    <%- tr.txid %>
+                                </span>                                                                
+                            </div>
+
+                        </td>
+                        <td><%- transactionTypes[tr.type || 0] %></td>
+                        <td><%- convertDate(dateToStr(essenseData.time)) %></td>
+                        <td><%- 0 %> PKOIN</td>
+                    </tr>
+
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+    <div class="history-navigation">
+        <div class="page-button page-back">
+            <i class="fa fa-chevron-left"></i>
+        </div>
+        <div class="pages">
+            <div class="page">
+                1
+            </div>
+            <div class="page active">
+                2
+            </div>
+            <div class="page">
+                3
+            </div>
+        </div>
+        <div class="page-button page-forward">
+            <i class="fa fa-chevron-right"></i>
+        </div>
+    </div>
+</div>

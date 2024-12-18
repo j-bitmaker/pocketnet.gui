@@ -531,6 +531,114 @@
   background: rgb(var(--color-bg-orange));
   color: white;
 }
+#nodecontrol .chartWrapper .chart-top {
+  font-size: 1.1em;
+  padding: 0.5em 1em 1em 1em;
+}
+#nodecontrol .nodecontenthistory .history-top {
+  padding: 1.5em 1em;
+  background: rgb(var(--background-total-theme));
+  font-size: 1.1em;
+  border-radius: 8px 8px 0 0;
+}
+#nodecontrol .nodecontenthistory .history-table table {
+  border: 0;
+  width: 100%;
+  border-collapse: separate;
+}
+#nodecontrol .nodecontenthistory .history-table table th,
+#nodecontrol .nodecontenthistory .history-table table td {
+  border-left: none;
+  border-right: none;
+  border-top: none;
+}
+#nodecontrol .nodecontenthistory .history-table table tr {
+  border-top: none;
+}
+#nodecontrol .nodecontenthistory .history-table table thead {
+  background: #F5F5F5;
+  color: #595D62;
+  font-weight: 400;
+}
+#nodecontrol .nodecontenthistory .history-table table thead tr {
+  /* Auto layout */
+  gap: 16px;
+  height: 32px;
+  background: #F5F5F5;
+}
+#nodecontrol .nodecontenthistory .history-table table thead tr th {
+  /* Inside auto layout */
+  text-align: start;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+  width: 20%;
+  padding: 1em 1.5em;
+}
+#nodecontrol .nodecontenthistory .history-table table thead tr th:nth-child(1),
+#nodecontrol .nodecontenthistory .history-table table thead tr th:nth-child(3) {
+  width: 30%;
+}
+#nodecontrol .nodecontenthistory .history-table table tbody {
+  background: rgb(var(--background-total-theme));
+}
+#nodecontrol .nodecontenthistory .history-table table tbody tr td {
+  padding: 1em 1em;
+}
+#nodecontrol .nodecontenthistory .history-table table tbody tr .txid {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 20px;
+  background: #F5F5F5;
+  padding: 4px 10px;
+}
+#nodecontrol .nodecontenthistory .history-table table tbody tr .txid .text {
+  width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+  text-align: center;
+  margin-left: 4px;
+}
+#nodecontrol .nodecontenthistory .history-navigation {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em 1em;
+  background: rgb(var(--background-total-theme));
+  border-radius: 0 0 8px 8px;
+}
+#nodecontrol .nodecontenthistory .history-navigation .page-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+  width: 40px;
+  padding: 1em;
+  border: 1px solid;
+  border-radius: 8px;
+  border: 1px solid #E2E2E2;
+  cursor: pointer;
+}
+#nodecontrol .nodecontenthistory .history-navigation .pages {
+  display: flex;
+}
+#nodecontrol .nodecontenthistory .history-navigation .pages .page {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+  width: 40px;
+  padding: 1em;
+  cursor: pointer;
+  border-radius: 8px;
+}
+#nodecontrol .nodecontenthistory .history-navigation .pages .page.active {
+  background: #3448F0;
+  color: rgb(var(--background-total-theme));
+}
 #nodecontrol .back {
   margin-top: 0.5em;
   cursor: pointer;
