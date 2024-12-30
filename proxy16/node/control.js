@@ -428,8 +428,22 @@ var Control = function(settings, proxy) {
         },
         
         createWallet: function(filePath = '', disable_private_keys = false, blank = false) {
-            console.log('createWallet???', filePath, disable_private_keys, blank);
+
             return self.kit.rpc('createwallet', [filePath, disable_private_keys, blank, '', false, false, true]).then(result => {
+                return Promise.resolve(result)
+            })
+        },
+
+        listtransactions: function(label, number, page, include_watchonly) {
+
+            return self.kit.rpc('listtransactions', [label, number, page, include_watchonly]).then(result => {
+                return Promise.resolve(result)
+            })
+        },
+
+        getstakereport: function() {
+
+            return self.kit.rpc('getstakereport', []).then(result => {
                 return Promise.resolve(result)
             })
         },
@@ -447,8 +461,14 @@ var Control = function(settings, proxy) {
             })
         },
 
-        sethdseed: function(hdseed) {
-            return self.kit.rpc('sethdseed', [true, hdseed]).then((result, req, body) => {
+        sethdseed: function(hdseed, walletname) {
+            return self.kit.rpc('sethdseed', [hdseed, walletname || '']).then((result, req, body) => {
+                return Promise.resolve(result)
+            })
+        },
+
+        sethdseedfromdump: function(path, walletname) {
+            return self.kit.rpc('sethdseedfromdump', [path, walletname || '']).then((result, req, body) => {
                 return Promise.resolve(result)
             })
         },

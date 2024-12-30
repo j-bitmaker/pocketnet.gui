@@ -12,7 +12,7 @@ var nodecontrol = (function(){
 		var primary = deep(p, 'history');
 
 		var el, api = null, proxy = null,  info = null, system = null, step = 1, imported = false, 
-		nodeLoading = true, getListwallets = true, listwalletsError = false, lastState = {}, history, exchange = 'common';
+		nodeLoading = true, getListwallets = true, listwalletsError = false, lastState = {}, history, exchange = 'common', stakereport;
 
 		var market_keys = {
 			'mercatox' : 'last_price',
@@ -313,28 +313,23 @@ var nodecontrol = (function(){
 				return prevprice
 			},	
 
-			prices : function(){
-				var p = []
+			stakereportseries : function(){
 
-				if(history && history[exchange] && history[exchange].length){
+				var p = [];
 
-					p = _.filter(history[exchange], function(p){
-						return p
+				_.each(stakereport, function(pn, date){
+
+					var d = new Date(date);
+					var y = Number(pn);
+
+					if (String(d) == 'Invalid Date' || Number.isNaN(y) ) return false;
+											
+					p.push({
+						x : fromutc(d),
+						y : y
 					})
 
-					p = _.map(p, function(pn){
-
-						// if(pn.prices['USD']) {
-							return {
-								x : fromutc(new Date(pn.date)),
-								y : Number(pn.prices['USD'].data[market_keys[exchange]])
-							}
-						//}
-
-					})
-
-					
-				}
+				})
 
 				return p
 			}
@@ -659,25 +654,15 @@ var nodecontrol = (function(){
 					}
 				})*/
 				return [{
-					name : "Coins",
+					name : "Staking statistics",
 
-					// color: {
-					// 	linearGradient: {
-					// 		angle: 90,
-					// 		opacity: 0.5
-					// 	},
-					// 	stops: [
-					// 		[0, 'rgba(52, 72, 240, 0.62)'],
-					// 		[1, 'rgba(52, 72, 240, 0.62)']
-					// 	]
-					// },
 
 					lineWidth: 3, // Make the line bold
 					fillOpacity: 0.3, // Make the area more prominent with opacity
 					color: "rgba(52, 72, 240, 0.6)",// Line color
 					fillColor:  "rgba(52, 72, 240, 0.2)", // Area color (same as line)
 
-					data : calc.prices()
+					data : calc.stakereportseries()
 				}]
 			}
 		}
@@ -1128,10 +1113,15 @@ var nodecontrol = (function(){
 
 					},
 					function(p){
-
-						var address = self.app.user.address.value;
-
-						self.app.api.rpc('getaddresstransactions', [address, 3072586, 0, 10, 0, [1, 2, 3]])
+						
+						proxy.system.request('set.node.wallet.listtransactions', 
+							{
+								label: '*',
+								number: 10, 
+								page: 0,
+								include_watchonly: false
+							}
+						)
 						.then(transactions => {
 							console.log('a!!!!!!!!!!', transactions);
 
@@ -1163,21 +1153,22 @@ var nodecontrol = (function(){
 							return Promise.reject(e)
 						})
 
-						self.app.api.rpc('getstakereport').then(d => {
+						proxy.system.request('set.node.wallet.getstakereport')
+						.then(d => {
 
 							console.log('d!!!!!!!!???', d);
+
+							stakereport = d
+
+							actions.loadhistory(function(){
+
+								renders.pricechart(p.el)
+		
+							})
 
 						}).catch(err => {
 							console.log('errrr????', err);
 						})
-
-						actions.loadhistory(function(){
-
-							renders.pricechart(p.el)
-	
-						})
-
-
 
 
 						enabledInstall = 0;

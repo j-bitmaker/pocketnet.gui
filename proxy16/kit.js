@@ -1057,6 +1057,22 @@ const kit = {
 							return Promise.resolve(result)
 						})
 					},
+					listtransactions: function (data) {
+						return kit.proxy().then(proxy => {
+							return proxy.nodeControl.request.listtransactions(data.label, data.number, data.page, data.include_watchonly)
+						}).then(result => {
+							return Promise.resolve(result)
+						})
+					},
+					getstakereport: function () {
+						return kit.proxy().then(proxy => {
+							return proxy.nodeControl.request.getstakereport()
+						}).then(result => {
+							return Promise.resolve(result)
+						})
+					}
+
+					
 				},
 				saveWallet: function ({path}) {
 					return kit.proxy().then(proxy => {
@@ -1105,6 +1121,13 @@ const kit = {
 				sethdseed: function ({hdseed}) {
 					return kit.proxy().then(proxy => {
 						return proxy.nodeControl.request.sethdseed(hdseed)
+					}).then(result => {
+						return Promise.resolve(result)
+					})
+				},
+				sethdseedfromdump: function ({path, walletname}) {
+					return kit.proxy().then(proxy => {
+						return proxy.nodeControl.request.sethdseedfromdump(path, walletname)
 					}).then(result => {
 						return Promise.resolve(result)
 					})

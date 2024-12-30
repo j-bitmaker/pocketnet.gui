@@ -75,8 +75,10 @@ const privates = {
     sendtoaddress: true,
     gethdseed: true,
     sethdseed: true,
+    sethdseedfromdump: true,
     listwallets: true,
-    createwallet: true
+    createwallet: true,
+    listtransactions: true,
 }
 
 const posts = {
@@ -85,6 +87,7 @@ const posts = {
 }
 
 const publics = {
+    getaddresstransactions: true,
     getcontent: true,
     getcontents: true,
     getlastcomments: true,
@@ -132,7 +135,6 @@ const publics = {
     // BlockExplorer
     getblocktransactions: true,
     getaddressinfo: true,
-    getaddresstransactions: true,
     gettransactions: true,
     getblock: true,
     getblocks: true,
@@ -488,13 +490,14 @@ RpcClient.callspec = {
     listaddressgroupings: '',
     getnewaddress: '',
     gethdseed: '',
-    sethdseed: 'bool str',
+    sethdseed: 'str str',
+    sethdseedfromdump: 'str str',
     listwallets: '',
     listaddresses: '',
     listReceivedByAccount: 'int bool',
     listReceivedByAddress: 'int bool',
     listSinceBlock: 'str int',
-    listTransactions: 'str int int',
+    listtransactions: 'str int int bool',
     listUnspent: 'int int',
     txunspent: 'obj int int',
     listLockUnspent: 'bool',

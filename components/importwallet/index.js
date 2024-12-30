@@ -34,20 +34,22 @@ var importwallet = (function(){
 
 				globalpreloader(true);
 
-				return proxy.system.request('set.node.createWallet', {blank: true}).then(r => {
+				// return proxy.system.request('set.node.createWallet', {blank: true}).then(r => {
 
-					return proxy.system.request('set.node.sethdseed', {hdseed: hdseed}).then(mnemonic => {
 
-						console.log('r importwallet: ', mnemonic);
 
-						if (essenseData.success)
-							essenseData.success(mnemonic);
+				// })
+				
+				return proxy.system.request('set.node.sethdseed', {hdseed: hdseed}).then(mnemonic => {
 
-						globalpreloader(false);
+					console.log('r importwallet: ', mnemonic);
 
-						self.closeContainer();
+					if (essenseData.success)
+						essenseData.success(mnemonic);
 
-					})
+					globalpreloader(false);
+
+					self.closeContainer();
 
 				}).catch(e => {
 
@@ -137,7 +139,7 @@ var importwallet = (function(){
 
 				return proxy.system.request('set.node.createWallet', {}).then(r => {
 
-					return proxy.system.request('set.node.importwallet', {path: this.files[0].path}).then(mnemonic => {
+					return proxy.system.request('set.node.sethdseedfromdump', {path: this.files[0].path}).then(mnemonic => {
 
 						globalpreloader(false);
 						

@@ -9,7 +9,7 @@
 #nodecontrol .managewallet {
   display: flex;
   justify-content: space-between;
-  gap: 1em;
+  gap: 1.25em;
 }
 #nodecontrol .managewallet .blockWrapper {
   width: 100%;
@@ -407,7 +407,7 @@
   background: rgb(var(--background-total-theme));
   padding: 1em;
   border-radius: 16px;
-  margin-bottom: 1em;
+  margin-bottom: 1.25em;
 }
 #nodecontrol .nodecontentstate .stat {
   display: flex;
