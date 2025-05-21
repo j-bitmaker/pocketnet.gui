@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staking Dashboard</title>
+    <link rel="stylesheet" href="staking-dashboard.css">
+</head>
+<body>
+    <div class="staking-dashboard">
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <div class="status-chip">
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/66285015c1bdad70b95788b2dd67904f430e2da3?placeholderIfAbsent=true&apiKey=b3a245a52e034e378015bba57aea4de9" class="status-icon" />
+                <div class="chip-label">Staking</div>
+            </div>
+            <div class="divider"></div>
+            <div class="sync-status">
+                <div class="chip-label">Sync:</div>
+                <div class="sync-progress">
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/09de85ff1c7eb6dc9d1052aa9693ea6d34c51f68?placeholderIfAbsent=true&apiKey=b3a245a52e034e378015bba57aea4de9" class="sync-icon" />
+                    <div class="chip-label">33% (00:10:24)</div>
+                </div>
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/d83b3c67d6b29927ffcdda69c5875845dd712308?placeholderIfAbsent=true&apiKey=b3a245a52e034e378015bba57aea4de9" class="status-icon" />
+            </div>
+            <div class="divider"></div>
+            <div class="version-info">
+                <div class="chip-label">Version:</div>
+                <div class="version-number">
+                    <div class="chip-label">0.20.18</div>
+                    <div class="commit-hash">8fce2b4</div>
+                </div>
+                <div class="version-button">
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/f1c02ab7af8a1c4fd0cc1aa144ead8791239dadc?placeholderIfAbsent=true&apiKey=b3a245a52e034e378015bba57aea4de9" class="button-icon" />
+                </div>
+            </div>
+            <div class="refresh-button">
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/354b8e1b65e2930de790f6272f916da3872b5644?placeholderIfAbsent=true&apiKey=b3a245a52e034e378015bba57aea4de9" class="button-icon" />
+            </div>
+        </div>
+
+        <!-- Staking Form and Info Section -->
+        <div class="staking-section">
+            <!-- Staking Form -->
+            <div class="staking-form">
+                <div class="form-container">
+                    <div class="wallet-header">
+                        <div class="wallet-address">
+                            <div class="address-indicator"></div>
+                            <div class="address-wrapper">
+                                <div class="address-text">0x1Fe2D...593B9</div>
+                                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/dcb0aaf4301bac2f813224e7e34440066881d65f?placeholderIfAbsent=true&apiKey=b3a245a52e034e378015bba57aea4de9" class="copy-icon" />
+                            </div>
+                        </div>
+                        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/d83b3c67d6b29927ffcdda69c5875845dd712308?placeholderIfAbsent=true&apiKey=b3a245a52e034e378015bba57aea4de9" class="menu-icon" />
+                    </div>
+                    <div class="stake-amount-field">
+                        <div class="field-label">Stake amount</div>
+                        <div class="input-container">
+                            <div class="input-placeholder">0,00</div>
+                            <div class="token-selector">
+                                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/0265257963e658e24f9798da2566151ae3e87240?placeholderIfAbsent=true&apiKey=b3a245a52e034e378015bba57aea4de9" class="token-icon" />
+                                <div class="token-name">PKOIN</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="amount-slider">
+                        <div class="slider-controls">
+                            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/db92ce2ac24a58665aadc83be2d602151004c9b9?placeholderIfAbsent=true&apiKey=b3a245a52e034e378015bba57aea4de9" class="slider-icon" />
+                            <div class="slider-wrapper">
+                                <div class="slider-rail">
+                                    <div class="rail"></div>
+                                </div>
+                                <div class="track-wrapper">
+                                    <div class="slider-track">
+                                        <div class="track"></div>
+                                        <div class="slider-handle">
+                                            <div class="handle"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/0c2e89aaa24178a33721ae152421966a31406c25?placeholderIfAbsent=true&apiKey=b3a245a52e034e378015bba57aea4de9" class="slider-icon" />
+                        </div>
+                        <div class="balance-row">
+                            <div class="balance-info">Balance: 0.00 PKOIN</div>
+                            <div class="max-button">Max</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="deposit-button">Deposit</button>
+            </div>
+
+            <!-- Staking Info -->
+            <div class="staking-info">
+                <div class="info-card">
+                    <div class="info-icon-wrapper">
+                        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/e5d3ed1353fda2b8e7bbd783b37f8388f43c7e9b?placeholderIfAbsent=true&apiKey=b3a245a52e034e378015bba57aea4de9" class="info-icon" />
+                    </div>
+                    <div class="info-content">
+                        <div class="info-label">In Stacking</div>
+                        <div class="info-value">
+                            <div class="value-row">
+                                <div class="value-amount">0,00</div>
+                                <div class="value-currency">PKOIN</div>
+                            </div>
+                            <div class="value-usd">~$0,00 USD</div>
+                        </div>
+                    </div>
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/d83b3c67d6b29927ffcdda69c5875845dd712308?placeholderIfAbsent=true&apiKey=b3a245a52e034e378015bba57aea4de9" class="menu-icon" />
+                </div>
+                <div class="info-card">
+                    <div class="info-icon-wrapper">
+                        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/dddaadd7084c8ed601908bb7fa69f539c820c3f3?placeholderIfAbsent=true&apiKey=b3a245a52e034e378015bba57aea4de9" class="info-icon" />
+                    </div>
+                    <div class="info-content">
+                        <div class="info-label">Rewards</div>
+                        <div class="info-value">
+                            <div class="value-row">
+                                <div class="value-amount">0,00</div>
+                                <div class="value-currency">PKOIN</div>
+                            </div>
+                            <div class="value-usd">~$0,00 USD</div>
+                        </div>
+                    </div>
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/d83b3c67d6b29927ffcdda69c5875845dd712308?placeholderIfAbsent=true&apiKey=b3a245a52e034e378015bba57aea4de9" class="menu-icon" />
+                </div>
+                <div class="withdraw-button-wrapper">
+                    <button class="withdraw-button">Withdraw</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chart Section -->
+        <div class="chart-section">
+            <div class="chart-header">
+                <div class="chart-title">1-7 March 2021</div>
+                <div class="period-selector">
+                    <div class="period-option active">Неделя</div>
+                    <div class="period-option">Месяц</div>
+                    <div class="period-option">Год</div>
+                </div>
+            </div>
+            <div class="chart-container">
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/6aedd09b6d14ac6afa462f263274883ee8ed54df?placeholderIfAbsent=true&apiKey=b3a245a52e034e378015bba57aea4de9" class="chart-image" />
+            </div>
+        </div>
+
+        <!-- Transaction History -->
+        <div class="transaction-history">
+            <div class="history-header">
+                <div class="history-title">История транзакций</div>
+                <div class="history-filters">
+                    <div class="period-selector">
+                        <div class="period-option active">Неделя</div>
+                        <div class="period-option">Месяц</div>
+                        <div class="period-option">Год</div>
+                    </div>
+                    <button class="time-filter-button">За все время</button>
+                </div>
+            </div>
+            <div class="table-header">
+                <div class="table-column">Address</div>
+                <div class="table-column">Type</div>
+                <div class="table-column">Date</div>
+                <div class="table-column right">Amount</div>
+            </div>
+            <div class="transaction-list">
+                <div class="transaction-row">
+                    <div class="address-chip">
+                        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/dbcd33e63e04546911f42b8a44e3fdcd00fb1f02?placeholderIfAbsent=true&apiKey=b3a245a52e034e378015bba57aea4de9" class="address-icon" />
+                        <div class="address-text">0x1Fe2D...593B9</div>
+                    </div>
+                    <div class="transaction-type">Coinstake</div>
+                    <div class="transaction-date">03.29.2022, 10:31</div>
+                    <div class="transaction-amount positive">+ 0.0033 PKOIN</div>
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/d613869d28208d0f6589bdf9a14cd2d9052387d9?placeholderIfAbsent=true&apiKey=b3a245a52e034e378015bba57aea4de9" class="transaction-icon" />
+                </div>
+                <div class="transaction-row">
+                    <div class="address-chip">
+                        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/dbcd33e63e04546911f42b8a44e3fdcd00fb1f02?placeholderIfAbsent=true&apiKey=b3a245a52e034e378015bba57aea4de9" class="address-icon" />
+                        <div class="address-text">0x1Fe2D...593B9</div>
+                    </div>
+                    <div class="transaction-type">Coinstake</div>
+                    <div class="transaction-date">03.29.2022, 10:31</div>
+                    <div class="transaction-amount positive">+ 0.0033 PKOIN</div>
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/d613869d28208d0f6589bdf9a14cd2d9052387d9?placeholderIfAbsent=true&apiKey=b3a245a52e034e378015bba57aea4de9" class="transaction-icon" />
+                </div>
+                <div class="transaction-row">
+                    <div class="address-chip">
+                        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/dbcd33e63e04546911f42b8a44e3fdcd00fb1f02?placeholderIfAbsent=true&apiKey=b3a245a52e034e378015bba57aea4de9" class="address-icon" />
+                        <div class="address-text">0x1Fe2D...593B9</div>
+                    </div>
+                    <div class="transaction-type">Coinstake</div>
+                    <div class="transaction-date">03.29.2022, 10:31</div>
+                    <div class="transaction-amount negative">- 0.0033 PKOIN</div>
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/dc68e9b0adc8024f159239212c1ee3fc28b881f5?placeholderIfAbsent=true&apiKey=b3a245a52e034e378015bba57aea4de9" class="transaction-icon" />
+                </div>
+                <div class="transaction-row">
+                    <div class="address-chip">
+                        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/dbcd33e63e04546911f42b8a44e3fdcd00fb1f02?placeholderIfAbsent=true&apiKey=b3a245a52e034e378015bba57aea4de9" class="address-icon" />
+                        <div class="address-text">0x1Fe2D...593B9</div>
+                    </div>
+                    <div class="transaction-type">Coinstake</div>
+                    <div class="transaction-date">03.29.2022, 10:31</div>
+                    <div class="transaction-amount positive">+ 0.0033 PKOIN</div>
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/d613869d28208d0f6589bdf9a14cd2d9052387d9?placeholderIfAbsent=true&apiKey=b3a245a52e034e378015bba57aea4de9" class="transaction-icon" />
+                </div>
+                <div class="transaction-row">
+                    <div class="address-chip">
+                        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/dbcd33e63e04546911f42b8a44e3fdcd00fb1f02?placeholderIfAbsent=true&apiKey=b3a245a52e034e378015bba57aea4de9" class="address-icon" />
+                        <div class="address-text">0x1Fe2D...593B9</div>
+                    </div>
+                    <div class="transaction-type">Coinstake</div>
+                    <div class="transaction-date">03.29.2022, 10:31</div>
+                    <div class="transaction-amount positive">+ 0.0033 PKOIN</div>
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/d613869d28208d0f6589bdf9a14cd2d9052387d9?placeholderIfAbsent=true&apiKey=b3a245a52e034e378015bba57aea4de9" class="transaction-icon" />
+                </div>
+            </div>
+            <div class="pagination">
+                <div class="pagination-button prev">
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/8874f51c46fc62bbbb9e6c59f55ff914ba7fd811?placeholderIfAbsent=true&apiKey=b3a245a52e034e378015bba57aea4de9" class="pagination-icon" />
+                </div>
+                <div class="pagination-pages">
+                    <div class="page-number">1</div>
+                    <div class="page-number">2</div>
+                    <div class="page-number active">3</div>
+                    <div class="page-number">4</div>
+                    <div class="page-number">5</div>
+                    <div class="page-number">26</div>
+                </div>
+                <div class="pagination-button next">
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/01e7b557eee4d3a2eb8c0318c98f8589aac57493?placeholderIfAbsent=true&apiKey=b3a245a52e034e378015bba57aea4de9" class="pagination-icon" />
+                </div>
+            </div>
+        </div>
+
+        <div class="divider">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/f1044674c4b4f65490dc3675fe25157afae3350c?placeholderIfAbsent=true&apiKey=b3a245a52e034e378015bba57aea4de9" class="divider-image" />
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="faq-section">
+            <div class="section-title">Часто задаваемые вопросы</div>
+            <div class="accordion-list">
+                <div class="accordion-item">
+                    <div class="accordion-title">Что такое валидатор?</div>
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/7af1a5c10f38599747a21552abf8037c85aac131?placeholderIfAbsent=true&apiKey=b3a245a52e034e378015bba57aea4de9" class="accordion-icon" />
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-title">Могу ли я внести более 32 ЕТН?</div>
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/7af1a5c10f38599747a21552abf8037c85aac131?placeholderIfAbsent=true&apiKey=b3a245a52e034e378015bba57aea4de9" class="accordion-icon" />
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-title">Попаду ли я под сокращение, если перейду в офлайн-режим? (Если коротко: нет.)</div>
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/7af1a5c10f38599747a21552abf8037c85aac131?placeholderIfAbsent=true&apiKey=b3a245a52e034e378015bba57aea4de9" class="accordion-icon" />
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-title">Как точно не попасть под сокращение?</div>
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/7af1a5c10f38599747a21552abf8037c85aac131?placeholderIfAbsent=true&apiKey=b3a245a52e034e378015bba57aea4de9" class="accordion-icon" />
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-title">Какой клиент лучше всех?</div>
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/7af1a5c10f38599747a21552abf8037c85aac131?placeholderIfAbsent=true&apiKey=b3a245a52e034e378015bba57aea4de9" class="accordion-icon" />
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-title">Могу ли я просто использовать VPS (виртуальный частный сервер)?</div>
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/7af1a5c10f38599747a21552abf8037c85aac131?placeholderIfAbsent=true&apiKey=b3a245a52e034e378015bba57aea4de9" class="accordion-icon" />
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-title">Как разблокировать свои вознаграждения или вернуть ЕТН?</div>
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/7af1a5c10f38599747a21552abf8037c85aac131?placeholderIfAbsent=true&apiKey=b3a245a52e034e378015bba57aea4de9" class="accordion-icon" />
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Resources Section -->
+        <div class="resources-section">
+            <div class="section-title">Дополнительные ресурсы</div>
+            <div class="resource-list">
+                <div class="resource-item">
+                    <div class="resource-link">Каталог стейкинга Ethereum(opens in a new tab)</div>
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/d7a10717cd66f29ac09ba6a32b2ef16779d69767?placeholderIfAbsent=true&apiKey=b3a245a52e034e378015bba57aea4de9" class="resource-icon" />
+                </div>
+                <div class="resource-item">
+                    <div class="resource-link">Проблема разнообразия клиентов Ethereum</div>
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/d7a10717cd66f29ac09ba6a32b2ef16779d69767?placeholderIfAbsent=true&apiKey=b3a245a52e034e378015bba57aea4de9" class="resource-icon" />
+                </div>
+                <div class="resource-item">
+                    <div class="resource-link">Помощь с разнообразием клиентов(opens in a new tab)</div>
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/d7a10717cd66f29ac09ba6a32b2ef16779d69767?placeholderIfAbsent=true&apiKey=b3a245a52e034e378015bba57aea4de9" class="resource-icon" />
+                </div>
+                <div class="resource-item">
+                    <div class="resource-link">Разнообразие клиентов на консенсусном уровне Ethereum(opens in a new tab)</div>
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/d7a10717cd66f29ac09ba6a32b2ef16779d69767?placeholderIfAbsent=true&apiKey=b3a245a52e034e378015bba57aea4de9" class="resource-icon" />
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

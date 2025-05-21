@@ -1125,6 +1125,13 @@ var nodecontrol = (function(){
 						.then(transactions => {
 							console.log('a!!!!!!!!!!', transactions);
 
+							transactions = [{
+								txid: '0x1Fe2D...593B9',
+								type: 3,
+								date: 1747834108546,
+								amount: -0.0033
+							}]
+
 							self.shell({
 								inner : html,
 								name : 'nodecontenthistory',
@@ -1144,6 +1151,20 @@ var nodecontrol = (function(){
 									sitemessage(self.app.localization.e('successcopied'))
 								})
 
+							})
+
+							self.shell({
+								inner : html,
+								name : 'faq',
+								data : {
+									
+								},
+		
+								el : p.el.find('.faqWrapper')
+		
+							}, function(p){
+
+							
 							})
 
 							

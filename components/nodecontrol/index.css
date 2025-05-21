@@ -921,6 +921,947 @@
 #nodecontrol .nodecontentmanage .update .noupdatenode {
   color: rgb(var(--neutral-grad-2));
 }
+#nodecontrol * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+#nodecontrol body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  line-height: 1.5;
+  color: #000000;
+  background-color: #f9fafb;
+}
+#nodecontrol img {
+  max-width: 100%;
+}
+#nodecontrol .staking-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+  align-self: stretch;
+  max-width: 728px;
+  margin: 0 auto;
+  padding: 16px;
+}
+#nodecontrol .status-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  padding: 12px;
+  width: 100%;
+  border-radius: 16px;
+  background-color: #FFFFFF;
+}
+#nodecontrol .status-chip {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  align-self: stretch;
+  height: 100%;
+  font-size: 14px;
+  line-height: 24px;
+  color: #000000;
+  white-space: nowrap;
+  border-radius: 8px;
+  border: 1px solid #E2E2E2;
+}
+#nodecontrol .status-icon {
+  object-fit: contain;
+  flex-shrink: 0;
+  align-self: stretch;
+  margin: auto 0;
+  width: 24px;
+  aspect-ratio: 1/1;
+}
+#nodecontrol .chip-label {
+  align-self: stretch;
+  margin: auto 0;
+  color: #000000;
+}
+#nodecontrol .divider {
+  flex-shrink: 0;
+  align-self: stretch;
+  margin: auto 0;
+  width: 0;
+  height: 16px;
+  border: 1px dashed #E2E2E2;
+  background-color: #E2E2E2;
+}
+#nodecontrol .sync-status {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+  align-items: center;
+  align-self: stretch;
+  padding: 0 0 16px 0;
+  margin: auto 0;
+  max-height: 32px;
+  font-size: 14px;
+  line-height: 24px;
+  min-height: 32px;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+#nodecontrol .sync-progress {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  align-self: stretch;
+  margin: auto 0;
+  max-height: 40px;
+  border-radius: 9999px;
+  min-height: 24px;
+  color: #666666;
+}
+#nodecontrol .sync-icon {
+  object-fit: contain;
+  flex-shrink: 0;
+  align-self: stretch;
+  margin: auto 0;
+  aspect-ratio: 1/1;
+  width: 13px;
+}
+#nodecontrol .version-info {
+  display: flex;
+  flex: 1;
+  gap: 8px;
+  align-items: center;
+  align-self: stretch;
+  padding: 0 0 16px 0;
+  margin: auto 0;
+  max-height: 32px;
+  border-radius: 8px;
+  min-height: 32px;
+  min-width: 240px;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+#nodecontrol .version-number {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  align-self: stretch;
+  margin: auto 0;
+  max-height: 40px;
+  font-size: 14px;
+  line-height: 24px;
+  white-space: nowrap;
+  border-radius: 8px;
+  min-height: 32px;
+}
+#nodecontrol .commit-hash {
+  gap: 10px;
+  align-self: stretch;
+  padding: 8px 0;
+  margin: auto 0;
+  border-radius: 9999px;
+  background-color: #F5F5F5;
+  min-height: 24px;
+  padding-left: 8px;
+  padding-right: 8px;
+  color: #666666;
+}
+#nodecontrol .version-button {
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  align-self: stretch;
+  padding: 4px;
+  margin: auto 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 9999px;
+  background-color: rgba(52, 72, 240, 0.12);
+}
+#nodecontrol .button-icon {
+  object-fit: contain;
+  align-self: stretch;
+  margin: auto 0;
+  width: 16px;
+  aspect-ratio: 1/1;
+}
+#nodecontrol .refresh-button {
+  display: flex;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  align-self: stretch;
+  padding: 16px;
+  margin: auto 0;
+  width: 32px;
+  height: 32px;
+  background-color: #FFFFFF;
+  border-radius: 16px;
+}
+#nodecontrol .staking-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 16px;
+  width: 100%;
+}
+#nodecontrol .staking-form {
+  gap: 16px;
+  padding: 16px;
+  background-color: #FFFFFF;
+  border-radius: 16px;
+  min-width: 240px;
+  width: 365px;
+}
+#nodecontrol .form-container {
+  max-width: 100%;
+  width: 333px;
+}
+#nodecontrol .wallet-header {
+  display: flex;
+  gap: 40px;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 12px;
+  width: 100%;
+  font-size: 14px;
+  line-height: 24px;
+  color: #000000;
+  white-space: nowrap;
+  border-bottom: 1px dashed #E2E2E2;
+}
+#nodecontrol .wallet-address {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding-left: 4px;
+  border-radius: 16px;
+}
+#nodecontrol .address-indicator {
+  display: flex;
+  flex-shrink: 0;
+  align-self: stretch;
+  margin: auto 0;
+  width: 12px;
+  height: 12px;
+  background-color: #3448F0;
+  border-radius: 9999px;
+  border: 5px solid rgba(52, 72, 240, 0.12);
+}
+#nodecontrol .address-wrapper {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  align-self: stretch;
+  margin: auto 0;
+}
+#nodecontrol .address-text {
+  align-self: stretch;
+  margin: auto 0;
+  color: #000000;
+}
+#nodecontrol .copy-icon {
+  object-fit: contain;
+  flex-shrink: 0;
+  align-self: stretch;
+  margin: auto 0;
+  width: 24px;
+  aspect-ratio: 1/1;
+}
+#nodecontrol .menu-icon {
+  object-fit: contain;
+  flex-shrink: 0;
+  width: 24px;
+  aspect-ratio: 1/1;
+}
+#nodecontrol .stake-amount-field {
+  gap: 8px;
+  margin-top: 16px;
+  width: 100%;
+}
+#nodecontrol .field-label {
+  font-size: 14px;
+  line-height: 24px;
+  color: #666666;
+}
+#nodecontrol .input-container {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 8px 0;
+  margin-top: 8px;
+  width: 100%;
+  font-size: 16px;
+  white-space: nowrap;
+  border-radius: 16px;
+  border: 1px solid #E2E2E2;
+  background-color: #F5F5F5;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+#nodecontrol .input-placeholder {
+  gap: 4px;
+  align-self: stretch;
+  margin: auto 0;
+  color: #666666;
+  width: 220px;
+}
+#nodecontrol .token-selector {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  align-self: stretch;
+  margin: auto 0;
+  color: #3448F0;
+}
+#nodecontrol .token-icon {
+  object-fit: contain;
+  flex-shrink: 0;
+  align-self: stretch;
+  margin: auto 0;
+  width: 16px;
+  aspect-ratio: 1/1;
+}
+#nodecontrol .token-name {
+  align-self: stretch;
+  margin: auto 0;
+  color: #3448F0;
+}
+#nodecontrol .amount-slider {
+  gap: 8px;
+  margin-top: 16px;
+  width: 100%;
+}
+#nodecontrol .slider-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  width: 100%;
+  min-height: 16px;
+}
+#nodecontrol .slider-icon {
+  object-fit: contain;
+  flex-shrink: 0;
+  align-self: stretch;
+  margin: auto 0;
+  width: 16px;
+  aspect-ratio: 1/1;
+}
+#nodecontrol .slider-wrapper {
+  position: relative;
+  flex: 1;
+  flex-shrink: 0;
+  align-self: stretch;
+  margin: auto 0;
+  min-width: 240px;
+}
+#nodecontrol .slider-rail {
+  display: flex;
+  position: absolute;
+  inset-inline: 0;
+  top: 50%;
+  z-index: 0;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 100%;
+  transform: translateY(-50%) translateX(0%);
+  width: 285px;
+}
+#nodecontrol .rail {
+  display: flex;
+  width: 100%;
+  min-height: 4px;
+  background-color: #E2E2E2;
+  border-radius: 4px;
+}
+#nodecontrol .track-wrapper {
+  z-index: 0;
+  padding-right: 144px;
+  width: 100%;
+}
+#nodecontrol .slider-track {
+  display: flex;
+  position: relative;
+  gap: 40px;
+  align-items: flex-start;
+  width: 100%;
+}
+#nodecontrol .track {
+  display: flex;
+  position: absolute;
+  inset-inline: 0;
+  z-index: 0;
+  flex-shrink: 0;
+  align-self: flex-start;
+  height: 4px;
+  background-color: #3448F0;
+  border-radius: 4px;
+  bottom: 5px;
+  width: 135px;
+}
+#nodecontrol .slider-handle {
+  display: flex;
+  z-index: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0 1px;
+  margin: auto 0;
+  width: 14px;
+}
+#nodecontrol .handle {
+  display: flex;
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  background-color: #FFFFFF;
+  border-radius: 9999px;
+  border: 2px solid #3448F0;
+  fill: #FFFFFF;
+  stroke: 2px #3448F0;
+}
+#nodecontrol .balance-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin-top: 8px;
+  width: 100%;
+  font-size: 14px;
+  line-height: 24px;
+  min-height: 24px;
+}
+#nodecontrol .balance-info {
+  flex: 1;
+  flex-shrink: 0;
+  color: #666666;
+}
+#nodecontrol .max-button {
+  gap: 10px;
+  align-self: stretch;
+  padding: 0 0 8px 0;
+  color: #3448F0;
+  white-space: nowrap;
+  border-radius: 8px;
+  background-color: #F5F5F5;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+#nodecontrol .deposit-button {
+  overflow: hidden;
+  align-self: stretch;
+  padding: 16px 0;
+  margin-top: 16px;
+  width: 100%;
+  font-size: 16px;
+  text-align: center;
+  color: #FFFFFF;
+  white-space: nowrap;
+  border-radius: 8px;
+  background-color: #3448F0;
+  border: none;
+  cursor: pointer;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+#nodecontrol .staking-info {
+  overflow: hidden;
+  flex: 1;
+  flex-shrink: 0;
+  align-self: flex-start;
+  background-color: #FFFFFF;
+  border-radius: 16px;
+  min-width: 240px;
+}
+#nodecontrol .info-card {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 16px;
+  width: 100%;
+  border-bottom: 1px dashed #E2E2E2;
+}
+#nodecontrol .info-icon-wrapper {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  padding: 4px;
+  border-radius: 16px;
+  background-color: rgba(52, 72, 240, 0.12);
+  height: 46px;
+  min-height: 46px;
+  width: 46px;
+}
+#nodecontrol .info-icon {
+  object-fit: contain;
+  align-self: stretch;
+  margin: auto 0;
+  aspect-ratio: 1/1;
+  width: 30px;
+}
+#nodecontrol .info-content {
+  flex: 1;
+  flex-shrink: 0;
+  gap: 4px;
+}
+#nodecontrol .info-label {
+  font-size: 14px;
+  line-height: 24px;
+  color: #666666;
+}
+#nodecontrol .info-value {
+  display: flex;
+  flex-direction: column;
+  margin-top: 4px;
+  width: 100%;
+}
+#nodecontrol .value-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  align-self: flex-start;
+  white-space: nowrap;
+}
+#nodecontrol .value-amount {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 32px;
+  color: #000000;
+}
+#nodecontrol .value-currency {
+  font-size: 14px;
+  line-height: 24px;
+  color: #666666;
+}
+#nodecontrol .value-usd {
+  font-size: 12px;
+  line-height: 1;
+  color: #3448F0;
+}
+#nodecontrol .withdraw-button-wrapper {
+  gap: 64px;
+  width: 100%;
+  font-size: 16px;
+  text-align: center;
+  white-space: nowrap;
+  color: #666666;
+}
+#nodecontrol .withdraw-button {
+  overflow: hidden;
+  align-self: stretch;
+  padding: 16px 0;
+  width: 100%;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid #E2E2E2;
+  background-color: #FFFFFF;
+  min-height: 32px;
+  padding-left: 12px;
+  padding-right: 12px;
+  color: #666666;
+  cursor: pointer;
+}
+#nodecontrol .chart-section {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 16px;
+  margin-top: 16px;
+  width: 100%;
+  background-color: #FFFFFF;
+  border-radius: 16px;
+}
+#nodecontrol .chart-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  width: 100%;
+}
+#nodecontrol .chart-title {
+  flex: 1;
+  flex-shrink: 0;
+  align-self: stretch;
+  margin: auto 0;
+  font-size: 16px;
+  font-weight: 700;
+}
+#nodecontrol .period-selector {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  align-self: stretch;
+  padding: 4px;
+  margin: auto 0;
+  font-size: 14px;
+  line-height: 24px;
+  color: #000000;
+  white-space: nowrap;
+  border-radius: 8px;
+  background-color: #F5F5F5;
+}
+#nodecontrol .period-option {
+  gap: 10px;
+  align-self: stretch;
+  padding: 4px 12px;
+  margin: auto 0;
+  color: #000000;
+  border-radius: 8px;
+}
+#nodecontrol .period-option.active {
+  background-color: #FFFFFF;
+}
+#nodecontrol .chart-container {
+  overflow: hidden;
+  margin-top: 12px;
+  width: 100%;
+  border-radius: 8px;
+}
+#nodecontrol .chart-image {
+  object-fit: contain;
+  width: 100%;
+  border-radius: 0;
+  aspect-ratio: 2.59/1;
+}
+#nodecontrol .transaction-history {
+  margin-top: 16px;
+  width: 100%;
+  background-color: #FFFFFF;
+  border-radius: 8px;
+}
+#nodecontrol .history-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 64px;
+  width: 100%;
+  font-size: 14px;
+  background-color: #FFFFFF;
+  border-radius: 16px;
+}
+#nodecontrol .history-title {
+  align-self: stretch;
+  margin: auto 0;
+  line-height: 24px;
+  color: #000000;
+}
+#nodecontrol .history-filters {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  align-self: stretch;
+  margin: auto 0;
+  min-width: 240px;
+}
+#nodecontrol .time-filter-button {
+  overflow: hidden;
+  align-self: stretch;
+  padding: 16px 0 12px 0;
+  margin: auto 0;
+  line-height: 1;
+  text-align: center;
+  border-radius: 8px;
+  border: 1px solid #E2E2E2;
+  background-color: #FFFFFF;
+  min-height: 40px;
+  padding-right: 12px;
+  color: #666666;
+  cursor: pointer;
+}
+#nodecontrol .table-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  padding: 4px 12px;
+  width: 100%;
+  font-size: 12px;
+  line-height: 1;
+  white-space: nowrap;
+  background-color: #F5F5F5;
+  color: #666666;
+}
+#nodecontrol .table-column {
+  flex: 1;
+  flex-shrink: 0;
+  align-self: stretch;
+  margin: auto 0;
+  min-height: 24px;
+  color: #666666;
+}
+#nodecontrol .table-column.right {
+  text-align: right;
+}
+#nodecontrol .transaction-list {
+  width: 100%;
+  font-size: 14px;
+  line-height: 24px;
+  color: #000000;
+}
+#nodecontrol .transaction-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: center;
+  padding: 12px;
+  width: 100%;
+  background-color: #FFFFFF;
+  border-radius: 6px;
+  border-bottom: 1px solid #F5F5F5;
+  min-height: 48px;
+}
+#nodecontrol .transaction-row:not(:first-child) {
+  margin-top: 4px;
+}
+#nodecontrol .address-chip {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  align-self: stretch;
+  padding: 0 0 8px 0;
+  margin: auto 0;
+  white-space: nowrap;
+  border-radius: 8px;
+  background-color: #F5F5F5;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+#nodecontrol .address-icon {
+  object-fit: contain;
+  flex-shrink: 0;
+  align-self: stretch;
+  margin: auto 0;
+  width: 16px;
+  aspect-ratio: 1/1;
+}
+#nodecontrol .transaction-type {
+  flex: 1;
+  flex-shrink: 0;
+  align-self: stretch;
+  margin: auto 0;
+  line-height: 1;
+  color: #000000;
+  white-space: nowrap;
+  min-height: 24px;
+}
+#nodecontrol .transaction-date {
+  flex: 1;
+  flex-shrink: 0;
+  align-self: stretch;
+  margin: auto 0;
+  color: #000000;
+  min-height: 24px;
+}
+#nodecontrol .transaction-amount {
+  flex: 1;
+  flex-shrink: 0;
+  align-self: stretch;
+  margin: auto 0;
+  min-height: 24px;
+}
+#nodecontrol .transaction-amount.positive {
+  color: #3448F0;
+}
+#nodecontrol .transaction-amount.negative {
+  color: #EF4444;
+}
+#nodecontrol .transaction-amount .transaction-icon-wrappe {
+  margin-left: 4px;
+}
+#nodecontrol .transaction-icon {
+  object-fit: contain;
+  flex-shrink: 0;
+  align-self: stretch;
+  margin: auto 0;
+  width: 16px;
+  aspect-ratio: 1/1;
+}
+#nodecontrol .pagination {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+  padding: 8px 0;
+  width: 100%;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+#nodecontrol .pagination-button {
+  display: flex;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  align-self: stretch;
+  padding: 16px;
+  margin: auto 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid #E2E2E2;
+  cursor: pointer;
+}
+#nodecontrol .pagination-icon {
+  object-fit: contain;
+  align-self: stretch;
+  margin: auto 0;
+  width: 24px;
+  aspect-ratio: 1/1;
+}
+#nodecontrol .pagination-pages {
+  display: flex;
+  overflow: hidden;
+  flex-wrap: wrap;
+  flex: 1;
+  flex-shrink: 0;
+  gap: 4px;
+  justify-content: center;
+  align-items: center;
+  align-self: stretch;
+  padding: 0;
+  margin: auto 0;
+  font-size: 14px;
+  line-height: 24px;
+  text-align: center;
+  color: #000000;
+  white-space: nowrap;
+  min-width: 240px;
+}
+#nodecontrol .page-number {
+  overflow: hidden;
+  align-self: stretch;
+  padding: 16px 0;
+  margin: auto 0;
+  width: 32px;
+  height: 32px;
+  color: #000000;
+  border-radius: 4px;
+  min-height: 32px;
+  padding-left: 12px;
+  padding-right: 12px;
+  cursor: pointer;
+}
+#nodecontrol .page-number.active {
+  font-weight: 700;
+  color: #FFFFFF;
+  border-radius: 8px;
+  background-color: #3448F0;
+}
+#nodecontrol .divider {
+  margin-top: 16px;
+  width: 100%;
+}
+#nodecontrol .divider-image {
+  object-fit: contain;
+  width: 100%;
+  aspect-ratio: 1000/1;
+  stroke: 1px;
+  stroke-color: rgba(15, 23, 42, 0.1);
+}
+#nodecontrol .faq-section {
+  margin-top: 16px;
+  width: 100%;
+  color: #000000;
+}
+#nodecontrol .section-title {
+  width: 100%;
+  font-size: 16px;
+  font-weight: 700;
+  color: #000000;
+}
+#nodecontrol .accordion-list {
+  gap: 4px;
+  margin-top: 16px;
+  width: 100%;
+  font-size: 14px;
+  line-height: 24px;
+}
+#nodecontrol .accordion-item {
+  display: flex;
+  overflow: hidden;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 0;
+  width: 100%;
+  max-height: 48px;
+  border-radius: 8px;
+  background-color: #FFFFFF;
+  min-height: 48px;
+  padding-left: 16px;
+  padding-right: 16px;
+  cursor: pointer;
+}
+#nodecontrol .accordion-item:not(:first-child) {
+  margin-top: 4px;
+}
+#nodecontrol .accordion-title {
+  flex: 1;
+  flex-shrink: 0;
+  align-self: stretch;
+  margin: auto 0;
+  color: #000000;
+}
+#nodecontrol .accordion-icon {
+  object-fit: contain;
+  flex-shrink: 0;
+  align-self: stretch;
+  margin: auto 0;
+  width: 24px;
+  aspect-ratio: 1/1;
+}
+#nodecontrol .resources-section {
+  margin-top: 16px;
+  width: 100%;
+}
+#nodecontrol .resource-list {
+  gap: 4px;
+  margin-top: 16px;
+  width: 100%;
+  font-size: 14px;
+  line-height: 1;
+  color: #3448F0;
+}
+#nodecontrol .resource-item {
+  display: flex;
+  overflow: hidden;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 8px;
+  width: 100%;
+  border-radius: 16px;
+  cursor: pointer;
+}
+#nodecontrol .resource-item:not(:first-child) {
+  margin-top: 4px;
+}
+#nodecontrol .resource-link {
+  flex: 1;
+  flex-shrink: 0;
+  color: #3448F0;
+}
+#nodecontrol .resource-icon {
+  object-fit: contain;
+  flex-shrink: 0;
+  margin: auto 0;
+  width: 16px;
+  aspect-ratio: 1/1;
+}
+@media (max-width: 768px) {
+  #nodecontrol .staking-dashboard {
+    max-width: 100%;
+  }
+  #nodecontrol .staking-form {
+    width: 100%;
+  }
+  #nodecontrol .form-container {
+    width: 100%;
+  }
+  #nodecontrol .history-header {
+    padding: 8px 16px;
+  }
+  #nodecontrol .pagination-pages {
+    max-width: 100%;
+  }
+}
 .addressdialog input {
   width: 100%;
 }
