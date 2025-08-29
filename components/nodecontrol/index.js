@@ -1165,7 +1165,52 @@ var nodecontrol = (function(){
 		
 							}, function(p){
 
-							
+								var lorem = [
+									'Это случайный текст-рыба, призванный показать, как будет выглядеть содержимое в раскрытом состоянии. Он не несет смысловой нагрузки и используется только для демонстрации.',
+									'Ещё немного случайного содержания. Здесь можно разместить подробные ответы, ссылки и пояснения по теме вопроса.',
+									'Третий блок текста. При необходимости разделите ответ на абзацы и списки, чтобы улучшить читаемость.',
+									'Четвёртый фрагмент. Вы можете заменить эти тексты на реальные ответы позднее.',
+									'Пятый фрагмент. Обратите внимание, что разворачивание работает плавно и не вызывает скачков макета.',
+									'Шестой фрагмент. Содержимое подгоняется под ширину контейнера и корректно переносится.'
+								]
+
+								var $list = p.el.find('.faq-section .accordion-list');
+
+								$list.find('.accordion-item').each(function(i){
+									var txt = lorem[i % lorem.length]
+									$(this).find('.accordion-text').text(txt)
+								})
+
+								var lockScrollTop = function(cb){
+									var $win = p.el.closest('.customscroll');
+									var restore = null;
+
+									if ($win.length){
+										var prev = $win.scrollTop();
+										var headerOffset = 0;
+										restore = function(){
+											$win.scrollTop(prev + headerOffset);
+										}
+									}
+
+									cb();
+
+									if (restore) restore();
+								}
+
+								$list.on('click', '.accordion-item', function(e){
+									var $item = $(this);
+
+									lockScrollTop(function(){
+										if ($item.hasClass('active')){
+											$item.removeClass('active')
+										} else {
+											$list.find('.accordion-item.active').removeClass('active')
+											$item.addClass('active')
+										}
+									})
+								})
+
 							})
 
 							

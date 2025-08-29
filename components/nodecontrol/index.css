@@ -945,7 +945,6 @@
   align-items: center;
   padding: 12px 0;
   width: 100%;
-  max-height: 48px;
   border-radius: 8px;
   background-color: #FFFFFF;
   min-height: 48px;
@@ -956,12 +955,29 @@
 #nodecontrol .faq-section .accordion-item:not(:first-child) {
   margin-top: 4px;
 }
+#nodecontrol .faq-section .accordion-item .accordion-content {
+  width: 100%;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.25s ease;
+}
+#nodecontrol .faq-section .accordion-item .accordion-text {
+  padding: 0 0 12px 0;
+  color: rgb(var(--neutral-grad-3));
+  font-size: 13px;
+  line-height: 1.6;
+}
+#nodecontrol .faq-section .accordion-item.active .accordion-content {
+  max-height: 500px;
+}
 #nodecontrol .faq-section .accordion-title {
   flex: 1;
   flex-shrink: 0;
   align-self: stretch;
   margin: auto 0;
   color: #000000;
+  font-weight: 500;
+  font-size: 15px;
 }
 #nodecontrol .faq-section .accordion-icon {
   object-fit: contain;
