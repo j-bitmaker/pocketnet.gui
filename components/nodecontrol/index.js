@@ -882,13 +882,14 @@ var nodecontrol = (function(){
 
 							var $range = p.el.find('.progressBar');
 							var currentValue = $range.val();
-							var maxValue = $range.attr('max');
+							var maxValue = Number($range.attr('max') || 0);
 							var newValue = parseInt(currentValue) + (maxValue * 0.01); 
 						
-							if (newValue <= maxValue) {
-							  $range.val(newValue);
+							if (newValue < maxValue) {
+								$range.val(newValue);
 							} else {
-							  $range.val(maxValue); 
+								newValue = maxValue
+								$range.val(maxValue); 
 							}
 
 							actions.percToSum(newValue, inputSum);
