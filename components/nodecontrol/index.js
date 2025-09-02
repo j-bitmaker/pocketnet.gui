@@ -12,7 +12,8 @@ var nodecontrol = (function(){
 		var primary = deep(p, 'history');
 
 		var el, api = null, proxy = null,  info = null, system = null, step = 1, imported = false, 
-		nodeLoading = true, getListwallets = true, listwalletsError = false, lastState = {}, history, exchange = 'common', stakereport;
+		nodeLoading = true, getListwallets = true, listwalletsError = false, lastState = {}, history, 
+		exchange = 'common', stakereport, loadFolder = false;
 
 		var market_keys = {
 			'mercatox' : 'last_price',
@@ -133,9 +134,11 @@ var nodecontrol = (function(){
 			'ndataPath' : function(caller, defaultPath){
 				return proxy.system.request('set.node.ndataPath', {defaultPath: defaultPath}).then(r => {
 					actions.refresh().then(r => {
+						loadFolder = false;
 						actions.refreshsystem()
 					})
 				}).catch(e => {
+					loadFolder = false;
 				})
 			},
 			'createWallet' : function(caller, defaultPath){
@@ -1127,7 +1130,7 @@ var nodecontrol = (function(){
 							console.log('a!!!!!!!!!!', transactions);
 
 							transactions = [{
-								txid: '0x1Fe2D...593B9',
+								txid: '0x1Fe2Dxjdsjzkjsdklsdjxjsllie593B9',
 								type: 3,
 								date: 1747834108546,
 								amount: -0.0033
@@ -1147,8 +1150,9 @@ var nodecontrol = (function(){
 
 								p.el.find('.copy').on('click', function(){
 
-									copyText($(this).find('.text'))
+									var full = $(this).attr('txid');
 
+									copycleartext(full)
 									sitemessage(self.app.localization.e('successcopied'))
 								})
 
@@ -1288,7 +1292,15 @@ var nodecontrol = (function(){
 
 						p.el.find('.choosePath').on('click', function(){
 
+							console.log('loadFolder', loadFolder);
+							if (loadFolder){
+								return;
+							}
+
 							systemsettings.ndataPath();
+
+							loadFolder = true;
+
 
 						})
 
