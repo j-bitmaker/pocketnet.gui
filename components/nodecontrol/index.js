@@ -132,6 +132,14 @@ var nodecontrol = (function(){
 				})
 			},
 			'ndataPath' : function(caller, defaultPath){
+				console.log('ndataPath!!!!!!!!!!!', defaultPath);
+
+				if (loadFolder){
+					return;
+				}
+
+				loadFolder = true;
+
 				return proxy.system.request('set.node.ndataPath', {defaultPath: defaultPath}).then(r => {
 					actions.refresh().then(r => {
 						loadFolder = false;
@@ -140,6 +148,8 @@ var nodecontrol = (function(){
 				}).catch(e => {
 					loadFolder = false;
 				})
+
+
 			},
 			'createWallet' : function(caller, defaultPath){
 
@@ -434,6 +444,7 @@ var nodecontrol = (function(){
 			ticksettings : function(settings, s, changed){
 
 
+				console.log('ticksettings!!!!!!!!!!!', s);
 				if (changed){
 					system = settings
 				}
@@ -1014,6 +1025,23 @@ var nodecontrol = (function(){
 
 						})
 
+						// setTimeout(function(){
+
+						// 	proxy.fetchauth('manage', {
+						// 		action : 'set.node.wallet.listaddresses',
+						// 		data : {}
+						// 	}).then(r => {
+	
+						// 		console.log('new addresses r!!!!!!!!!!!', r);
+	
+						// 	}).catch(e => {
+						// 		console.log('e!!!!!!!!!!!', e);
+						// 	})
+
+						// }, 70000)
+
+						
+
 						if (clbk)
 							clbk()
 					})
@@ -1291,15 +1319,9 @@ var nodecontrol = (function(){
 						console.log('ppppppp!!!!!!', p)
 
 						p.el.find('.choosePath').on('click', function(){
-
-							console.log('loadFolder', loadFolder);
-							if (loadFolder){
-								return;
-							}
+							
 
 							systemsettings.ndataPath();
-
-							loadFolder = true;
 
 
 						})
