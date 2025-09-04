@@ -5,8 +5,37 @@ var path = require('path');
 var downloadRelease = require('download-github-release');
 var md5 = require('md5');
 var _ = require("underscore");
-const random = require('random')
+const random = require('random');
+const os = require('os');
 var f = {}
+
+f.getDefaultDataDir = function() {
+    const platform = process.platform;
+    
+    if (platform === 'win32') {
+        // Windows: C:\Users\Username\AppData\Roaming\Pocketcoin
+        const appData = process.env.APPDATA;
+        if (!appData) {
+            throw new Error('APPDATA environment variable not found');
+        }
+        return path.join(appData, 'Pocketcoin');
+    } else {
+        // Unix-like systems (macOS, Linux, etc.)
+        const homeDir = os.homedir();
+        if (!homeDir) {
+            throw new Error('Home directory not found');
+        }
+        
+        if (platform === 'darwin') {
+            // macOS: ~/Library/Application Support/Pocketcoin
+            return path.join(homeDir, 'Library', 'Application Support', 'Pocketcoin');
+        } else {
+            // Unix-like (Linux, FreeBSD, etc.): ~/.pocketcoin
+            return path.join(homeDir, '.pocketcoin');
+        }
+    }
+}
+
 
 f.mix = function(array){
     _.each(array, function(vi, i){

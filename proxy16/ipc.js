@@ -163,6 +163,11 @@ var IPC = function(ipc, wc, ComLayer){
 		set : {
 			node : {
 				ndataPath : function(message){
+
+					const newDefaultPath = f.getDefaultDataDir();
+
+					console.log('newDefaultPath: ', newDefaultPath, message.data.defaultPath);
+
 					return helpers.dialog({
 						properties: ['openDirectory'],
                         defaultPath: message.data.defaultPath || ''

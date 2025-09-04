@@ -358,8 +358,8 @@ var state = {
 			node : {
 				enabled : settings.node.enabled,
 				binPath : settings.node.binPath,
-				ndataPath: settings.node.ndataPath,
-				dataPath: settings.node.dataPath,
+				ndataPath: settings.node.ndataPath || f.getDefaultDataDir(),
+				dataPath: settings.node.dataPath
 			},
 			admins : settings.admins,
 			proxies : {
