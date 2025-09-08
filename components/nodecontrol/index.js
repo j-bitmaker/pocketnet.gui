@@ -1505,6 +1505,19 @@ var nodecontrol = (function(){
 					function(p){
 
 						actions.settings(p.el)
+
+						var applyStableSpin = function($root){
+							try{
+								var now = Date.now();
+								var periodMs = 2000; // Font Awesome fa-spin default ~1s, using 2s for smoother
+								$root.find('i.fa-spin').each(function(){
+									var seed = now; // could be improved with persistent key if needed
+									var delaySec = -((seed % periodMs) / 1000).toFixed(3);
+									this.style.animationDelay = delaySec + 's';
+									this.style.webkitAnimationDelay = delaySec + 's';
+								})
+							}catch(e){}
+						}
 						
 
 						p.el.find('.tooltip').tooltipster({
@@ -1513,7 +1526,14 @@ var nodecontrol = (function(){
 							zIndex: 1006,
 							position: 'bottom',
 							contentAsHTML: true,
+							functionReady: function(instance, helper){
+								// Apply to tooltip content after it opens
+								applyStableSpin($(helper.tooltip));
+							}
 						});
+
+						// Apply to visible area after render
+						applyStableSpin(p.el);
 
 						p.el.find('.updatenode').on('click', function(){
 							new dialog({

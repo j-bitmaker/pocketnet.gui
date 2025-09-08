@@ -474,6 +474,13 @@
   background: rgba(52, 72, 240, 0.08);
   cursor: pointer;
 }
+#nodecontrol .nodecontentstate .stat .stat-left .sync {
+  display: flex;
+  align-items: center;
+}
+#nodecontrol .nodecontentstate .stat .stat-left .sync .question {
+  margin-left: 10px;
+}
 #nodecontrol .nodecontentstate .stat .stat-left .question {
   margin-left: 3px;
 }
