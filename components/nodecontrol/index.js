@@ -162,11 +162,11 @@ var nodecontrol = (function(){
 
 					success : function(){
 
-						topPreloader(100);
+						globalpreloader(true, null, true);
 
 						return proxy.system.request('set.node.createWallet', {}).then(r => {
 
-							topPreloader(0);
+							globalpreloader(false);
 
 							return proxy.system.request('set.node.gethdseed', {}).then(mnemonic => {
 								
@@ -198,7 +198,7 @@ var nodecontrol = (function(){
 		
 						}).catch(e => {
 
-							topPreloader(0);
+							globalpreloader(false);
 
 							if (e.code && e.message)
 								sitemessage(`(${self.app.localization.e('dcode')} ${e.code}): ${e.message}`, null, 5000)
@@ -598,10 +598,6 @@ var nodecontrol = (function(){
 
                     proxy.system.request('set.node.enabled', {enabled : true}).then(r => {
 
-                        actions.refresh().then(r => {
-                            renders.all()
-                            topPreloader(100);
-                        })
                         
                     })
 
@@ -619,6 +615,7 @@ var nodecontrol = (function(){
 			},
 			removeNode : function(all){
 
+
 				proxy.fetchauth('manage', {
 					action : 'node.delete',
 					data : {
@@ -626,13 +623,9 @@ var nodecontrol = (function(){
 					}
 					
 				}).then(r => {
+					
+					sitemessage(self.app.localization.e('easyNode_e100531'))
 
-
-					actions.refresh().then(r => {
-						renders.all()
-					})
-
-					topPreloader(100);
 
 				}).catch(e => {
 
@@ -642,7 +635,6 @@ var nodecontrol = (function(){
 						renders.all()
 					})
 
-					topPreloader(100);
 
 				})
 			},
