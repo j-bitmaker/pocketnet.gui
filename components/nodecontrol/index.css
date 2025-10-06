@@ -475,14 +475,12 @@
   cursor: pointer;
 }
 #nodecontrol .nodecontentstate .stat .stat-left .sync {
+  gap: 0.5em;
   display: flex;
   align-items: center;
 }
 #nodecontrol .nodecontentstate .stat .stat-left .sync .question {
   margin-left: 10px;
-}
-#nodecontrol .nodecontentstate .stat .stat-left .question {
-  margin-left: 3px;
 }
 #nodecontrol .nodecontentstate .stat .stat-right .addSettings {
   cursor: pointer;
