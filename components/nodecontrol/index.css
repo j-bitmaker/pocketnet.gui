@@ -543,10 +543,63 @@
   padding: 0.5em 1em 1em 1em;
 }
 #nodecontrol .nodecontenthistory .history-top {
-  padding: 1.5em 1em;
+  padding: 8px 16px;
   background: rgb(var(--background-total-theme));
   font-size: 1.1em;
   border-radius: 8px 8px 0 0;
+}
+#nodecontrol .nodecontenthistory .history-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#nodecontrol .nodecontenthistory .period-selector {
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  gap: 4px;
+  height: 40px;
+  background: #F3F3F2;
+  border-radius: 8px;
+}
+#nodecontrol .nodecontenthistory .history-filters {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+#nodecontrol .nodecontenthistory .history-filters .period-option {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 12px;
+  gap: 10px;
+  height: 32px;
+  border-radius: 8px;
+  font-family: 'DM Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  color: #000000;
+}
+#nodecontrol .nodecontenthistory .history-filters .period-option.active {
+  background: #FFFFFF;
+}
+#nodecontrol .nodecontenthistory .time-filter-button {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 12px;
+  height: 40px;
+  border: 1px solid #E2E2E2;
+  border-radius: 8px;
+  background: transparent;
+  color: #595D62;
+  font-family: 'DM Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
 }
 #nodecontrol .nodecontenthistory .history-table table {
   border: 0;

@@ -731,11 +731,74 @@
 
     .nodecontenthistory{
         .history-top{
-            padding: @rhythm * 3 @rhythm * 2;
+            padding: 8px 16px;
             background: rgb(var(--background-total-theme));
             font-size: 1.1em;
             border-radius: 8px 8px 0 0; 
         }
+
+        .history-top{
+            display: flex;
+                justify-content: space-between;
+                align-items: center; // align with Figma
+        }
+
+            .period-selector{
+                // Figma: container for tabs
+                display: flex;
+                align-items: center;
+                padding: 4px;
+                gap: 4px;
+                height: 40px;
+                background: #F3F3F2;
+                border-radius: 8px;
+            }
+
+        .history-filters{
+                display: flex;
+                align-items: center;
+                gap: 8px; // Figma gap
+
+            .period-option{
+                    // Figma: individual tab
+                    cursor: pointer;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 4px 12px;
+                    gap: 10px;
+                    height: 32px;
+                    border-radius: 8px;
+                    font-family: 'DM Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+                    font-weight: 400;
+                    font-size: 14px;
+                    line-height: 24px;
+                    color: #000000;
+
+                    &.active{
+                        background: #FFFFFF;
+                    }
+            }
+        }
+
+            // Figma: secondary button on the right
+            .time-filter-button{
+                box-sizing: border-box;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 4px 12px;
+                height: 40px;
+                border: 1px solid #E2E2E2;
+                border-radius: 8px;
+                background: transparent;
+                color: #595D62;
+                font-family: 'DM Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 20px;
+            }
+
 
         .history-table{
             table{
