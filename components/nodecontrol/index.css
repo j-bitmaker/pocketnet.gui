@@ -51,6 +51,30 @@
   color: #d0c9ca;
   cursor: pointer;
 }
+#nodecontrol .managewallet .blockWrapper .top .addressWrapper .addressSelectBtn {
+  background: transparent;
+  border: 1px solid rgb(var(--neutral-grad-1));
+  border-radius: 8px;
+  padding: 6px 10px;
+  cursor: pointer;
+  color: rgb(var(--neutral-grad-3));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.5em;
+  transition: all 0.2s ease;
+}
+#nodecontrol .managewallet .blockWrapper .top .addressWrapper .addressSelectBtn i {
+  font-size: 0.85em;
+}
+#nodecontrol .managewallet .blockWrapper .top .addressWrapper .addressSelectBtn:hover {
+  background: rgb(var(--neutral-grad-1), 0.3);
+  border-color: rgb(var(--neutral-grad-2));
+  color: rgb(var(--color-txt-ac));
+}
+#nodecontrol .managewallet .blockWrapper .top .addressWrapper .addressSelectBtn:active {
+  transform: scale(0.95);
+}
 #nodecontrol .managewallet .blockWrapper .withdrawBlock {
   display: flex;
   justify-content: space-between;
@@ -1095,6 +1119,63 @@
   width: 100%;
   height: 120px;
   max-height: 230px;
+}
+.addressSelectModal .addressModalHeader {
+  font-size: 1.2em;
+  font-weight: 700;
+  color: rgb(var(--text-color));
+  margin-bottom: 1em;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid rgb(var(--neutral-grad-1));
+}
+.addressSelectModal .addressModalList {
+  max-height: 400px;
+  overflow-y: auto;
+  margin: 1em 0;
+}
+.addressSelectModal .addressModalList .addressModalEmpty {
+  text-align: center;
+  padding: 1.5em;
+  color: rgb(var(--neutral-grad-3));
+}
+.addressSelectModal .addressModalList .addressModalItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em;
+  margin-bottom: 0.5em;
+  border-radius: 8px;
+  border: 1px solid rgb(var(--neutral-grad-1));
+  background: rgb(var(--background-total-theme));
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.addressSelectModal .addressModalList .addressModalItem:hover {
+  background: rgb(var(--neutral-grad-1), 0.2);
+  border-color: rgb(var(--neutral-grad-2));
+}
+.addressSelectModal .addressModalList .addressModalItem.active {
+  background: rgba(52, 72, 240, 0.08);
+  border-color: #3448F0;
+}
+.addressSelectModal .addressModalList .addressModalItem.active .addressModalText {
+  color: #3448F0;
+  font-weight: 500;
+}
+.addressSelectModal .addressModalList .addressModalItem.active i {
+  color: #3448F0;
+}
+.addressSelectModal .addressModalList .addressModalItem .addressModalText {
+  flex: 1;
+  font-family: monospace;
+  font-size: 0.9em;
+  word-break: break-all;
+  color: rgb(var(--text-color));
+}
+.addressSelectModal .addressModalList .addressModalItem i {
+  margin-left: 0.5em;
+  color: #3448F0;
+  font-size: 0.9em;
 }
 @media (max-width: 640px) {
   #nodecontrol .init .init-right {

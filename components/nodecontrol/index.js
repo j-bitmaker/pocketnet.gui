@@ -349,6 +349,63 @@ var nodecontrol = (function(){
 
 		}
 
+		var addressStorage = {
+			key: 'nodecontrol_addresses',
+			selectedKey: 'nodecontrol_selected_address',
+			
+			hardcodedAddresses: [
+				'jsd382x832ksa82a',
+				'PsT4K7mR8nL9qW2vX3yZ6bC5dF1gH4jK8',
+				'QmN9pL7rT5sV2wX4yZ6bC8dF3gH5jK9L2',
+				'RtO8qM9nU6tW3xY5zA7cE9fG4hJ6kL0M3',
+				'SuP9rN0oV7uX4yZ6bA8dE0gH5jK7L1N4'
+			],
+			
+			getAddresses: function() {
+				try {
+					var stored = localStorage.getItem(this.key);
+					if (stored) {
+						return JSON.parse(stored);
+					}
+				} catch(e) {
+					console.error('Error loading addresses:', e);
+				}
+				// Save hardcoded addresses to localStorage on first load
+				this.saveAddresses(this.hardcodedAddresses);
+				return this.hardcodedAddresses;
+			},
+			
+			saveAddresses: function(addresses) {
+				try {
+					localStorage.setItem(this.key, JSON.stringify(addresses));
+				} catch(e) {
+					console.error('Error saving addresses:', e);
+				}
+			},
+			
+			getSelectedAddress: function() {
+				try {
+					var stored = localStorage.getItem(this.selectedKey);
+					if (stored) {
+						return stored;
+					}
+				} catch(e) {
+					console.error('Error loading selected address:', e);
+				}
+				// Return first address as default
+				var addresses = this.getAddresses();
+				return addresses && addresses.length > 0 ? addresses[0] : 'jsd382x832ksa82a';
+			},
+			
+			saveSelectedAddress: function(address) {
+				try {
+					localStorage.setItem(this.selectedKey, address);
+				} catch(e) {
+					console.error('Error saving selected address:', e);
+				}
+			}
+		};
+
 		var actions = {
 
 			loadhistory : function(clbk){ //00
@@ -811,6 +868,9 @@ var nodecontrol = (function(){
 			nodecontentmanagewallet : function(elc, clbk){
 				if (actions.admin() && info.nodeControl.state.wallet) {
 
+					// Load addresses and selected address from storage
+					var addresses = addressStorage.getAddresses();
+					var selectedAddress = addressStorage.getSelectedAddress();
 
 					self.shell({
 						inner : html,
@@ -819,7 +879,8 @@ var nodecontrol = (function(){
 							nodestate : info.nodeControl.state,
 							nc : info.nodeControl,
 							proxy : proxy,
-							address: 'jsd382x832ksa82a'
+							address: selectedAddress,
+							addresses: addresses
 						},
 
 						el : elc.find('.walletWrapper')
@@ -828,6 +889,70 @@ var nodecontrol = (function(){
 					function(p) {
 
                         actions.settings(p.el)
+
+						// Show address selection modal
+						p.el.find('.addressSelectBtn').on('click', function(){
+							var addresses = addressStorage.getAddresses();
+							var selectedAddress = addressStorage.getSelectedAddress();
+							
+							// Build address list HTML
+							var addressListHtml = '<div class="addressModalList">';
+							if (addresses && addresses.length > 0) {
+								addresses.forEach(function(addr) {
+									var isActive = (addr === selectedAddress) ? 'active' : '';
+									var checkIcon = (addr === selectedAddress) ? '<i class="fas fa-check"></i>' : '';
+									addressListHtml += '<div class="addressModalItem ' + isActive + '" data-address="' + addr + '">' +
+										'<div class="addressModalText">' + addr + '</div>' + checkIcon + '</div>';
+								});
+							} else {
+								addressListHtml += '<div class="addressModalEmpty">No addresses available</div>';
+							}
+							addressListHtml += '</div>';
+							
+							// Create modal dialog
+							var addressModal = new dialog({
+								class: 'zindex addressSelectModal',
+								html: '<div class="addressModalHeader">Select Address</div>' + addressListHtml,
+								btn1text: self.app.localization.e('dcancel'),
+								btn2text: '',
+								wrap: true,
+								clbk: function($el, dialogSelf) {
+									// Hide btn2 (we don't need it)
+									$el.find('.btn2wr').hide();
+									
+									// Override button click to just close
+									$el.find('.btn1').off('click').on('click', function() {
+										if (dialogSelf && dialogSelf.destroy) {
+											dialogSelf.destroy();
+										}
+									});
+									
+									// Handle address selection
+									$el.find('.addressModalItem').on('click', function(){
+										var selectedAddr = $(this).attr('data-address');
+										
+										// Update selected address in storage
+										addressStorage.saveSelectedAddress(selectedAddr);
+										
+										// Update UI
+										$el.find('.addressModalItem').removeClass('active').find('i.fa-check').remove();
+										$(this).addClass('active').append('<i class="fas fa-check"></i>');
+										
+										// Update displayed address
+										p.el.find('.address').text(selectedAddr);
+										
+										// Close modal
+										setTimeout(function() {
+											if (dialogSelf && dialogSelf.destroy) {
+												dialogSelf.destroy();
+											} else if (addressModal && addressModal.destroy) {
+												addressModal.destroy();
+											}
+										}, 300);
+									});
+								}
+							});
+						});
 
 						p.el.find('.copy').on('click', function(){
 
@@ -1025,9 +1150,15 @@ var nodecontrol = (function(){
 							}).then(r => {
 	
 								console.log('new addresses r!!!!!!!!!!!', r);
+								
+								// Save addresses to localStorage when received from server
+								if (r && Array.isArray(r) && r.length > 0) {
+									addressStorage.saveAddresses(r);
+								}
 	
 							}).catch(e => {
 								console.log('e!!!!!!!!!!!', e);
+								// Use hardcoded addresses if server fails
 							})
 
 						}, 20000)
