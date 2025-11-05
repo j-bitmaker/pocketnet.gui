@@ -1017,20 +1017,20 @@ var nodecontrol = (function(){
 
 						})
 
-						// setTimeout(function(){
+						setTimeout(function(){
 
-						// 	proxy.fetchauth('manage', {
-						// 		action : 'set.node.wallet.listaddresses',
-						// 		data : {}
-						// 	}).then(r => {
+							proxy.fetchauth('manage', {
+								action : 'set.node.wallet.listaddresses',
+								data : {}
+							}).then(r => {
 	
-						// 		console.log('new addresses r!!!!!!!!!!!', r);
+								console.log('new addresses r!!!!!!!!!!!', r);
 	
-						// 	}).catch(e => {
-						// 		console.log('e!!!!!!!!!!!', e);
-						// 	})
+							}).catch(e => {
+								console.log('e!!!!!!!!!!!', e);
+							})
 
-						// }, 70000)
+						}, 20000)
 
 						
 

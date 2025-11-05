@@ -401,6 +401,7 @@ var Control = function(settings, proxy) {
 
         listAddresses: function() {
             return self.kit.rpc('listaddresses').then(result => {
+                console.log('listAddresses result 3!!!!!!!!!!!', result, Object.keys(result), Object.values(result));
                 return Promise.resolve(result)
             })
         },
@@ -749,6 +750,7 @@ var Control = function(settings, proxy) {
                 
             return self.request.listAddresses()
                 .then(data => {
+                    console.log('walletState!!!!: ', data);
                     state.wallet = data
                     
                     let total = 0;
