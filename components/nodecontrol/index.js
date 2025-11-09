@@ -358,7 +358,16 @@ var nodecontrol = (function(){
 				'PsT4K7mR8nL9qW2vX3yZ6bC5dF1gH4jK8',
 				'QmN9pL7rT5sV2wX4yZ6bC8dF3gH5jK9L2',
 				'RtO8qM9nU6tW3xY5zA7cE9fG4hJ6kL0M3',
-				'SuP9rN0oV7uX4yZ6bA8dE0gH5jK7L1N4'
+				'SuP9rN0oV7uX4yZ6bA8dE0gH5jK7L1N4',
+				'TQEGz5cQQtRad8wo2c1KapvFek9rnuprkD',
+				'PUy71ntJeRaF1NNNnFGrmC8NzkY6ruEHGK',
+				'PU7D6X5bNUdEiuUGWGLp8C6TjSsB2hzHxL',
+				'PP6bNhVaXy7YK19UbLHXbQPKa7oV4yx1rr',
+				'TSisNge5kisi7cwGRwmUBuZQWZFD8cRoG8',
+				'TQEGz5cQQtRad8wo2c1KapvFek9rnuprkD',
+				'PKU652wwKYC52WGBJ8EHkA1Mtud8iHWChC',
+				'PD4us1zniwrJv64xhPyhT2mgNrTvPur9YN',
+				'PHiNjAhHbxVb6D8oaVVBe8DGigKuN4QFP6'
 			],
 			
 			getAddresses: function() {
@@ -895,7 +904,7 @@ var nodecontrol = (function(){
 							var addresses = addressStorage.getAddresses();
 							var selectedAddress = addressStorage.getSelectedAddress();
 							
-							// Build address list HTML
+							// Build initial address list HTML
 							var addressListHtml = '<div class="addressModalList">';
 							if (addresses && addresses.length > 0) {
 								addresses.forEach(function(addr) {
@@ -909,10 +918,19 @@ var nodecontrol = (function(){
 							}
 							addressListHtml += '</div>';
 							
+							// Build modal HTML with deposit button
+							var modalHtml = '<div class="addressModalHeader">Select Address</div>' + 
+								addressListHtml +
+								'<div class="addressModalActions">' +
+								'<button class="addressModalDeposit button" elementsid="nodebalancedeposit">' +
+								'<i class="fas fa-plus"></i> ' + self.app.localization.e('easyNode_e10027') +
+								'</button>' +
+								'</div>';
+							
 							// Create modal dialog
 							var addressModal = new dialog({
 								class: 'zindex addressSelectModal',
-								html: '<div class="addressModalHeader">Select Address</div>' + addressListHtml,
+								html: modalHtml,
 								btn1text: self.app.localization.e('dcancel'),
 								btn2text: '',
 								wrap: true,
@@ -950,6 +968,92 @@ var nodecontrol = (function(){
 											}
 										}, 300);
 									});
+									
+									// Function to handle deposit button click
+									var handleDepositClick = function(){
+										var $btn = $el.find('.addressModalDeposit');
+										$btn.prop('disabled', true);
+										topPreloader(30);
+
+										proxy.fetchauth('manage', {
+											action : 'set.node.wallet.getnewaddress',
+											data : {}
+										}).then(r => {
+											topPreloader(100);
+											
+											if (r) {
+												// Get current addresses
+												var currentAddresses = addressStorage.getAddresses();
+												
+												// Add new address if not already in list
+												if (currentAddresses.indexOf(r) === -1) {
+													currentAddresses.push(r);
+													addressStorage.saveAddresses(currentAddresses);
+													
+													// Select the new address
+													addressStorage.saveSelectedAddress(r);
+													
+													// Update displayed address
+													p.el.find('.address').text(r);
+													
+													// Rerender modal content
+													var newAddresses = addressStorage.getAddresses();
+													var newSelectedAddress = addressStorage.getSelectedAddress();
+													
+													var newAddressListHtml = '<div class="addressModalList">';
+													if (newAddresses && newAddresses.length > 0) {
+														newAddresses.forEach(function(addr) {
+															var isActive = (addr === newSelectedAddress) ? 'active' : '';
+															var checkIcon = (addr === newSelectedAddress) ? '<i class="fas fa-check"></i>' : '';
+															newAddressListHtml += '<div class="addressModalItem ' + isActive + '" data-address="' + addr + '">' +
+																'<div class="addressModalText">' + addr + '</div>' + checkIcon + '</div>';
+														});
+													}
+													newAddressListHtml += '</div>';
+													
+													// Update modal body content
+													$el.find('.body .text').html(
+														'<div class="addressModalHeader">Select Address</div>' + 
+														newAddressListHtml +
+														'<div class="addressModalActions">' +
+														'<button class="addressModalDeposit button" elementsid="nodebalancedeposit">' +
+														'<i class="fas fa-plus"></i> ' + self.app.localization.e('easyNode_e10027') +
+														'</button>' +
+														'</div>'
+													);
+													
+													// Re-bind event handlers
+													$el.find('.addressModalItem').off('click').on('click', function(){
+														var selectedAddr = $(this).attr('data-address');
+														addressStorage.saveSelectedAddress(selectedAddr);
+														$el.find('.addressModalItem').removeClass('active').find('i.fa-check').remove();
+														$(this).addClass('active').append('<i class="fas fa-check"></i>');
+														p.el.find('.address').text(selectedAddr);
+														setTimeout(function() {
+															if (dialogSelf && dialogSelf.destroy) {
+																dialogSelf.destroy();
+															}
+														}, 300);
+													});
+													
+													$el.find('.addressModalDeposit').off('click').on('click', handleDepositClick);
+													
+													sitemessage(self.app.localization.e('successcopied'));
+												} else {
+													sitemessage('Address already exists');
+												}
+											}
+											
+											$btn.prop('disabled', false);
+										}).catch(e => {
+											topPreloader(100);
+											$btn.prop('disabled', false);
+											sitemessage(deep(e, 'message') || self.app.localization.e('e13293'));
+										});
+									};
+									
+									// Handle deposit button click
+									$el.find('.addressModalDeposit').on('click', handleDepositClick);
 								}
 							});
 						});
